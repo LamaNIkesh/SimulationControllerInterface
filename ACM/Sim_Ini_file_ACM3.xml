@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Sim_Meta>
+  <packet>
+    <destdevice>0</destdevice>
+    <timestamp>65532</timestamp>
+    <command>14</command>
+    <timestamp>0</timestamp>
+    <timestepsize>1000</timestepsize>
+    <cyclesNum>6000</cyclesNum>
+    <simID>3</simID>
+    <watchdogPeriod>1</watchdogPeriod>
+    <neuronsnum>10</neuronsnum>
+    <musclesnum>0</musclesnum>
+  </packet>
+</Sim_Meta>

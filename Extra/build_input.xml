@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<input>
+  <timestamp>0</timestamp>
+  <neuron>5</neuron>
+  <simtime>5</simtime>
+  <watchdog>5</watchdog>
+</input>

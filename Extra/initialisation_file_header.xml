@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<destdevice>0</destdevice>
+<timestamp>65532</timestamp>
+<command>14</command>
+<timestamp>0</timestamp>
+<timestepsize>1000000</timestepsize>
+<cyclesNum>1000000</cyclesNum>
+<simID>ACM1</simID>
+<watchdogPeriod>1</watchdogPeriod>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+
+<!-- <p id="demo1"></p>
+<p id="demo12"></p>
+<p id="demo13"></p>
+<p id="demo14"></p>
+<p id="demo"></p>
+<p id="demo2"></p> -->
+
+<script>
+var xhttp = new XMLHttpRequest();
+var xhttp2 = new XMLHttpRequest();
+xhttp2.open("GET", "neuron_id.xml", true);
+xhttp2.send();
+xhttp.open("GET", "plot_data.xml", true);
+xhttp.send();
+xhttp.onreadystatechange = function() {
+	if (xhttp.readyState == 4 && xhttp.status == 200) {
+	 myFunction(xhttp, xhttp2);
+	}
+};
+function myFunction(xml1, xml2) {
+var neuron = [ ];
+    var x, y, i, xlen, xmlDoc, txt;
+    xmlDoc = xml1.responseXML;
+	xmlDoc2 = xml2.responseXML;
+	var test = [];
+	var test2 = [];
+	var zlen = xmlDoc.getElementsByTagName("item").length;
+	for (j = 0; j < zlen; j++) {
+    x = xmlDoc.getElementsByTagName("item")[j];
+	//document.getElementById("demo14").innerHTML = xmlDoc2.getElementsByTagName("Column1")[10].childNodes[0].nodeValue;
+    xlen = x.childNodes.length;
+    y = x.firstChild;
+    txt = "";
+    for (i = 0; i < xlen; i++) {
+        if (y.nodeType == 1) {
+			if (y.nodeName == "timestamp") {
+				var z = x.getElementsByTagName(y.nodeName)[0].childNodes[0].nodeValue;
+				}
+			else{
+				var z = x.getElementsByTagName(y.nodeName)[(i-1)/2-1].childNodes[0].nodeValue;
+				test.push(z);
+				test2.push(x.getElementsByTagName("timestamp")[0].childNodes[0].nodeValue);
+				}
+            txt += i + " " + y.nodeName + " " + z + "<br>";
+        }
+        y = y.nextSibling;
+    }
+//    document.getElementById("demo1").innerHTML = txt;
+}
+var test3 = [];
+for (var i = 0; i < test.length; i++) {
+	test3.push([test[i], test2[i]]);
+	}
+//document.getElementById("demo12").innerHTML = test3;
+var test4 = [];
+for (var i = 0; i < test.length; i++) {
+	var name = xmlDoc2.getElementsByTagName("Column1")[parseInt(test[i])-1].childNodes[0].nodeValue;
+	test4.push([name, test2[i]]);
+	}
+
+var test5 = test4.sort();	
+//document.getElementById("demo13").innerHTML = test4;
+
+var y1 = [];
+var x1 = [];
+
+for (var i = 0; i < test5.length; i++) {
+	y1.push(test5[i][0]);
+	x1.push(test5[i][1]);
+	}
+//var y1 = ["ADAL","ADAL","ADAL","ADAL","ADAL","ADAL","ADAL","ADAR","ADAR","ADAR","ADAR","ADAR","ADAR","ADAR","ADAR","ADAR","ADAR"];
+//var x1 = [14, 18, 18, 2, 7, 7, 8, 0, 1, 10, 14, 14, 14, 17, 18, 19, 2];
+//document.getElementById("demo13").innerHTML = x1[0]==x1a[0];
+//document.getElementById("demo14").innerHTML = x1.length;
+var data = [{
+	  name: "Spikes",
+      y: y1,
+      x: x1,
+      mode: 'markers',
+	  marker: { 
+		symbol: 142,
+		color: 'rgb(16, 32, 77)',
+		//size: 500
+		},
+	  uid: "40abaa"
+	  }];
+    var layout = {
+	  showlegend: false,
+	  title: "Spike trains",
+      yaxis: { 
+		showgrid: false
+	   },      // set the y axis title
+      xaxis: {
+		title: "Timestamp",
+        showgrid: false,                  // remove the x-axis grid lines
+		zeroline: false
+        // tickformat: "%B, %Y"              // customize the date format to "month, day"
+      },
+      // margin: {                           // update the left, bottom, right, top margin
+        // l: 40, b: 10, r: 10, t: 20
+      // }
+	  hovermode: 'closest'
+    };
+
+    Plotly.plot(document.getElementById('spikes'), data, layout, {displaylogo: false});
+}
+
+
+//var test = ["ADER","ADA","ADAR","ADAR","ADAR","ADE"];
+//var test2 = [1, 15, 5, 8, 4, 2];
+//var test3 = [];
+//for (var i = 0; i < test.length; i++) {
+//	test3.push([test[i], test2[i]]);
+//	}
+//document.getElementById("demo").innerHTML = test3;
+//var test4 = test3.sort();
+// txt =[];
+
+//document.getElementById("demo2").innerHTML = test4;
+
+// document.getElementById("demo2").innerHTML = txt;
+// alert(test.sortIndices.join(","));
+
+    
+</script>
+<div id="spikes"></div>
+</body>

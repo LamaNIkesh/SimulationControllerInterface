@@ -1,0 +1,231 @@
+<?php
+$flag=0;
+if (file_exists ("database.txt")){
+$data= file("database.txt");
+for ($line = 0; $line < count($data); ++$line){
+	$userData=explode(" ",$data[$line]);
+	if ($userData[3]=="1"){
+		$flag=1;
+		$userLogged=$userData[0];
+	}
+}
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Si elegans</title>
+<link rel="stylesheet" href="styles2.css">
+<link rel="icon" href="favicon.ico">
+<meta name="keywords" content="Se elegans, elegans, modelling, simulation">
+<meta name="description" content="Simulation of C. elegans">
+<meta name="author" content="Alicia Costalago Meruelo">
+  <script src="vis/dist/vis.js"></script>
+  <link href="vis/dist/vis.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<header>
+
+<img src="Si_elegans.png" alt="Si elegans logo" align="right" width="455" height="126">
+<h1><em>Si elegans</em> Project</h1>
+<style>
+        #network {
+            width: 50%;
+            height: 500px;
+		    border: 2px solid black;
+			margin-left: 50px;
+			background-color:#FFFFFF
+        }
+    </style>
+    <script type="text/javascript">
+        var nodes, edges, network;
+
+        // convenience method to stringify a JSON object
+        function toJSON(obj) {
+            return JSON.stringify(obj, null, 4);
+        }
+
+        function addNode() {
+            try {
+				var sen='#66FF00';
+				var inter='#FFFF00';
+				var motor='#0066FF';
+                nodes.add({
+                    id: document.getElementById('node-id').value,
+                    label: document.getElementById('node-label').value,
+					color:sen
+                });
+            }
+            catch (err) {
+                alert(err);
+            }
+        }
+		
+        function addEdge() {
+            try {
+                edges.add({
+                    id: document.getElementById('edge-id').value,
+                    from: document.getElementById('edge-from').value,
+                    to: document.getElementById('edge-to').value,
+					arrows:'to'
+                });
+            }
+            catch (err) {
+                alert(err);
+            }
+        }
+        function updateEdge() {
+            try {
+                edges.update({
+                    id: document.getElementById('edge-id').value,
+                    from: document.getElementById('edge-from').value,
+                    to: document.getElementById('edge-to').value,
+					arrows:'to'
+                });
+            }
+            catch (err) {
+                alert(err);
+            }
+        }
+        function removeEdge() {
+            try {
+                edges.remove({id: document.getElementById('edge-id').value});
+            }
+            catch (err) {
+                alert(err);
+            }
+        }
+
+        function draw() {
+            // create an array with nodes
+            nodes = new vis.DataSet();
+            nodes.on('*', function () {
+                document.getElementById('nodes').innerHTML = JSON.stringify(nodes.get(), null, 4);
+            });
+				var sen='#66FF00';
+				var inter='#FFFF00';
+				var motor='#0066FF';
+            nodes.add([
+                {id: 'ADAL', label: 'ADAL', color:sen},
+                {id: 'AWBR', label: 'AWBR', color:inter},
+                {id: 'RISR', label: 'RISR', color:motor}
+            ]);
+
+            // create an array with edges
+            edges = new vis.DataSet();
+            edges.on('*', function () {
+                document.getElementById('edges').innerHTML = JSON.stringify(edges.get(), null, 4);
+            });
+
+
+            // create a network
+            var container = document.getElementById('network');
+            var data = {
+                nodes: nodes,
+                edges: edges
+            };
+            var options = {};
+            network = new vis.Network(container, data, options);
+        }
+    function sendJSON(){
+	$.ajax({
+            type: "POST",
+            dataType: "json",
+            url: test3.php",
+            data: {myData:nodes},
+            contentType: "application/json; charset=utf-8",
+            success: function(data){
+                alert('Items added');
+            },
+            error: function(e){
+                console.log(e.message);
+            }
+    });
+	}
+    </script>
+
+    <script src="../../googleAnalytics.js"></script>
+</header>
+
+<body onload="draw();">
+
+<p>
+    This example demonstrates dynamically adding, updating and removing nodes
+    and edges using a DataSet.
+</p>
+
+<table>
+    <colgroup>
+        <col width="35%">
+        <col width="65%">
+    </colgroup>
+    <tr>
+        <td>
+            <h2>Edge</h2>
+            <table>
+                <tr>
+                    <td></td>
+                    <td><label for="edge-id">Id</label></td>
+                    <td><input id="edge-id" type="number" value= 1 ></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label for="edge-from">From</label></td>
+                    <td><input id="edge-from" type="text" value="ADAL"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label for="edge-to">To</label></td>
+                    <td><input id="edge-to" type="text" value="RISR"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Action</td>
+                    <td>
+                        <button id="edge-add" onclick="addEdge();">Add</button>
+                        <button id="edge-update" onclick="updateEdge();">Update</button>
+                        <button id="edge-remove" onclick="removeEdge();">Remove</button>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+</table>
+            <h2>Network</h2>
+
+            <div id="network"></div>
+
+			<br>
+			<pre id="edges"></pre> 
+<table style="display:none;">
+    <colgroup>
+        <col width="300px">
+		<col width="300px">
+    </colgroup>
+    <tr>
+        <td>
+            <h2>Nodes</h2>
+            <pre id="nodes"></pre>
+        </td>
+
+        <td>
+            <h2>Edges</h2>
+            <pre id="edges"></pre>
+        </td>
+    </tr>
+</table>
+
+<br><br>
+
+	<form id = "test" action="test.php" method="post">
+	<input type="submit" value="Save network">
+	</form>
+	<br><br>
+<footer>
+Copyright &copy <em>Si elegans</em> project 2013.
+<br> Supported by the Digital Office of the Istituto Italiano di Tecnologia. Contact: 
+<a href="mailto:si-elegans@outlook.com" target="_top">si-elegans@outlook.com
+</footer>
+</body>
+</html>

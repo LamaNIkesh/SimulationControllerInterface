@@ -1,0 +1,80 @@
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body { 
+  padding: 0; 
+  background: url("../img/bg.jpg") repeat-x; 
+  font: 0.8em/1.5 "arial",sans-serif; 
+  color: #354146; 
+  text-align: center; 
+}
+
+
+header {
+	min-width: 1000px;
+/*     background-color:#493D26; */
+    /*background-color:#green;*/
+    color:white;
+    text-align:center;
+    padding:14px;
+	font-size:150%;
+}
+
+
+a:link{
+	color:White
+}
+a:visited{
+	color:#white
+}
+a:hover{
+	color:#CCFFFF
+}
+a:active{
+	color:pink
+}
+
+
+#content{
+	/*background-color: #f0f5f5;*/
+	margin-left : 210px; 
+	margin-right: 200px;
+	text-align :left;
+	height = 100%;
+	
+}
+
+#publication{
+	margin-left : 200px; 
+	margin-right: 200px;
+	text-align :left;
+	height = 100%;
+}
+
+#mynetwork {
+    width: 600px;
+    height: 400px;
+    border: 5px solid black;
+	margin-left: 50px;
+	background-color:#FFFFEE
+}
+
+#network {
+	width: 50%;
+	height: 500px;
+	border: 2px solid black;
+	margin-left: 50px;
+	background-color:#FFFFFF
+}
+
+#footer{
+	
+	position:absolute;
+	bottom:0px;
+	width:60%;
+	margin-left:30px;
+	overflow:hidden;
+}

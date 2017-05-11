@@ -1,0 +1,18 @@
+<packet>   <!-- One packet per neuron in the network -->
+  <destdevice>1</destdevice> <!-- This should be the destination neuron  -->                     
+  <sourcedevice>65532</sourcedevice>  <!-- Fix value -->
+  <command>24</command>  <!-- Fix value -->
+  <timestamp>0</timestamp>  <!-- Fix value -->
+  <modelid>1</modelid>  <!-- For that neuron model 1, 2 or 3 -->
+  <item>
+    <itemid>1</itemid>    <!-- There will be a variable number of items dependent on the model type -->
+    <itemtype>1</itemtype>   <!-- Fix value -->
+    <itemdatatype>16</itemdatatype>   <!-- Fix values. Can be read from library -->
+    <itemintegerpart>8</integerpart>  <!-- Fix values. Can be read from library -->
+    <inlsb>0</inlsb>  <!-- Fix values. Can be read from library -->
+    <inmsb>31</inmsb>  <!-- Fix values. Can be read from library -->
+    <outlsb>0</outlsb>  <!-- Fix values. Can be read from library -->
+    <outmsb>0</outmsb>   <!-- Fix values. Can be read from library -->
+    <itemvalue>1</itemvalue>    <!-- This is the only value that I add, based on the user input -->
+  </item>
+</packet>
