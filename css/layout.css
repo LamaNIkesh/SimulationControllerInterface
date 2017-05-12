@@ -9,7 +9,6 @@ html {
 	height:100px;
 }
 
-
 footer{
    background-color: #424558;
     position: fixed;
@@ -26,3 +25,5 @@ footer p {
     margin: 0px;
     line-height: 100%;
 }
+
+#success_message{ display: none;}

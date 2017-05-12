@@ -1,64 +1,110 @@
 <?php
 include("head.html")
 ?>
+
+
 <div class="container">
-  	<div class="col-md-5">
-    
-          <form class="form-horizontal" action="" method="POST">
-          <fieldset>
-            <div id="legend">
-              <legend class="">Register</legend>
-            </div>
-            <div class="control-group">
-              <label class="control-label" for="username">Full Name</label>
-              <div class="controls">
-                <input id="username" name="username" placeholder="" class="form-control input-lg" type="text">
-                <p class="help-block">Please enter your full name</p>
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label" for="username">Username</label>
-              <div class="controls">
-                <input id="username" name="username" placeholder="" class="form-control input-lg" type="text">
-                <p class="help-block">Username can contain any letters or numbers, without spaces</p>
-              </div>
-            </div>
-         
-            <div class="control-group">
-              <label class="control-label" for="email">E-mail</label>
-              <div class="controls">
-                <input id="email" name="email" placeholder="" class="form-control input-lg" type="email">
-                <p class="help-block">Please provide your E-mail</p>
-              </div>
-            </div>
-         
-            <div class="control-group">
-              <label class="control-label" for="password">Password</label>
-              <div class="controls">
-                <input id="password" name="password" placeholder="" class="form-control input-lg" type="password">
-                <p class="help-block">Password should be at least 6 characters</p>
-              </div>
-            </div>
-         
-            <div class="control-group">
-              <label class="control-label" for="password_confirm">Password (Confirm)</label>
-              <div class="controls">
-                <input id="password_confirm" name="password_confirm" placeholder="" class="form-control input-lg" type="password">
-                <p class="help-block">Please confirm password</p>
-              </div>
-            </div>
-         
-            <div class="control-group">
-              <!-- Button -->
-              <div class="controls">
-                <button class="btn btn-success">Register</button>
-              </div>
-            </div>
-          </fieldset>
-        </form>
-    
-    </div> 
+<div class="col-sm-12">
+<form class="well form-horizontal" action="registration_process.php" method="post"  id="registration_form">
+		<fieldset>
+
+			<!-- Form Name -->
+			<legend><center><h2><b>Registration Form</b></h2></center></legend><br>
+
+			<!-- Text input-->
+
+			<div class="form-group">
+				<label class="col-md-4 control-label">First Name</label>  
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+						<input  name="first_name" placeholder="First Name" class="form-control"  type="text">
+					</div>
+				</div>
+			</div>
+
+			<!-- Text input-->
+
+			<div class="form-group">
+				<label class="col-md-4 control-label" >Last Name</label> 
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+						<input name="last_name" placeholder="Last Name" class="form-control"  type="text">
+					</div>
+				</div>
+			</div>
+
+
+			<!-- Text input-->
+
+			<div class="form-group">
+				<label class="col-md-4 control-label">Username</label>  
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+						<input  name="user_name" placeholder="Username" class="form-control"  type="text">
+					</div>
+				</div>
+			</div>
+
+			<!-- Text input-->
+
+			<div class="form-group">
+				<label class="col-md-4 control-label" >Password</label> 
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+						<input name="user_password" placeholder="Password" class="form-control"  type="password">
+					</div>
+				</div>
+			</div>
+
+			<!-- Text input-->
+
+			<div class="form-group">
+				<label class="col-md-4 control-label" >Confirm Password</label> 
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+						<input name="confirm_password" placeholder="Confirm Password" class="form-control"  type="password">
+					</div>
+				</div>
+			</div>
+
+			<!-- Text input-->
+			<div class="form-group">
+				<label class="col-md-4 control-label">E-Mail</label>  
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+						<input name="email" placeholder="E-Mail Address" class="form-control"  type="text">
+					</div>
+				</div>
+			</div>
+
+
+			<!-- Text input-->
+
+
+			<!-- Select Basic -->
+
+			<!-- Success message -->
+		
+
+			<!-- Button -->
+			<div class="form-group">
+				<label class="col-md-4 control-label"></label>
+				<div class="col-md-4"><br>
+					&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button type="submit" class="btn btn-warning">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSUBMIT <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button></a>
+				</div>
+			</div>
+
+		</fieldset>
+	</form>
 </div>
+</div>
+</div><!-- /.container -->
 <?php
 include("end_page.html")
 ?>
