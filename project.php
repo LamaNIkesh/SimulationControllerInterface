@@ -2,7 +2,8 @@
 include("head.html")
 ?>
 <div class = "container">
-<h1>Project Page</h1>
+<div class="col-sm-12">
+<h2 style = "color: #58cbba;">Your Project</h2>
 Under Construction!!!!
 </div>
 <?php

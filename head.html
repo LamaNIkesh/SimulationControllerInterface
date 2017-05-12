@@ -1,74 +1,71 @@
 <!DOCTYPE html>
 <html lang = "en">
 <head>
-<title>Si elegans</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src = "js/click.js"></script>
+	<title>Simulation Controller Interface</title>
+	<link rel="icon" href="Pictures/titlelogo.png" type="image/png">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/layout.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script src = "js/click.js"></script>
 </head>
 <body>
-<div class = "container">
-	
-	<div class="row">
+	<div class = "container">
+
+			<div class="col-sm-9">
+				<div class="content-wrapper" style="margin-top:10px; margin-bottom:5px">
+					<img src = "Pictures/mainlogo.png" alt = "ntu logo" width = "450" height = "100" margin-top = "100px">
+				</div>
+			</div>
+			<!---div class = "col-sm-5"></div>-->
+			<!--<div class="col-sm-4"><img src="Pictures/Si_elegans.png" alt="Si elegans logo" width="370" height="110"></div>-->
+			<div class="col-sm-3">
+				<div class = "content-wrapper" style = "margin-top:15px; position:right ;margin-bottom:5px;">
+					<img src = "Pictures/neuron.png" alt = "ntu logo" width = "300" height = "120">
+				</div>
+			</div>
+		</div>
 		
-		<div class="col-sm-4 ">
-		<div class="content-wrapper" style="margin-top:10px; margin-bottom:5px">
-		<img src = "Pictures/mainlogo.png" alt = "ntu logo" width = "480" height = "100" margin-top = "100px">
-		</div>
-		</div>
-		<div class = "col-sm-5"></div>
-		<!--<div class="col-sm-4"><img src="Pictures/Si_elegans.png" alt="Si elegans logo" width="370" height="110"></div>-->
-		<div class="col-sm-3 spaced-row">
-		<div class = "content-wrapper" style = "margin-top:15px; position:right ;margin-bottom:5px;">
-		<img src = "Pictures/neuron.png" alt = "ntu logo" width = "300" height = "120">
-		</div>
-		</div>
+		<div class="col-sm-12">
+			<nav class="navbar navbar">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>                        
+						</button>
+						<a class="navbar-brand" href="#"></a>
+					</div>
+					<div class="collapse navbar-collapse" id="myNavbar">
+						<ul class="nav nav-tabs">
+							<li class = "active"><a href="home.php">Home</a></li>
+
+							<li><a href="news.php">News</a></li>
+							<li><a href="project.php">Project</a></li>
+							<li><a href="publications.php">Publication</a></li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="">System Builder <span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="build.php">Create your own topology</a></li>
+									<li><a href="#">Use C elegans topology</a></li>
+									<li><a href="#">Plot Results</a></li>
+								</ul>
+							</li>
+							<li><a href="#">Manage Your Account</a></li>
+							<li><a href="#">About Us</a></li>
+
+							<ul class="nav navbar-nav navbar-right">
+								<li><a href="register.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+								<li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				</nav>
+			</div>
+
 	</div>
-	<div class="row">
-		
-		<nav class="navbar navbar">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>                        
-					 </button>
-      <a class="navbar-brand" href="#"></a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav nav-tabs">
-        <li class = "active"><a href="home.php">Home</a></li>
-		
-		<li><a href="news.php">News</a></li>
-		<li><a href="project.php">Project</a></li>
-		<li><a href="publications.php">Publication</a></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="">System Builder <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="build.php">Create your own topology</a></li>
-            <li><a href="#">Use C elegans topology</a></li>
-            <li><a href="#">Plot Results</a></li>
-          </ul>
-        </li>
-        <li><a href="#">Manage Your Account</a></li>
-        <li><a href="#">About Us</a></li>
-      
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="register.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-  
-
-
-		</div>
-			
-	</div>
-</div>
-

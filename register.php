@@ -1,21 +1,63 @@
 <?php
 include("head.html")
 ?>
-
-<div class ="container">
-<h1>Register</h1>
-<form action="validation.php" method="post" name="test1">
-<fieldset>
-<legend>Create account</legend>
-<input type='hidden' name='submitted' id='submitted' value='1'/>
-<br>User name:<br><input type="text" name="user" required><br><br>
-Password:<br><input type="password" name="pass" required><br><br>
-Confirm password:<br><input type="password" name="passconf" required><br><br>
-Email address:<br><input type="text" name="email" required><br><br>
-<input type="submit">
-</fieldset>
-</form>
-<br><br>
+<div class="container">
+  	<div class="col-md-5">
+    
+          <form class="form-horizontal" action="" method="POST">
+          <fieldset>
+            <div id="legend">
+              <legend class="">Register</legend>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="username">Full Name</label>
+              <div class="controls">
+                <input id="username" name="username" placeholder="" class="form-control input-lg" type="text">
+                <p class="help-block">Please enter your full name</p>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="username">Username</label>
+              <div class="controls">
+                <input id="username" name="username" placeholder="" class="form-control input-lg" type="text">
+                <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+              </div>
+            </div>
+         
+            <div class="control-group">
+              <label class="control-label" for="email">E-mail</label>
+              <div class="controls">
+                <input id="email" name="email" placeholder="" class="form-control input-lg" type="email">
+                <p class="help-block">Please provide your E-mail</p>
+              </div>
+            </div>
+         
+            <div class="control-group">
+              <label class="control-label" for="password">Password</label>
+              <div class="controls">
+                <input id="password" name="password" placeholder="" class="form-control input-lg" type="password">
+                <p class="help-block">Password should be at least 6 characters</p>
+              </div>
+            </div>
+         
+            <div class="control-group">
+              <label class="control-label" for="password_confirm">Password (Confirm)</label>
+              <div class="controls">
+                <input id="password_confirm" name="password_confirm" placeholder="" class="form-control input-lg" type="password">
+                <p class="help-block">Please confirm password</p>
+              </div>
+            </div>
+         
+            <div class="control-group">
+              <!-- Button -->
+              <div class="controls">
+                <button class="btn btn-success">Register</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+    
+    </div> 
 </div>
 <?php
 include("end_page.html")

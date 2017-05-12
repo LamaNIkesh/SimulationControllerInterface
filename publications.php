@@ -2,12 +2,13 @@
 include("head.html")
 ?>
 <div class = "container">
+<div class="col-sm-12">
 
-
-<h1 style = "color: blue;">Publications</h1>
-<h2>2015</h2>
-
+<h2 style = "color: #58cbba;">Publications</h2>
+<h3>2015</h3>
+<font face = "Segoe UI">
 <p>
+<font color = " #7d6c8e ">
 Costalago Meruelo, A., Machado, P., Appiah, K., and Mcginnity, M. Si elegans: 
 <em>A computational model of C. elegans muscle response to light</em>
  in the Proceedings of the 3rd International Congress on Neurotechnology, 
@@ -66,7 +67,7 @@ Emerging DMD Applications,  M.R. Douglass, P.S. King, and B.L. Lee (Eds.).
 Vol. 9376, SPIE, p. pp. 17 (2015).
 </p>
 
-<h2>2014</h2>
+<h3>2014</h3>
 <p>
 Mujika, A., Epelde, G., Mauro, A.D., and Oyarzun, D. <em>Visualization of a 
 Virtual Caenorhabditis elegans inWebGL</em> in the Proceedings of the 2<sup>nd</sup> 
@@ -116,6 +117,7 @@ emulation of C. elegans nematode nervous system</em> at the 2014 Sixth World
 Congress on Nature and Biologically Inspired Computing (NaBIC), 65-71 (2014).
 </p>
 <br><br>
+</div>
 </div>
 <?php
 include("end_page.html")
