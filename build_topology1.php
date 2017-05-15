@@ -1,3 +1,7 @@
+<?php 
+
+ ?>
+
 <?php
 include("head.html")
 ?>
@@ -13,7 +17,7 @@ include("head.html")
 			$simNum =$_SESSION['simNum'];
 //Create new document
 			$dom = new DOMDocument('1.0', 'UTF-8');
-			$dom->formatOutput = true;
+			//$dom->formatOutput = true;
 
 			if(isset($_POST['submit']))
 			{	
@@ -72,9 +76,9 @@ include("head.html")
 						$dom->appendChild($input1);
 
 			//Save generated xml file as build_input.xml
-						$filename=$userLogged . "/Sim_Ini_file_" . $userID . ".xml";
+						$filename="SimulationXML/".$userLogged . "/Sim_Ini_file_" . $userID . ".xml";
 						echo $filename;
-						$dom->save('$filename');
+						$dom->save($filename);	
 
 						echo "A metadata initialisation file has been generated and saved as ", "Sim_Ini_file_" . $userID . ".xml";
 						

@@ -29,6 +29,11 @@ if(empty($_SESSION['password'])){
 //echo "flag".$_SESSION['flag'];
 if($_SESSION['flag'] == 1){
 	$userLogged = $_SESSION['username'];
+	$filename = 'SimulationXml/'.$userLogged;
+
+	if (!file_exists('SimulationXML/'.$userLogged)) {
+    mkdir('SimulationXML/'.$userLogged, 0777, true);
+	}
 }
 else{
 	$userLogged = "";

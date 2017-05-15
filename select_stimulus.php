@@ -1,25 +1,15 @@
 <?php
 include("head.html")
 ?>
+
+<div class = "container">
+	<div class="col-sm-12">
+
 <?php
-$flag=0;
-if (file_exists ("Libraries/database.txt")){
-$data= file("Libraries/database.txt");
-for ($line = 0; $line < count($data); ++$line){
-	$userData=explode(" ",$data[$line]);
-	if ($userData[3]=="1"){
-		$flag=1;
-		$userLogged=$userData[0];
-		$val=strval(intval($userData[4]));
-		$simNum=trim(preg_replace('/\s\s+/', ' ', $val));
-		$userID = $userLogged . $simNum;
-	}
-}
-}
-if ($flag==1){
+if ($_SESSION['flag']==1){
 	$list=file("Libraries/neuron_id.txt");
 	$neurons=$_POST['neuron'];
-	$filename=$userLogged . "/Neuron_Ini_file_" . $userID . ".xml";
+	$filename="SimulationXML/".$userLogged . "/Neuron_Ini_file_" . $userID . ".xml";
 	$xmlDoc1 = new DOMDocument();
 	$xmlDoc1->load($filename);
 	?><p>There are <?php echo $_POST['neuron']; ?> neurons that could receive stimulus.</p>
@@ -120,6 +110,8 @@ else{
 <?php
 }
 ?>
+</div></div>
+
 <?php
 include("end_page.html")
 ?>

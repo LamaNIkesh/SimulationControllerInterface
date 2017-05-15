@@ -2,12 +2,14 @@
 html {
     
     min-height:100%;
+    
 }
 
 #container{
 
 	height:100px;
 }
+
 
 footer{
    background-color: #424558;
@@ -27,3 +29,12 @@ footer p {
 }
 
 #success_message{ display: none;}
+
+#network {
+    width: 100%;
+    height: 500px;
+    border: 2px solid black;
+    margin-left: 0px;
+    background-color:#FFFFFF;
+    margin-bottom : 50px
+}

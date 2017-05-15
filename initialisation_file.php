@@ -1,51 +1,41 @@
 <?php
 include("head.html")
 ?>
+
+<div class = "container">
+	<div class="col-sm-12">
 <?php
-$flag=0;
-if (file_exists ("Libraries/database.txt")){
-$data= file("Libraries/database.txt");
-for ($line = 0; $line < count($data); ++$line){
-	$userData=explode(" ",$data[$line]);
-	if ($userData[3]=="1"){
-		$flag=1;
-		$userLogged=$userData[0];
-		$val=strval(intval($userData[4]));
-		$simNum=trim(preg_replace('/\s\s+/', ' ', $val));
-		$userID = $userLogged . $simNum;
-	}
-}
-}
-if ($flag==1){
+if ($_SESSION['flag']==1){
 	$topo=false;
 	$muscle=false;
 	$stim=false;
+	$simNum =1;
 	// $doc1=file($userLogged . "/" . $userLogged . $simNum . ".xml");
 	// $doc2=file($userLogged . "/Neuron_Ini_file_" . $userLogged . $simNum . ".xml");
 	$xmlDoc1 = new DOMDocument();
-	$xmlDoc1->load($userLogged . "/Sim_Ini_file_" . $userLogged . $simNum . ".xml");
-	unlink($userLogged . "/Sim_Ini_file_" . $userLogged . $simNum . ".xml");
+	$xmlDoc1->load("SimulationXML/".$userLogged . "/Sim_Ini_file_" . $userLogged . "_".$simNum . ".xml");
+	unlink("SimulationXML/".$userLogged . "/Sim_Ini_file_" . $userLogged . $simNum . ".xml");
 	$xmlDoc2 = new DOMDocument();
-	$xmlDoc2->load($userLogged . "/Neuron_Ini_file_" . $userLogged . $simNum . ".xml");
-	unlink($userLogged . "/Neuron_Ini_file_" . $userLogged . $simNum . ".xml");
-	if (file_exists($userLogged . "/Topo_Ini_file_" . $userLogged . $simNum . ".xml")){
+	$xmlDoc2->load("SimulationXML/".$userLogged . "/Neuron_Ini_file_" . $userLogged . $simNum . ".xml");
+	unlink("SimulationXML/".$userLogged . "/Neuron_Ini_file_" . $userLogged . $simNum . ".xml");
+	if (file_exists("SimulationXML/".$userLogged . "/Topo_Ini_file_" . $userLogged . $simNum . ".xml")){
 		$xmlDoc3 = new DOMDocument();
-		$xmlDoc3->load($userLogged . "/Topo_Ini_file_" . $userLogged . $simNum . ".xml");
+		$xmlDoc3->load("SimulationXML/".$userLogged . "/Topo_Ini_file_" . $userLogged . $simNum . ".xml");
 		$topo=true;
-		unlink($userLogged . "/Topo_Ini_file_" . $userLogged . $simNum . ".xml");
+		unlink("SimulationXML/".$userLogged . "/Topo_Ini_file_" . $userLogged . $simNum . ".xml");
 	}
-	if (file_exists($userLogged . "/Muscle_Ini_file_" . $userLogged . $simNum . ".xml")){
+	if (file_exists("SimulationXML/".$userLogged . "/Muscle_Ini_file_" . $userLogged . $simNum . ".xml")){
 		$xmlDoc4 = new DOMDocument();
-		$xmlDoc4->load($userLogged . "/Muscle_Ini_file_" . $userLogged . $simNum . ".xml");
+		$xmlDoc4->load("SimulationXML/".$userLogged . "/Muscle_Ini_file_" . $userLogged . $simNum . ".xml");
 		$muscle=true;
-		unlink($userLogged . "/Muscle_Ini_file_" . $userLogged . $simNum . ".xml");
+		unlink("SimulationXML/".$userLogged . "/Muscle_Ini_file_" . $userLogged . $simNum . ".xml");
 	}
 	
-	if (file_exists($userLogged . "/Stim_Ini_file_" . $userLogged . $simNum . ".xml")){
+	if (file_exists("SimulationXML/".$userLogged . "/Stim_Ini_file_" . $userLogged . $simNum . ".xml")){
 		$xmlDoc5 = new DOMDocument();
-		$xmlDoc5->load($userLogged . "/Stim_Ini_file_" . $userLogged . $simNum . ".xml");
+		$xmlDoc5->load("SimulationXML/".$userLogged . "/Stim_Ini_file_" . $userLogged . $simNum . ".xml");
 		$stim=true;
-		unlink($userLogged . "/Stim_Ini_file_" . $userLogged . $simNum . ".xml");
+		unlink("SimulationXML/".$userLogged . "/Stim_Ini_file_" . $userLogged . $simNum . ".xml");
 	}
 	
 	$dom = new DOMDocument("1.0");
@@ -103,7 +93,7 @@ if ($flag==1){
 	}
 	
 	$dom->appendChild($data);
-	$filename=$userLogged . "/Initialisation_file_" . $userID . ".xml";
+	$filename="SimulationXML/".$userLogged . "/Initialisation_file_" . $userID . ".xml";
 	$dom->save($filename);
 
 
@@ -132,6 +122,9 @@ else{
 <?php
 }
 ?>
+
+</div>
+</div>
 <?php
 include("end_page.html")
 ?>
