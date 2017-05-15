@@ -2,7 +2,7 @@
 include("head.html")
 ?>
 
-
+<!--Registration Form -->
 <div class="container">
 <div class="col-sm-12">
 <form class="well form-horizontal" action="registration_process.php" method="post"  id="registration_form">
@@ -11,7 +11,7 @@ include("head.html")
 			<!-- Form Name -->
 			<legend><center><h2><b>Registration Form</b></h2></center></legend><br>
 
-			<!-- Text input-->
+			<!-- Text input First name-->
 
 			<div class="form-group">
 				<label class="col-md-4 control-label">First Name</label>  
@@ -23,7 +23,7 @@ include("head.html")
 				</div>
 			</div>
 
-			<!-- Text input-->
+			<!-- Text input Last name-->
 
 			<div class="form-group">
 				<label class="col-md-4 control-label" >Last Name</label> 
@@ -36,7 +36,7 @@ include("head.html")
 			</div>
 
 
-			<!-- Text input-->
+			<!-- Text input username-->
 
 			<div class="form-group">
 				<label class="col-md-4 control-label">Username</label>  
@@ -48,7 +48,7 @@ include("head.html")
 				</div>
 			</div>
 
-			<!-- Text input-->
+			<!-- Text input password-->
 
 			<div class="form-group">
 				<label class="col-md-4 control-label" >Password</label> 
@@ -60,7 +60,7 @@ include("head.html")
 				</div>
 			</div>
 
-			<!-- Text input-->
+			<!-- Text input confirm password-->
 
 			<div class="form-group">
 				<label class="col-md-4 control-label" >Confirm Password</label> 
@@ -72,7 +72,7 @@ include("head.html")
 				</div>
 			</div>
 
-			<!-- Text input-->
+			<!-- Text input email-->
 			<div class="form-group">
 				<label class="col-md-4 control-label">E-Mail</label>  
 				<div class="col-md-4 inputGroupContainer">
@@ -83,16 +83,9 @@ include("head.html")
 				</div>
 			</div>
 
-
-			<!-- Text input-->
-
-
-			<!-- Select Basic -->
-
-			<!-- Success message -->
 		
 
-			<!-- Button -->
+			<!-- Button to submit -->
 			<div class="form-group">
 				<label class="col-md-4 control-label"></label>
 				<div class="col-md-4"><br>

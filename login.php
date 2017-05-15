@@ -1,24 +1,23 @@
 <?php
 include("head.html")
+
 ?>
-<div class="container">
-	<div class="col-md-5">
-	<h2></style> Login</h2></style>
-	<form>
-		
-			<div class="input-group">
-				<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				<input id="email" type="text" class="form-control" name="email" placeholder="Email">
-			</div>
-			<div class="input-group">
-				<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-				<input id="password" type="password" class="form-control" name="password" placeholder="Password">
-			</div>
-			<br>
-			
-		</form>
-		<br>
-	</div>
+<?php echo $_SESSION['loginfail'] ?>
+<div class = "container">
+  <div class="wrapper">
+    <form class="form-signin" action = "loginProcess.php" method = "post">       
+      <h2 class="form-signin-heading">Please login</h2>
+      <?php if($_SESSION['loginfail'] == 1){?>
+	      <p>Login Failed!!Please check your username and password</p>
+      <?php } $_SESSION['loginfail'] = 0;?>
+      <input type="text" class="form-control" name="username" placeholder="Username" required="" autofocus=""/>
+      <input type="password" class="form-control" name="password" placeholder="Password" required="" />      
+      <label class="checkbox">
+        <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
+      </label>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>  
+    </form>
+  </div>
 </div>
 <?php
 include("end_page.html")

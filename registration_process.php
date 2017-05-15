@@ -1,18 +1,19 @@
+<?php session_start(); ?>
+
 <?php
-include("head.html")
-?>
-<?php
+//var declaration
 $server = 'localhost';
 $user = 'root';
 $pass = '';
-$db = 'Registration';
+$db = 'Registration'; //database name
+$flag = 0;
 try{
-$db = new mysqli('localhost', $user, $pass,$db) or die("Unable to connect");
-echo "Connected to the database";
-echo $_POST['first_name'];
-
-session_start();
-	echo $_POST['first_name'];
+	$db = new mysqli('localhost', $user, $pass,$db) or die("Unable to connect");
+	#echo "Connected to the database";
+	#echo $_POST['first_name'];
+	#start session to check if the user is logged in 
+	
+	#echo $_POST['first_name'];
 
 	$fname = $_POST['first_name'];
 	$lname = $_POST['last_name'];
@@ -22,44 +23,60 @@ session_start();
 	$password = md5($password); //md5 has for security
 
 
-	echo $fname;
-	echo $lname;
-	echo $username;
-	echo $password;
-	echo $email;
+	#echo $fname;
+	#echo $lname;
+	#echo $username;
+	#echo $password;
+	#echo $email;
 	
+	#---Inserting into the database, the table Signup is for storing user registration details
+	//--Signup table is inside Registration database
 
-
-	$sql = "INSERT INTO Registration(fname,lname,username,password,email) VALUES('$fname','$lname','$username','$password','$email')";
+	$sql = "INSERT INTO Signup(Firstname,Lastname,username,password,email) VALUES('$fname','$lname','$username','$password','$email')";
 
 	if(mysqli_query($db,$sql)){
-		echo "new Record created successfully";
+		#echo "new Record created successfully";
+		//flag indicates user logged in 
+		$_SESSION['flag'] = 1;
+		#$_SESSION['message'] = "You are now logged in";
+		$_SESSION['username'] = $username;
 	}
 	else{
 		echo "Error: ".$sql."<br>".mysqli_error($conn);
+		$flag = 0;
 	}
 
 	mysqli_close($db);
 
-	$_SESSION['message'] = "You are now logged in";
-	$_SESSION['username'] = $username;
-
-
+//catching the exception
 }
 catch(PDOException $e)
 {
 	echo "Connection failed: ". $e->getMessage();
+	$flag = 1;
 }
-
-	
-
-
 ?>
 
+<!-- loggin the user in before loading the page -->
+
+<?php
+include("head.html")
+?>
+
+
 <div class="container">
-<div class="col-sm-12">
-	Registration process...
-</div>
+	<div class="col-sm-12">
+		<?php  	if($flag==0){
+
+			echo "Signup successful..";
+		}
+		else{
+			echo "Signup unsucessful. Try again!!";
+		}
+		?>
+
+
+	</div>
 </div><!-- /.container -->
 <?php
 include("end_page.html")

@@ -1,3 +1,5 @@
+  //user registration form js
+  //responsive field
   $(document).ready(function() {
     $('#registration_form').bootstrapValidator({
         // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
@@ -79,7 +81,7 @@
         })
         .on('success.form.bv', function(e) {
             $('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
-                
+
                 $('#Registration_form').data('bootstrapValidator').resetForm();
 
             // Prevent form submission
