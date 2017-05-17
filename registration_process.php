@@ -8,7 +8,7 @@ $pass = '';
 $db = 'Registration'; //database name
 $flag = 0;
 try{
-	$db = new mysqli('localhost', $user, $pass,$db) or die("Unable to connect");
+	$connection = new mysqli('localhost', $user, $pass,$db) or die("Unable to connect");
 	#echo "Connected to the database";
 	#echo $_POST['first_name'];
 	#start session to check if the user is logged in 
@@ -34,19 +34,20 @@ try{
 
 	$sql = "INSERT INTO Signup(Firstname,Lastname,username,password,email) VALUES('$fname','$lname','$username','$password','$email')";
 
-	if(mysqli_query($db,$sql)){
+	if(mysqli_query($connection,$sql)){
 		#echo "new Record created successfully";
 		//flag indicates user logged in 
 		$_SESSION['flag'] = 1;
 		#$_SESSION['message'] = "You are now logged in";
 		$_SESSION['username'] = $username;
+		$_SESSION['useremail'] = $email;
 	}
 	else{
 		echo "Error: ".$sql."<br>".mysqli_error($conn);
 		$flag = 0;
 	}
 
-	mysqli_close($db);
+	mysqli_close($connection);
 
 //catching the exception
 }

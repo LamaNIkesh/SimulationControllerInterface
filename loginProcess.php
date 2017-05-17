@@ -34,6 +34,7 @@ try{
 	if($row['username']== $username && $row['password'] == $password){
 		$_SESSION['username'] = $username;
 		$_SESSION['password'] = $password;
+		$_SESSION['useremail'] = $row['email'];
 		$flag = 1;
 		$_SESSION['flag'] = $flag;
 		$_SESSION['loginfail'] = 0;
@@ -56,5 +57,5 @@ catch(PDOException $e)
 	$flag = 1;
 }
 
-mysqli_close($db);
+mysqli_close($connection);
 ?>
