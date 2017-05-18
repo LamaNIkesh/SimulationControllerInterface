@@ -1,4 +1,5 @@
-$(".nav a").on("click", function(){
-   $(".nav").find(".active").removeClass("active");
-   $(this).parent().addClass("active");
+$(document).ready(function() {
+    $(document).on('click', '.nav li', function (e) {
+        $(this).parent().addClass('active').siblings().removeClass('active');
+    });
 });

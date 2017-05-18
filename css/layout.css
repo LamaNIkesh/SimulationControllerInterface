@@ -38,3 +38,7 @@ footer p {
     background-color:#FFFFFF;
     margin-bottom : 50px
 }
+.navbar-default .navbar-nav > .active{
+    color: #000;
+   background: #d65c14;
+ }

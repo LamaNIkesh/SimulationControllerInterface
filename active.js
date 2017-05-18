@@ -1,4 +1,11 @@
-$(".nav a").on("click", function(){
-   $(".nav").find(".active").removeClass("active");
-   $(this).parent().addClass("active");
+$(function() {
+  $("h1").animate({
+    "margin-left": "100px"
+  }, "slow");
+
+  $(".nav li").on("click", function() {
+    $(".nav li").removeClass("active");
+    $(this).addClass("active");
+  });
+  
 });
