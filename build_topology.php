@@ -13,12 +13,12 @@ if ($_SESSION['flag']==1){
 			</h1>
 			<p>This pages would let you build your own topology using an existing subcircuit of the <em>C. elegans</em> connectome. 
 				<form method="POST" action="build_topology1.php">
-					Timestamp: <input type="number" name="timestamp" value="0" disabled> (Fixed value)<br>
+					Timestamp: <input type="number" name="timestamp" value="0.01" disabled> (Fixed value)<br>
 					<br>
 					Number of neurons in the subcircuit: <input type="number" name="neuron" min="1" max="302" value="1" required>
 					<br><br>
-					Number of muscles in the subcircuit: <input type="number" name="muscle" min="0" max="135" value="0" required>
-					<br><br>
+					<!---Number of muscles in the subcircuit: <input type="number" name="muscle" min="0" max="135" value="0" required>
+					<br><br>-->
 					
 					Are all neurons using the same model: <select name="samemodel" required>
 					<option value="yes">Yes</option>

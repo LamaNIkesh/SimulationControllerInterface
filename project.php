@@ -1,3 +1,7 @@
+<?php 
+	$currentfile = basename(__FILE__);
+?>
+
 <?php
 include("head.html")
 ?>
