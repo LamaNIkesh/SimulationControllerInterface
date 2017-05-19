@@ -23,10 +23,11 @@ else {
 	exit ('Could not load the file...');
 }
 
-if ($_POST['samemodel']=='yes'){
+if ($_POST['samemodel']=='yes' and $_POST['no_of_diff_neurons']==0){
 	for ($number = 1; $number < $_POST['neuron']+1; ++$number){
 		$packet=$data->createElement("packet");
-		$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
+		//$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
+		$destdev=$data->createElement("destdevice", 1);//temporary
 		$packet->appendChild($destdev);
 		$sourcedev=$data->createElement("sourcedevice",65532);
 		$packet->appendChild($sourcedev);
@@ -69,10 +70,12 @@ if ($_POST['samemodel']=='yes'){
 	$filename="SimulationXML/".$userLogged . "/Neuron_Ini_file_" . $userID . ".xml";
 	$data->save($filename);
 }
-else{
+{
+ 	//echo $_POST['name'.$number];
 	for ($number = 1; $number < $_POST['neuron']+1; ++$number){
 		$packet=$data->createElement("packet");
-		$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
+		//$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
+		$destdev=$data->createElement("destdevice",1);
 		$packet->appendChild($destdev);
 		$sourcedev=$data->createElement("sourcedevice",65532);
 		$packet->appendChild($sourcedev);
@@ -116,14 +119,15 @@ else{
 	$data->save($filename);	
 }
 echo "Neuronal initialisation data has been saved as ", "Neuron_Ini_file_" . $userID . ".xml";
-if ($_POST['muscle']>0){
-	?>
-	<br>
-	<form action="select_muscle.php" method="post">
-		<br><input type="submit" value="Add muscle initialisation data">
-		<input type="hidden" name="neuron" value=<?php echo $_POST['neuron']; ?>>
-		<input type="hidden" value=<?php echo $_POST['muscle']; ?> name="muscle">
-		<input type="hidden" value=<?php echo $_POST['musclesamemodel']; ?> name="musclesamemodel">
+
+
+
+
+?>
+<br>
+<form action="topology.php" method="post">
+	<input type="hidden" name="neuron" value=<?php echo $_POST['neuron']; ?>>
+		<!--
 		<?php
 		for ($number = 1; $number < $_POST['neuron']+1; ++$number){
 			?>
@@ -131,28 +135,12 @@ if ($_POST['muscle']>0){
 			<?php
 		}
 		?>
-	</form><br>
-	<?php
-}
-else{
-	?>
+	-->
 	<br>
-	<form action="topology.php" method="post">
-		<input type="hidden" name="neuron" value=<?php echo $_POST['neuron']; ?>>
-		<input type="hidden" value=<?php echo $_POST['muscle']; ?> name="muscle">
-		<input type="hidden" value=<?php echo $_POST['musclesamemodel']; ?> name="musclesamemodel">
-		<?php
-		for ($number = 1; $number < $_POST['neuron']+1; ++$number){
-			?>
-			<input type="hidden" name=<?php echo "name".$number?> value=<?php echo $_POST['name'.$number]; ?>>
-			<?php
-		}
-		?>
-		<br>
-		<input type="submit" value="Create topology">
-	</form><br><br>
-	<?php
-}
+	<input type="submit" value="Create topology">
+</form><br><br>
+<?php
+
 }
 else{
 	?>

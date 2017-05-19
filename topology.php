@@ -140,9 +140,8 @@ var nodes, edges, network;
         		<?php
         		if ($_SESSION['flag']==1){
         			$list=file("Libraries/neuron_id.txt");
-        			$list2=file("Libraries/muscle_id.txt");
         			$neurons=$_POST['neuron'];
-        			$muscle=$_POST['muscle'];
+        			
         			for ($number = 1; $number < $neurons+1; ++$number){
         				$name1=$_POST['name'.$number];
         				?>
