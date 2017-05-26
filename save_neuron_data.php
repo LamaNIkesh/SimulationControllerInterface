@@ -39,7 +39,7 @@ if ($_POST['samemodel']=='yes' and $_POST['no_of_diff_neurons']==0){
 		$packet->appendChild($modelid);
 		
 		foreach ($ModelLibrary->neuron as $model){
-			if ($model->neuronid==$_POST['model']){
+			if ($model	neuronid==$_POST['model']){
 				foreach ($model->item as $modelitem){
 				// $item=$data->createElement("item");
 					$itemid=$data->createElement("itemid",$modelitem->itemid);

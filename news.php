@@ -1,11 +1,4 @@
 
-<<<<<<< HEAD
-=======
-<?php 
-	$currentfile = basename(__FILE__);
-?>
-
->>>>>>> d81a01f872b811da4ce1463ae34a418e1712e281
 <?php
 include("head.html")
 ?>
