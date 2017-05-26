@@ -5,7 +5,11 @@
     <sourcedevice>65532</sourcedevice>
     <command>24</command>
     <timestamp>0</timestamp>
+<<<<<<< HEAD
     <modelid>2</modelid>
+=======
+    <modelid>1</modelid>
+>>>>>>> d81a01f872b811da4ce1463ae34a418e1712e281
     <itemid>1</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -14,7 +18,11 @@
     <inmsb>31</inmsb>
     <outlsb>0</outlsb>
     <outmsb>0</outmsb>
+<<<<<<< HEAD
     <itemvalue>6</itemvalue>
+=======
+    <itemvalue>5.0</itemvalue>
+>>>>>>> d81a01f872b811da4ce1463ae34a418e1712e281
     <itemid>2</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -34,6 +42,7 @@
     <outmsb>0</outmsb>
     <itemvalue>2.0</itemvalue>
     <itemid>4</itemid>
+<<<<<<< HEAD
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
     <itemintegerpart>8</itemintegerpart>
@@ -680,4 +689,15 @@
     <timestamp>0</timestamp>
     <modelid/>
   </packet>
+=======
+    <itemtype>2</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>96</inlsb>
+    <inmsb>127</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>31</outmsb>
+    <itemvalue>2.0</itemvalue>
+  </packet>
+>>>>>>> d81a01f872b811da4ce1463ae34a418e1712e281
 </Neuron_Initialisation>
