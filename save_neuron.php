@@ -109,25 +109,28 @@ $index++;
 }
 
 
-$list=file("Libraries/neuron_id.txt");
+//$list=file("Libraries/neuron_id.txt");
 ?><p>There are <?php echo $_POST['no_of_diff_neurons']; ?> neuron(s) to be processed with different models.</p>
 <form action="save_neuron_data.php" method="post">
 	<input type="hidden" name="neuron" value=<?php echo $_POST['no_of_diff_neurons']; ?>>
 	<input type="hidden" value=<?php echo $_POST['no_of_diff_neurons']; ?> name="no_of_diff_neurons">
 
 	<?php
-	for ($number = 1; $number < $_POST['no_of_diff_neurons']+1; ++$number){
+	for ($number = 1; $number < $_POST['no_of_diff_neurons']+1; $number++	){
+		echo $number;
 		if ($_POST['model'.$number]==1){$modelname="Integrate and fire";}
 		if ($_POST['model'.$number]==2){$modelname="Leaky integrate and fire";}
 		if ($_POST['model'.$number]==3){$modelname="Izhikevich";}
 
 		foreach ($ModelLibrary->neuron as $model){
-			if ($model->neuronid==$_POST['model' . $number]){
-				$id=$_POST['name'.$number];
+			if ($model->neuronid==$_POST['model']){
+
+				$id=$_POST['name'.$number - $no_of_same_neurons];
+				echo $id;
 				?><br><fieldset>
 				<legend>The typical values for the <?php echo $modelname; ?> model are: </legend>
 				<input type="hidden" name=<?php echo 'model'.$number; ?> value=<?php echo $_POST['model'.$number]; ?>>
-				<input type="hidden" name=<?php echo 'name'.$number; ?> value=<?php echo $_POST['name'.$number]; ?>><?php
+				<input type="hidden" name=<?php echo 'name'.$number - $no_of_same_neurons; ?> value=<?php echo $id; ?>><?php
 				foreach ($model->item as $item){
 					$DataItem= str_replace("_", " ", $item->name);
 					?>

@@ -2,6 +2,8 @@
 include("head.html")
 ?>
 
+<?php $number = 0; ?>
+
 <div class = "container">
 	<div class="col-sm-12">
 		<form action="save_neuron.php" method="post">
@@ -43,6 +45,7 @@ include("head.html")
 
 <?php
 }
+
 else {
 	$number = 1;
 	$subtractedSameModel = 0;
@@ -63,7 +66,8 @@ else {
 
 
 			<?php
-			for ($number = 1; $number < $subtractedSameModel + 1; ++$number){
+			for ($number = 1; $number < $subtractedSameModel + 1; $number++){
+				echo "number ".$number;
 				?> 
 				<!--Neuron-->  <!--name:--> <input type ="hidden" name=<?php echo 'name'.$number; ?> value=<?php echo 'name'.$number; ?> required>
 			<?php
@@ -81,8 +85,8 @@ else {
 
 	<?php
 }
-
-
+$noOfSameModels = $number;
+echo $noOfSameModels;
 //This section deals with different models
 ?><p><?php echo $no_of_neurons; ?> neurons to be processed with different models</p>
 	<input type="hidden" name="no_of_neurons" value=<?php echo $no_of_neurons + $subtractedSameModel; ?>>
@@ -94,9 +98,13 @@ else {
 		<input type="hidden" value=<?php echo $_POST['musclesamemodel']; ?> name="musclesamemodel">-->
 		
 		<?php
-		for ($number = 1; $number < $no_of_neurons+1; ++$number){
+		for ($neuronNum = 0; $neuronNum < $no_of_neurons+1; $neuronNum++){
+			echo $neuronNum;
+			$number = $neuronNum + $noOfSameModels;
+			echo "diff neurons ".$number;
 			?>
 			<p>Neuron <?php echo $number; ?> </p>
+			<input type ="hidden" name=<?php echo 'name'.$number; ?> value=<?php echo 'name'.$number ; ?> required>
 			<!---
 			Neuron name: <select name=<?php echo 'name'.$number; ?> required>
 			<?php
