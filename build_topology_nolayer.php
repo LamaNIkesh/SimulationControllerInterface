@@ -19,7 +19,7 @@ if ($_SESSION['flag']==1){
 					Timestamp(in ms): </div><input type="number" name="timestamp" value="0.01" disabled> (Fixed value)<br>
 					<br>
 					<div class= "col-sm-3">
-					Number of neurons :</div> <input type="number" name="no_of_neurons" min="1" max="500" value="1" required>
+					Number of neurons :</div> <input type="number" name="totalNeurons" min="1" max="500" value="1" required>
 					<br><br>
 					<!---Number of muscles in the subcircuit: <input type="number" name="muscle" min="0" max="135" value="0" required>
 					<br><br>-->
@@ -31,7 +31,7 @@ if ($_SESSION['flag']==1){
 					<br><br>
 					<div class = "col-sm-3">
 					
-					How many with different models?:</div><input type="number" name="no_of_diff_neurons" min="0" max="500" value="0" required>(Leave it to zero if all the neurons have same model)
+					How many with different models?:</div><input type="number" name="totalDiffModelNeurons" min="0" max="500" value="0" required>(Leave it to zero if all the neurons have same model)
 				
 				
 				<br><br>

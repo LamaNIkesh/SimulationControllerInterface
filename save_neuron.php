@@ -15,16 +15,16 @@ else {
 	exit ('Could not load the file...');
 }
 //echo $_POST['samemodel'];
-if ($_POST['samemodel']=='yes' and $_POST['no_of_diff_neurons'] == 0){
+if ($_POST['samemodel']=='yes' and $_POST['totalDiffModelNeurons'] == 0){
 	if ($_POST['model']==1){$modelname="Integrate and fire";}
 	if ($_POST['model']==2){$modelname="Leaky integrate and fire";}
 	if ($_POST['model']==3){$modelname="Izhikevich";}
-	?><p>There are <?php echo $_POST['no_of_neurons']; ?> neurons to be processed with the same model.
+	?><p>There are <?php echo $_POST['totalNeurons']; ?> neurons to be processed with the same model.
 	<br><br> The typical values for the <?php echo $modelname; ?> model are: </p>
 	<form action="save_neuron_data.php" method="post">
 		
 		<?php
-		for ($number = 1; $number < $_POST['no_of_neurons']+1; ++$number){
+		for ($number = 1; $number < $_POST['totalNeurons']+1; ++$number){
 			?>
 			<input type="hidden" name=<?php echo "name".$number?> value=<?php echo $_POST['name'.$number]; ?>>
 			<?php
@@ -34,7 +34,7 @@ if ($_POST['samemodel']=='yes' and $_POST['no_of_diff_neurons'] == 0){
 
 		<input type="hidden" name="model" value=<?php echo $_POST['model']; ?>>
 		<!--keeping the to neuron for the next file save_neuron_data-->
-		<input type="hidden" name="neuron" value=<?php echo $_POST['no_of_neurons']; ?>>
+		<input type="hidden" name="neuron" value=<?php echo $_POST['totalNeurons']; ?>>
 
 		<input type="hidden" value=<?php echo $_POST['samemodel']; ?> name="samemodel">
 
@@ -61,18 +61,18 @@ $index++;
 else{
 	//deals with different models with combination of same models too
 
-	if($_POST['no_of_neurons']>$_POST['no_of_diff_neurons']){
+	if($_POST['totalNeurons']>$_POST['totalDiffModelNeurons']){
 		echo "nxt stage";
-		$no_of_same_neurons = $_POST['no_of_neurons'] - $_POST['no_of_diff_neurons'];
+		$sameModelNeurons= $_POST['totalNeurons'] - $_POST['totalDiffModelNeurons'];
 		if ($_POST['model']==1){$modelname="Integrate and fire";}
 		if ($_POST['model']==2){$modelname="Leaky integrate and fire";}
 		if ($_POST['model']==3){$modelname="Izhikevich";}
-		?><p>There are <?php echo $no_of_same_neurons; ?> neurons to be processed with the same model.
+		?><p>There are <?php echo $sameModelNeurons; ?> neurons to be processed with the same model.
 		<br><br> The typical values for the <?php echo $modelname; ?> model are: </p>
 		<form action="save_neuron_data.php" method="post">
 
 			<?php
-			for ($number = 1; $number < $no_of_same_neurons+1; ++$number){
+			for ($number = 1; $number < $sameModelNeurons+1; ++$number){
 				?>
 				<input type="hidden" name=<?php echo "name".$number?> value=<?php echo $_POST['name'.$number]; ?>>
 				<?php
@@ -84,7 +84,7 @@ else{
 			<input type="hidden" name="model" value=<?php echo $_POST['model']; ?>>
 			
 			<!--keeping the to neuron for the next file save_neuron_data-->
-			<input type="hidden" name="neuron" value=<?php echo $_POST['no_of_neurons']; ?>>
+			<input type="hidden" name="neuron" value=<?php echo $_POST['totalNeurons']; ?>>
 
 			<input type="hidden" value=<?php echo $_POST['samemodel']; ?> name="samemodel">
 
@@ -110,13 +110,13 @@ $index++;
 
 
 //$list=file("Libraries/neuron_id.txt");
-?><p>There are <?php echo $_POST['no_of_diff_neurons']; ?> neuron(s) to be processed with different models.</p>
+?><p>There are <?php echo $_POST['totalDiffModelNeurons']; ?> neuron(s) to be processed with different models.</p>
 <form action="save_neuron_data.php" method="post">
-	<input type="hidden" name="neuron" value=<?php echo $_POST['no_of_diff_neurons']; ?>>
-	<input type="hidden" value=<?php echo $_POST['no_of_diff_neurons']; ?> name="no_of_diff_neurons">
+	<input type="hidden" name="neuron" value=<?php echo $_POST['totalDiffModelNeurons']; ?>>
+	<input type="hidden" value=<?php echo $_POST['totalDiffModelNeurons']; ?> name="totalDiffModelNeurons">
 
 	<?php
-	for ($number = 1; $number < $_POST['no_of_diff_neurons']+1; $number++	){
+	for ($number = 1; $number < $_POST['totalDiffModelNeurons']+1; $number++	){
 		echo $number;
 		if ($_POST['model'.$number]==1){$modelname="Integrate and fire";}
 		if ($_POST['model'.$number]==2){$modelname="Leaky integrate and fire";}

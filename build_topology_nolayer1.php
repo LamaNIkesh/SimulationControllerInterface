@@ -19,7 +19,7 @@ include("head.html")
 			if(isset($_POST['submit']))
 			{	
 				try {
-					if(!empty($_POST["no_of_neurons"]) and !empty($_POST["simtime"]) and !empty($_POST["watchdog"]))
+					if(!empty($_POST["totalNeurons"]) and !empty($_POST["simtime"]) and !empty($_POST["watchdog"]))
 					{
 						?>
 						<p>Fields submitted successfully</p>		
@@ -66,7 +66,7 @@ include("head.html")
 						$input->appendChild($g);
 						$h=$dom->createElement("watchdogPeriod", $watchdog);
 						$input->appendChild($h);
-						$i=$dom->createElement("neuronsnum", $_POST['no_of_neurons']);
+						$i=$dom->createElement("neuronsnum", $_POST['totalNeurons']);
 						$input->appendChild($i);
 						//Not using muscle, only for c elegans
 						//$j=$dom->createElement("musclesnum", $_POST['muscle']);
@@ -92,12 +92,12 @@ include("head.html")
 
 				<form action="select_neuron.php" method="POST">
 					<br>
-					<input type="hidden" value=<?php echo $_POST['no_of_neurons']; ?> name="neuron_num">
-					<input type = "hidden" value=<?php echo $_POST['no_of_diff_neurons'];?> name = "no_of_diff_neurons">
+					<input type="hidden" value=<?php echo $_POST['totalNeurons']; ?> name="totalNeurons">
+					<input type = "hidden" value=<?php echo $_POST['totalDiffModelNeurons'];?> name = "totalDiffModelNeurons">
 					<!--input type="hidden" value=<?php echo $_POST['muscle']; ?> name="muscle">-->
 					<input type="hidden" value=<?php echo $_POST['samemodel']; ?> name="samemodel">
 					<!--
-					<input type="hidden" value=<?php echo $_POST['no_of_diff_neurons']; ?> name="no_of_diff_neurons">-->
+					<input type="hidden" value=<?php echo $_POST['totalDiffModelNeurons']; ?> name="totalDiffModelNeurons">-->
 					<!--
 					<input type="hidden" value=<?php echo $_POST['musclesamemodel']; ?> name="musclesamemodel">-->
 					<input type="submit" value="Next" name="submit">
