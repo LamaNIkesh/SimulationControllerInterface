@@ -22,10 +22,25 @@ if(file_exists('Libraries/ModelLibrary_metadata.xml')){ #Load XML file
 else {
 	exit ('Could not load the file...');
 }
+?>
+ <?php
+ $neuronlistPath = "SimulationXML/".$userLogged . "/NeuronList.txt";
+$myfile = fopen($neuronlistPath, "w") or die("Unable to open file!");
+?>
 
-if ($_POST['samemodel']=='yes' and $_POST['no_of_diff_neurons']==0){
-	for ($number = 1; $number < $_POST['neuron']+1; ++$number){
-		$packet=$data->createElement("packet");
+<form action="topology.php" method="post">
+	<?php
+	if ($_POST['samemodel']=='yes' and $_POST['totalDiffModelNeurons']==0){
+		for ($number = 1; $number < $_POST['totalNeurons']+1; $number++){
+			echo 'passed from previous :'.$_POST['neuron'.$number];
+			
+			fwrite($myfile, "neuron".$number."\n");
+			//fwrite($myfile,'\n');
+			?>
+			<input type="hidden" value=<?php echo $_POST['neuron'.$number]; ?> name=<?php echo "neuron".$number; ?>>
+
+			<?php
+			$packet=$data->createElement("packet");
 		//$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
 		$destdev=$data->createElement("destdevice", 1);//temporary
 		$packet->appendChild($destdev);
@@ -39,7 +54,7 @@ if ($_POST['samemodel']=='yes' and $_POST['no_of_diff_neurons']==0){
 		$packet->appendChild($modelid);
 		
 		foreach ($ModelLibrary->neuron as $model){
-			if ($model	neuronid==$_POST['model']){
+			if ($model->neuronid==$_POST['model']){
 				foreach ($model->item as $modelitem){
 				// $item=$data->createElement("item");
 					$itemid=$data->createElement("itemid",$modelitem->itemid);
@@ -69,76 +84,151 @@ if ($_POST['samemodel']=='yes' and $_POST['no_of_diff_neurons']==0){
 	$data->appendChild($dom);
 	$filename="SimulationXML/".$userLogged . "/Neuron_Ini_file_" . $userID . ".xml";
 	$data->save($filename);
-}
-{
- 	//echo $_POST['name'.$number];
-	for ($number = 1; $number < $_POST['neuron']+1; ++$number){
-		$packet=$data->createElement("packet");
-		//$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
-		$destdev=$data->createElement("destdevice",1);
-		$packet->appendChild($destdev);
-		$sourcedev=$data->createElement("sourcedevice",65532);
-		$packet->appendChild($sourcedev);
-		$command=$data->createElement("command",24);
-		$packet->appendChild($command);
-		$timestamp=$data->createElement("timestamp",0);
-		$packet->appendChild($timestamp);
-		$modelid=$data->createElement("modelid",$_POST['model' . $number]);
-		$packet->appendChild($modelid);
+	?>
 
-		foreach ($ModelLibrary->neuron as $model){
-			if ($model->neuronid==$_POST['model' . $number]){
-				foreach ($model->item as $modelitem){
-				// $item=$data->createElement("item");
-					$itemid=$data->createElement("itemid",$modelitem->itemid);
-					$packet->appendChild($itemid);
-					$itemtype=$data->createElement("itemtype",$modelitem->type);
-					$packet->appendChild($itemtype);
-					$itemdatatype=$data->createElement("itemdatatype",$modelitem->datatype);
-					$packet->appendChild($itemdatatype);
-					$itemintegerpart=$data->createElement("itemintegerpart",$modelitem->integerpart);
-					$packet->appendChild($itemintegerpart);
-					$inlsb=$data->createElement("inlsb",$modelitem->inlsb);
-					$packet->appendChild($inlsb);
-					$inmsb=$data->createElement("inmsb",$modelitem->inmsb);
-					$packet->appendChild($inmsb);
-					$outlsb=$data->createElement("outlsb",$modelitem->outlsb);
-					$packet->appendChild($outlsb);
-					$outmsb=$data->createElement("outmsb",$modelitem->outmsb);
-					$packet->appendChild($outmsb);
-					$itemvalue=$data->createElement("itemvalue",$_POST["neuron" . $number . "item" . $modelitem->itemid]);
-					$packet->appendChild($itemvalue);
-				// $packet->appendChild($item);
+
+
+	<br>
+	<input type="hidden" name="totalNeurons" value=<?php echo $_POST['totalNeurons']; ?>>
+	<br>
+	<input type="submit" value="Create topology">
+</form><br><br>
+<?php
+}
+
+else{
+//for mixed group of same  and different neurons
+	$subtractedSameModel = 0;
+	if($_POST['totalNeurons']>$_POST['totalDiffModelNeurons']){
+//echo "nxt stage";
+		$subtractedSameModel= $_POST['totalNeurons'] - $_POST['totalDiffModelNeurons'];
+
+
+		for ($number = 1; $number < $subtractedSameModel + 1; $number++){
+			fwrite($myfile,"neuron".$number."\n");
+			//fwrite($myfile,'\n');
+			?>
+
+			<input type="hidden" value=<?php echo "neuron".$number; ?> name=<?php echo "neuron".$number; ?>>
+			<?php 
+			$packet=$data->createElement("packet");
+			//$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
+			$destdev=$data->createElement("destdevice", 1);//temporary
+			$packet->appendChild($destdev);
+			$sourcedev=$data->createElement("sourcedevice",65532);
+			$packet->appendChild($sourcedev);
+			$command=$data->createElement("command",24);
+			$packet->appendChild($command);
+			$timestamp=$data->createElement("timestamp",0);
+			$packet->appendChild($timestamp);
+			$modelid=$data->createElement("modelid",$_POST['model']);
+			$packet->appendChild($modelid);
+
+			foreach ($ModelLibrary->neuron as $model){
+				if ($model->neuronid==$_POST['model']){
+					foreach ($model->item as $modelitem){
+			// $item=$data->createElement("item");
+						$itemid=$data->createElement("itemid",$modelitem->itemid);
+						$packet->appendChild($itemid);
+						$itemtype=$data->createElement("itemtype",$modelitem->type);
+						$packet->appendChild($itemtype);
+						$itemdatatype=$data->createElement("itemdatatype",$modelitem->datatype);
+						$packet->appendChild($itemdatatype);
+						$itemintegerpart=$data->createElement("itemintegerpart",$modelitem->integerpart);
+						$packet->appendChild($itemintegerpart);
+						$inlsb=$data->createElement("inlsb",$modelitem->inlsb);
+						$packet->appendChild($inlsb);
+						$inmsb=$data->createElement("inmsb",$modelitem->inmsb);
+						$packet->appendChild($inmsb);
+						$outlsb=$data->createElement("outlsb",$modelitem->outlsb);
+						$packet->appendChild($outlsb);
+						$outmsb=$data->createElement("outmsb",$modelitem->outmsb);
+						$packet->appendChild($outmsb);
+						$itemvalue=$data->createElement("itemvalue",$_POST["item" . $modelitem->itemid]);
+						$packet->appendChild($itemvalue);
+			// $packet->appendChild($item);
+					}
 				}
 			}
+			$dom->appendChild($packet);
 		}
-		$dom->appendChild($packet);
+		$data->appendChild($dom);
+		$filename="SimulationXML/".$userLogged . "/Neuron_Ini_file_" . $userID . ".xml";
+		$data->save($filename);
+
+}//end of if statement
+
+//writing for different models
+//echo $_POST['name'.$number];
+for ($number = 1; $number < $_POST['totalDiffModelNeurons'] + 1; $number++){
+	fwrite($myfile, "neuron".($number+$subtractedSameModel)."\n");
+	//fwrite($myfile,'\n');
+	?>
+	
+	<input type="hidden" value=<?php echo "neuron".($number+$subtractedSameModel); ?> name=<?php echo "neuron".($number+$subtractedSameModel); ?>>
+	<?php 
+	$packet=$data->createElement("packet");
+//$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
+	$destdev=$data->createElement("destdevice",1);
+	$packet->appendChild($destdev);
+	$sourcedev=$data->createElement("sourcedevice",65532);
+	$packet->appendChild($sourcedev);
+	$command=$data->createElement("command",24);
+	$packet->appendChild($command);
+	$timestamp=$data->createElement("timestamp",0);
+	$packet->appendChild($timestamp);
+$modelid=$data->createElement("modelid",$_POST['model' . ($number+$subtractedSameModel)]); // the model number are same model num + . eg if there are 3 same 
+//models then starting index for diff model is 3+1 = 4 and 5,6....
+$packet->appendChild($modelid);
+
+foreach ($ModelLibrary->neuron as $model){
+	if ($model->neuronid==$_POST['model' . ($number+$subtractedSameModel)]){
+		foreach ($model->item as $modelitem){
+// $item=$data->createElement("item");
+			$itemid=$data->createElement("itemid",$modelitem->itemid);
+			$packet->appendChild($itemid);
+			$itemtype=$data->createElement("itemtype",$modelitem->type);
+			$packet->appendChild($itemtype);
+			$itemdatatype=$data->createElement("itemdatatype",$modelitem->datatype);
+			$packet->appendChild($itemdatatype);
+			$itemintegerpart=$data->createElement("itemintegerpart",$modelitem->integerpart);
+			$packet->appendChild($itemintegerpart);
+			$inlsb=$data->createElement("inlsb",$modelitem->inlsb);
+			$packet->appendChild($inlsb);
+			$inmsb=$data->createElement("inmsb",$modelitem->inmsb);
+			$packet->appendChild($inmsb);
+			$outlsb=$data->createElement("outlsb",$modelitem->outlsb);
+			$packet->appendChild($outlsb);
+			$outmsb=$data->createElement("outmsb",$modelitem->outmsb);
+			$packet->appendChild($outmsb);
+			$itemvalue=$data->createElement("itemvalue",$_POST["neuron" . ($number+$subtractedSameModel) . "item" . $modelitem->itemid]);
+			$packet->appendChild($itemvalue);
+// $packet->appendChild($item);
+		}
 	}
-	$data->appendChild($dom);
-	$filename="SimulationXML/".$userLogged . "/Neuron_Ini_file_" . $userID . ".xml";
-	$data->save($filename);	
 }
+$dom->appendChild($packet);
+}
+$data->appendChild($dom);
+$filename="SimulationXML/".$userLogged . "/Neuron_Ini_file_" . $userID . ".xml";
+$data->save($filename);	
+
+?>
+<br>
+<input type="hidden" name="totalNeurons" value=<?php echo $_POST['totalNeurons']; ?>>
+<br>
+<input type="submit" value="Create topology">
+</form><br><br>
+<?php
+}
+fclose($myfile);
 echo "Neuronal initialisation data has been saved as ", "Neuron_Ini_file_" . $userID . ".xml";
 
 
 
 
 ?>
-<br>
-<form action="topology.php" method="post">
-	<input type="hidden" name="neuron" value=<?php echo $_POST['neuron']; ?>>
-		<!--
-		<?php
-		for ($number = 1; $number < $_POST['neuron']+1; ++$number){
-			?>
-			<input type="hidden" name=<?php echo "name".$number?> value=<?php echo $_POST['name'.$number]; ?>>
-			<?php
-		}
-		?>
-	-->
-	<br>
-	<input type="submit" value="Create topology">
-</form><br><br>
+
 <?php
 
 }

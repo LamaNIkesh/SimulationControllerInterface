@@ -5,7 +5,7 @@
     <sourcedevice>65532</sourcedevice>
     <command>24</command>
     <timestamp>0</timestamp>
-    <modelid>2</modelid>
+    <modelid>1</modelid>
     <itemid>1</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -14,7 +14,7 @@
     <inmsb>31</inmsb>
     <outlsb>0</outlsb>
     <outmsb>0</outmsb>
-    <itemvalue>6</itemvalue>
+    <itemvalue>5.0</itemvalue>
     <itemid>2</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -34,29 +34,11 @@
     <outmsb>0</outmsb>
     <itemvalue>2.0</itemvalue>
     <itemid>4</itemid>
-    <itemtype>1</itemtype>
+    <itemtype>2</itemtype>
     <itemdatatype>16</itemdatatype>
     <itemintegerpart>8</itemintegerpart>
     <inlsb>96</inlsb>
     <inmsb>127</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>1.0</itemvalue>
-    <itemid>5</itemid>
-    <itemtype>1</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>128</inlsb>
-    <inmsb>159</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>40.0</itemvalue>
-    <itemid>6</itemid>
-    <itemtype>2</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>160</inlsb>
-    <inmsb>191</inmsb>
     <outlsb>0</outlsb>
     <outmsb>31</outmsb>
     <itemvalue>2.0</itemvalue>
@@ -66,7 +48,7 @@
     <sourcedevice>65532</sourcedevice>
     <command>24</command>
     <timestamp>0</timestamp>
-    <modelid>2</modelid>
+    <modelid>1</modelid>
     <itemid>1</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -75,7 +57,7 @@
     <inmsb>31</inmsb>
     <outlsb>0</outlsb>
     <outmsb>0</outmsb>
-    <itemvalue>6</itemvalue>
+    <itemvalue>5.0</itemvalue>
     <itemid>2</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -95,29 +77,11 @@
     <outmsb>0</outmsb>
     <itemvalue>2.0</itemvalue>
     <itemid>4</itemid>
-    <itemtype>1</itemtype>
+    <itemtype>2</itemtype>
     <itemdatatype>16</itemdatatype>
     <itemintegerpart>8</itemintegerpart>
     <inlsb>96</inlsb>
     <inmsb>127</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>1.0</itemvalue>
-    <itemid>5</itemid>
-    <itemtype>1</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>128</inlsb>
-    <inmsb>159</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>40.0</itemvalue>
-    <itemid>6</itemid>
-    <itemtype>2</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>160</inlsb>
-    <inmsb>191</inmsb>
     <outlsb>0</outlsb>
     <outmsb>31</outmsb>
     <itemvalue>2.0</itemvalue>
@@ -127,7 +91,7 @@
     <sourcedevice>65532</sourcedevice>
     <command>24</command>
     <timestamp>0</timestamp>
-    <modelid>2</modelid>
+    <modelid>1</modelid>
     <itemid>1</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -136,7 +100,7 @@
     <inmsb>31</inmsb>
     <outlsb>0</outlsb>
     <outmsb>0</outmsb>
-    <itemvalue>6</itemvalue>
+    <itemvalue>5.0</itemvalue>
     <itemid>2</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -156,29 +120,11 @@
     <outmsb>0</outmsb>
     <itemvalue>2.0</itemvalue>
     <itemid>4</itemid>
-    <itemtype>1</itemtype>
+    <itemtype>2</itemtype>
     <itemdatatype>16</itemdatatype>
     <itemintegerpart>8</itemintegerpart>
     <inlsb>96</inlsb>
     <inmsb>127</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>1.0</itemvalue>
-    <itemid>5</itemid>
-    <itemtype>1</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>128</inlsb>
-    <inmsb>159</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>40.0</itemvalue>
-    <itemid>6</itemid>
-    <itemtype>2</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>160</inlsb>
-    <inmsb>191</inmsb>
     <outlsb>0</outlsb>
     <outmsb>31</outmsb>
     <itemvalue>2.0</itemvalue>
@@ -188,7 +134,7 @@
     <sourcedevice>65532</sourcedevice>
     <command>24</command>
     <timestamp>0</timestamp>
-    <modelid>2</modelid>
+    <modelid>1</modelid>
     <itemid>1</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -197,7 +143,7 @@
     <inmsb>31</inmsb>
     <outlsb>0</outlsb>
     <outmsb>0</outmsb>
-    <itemvalue>6</itemvalue>
+    <itemvalue>5.0</itemvalue>
     <itemid>2</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -217,29 +163,11 @@
     <outmsb>0</outmsb>
     <itemvalue>2.0</itemvalue>
     <itemid>4</itemid>
-    <itemtype>1</itemtype>
+    <itemtype>2</itemtype>
     <itemdatatype>16</itemdatatype>
     <itemintegerpart>8</itemintegerpart>
     <inlsb>96</inlsb>
     <inmsb>127</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>1.0</itemvalue>
-    <itemid>5</itemid>
-    <itemtype>1</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>128</inlsb>
-    <inmsb>159</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>40.0</itemvalue>
-    <itemid>6</itemid>
-    <itemtype>2</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>160</inlsb>
-    <inmsb>191</inmsb>
     <outlsb>0</outlsb>
     <outmsb>31</outmsb>
     <itemvalue>2.0</itemvalue>
@@ -249,7 +177,7 @@
     <sourcedevice>65532</sourcedevice>
     <command>24</command>
     <timestamp>0</timestamp>
-    <modelid>2</modelid>
+    <modelid>1</modelid>
     <itemid>1</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -258,7 +186,7 @@
     <inmsb>31</inmsb>
     <outlsb>0</outlsb>
     <outmsb>0</outmsb>
-    <itemvalue>6</itemvalue>
+    <itemvalue>5.0</itemvalue>
     <itemid>2</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -278,29 +206,11 @@
     <outmsb>0</outmsb>
     <itemvalue>2.0</itemvalue>
     <itemid>4</itemid>
-    <itemtype>1</itemtype>
+    <itemtype>2</itemtype>
     <itemdatatype>16</itemdatatype>
     <itemintegerpart>8</itemintegerpart>
     <inlsb>96</inlsb>
     <inmsb>127</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>1.0</itemvalue>
-    <itemid>5</itemid>
-    <itemtype>1</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>128</inlsb>
-    <inmsb>159</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>40.0</itemvalue>
-    <itemid>6</itemid>
-    <itemtype>2</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>160</inlsb>
-    <inmsb>191</inmsb>
     <outlsb>0</outlsb>
     <outmsb>31</outmsb>
     <itemvalue>2.0</itemvalue>
@@ -310,7 +220,7 @@
     <sourcedevice>65532</sourcedevice>
     <command>24</command>
     <timestamp>0</timestamp>
-    <modelid>2</modelid>
+    <modelid>1</modelid>
     <itemid>1</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -319,7 +229,7 @@
     <inmsb>31</inmsb>
     <outlsb>0</outlsb>
     <outmsb>0</outmsb>
-    <itemvalue>6</itemvalue>
+    <itemvalue>5.0</itemvalue>
     <itemid>2</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -339,29 +249,11 @@
     <outmsb>0</outmsb>
     <itemvalue>2.0</itemvalue>
     <itemid>4</itemid>
-    <itemtype>1</itemtype>
+    <itemtype>2</itemtype>
     <itemdatatype>16</itemdatatype>
     <itemintegerpart>8</itemintegerpart>
     <inlsb>96</inlsb>
     <inmsb>127</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>1.0</itemvalue>
-    <itemid>5</itemid>
-    <itemtype>1</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>128</inlsb>
-    <inmsb>159</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>40.0</itemvalue>
-    <itemid>6</itemid>
-    <itemtype>2</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>160</inlsb>
-    <inmsb>191</inmsb>
     <outlsb>0</outlsb>
     <outmsb>31</outmsb>
     <itemvalue>2.0</itemvalue>
@@ -371,7 +263,7 @@
     <sourcedevice>65532</sourcedevice>
     <command>24</command>
     <timestamp>0</timestamp>
-    <modelid>2</modelid>
+    <modelid>1</modelid>
     <itemid>1</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -380,7 +272,7 @@
     <inmsb>31</inmsb>
     <outlsb>0</outlsb>
     <outmsb>0</outmsb>
-    <itemvalue>6</itemvalue>
+    <itemvalue>5.0</itemvalue>
     <itemid>2</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -400,29 +292,11 @@
     <outmsb>0</outmsb>
     <itemvalue>2.0</itemvalue>
     <itemid>4</itemid>
-    <itemtype>1</itemtype>
+    <itemtype>2</itemtype>
     <itemdatatype>16</itemdatatype>
     <itemintegerpart>8</itemintegerpart>
     <inlsb>96</inlsb>
     <inmsb>127</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>1.0</itemvalue>
-    <itemid>5</itemid>
-    <itemtype>1</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>128</inlsb>
-    <inmsb>159</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>40.0</itemvalue>
-    <itemid>6</itemid>
-    <itemtype>2</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>160</inlsb>
-    <inmsb>191</inmsb>
     <outlsb>0</outlsb>
     <outmsb>31</outmsb>
     <itemvalue>2.0</itemvalue>
@@ -432,7 +306,7 @@
     <sourcedevice>65532</sourcedevice>
     <command>24</command>
     <timestamp>0</timestamp>
-    <modelid>2</modelid>
+    <modelid>1</modelid>
     <itemid>1</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -441,7 +315,7 @@
     <inmsb>31</inmsb>
     <outlsb>0</outlsb>
     <outmsb>0</outmsb>
-    <itemvalue>6</itemvalue>
+    <itemvalue>5.0</itemvalue>
     <itemid>2</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -461,29 +335,11 @@
     <outmsb>0</outmsb>
     <itemvalue>2.0</itemvalue>
     <itemid>4</itemid>
-    <itemtype>1</itemtype>
+    <itemtype>2</itemtype>
     <itemdatatype>16</itemdatatype>
     <itemintegerpart>8</itemintegerpart>
     <inlsb>96</inlsb>
     <inmsb>127</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>1.0</itemvalue>
-    <itemid>5</itemid>
-    <itemtype>1</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>128</inlsb>
-    <inmsb>159</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>40.0</itemvalue>
-    <itemid>6</itemid>
-    <itemtype>2</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>160</inlsb>
-    <inmsb>191</inmsb>
     <outlsb>0</outlsb>
     <outmsb>31</outmsb>
     <itemvalue>2.0</itemvalue>
@@ -493,7 +349,7 @@
     <sourcedevice>65532</sourcedevice>
     <command>24</command>
     <timestamp>0</timestamp>
-    <modelid>2</modelid>
+    <modelid>1</modelid>
     <itemid>1</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -502,7 +358,7 @@
     <inmsb>31</inmsb>
     <outlsb>0</outlsb>
     <outmsb>0</outmsb>
-    <itemvalue>6</itemvalue>
+    <itemvalue>5.0</itemvalue>
     <itemid>2</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -522,29 +378,11 @@
     <outmsb>0</outmsb>
     <itemvalue>2.0</itemvalue>
     <itemid>4</itemid>
-    <itemtype>1</itemtype>
+    <itemtype>2</itemtype>
     <itemdatatype>16</itemdatatype>
     <itemintegerpart>8</itemintegerpart>
     <inlsb>96</inlsb>
     <inmsb>127</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>1.0</itemvalue>
-    <itemid>5</itemid>
-    <itemtype>1</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>128</inlsb>
-    <inmsb>159</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>40.0</itemvalue>
-    <itemid>6</itemid>
-    <itemtype>2</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>160</inlsb>
-    <inmsb>191</inmsb>
     <outlsb>0</outlsb>
     <outmsb>31</outmsb>
     <itemvalue>2.0</itemvalue>
@@ -554,7 +392,7 @@
     <sourcedevice>65532</sourcedevice>
     <command>24</command>
     <timestamp>0</timestamp>
-    <modelid>2</modelid>
+    <modelid>1</modelid>
     <itemid>1</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -563,7 +401,7 @@
     <inmsb>31</inmsb>
     <outlsb>0</outlsb>
     <outmsb>0</outmsb>
-    <itemvalue>6</itemvalue>
+    <itemvalue>5.0</itemvalue>
     <itemid>2</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -583,29 +421,11 @@
     <outmsb>0</outmsb>
     <itemvalue>2.0</itemvalue>
     <itemid>4</itemid>
-    <itemtype>1</itemtype>
+    <itemtype>2</itemtype>
     <itemdatatype>16</itemdatatype>
     <itemintegerpart>8</itemintegerpart>
     <inlsb>96</inlsb>
     <inmsb>127</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>1.0</itemvalue>
-    <itemid>5</itemid>
-    <itemtype>1</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>128</inlsb>
-    <inmsb>159</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>40.0</itemvalue>
-    <itemid>6</itemid>
-    <itemtype>2</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>160</inlsb>
-    <inmsb>191</inmsb>
     <outlsb>0</outlsb>
     <outmsb>31</outmsb>
     <itemvalue>2.0</itemvalue>
@@ -615,69 +435,214 @@
     <sourcedevice>65532</sourcedevice>
     <command>24</command>
     <timestamp>0</timestamp>
-    <modelid/>
+    <modelid>1</modelid>
+    <itemid>1</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>0</inlsb>
+    <inmsb>31</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>5.0</itemvalue>
+    <itemid>2</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>32</inlsb>
+    <inmsb>63</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>50.0</itemvalue>
+    <itemid>3</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>64</inlsb>
+    <inmsb>95</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>2.0</itemvalue>
+    <itemid>4</itemid>
+    <itemtype>2</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>96</inlsb>
+    <inmsb>127</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>31</outmsb>
+    <itemvalue>2.0</itemvalue>
   </packet>
   <packet>
     <destdevice>1</destdevice>
     <sourcedevice>65532</sourcedevice>
     <command>24</command>
     <timestamp>0</timestamp>
-    <modelid/>
+    <modelid>1</modelid>
+    <itemid>1</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>0</inlsb>
+    <inmsb>31</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>5.0</itemvalue>
+    <itemid>2</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>32</inlsb>
+    <inmsb>63</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>50.0</itemvalue>
+    <itemid>3</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>64</inlsb>
+    <inmsb>95</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>2.0</itemvalue>
+    <itemid>4</itemid>
+    <itemtype>2</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>96</inlsb>
+    <inmsb>127</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>31</outmsb>
+    <itemvalue>2.0</itemvalue>
   </packet>
   <packet>
     <destdevice>1</destdevice>
     <sourcedevice>65532</sourcedevice>
     <command>24</command>
     <timestamp>0</timestamp>
-    <modelid/>
+    <modelid>1</modelid>
+    <itemid>1</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>0</inlsb>
+    <inmsb>31</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>5.0</itemvalue>
+    <itemid>2</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>32</inlsb>
+    <inmsb>63</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>50.0</itemvalue>
+    <itemid>3</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>64</inlsb>
+    <inmsb>95</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>2.0</itemvalue>
+    <itemid>4</itemid>
+    <itemtype>2</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>96</inlsb>
+    <inmsb>127</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>31</outmsb>
+    <itemvalue>2.0</itemvalue>
   </packet>
   <packet>
     <destdevice>1</destdevice>
     <sourcedevice>65532</sourcedevice>
     <command>24</command>
     <timestamp>0</timestamp>
-    <modelid/>
+    <modelid>1</modelid>
+    <itemid>1</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>0</inlsb>
+    <inmsb>31</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>5.0</itemvalue>
+    <itemid>2</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>32</inlsb>
+    <inmsb>63</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>50.0</itemvalue>
+    <itemid>3</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>64</inlsb>
+    <inmsb>95</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>2.0</itemvalue>
+    <itemid>4</itemid>
+    <itemtype>2</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>96</inlsb>
+    <inmsb>127</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>31</outmsb>
+    <itemvalue>2.0</itemvalue>
   </packet>
   <packet>
     <destdevice>1</destdevice>
     <sourcedevice>65532</sourcedevice>
     <command>24</command>
     <timestamp>0</timestamp>
-    <modelid/>
-  </packet>
-  <packet>
-    <destdevice>1</destdevice>
-    <sourcedevice>65532</sourcedevice>
-    <command>24</command>
-    <timestamp>0</timestamp>
-    <modelid/>
-  </packet>
-  <packet>
-    <destdevice>1</destdevice>
-    <sourcedevice>65532</sourcedevice>
-    <command>24</command>
-    <timestamp>0</timestamp>
-    <modelid/>
-  </packet>
-  <packet>
-    <destdevice>1</destdevice>
-    <sourcedevice>65532</sourcedevice>
-    <command>24</command>
-    <timestamp>0</timestamp>
-    <modelid/>
-  </packet>
-  <packet>
-    <destdevice>1</destdevice>
-    <sourcedevice>65532</sourcedevice>
-    <command>24</command>
-    <timestamp>0</timestamp>
-    <modelid/>
-  </packet>
-  <packet>
-    <destdevice>1</destdevice>
-    <sourcedevice>65532</sourcedevice>
-    <command>24</command>
-    <timestamp>0</timestamp>
-    <modelid/>
+    <modelid>1</modelid>
+    <itemid>1</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>0</inlsb>
+    <inmsb>31</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>5.0</itemvalue>
+    <itemid>2</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>32</inlsb>
+    <inmsb>63</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>50.0</itemvalue>
+    <itemid>3</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>64</inlsb>
+    <inmsb>95</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>2.0</itemvalue>
+    <itemid>4</itemid>
+    <itemtype>2</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>96</inlsb>
+    <inmsb>127</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>31</outmsb>
+    <itemvalue>2.0</itemvalue>
   </packet>
 </Neuron_Initialisation>

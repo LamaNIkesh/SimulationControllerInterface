@@ -26,7 +26,7 @@ if ($_POST['samemodel']=='yes' and $_POST['totalDiffModelNeurons'] == 0){
 		<?php
 		for ($number = 1; $number < $_POST['totalNeurons']+1; ++$number){
 			?>
-			<input type="hidden" name=<?php echo "name".$number?> value=<?php echo $_POST['name'.$number]; ?>>
+			<input type="hidden" name=<?php echo "neuron".$number?> value=<?php echo $_POST['neuron'.$number]; ?>>
 			<?php
 
 		}
@@ -34,8 +34,8 @@ if ($_POST['samemodel']=='yes' and $_POST['totalDiffModelNeurons'] == 0){
 
 		<input type="hidden" name="model" value=<?php echo $_POST['model']; ?>>
 		<!--keeping the to neuron for the next file save_neuron_data-->
-		<input type="hidden" name="neuron" value=<?php echo $_POST['totalNeurons']; ?>>
-
+		<input type="hidden" name="totalNeurons" value=<?php echo $_POST['totalNeurons']; ?>>
+		<input type="hidden" name="totalDiffModelNeurons" value=<?php echo $_POST['totalDiffModelNeurons']; ?>>
 		<input type="hidden" value=<?php echo $_POST['samemodel']; ?> name="samemodel">
 
 		<?php
@@ -62,19 +62,19 @@ else{
 	//deals with different models with combination of same models too
 
 	if($_POST['totalNeurons']>$_POST['totalDiffModelNeurons']){
-		echo "nxt stage";
-		$sameModelNeurons= $_POST['totalNeurons'] - $_POST['totalDiffModelNeurons'];
+		//echo "nxt stage";
+		$subtractedSameModel= $_POST['totalNeurons'] - $_POST['totalDiffModelNeurons'];
 		if ($_POST['model']==1){$modelname="Integrate and fire";}
 		if ($_POST['model']==2){$modelname="Leaky integrate and fire";}
 		if ($_POST['model']==3){$modelname="Izhikevich";}
-		?><p>There are <?php echo $sameModelNeurons; ?> neurons to be processed with the same model.
-		<br><br> The typical values for the <?php echo $modelname; ?> model are: </p>
+		?><p>There are <?php echo $subtractedSameModel; ?> neurons to be processed with the same model.
+		<br><br> <legend>The typical values for the <?php echo $modelname; ?> model are: </legend></p>
 		<form action="save_neuron_data.php" method="post">
 
 			<?php
-			for ($number = 1; $number < $sameModelNeurons+1; ++$number){
+			for ($loopCounter = 1; $loopCounter < $subtractedSameModel+1; $loopCounter++){
 				?>
-				<input type="hidden" name=<?php echo "name".$number?> value=<?php echo $_POST['name'.$number]; ?>>
+				<input type="hidden" name=<?php echo "neuron".$loopCounter?> value=<?php echo $_POST['neuron'.$loopCounter]; ?>>
 				<?php
 				//echo "name ", $_POST['name'.$number];
 
@@ -84,7 +84,7 @@ else{
 			<input type="hidden" name="model" value=<?php echo $_POST['model']; ?>>
 			
 			<!--keeping the to neuron for the next file save_neuron_data-->
-			<input type="hidden" name="neuron" value=<?php echo $_POST['totalNeurons']; ?>>
+			<input type="hidden" name="totalNeurons" value=<?php echo $_POST['totalNeurons']; ?>>
 
 			<input type="hidden" value=<?php echo $_POST['samemodel']; ?> name="samemodel">
 
@@ -112,30 +112,32 @@ $index++;
 //$list=file("Libraries/neuron_id.txt");
 ?><p>There are <?php echo $_POST['totalDiffModelNeurons']; ?> neuron(s) to be processed with different models.</p>
 <form action="save_neuron_data.php" method="post">
-	<input type="hidden" name="neuron" value=<?php echo $_POST['totalDiffModelNeurons']; ?>>
+	<!--<input type="hidden" name="neuron" value=<?php echo $_POST['totalDiffModelNeurons']; ?>>-->
 	<input type="hidden" value=<?php echo $_POST['totalDiffModelNeurons']; ?> name="totalDiffModelNeurons">
 
 	<?php
-	for ($number = 1; $number < $_POST['totalDiffModelNeurons']+1; $number++	){
-		echo $number;
-		if ($_POST['model'.$number]==1){$modelname="Integrate and fire";}
-		if ($_POST['model'.$number]==2){$modelname="Leaky integrate and fire";}
-		if ($_POST['model'.$number]==3){$modelname="Izhikevich";}
+	for ($loopCounter = 1; $loopCounter < $_POST['totalDiffModelNeurons']+1; $loopCounter++){
+		//echo $loopCounter;
+		$modelNumber = $loopCounter + $subtractedSameModel;
+		//echo 'passed model : '.$_POST['model'.$modelNumber];
+		if ($_POST['model'.$modelNumber]==1){$modelname="Integrate and fire";}
+		if ($_POST['model'.$modelNumber]==2){$modelname="Leaky integrate and fire";}
+		if ($_POST['model'.$modelNumber]==3){$modelname="Izhikevich";}
 
 		foreach ($ModelLibrary->neuron as $model){
-			if ($model->neuronid==$_POST['model']){
+			if ($model->neuronid==$_POST['model'.$modelNumber]){
 
-				$id=$_POST['name'.$number - $no_of_same_neurons];
-				echo $id;
+				$id=$_POST['name'.($loopCounter + $subtractedSameModel)];
+				echo 'id '.$id;
 				?><br><fieldset>
 				<legend>The typical values for the <?php echo $modelname; ?> model are: </legend>
-				<input type="hidden" name=<?php echo 'model'.$number; ?> value=<?php echo $_POST['model'.$number]; ?>>
-				<input type="hidden" name=<?php echo 'name'.$number - $no_of_same_neurons; ?> value=<?php echo $id; ?>><?php
+				<input type="hidden" name=<?php echo 'model'.$modelNumber; ?> value=<?php echo $_POST['model'.$modelNumber]; ?>>
+				<input type="hidden" name=<?php echo 'name'.$modelNumber; ?> value=<?php echo $id; ?>><?php
 				foreach ($model->item as $item){
 					$DataItem= str_replace("_", " ", $item->name);
 					?>
 					<div class="col-sm-4">
-						<?php echo $DataItem; ?>:</div><div class = "col-sm-8"> <input type="number" name=<?php echo "neuron" . $number . "item" . $item->itemid; ?> value=<?php echo $item->typicalvalue; ?> required></div><br><br>
+						<?php echo $DataItem; ?>:</div><div class = "col-sm-8"> <input type="number" name=<?php echo "neuron" . $modelNumber . "item" . $item->itemid; ?> value=<?php echo $item->typicalvalue; ?> required></div><br><br>
 						<?php
 					}
 				}?></fieldset><?php
