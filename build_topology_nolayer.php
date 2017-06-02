@@ -8,6 +8,7 @@ if ($_SESSION['flag']==1){
 
 	<div class = "container">
 		<div class="col-sm-12">
+			<h6><font color = "#52a25e">System Builder-><b>Simulation Parameters</b></h6></font>
 			<h3>
 				You have selected to build a network without any layers
 			</h3>

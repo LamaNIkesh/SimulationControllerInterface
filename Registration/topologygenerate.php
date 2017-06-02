@@ -2,7 +2,6 @@
 include("head.html")
 ?>
 
-
 <script type="text/javascript" src="dist/vis.js"></script>
 <link href="dist/vis.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
@@ -12,9 +11,9 @@ var nodes, edges, network;
         	return JSON.stringify(obj, null, 4);
         }
         function addNode() {
-        	try {
+        	try {s
         		var sen='#66FF00';
-        		var inter='#FFFF00';
+        		var inter='#FFsFF00';
         		var motor='#0066FF';
         		nodes.add({
         			id: document.getElementById('node-id').value,
@@ -26,6 +25,7 @@ var nodes, edges, network;
         		alert(err);
         	}
         }
+
         function addEdge() {
         	try {
         		edges.add({
@@ -39,21 +39,27 @@ var nodes, edges, network;
         		alert(err);
         	}
         }
+
         function writeToFile()
         {
         	var txtFile = "data.txt";
         	var file = new File(txtFile);
         	var str = "My string";
+
         	file.open("w");
         	file.writeln("first line");
         	file.write(str);
         	file.close();
+
         }
+
+
         function draw(topology) {
             // create an array with nodes
             //writeToFile();
             nodes = new vis.DataSet();
             var neuron = document.getElementById("neuron").value;
+            dcoument.write(neuron);
             //document.write(neuron);
             //var muscle = document.getElementById("muscle").value;
             nodes.on('*', function () {
@@ -71,8 +77,11 @@ var nodes, edges, network;
                 	{id:counter2, label: lab, color:'#99CC33 '}]);
                 counter2=counter2+1;
             }
+
+
             // create an array with edges
             edges = new vis.DataSet();
+
             edges.on('*', function () {
             	document.getElementById('edges').innerHTML = JSON.stringify(edges.get(), null, 4);
             });
@@ -88,6 +97,9 @@ var nodes, edges, network;
             	try {
             		for (i=1; i<=neuron; i++){
             			for (j=1; j<=neuron; j++){
+
+            				str1 = "neuron";
+            				str2 = "synapse";
             				from = i.toString();
             				to = j.toString();
             				check = str1.concat(from,str2,to);
@@ -98,11 +110,14 @@ var nodes, edges, network;
                        n = counter.toString();
                        edges.add({id: n, from: to, to: from, arrows:'to'});
                        counter=counter+1;
+
                     //j = j+2;
                 }          
+
             }
         }
     }
+
     catch (err) {
     	alert(err);
     }
@@ -114,8 +129,8 @@ else if(topology == 2){
     var counter=1;
     //the values for str1 and str2 are changed so that right 
     //fields can be accessed via id 
-    var str1 = "neuron";
-    var str2 = "synapse";
+    var str1 = "neu";
+    var str2 = "syn";
     var from = "";
     var to = "";
     var connection = "";
@@ -124,11 +139,13 @@ else if(topology == 2){
    var fh = fso.CreateTextFile("test.txt", true);
    fh.WriteLine("Some text goes here...");
    fh.Close();*/
+
    try {
    	for (i=1; i<=neuron; i++){
         //document.getElementById('i').innerHTML = i;
         for (j=1; j<=neuron; j++){
                          //var random = Math.floor(Math.random() * neuron);
+
                          /*var from = i.toString();
                          var random = Math.floor(Math.random() * (max - min + 1)) + min;
                          var to = random.toString(); //using random neuron to connect to 
@@ -157,20 +174,18 @@ else if(topology == 2){
                             n = counter.toString();
                             edges.add({id: n, from: to, to: from, arrows:'from'});
                             counter=counter+1;
+
                         }
+
                     }
                 }
             }
+
             catch (err) {
             	alert(err);
             }
+
         }
-
-
-else if(topology == 3){
-	//only for testing purpose
-	//read topology from text file to make the porcess faster
-}
 
             // create a network
             var container = document.getElementById('network');
@@ -198,164 +213,149 @@ else if(topology == 3){
             	zoomView: true
             }
         };
+
         network = new vis.Network(container, data, options);
         network.setOptions(options);
     }
-    </script>
 
 
-    <!-- end of script-->
 
+</script> <!-- custom js to visualise topology-->
 
-    <div class = "container">
-    	<div class="col-sm-12">
-    		<h6><font color = "#52a25e">System Builder->Simulation Parameters->NeuronModels->NeuronModelParameter->Creating Initialisation File->Create Topology-><b>Topology Viewer</b></h6></font>
-    		<!--<p><h3>Create Topology</h3></p>-->
+<!-- end of script-->
 
-    		<?php
-    		if ($_SESSION['flag']==1){
-    			$neuronlistPath = "SimulationXML/".$userLogged . "/NeuronList.txt";
-    			$list=file($neuronlistPath);
+<div class = "container">
+	<div class="col-sm-12">
+
+		<p><h3>Create Topology</h3></p>
+
+		<p id = "i"></p>
+
+		<?php
+		if ($_SESSION['flag']==1){
+			$neuronlistPath = "SimulationXML/".$userLogged . "/NeuronList.txt";
+			$list=file($neuronlistPath);
+
                     //echo $list[9];
-    			$totalNeurons=$_POST['totalNeurons'];
-    			?><input type="hidden" name="neuron" id = "neuron" value=<?php echo $_POST['totalNeurons']; ?>>
-    			<?php 
-
+			$totalNeurons=$_POST['totalNeurons'];
                     //echo $_POST['totalNeurons'];
-    			$num = 1;
+			$num = 1;
                     //echo "neuron 1 is ".$_POST['neuron'.$num];
                     //Fully interconnected
-    			?>
-    			
-    			<?php  
-    			switch ($_POST['topologyType']) {
-    				case 'fullyConnected':
- 				# code...
-    				?>
-    				<p><h3>Fully Connected Topology</h3></p>
+			?>
+			<br>
 
-    				<?php 
-    				$myfile = fopen("SimulationXML/".$userLogged . "/Topology.txt", "w"); 
-    				for ($number = 1; $number < $totalNeurons+1; $number++){
-    					$name1='neuron'.$number;
-    					$arrayIndex = $number - 1;
-    					?>
-    					<!--<p>Neuron <?php echo preg_replace("/[^a-zA-Z0-9]+/", "", "$list[$arrayIndex]"); ?> receives synapses from: </p>-->
-    					<!--<form action="save_topology.php" method="post">-->
+			<?php 
 
-    					
-    					<input type="hidden" name=<?php echo "nameid". $number; ?> id = <?php echo "nameid". $number; ?> value=<?php echo $name1; ?>>
-    					<input type="hidden" name=<?php echo "neuron". $number; ?> id = <?php echo "neuron". $number; ?> value=<?php echo preg_replace("/[^a-zA-Z0-9]+/", "", "$list[$arrayIndex]"); ?>>
-    					<?php
+			if($_POST['topologyType'] == "fullyConnected"){
+				?>
+				<input type= "submit" method = "post" value = "View Fully Connected Network" onclick = "draw(1)">  
+				<input type="hidden" name="neuron" id = "neuron" value=<?php echo $_POST['totalNeurons']; ?>>
+				<?php 
+				$myfile = fopen("SimulationXML/".$userLogged . "/Topology.txt", "w"); 
+				for ($number = 1; $number < $totalNeurons+1; $number++){
+					$name1='neuron'.$number;
+					$arrayIndex = $number - 1;
+					?>
+					
+					<input type="hidden" name=<?php echo "nameid". $number; ?> id = <?php echo "nameid". $number; ?> value=<?php echo $name1; ?>>
+					<input type="hidden" name=<?php echo "neuron". $number; ?> id = <?php echo "neuron". $number; ?> value=<?php echo preg_replace("/[^a-zA-Z0-9]+/", "", "$list[$arrayIndex]"); ?>>
+					<?php
 
-    					for ($connect = 1; $connect < $totalNeurons+1; $connect++){
-    						$name2='neuron'.$connect;
-    						$arrayIndex2 = $connect - 1;
-    						$fullyconnect[$connect] = "neuron" . $number . "synapse" . $connect;
-    						$connection = $number." ".$connect;
-    						fwrite($myfile, $connection."\n");
+					for ($connect = 1; $connect < $totalNeurons+1; $connect++){
+						$name2='neuron'.$connect;
+						$arrayIndex2 = $connect - 1;
+						$fullyconnect[$connect] = "neuron" . $number . "synapse" . $connect;
+						$connection = $number." ".$connect;
+						fwrite($myfile, $connection."\n");
                         //the format or id will be something like neuron1synapse4 and it will change with each iteration
                                 //echo $fullyconnect[$connect];
-    						?> <input type="hidden" id = '<?php echo $fullyconnect[$connect];?>' name = <?php echo $fullyconnect[$connect];?>>
+						?> <input type="hidden" id = '<?php echo $fullyconnect[$connect];?>' name = <?php echo $fullyconnect[$connect];?>>
 
-    						<?php
-    					} 
-    				}
-    				fclose($myfile);
-    				?><input type= "submit" method = "post" value = "Visualise network" onclick = "draw(1)">
-    				<br><br>
-    				<form action="save_topology.php" method="post">
-    				<input type="submit" value="Next" action = "save_topology.php"></form>
-    				<?php 
-    				break;
-    				case 'randomlyConnected':
-				#randomly connected network
-    				?>
-    				<p><h3>Random Topology</h3></p>
+						<?php
+					}
+				}
+				fclose($myfile);	
 
-    				<?php 
-    				$randomTopo = fopen("SimulationXML/".$userLogged . "/RandomTopology.txt", "w");
-    				
+			}
+		//elseif($_POST['topologyType'] == "randomlyConnected"){
+			?>	
+			<input type= "submit" method = "post" value = "View Network" onclick = "draw(2)">   
+            <input type="hidden" name="neuron" id = "neuron" value=<?php echo $_POST['totalNeurons']; ?>> 
+			<?php 
                     //randomly connected network
-    				for ($number = 1; $number < $totalNeurons+1; $number++){
-    					$name1='neuron'.$number;
-    					$arrayIndex = $number - 1;
+			$randomTopo = fopen("SimulationXML/".$userLogged . "/RandomTopology.txt", "w"); 
+			for ($number = 1; $number < $totalNeurons+1; $number++){
+				$name1='neuron'.$number;
+				$arrayIndex = $number - 1;
                         //echo "First loop: ".$number;
-    					?>
-    					
-    					<input type="hidden" name=<?php echo "nameid". $number; ?> id = <?php echo "nameid". $number; ?> value=<?php echo $name1; ?>>
-    					<input type="hidden" name=<?php echo "neuron". $number; ?> id = <?php echo "neuron". $number; ?> value=<?php echo preg_replace("/[^a-zA-Z0-9]+/", "", "$list[$arrayIndex]"); ?>>
-    					<?php
-    					for ($connect = 1; $connect < $totalNeurons+1; $connect++){
-    						$name2='neuron'.$connect;
-    						$arrayIndex2 = $connect - 1;
-    						$randomConnection = mt_rand(1,$totalNeurons);
-    						$randomDivider = mt_rand(1,$totalNeurons);
+				?>
+				<!--
+				<input type="hidden" name=<?php echo "nameid". $number; ?> id = <?php echo "nameid". $number; ?> value=<?php echo $name1; ?>>
+                -->
+				<input type="hidden" name=<?php echo "neuron". $number; ?> id = <?php echo "neuron". $number; ?> value=<?php echo preg_replace("/[^a-zA-Z0-9]+/", "", "$list[$arrayIndex]"); ?>>
+				
+                <?php
+				for ($connect = 1; $connect < $totalNeurons+1; $connect++){
+
+					$name2='neuron'.$connect;
+					$arrayIndex2 = $connect - 1;
+					$randomConnection = mt_rand(1,$totalNeurons);
+					$randomDivider = mt_rand(1,$totalNeurons);
+
                                 //echo $randomConnection;
                                 //$fullyconnect[$connect] = "neuron" . $number . "synapse" . $connect;
-    						$randomlyconnected[$connect] = "neuron" . $number . "synapse" . $randomConnection;
-    						$connection = $number." ".$randomConnection;
-    						fwrite($randomTopo, $connection."\n");
+					$randomlyconnected[$connect] = "neu" . $number . "syn" . $randomConnection;
                             //echo $randomlyconnected[$connect];
-    						?> <input type="hidden" id = '<?php echo $randomlyconnected[$connect];?>' name = <?php echo $randomlyconnected[$connect];?> >
+					$connection = $number." ".$randomConnection;
+					fwrite($randomTopo, $connection."\n");
+
+					?> <input type="hidden" id = '<?php echo $randomlyconnected[$connect];?>' name = <?php echo $randomlyconnected[$connect];?> >
 
 
-    						<?php
-    						$connect = intval($connect + 2*$connect/((2/5)*$connect) + ($randomConnection/$randomDivider));
-    					}
-    				}
-    				fclose($randomTopo);
-    				?>
-    				<input type= "submit" method = "post" value = "Visualise Network" onclick = "draw(2)">  
-    				<br><br>
-    				<form action="save_topology.php" method="post">
-    				<input type="submit" value="Next" action = "save_topology.php"></form>
-    				
-    				<?php
-    				break; 			
-    				default:
- 				# code...
-    				break;
-    			}
+					<?php
+					$connect = intval($connect + 2*$connect/((2/5)*$connect) + ($randomConnection/$randomDivider));
+				} 
+			}
+			fclose($randomTopo);
+		//}
+			?>
 
+			<h2>Network</h2>
+			<button onclick="draw(1)">See network</button>
+			<br><br>
+			<div id="network"></div>
 
-    			?>
+			<table style="display:none;">
+				<colgroup>
+				<col width="1000px">
+				<col width="1000px">
+			</colgroup>
+			<tr>
+				<td>
+					<h2>Nodes</h2>
+					<pre id="nodes"></pre>
+				</td>
 
-    		<h2>Network</h2>
-    		
-    		<br><br>
-    		<div id="network"></div>
-
-    		<table style="display:none;">
-    			<colgroup>
-    			<col width="1000px">
-    			<col width="1000px">
-    		</colgroup>
-    		<tr>
-    			<td>
-    				<h2>Nodes</h2>
-    				<pre id="nodes"></pre>
-    			</td>
-
-    			<td>
-    				<h2>Edges</h2>
-    				<pre id="edges"></pre>
-    			</td>
-    		</tr>
-    	</table>
-    	<br><br>
-    	<?php
-    }
-    else{
-    	?>
-    	<p>You need to log in to see this page:</p>
-    	<form action="login.php" method="post">
-    		<input type="submit" value="Log in">
-    	</form>
-    	<br><br>
-    	<?php
-    }
-    ?>
+				<td>
+					<h2>Edges</h2>
+					<pre id="edges"></pre>
+				</td>
+			</tr>
+		</table>
+		<br><br>
+		<?php
+	}
+	else{
+		?>
+		<p>You need to log in to see this page:</p>
+		<form action="login.php" method="post">
+			<input type="submit" value="Log in">
+		</form>
+		<br><br>
+		<?php
+	}
+	?>
 
 </div>
 </div>

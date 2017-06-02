@@ -8,6 +8,7 @@ if ($_SESSION['flag']==1){
 
 	<div class = "container">
 		<div class="col-sm-12">
+			<h6><font color = "#52a25e"><b>System Builder-</b></h6></font>
 			<h2>
 				Welcome to System Builder
 			</h2>

@@ -10,6 +10,7 @@ $loopCounter = 0;
 
 <div class = "container">
 	<div class="col-sm-12">
+		<h6><font color = "#52a25e">System Builder->Simulation Parameters-><b>NeuronModels</b></h6></font>
 		<form action="save_neuron.php" method="post">
 
 			<?php

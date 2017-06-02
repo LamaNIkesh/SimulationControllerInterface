@@ -5,7 +5,7 @@ include("head.html")
 
 <div class = "container">
 	<div class="col-sm-12">
-
+		<h6><font color = "#52a25e">System Builder->Simulation Parameters->NeuronModels->NeuronModelParameter-><b>Creating Initialisation File</b></h6></font>
 		<?php
 		if ($_SESSION['flag']==1){
 			//needs to be changed later on
@@ -223,9 +223,6 @@ $data->save($filename);
 }
 fclose($myfile);
 echo "Neuronal initialisation data has been saved as ", "Neuron_Ini_file_" . $userID . ".xml";
-
-
-
 
 ?>
 

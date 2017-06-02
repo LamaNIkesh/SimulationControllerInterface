@@ -4,7 +4,7 @@ include("head.html")
 
 <div class = "container">
 	<div class="col-sm-12">
-
+		<h6><font color = "#52a25e">System Builder->Simulation Parameters->NeuronModels-><b>NeuronModelParameter</b></h6></font>
 		<?php
 		if ($_SESSION['flag']==1){
 if(file_exists('Libraries/ModelLibrary_metadata.xml')){ #Load XML file
