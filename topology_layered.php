@@ -21,31 +21,56 @@ include("head.html")
                     //echo $list[9];
         $totalNeurons=$_POST['totalNeurons'];
                     //echo $_POST['totalNeurons'];
+        //echo $_POST['totalNeuronsEachLayer1'];
         $num = 1;
                     //echo "neuron 1 is ".$_POST['neuron'.$num];
                     //Fully interconnected
+
         ?>
         <br>
-        <form method="post" action ="topologygenerate.php"> 
+        <form method="post" action ="topologygenerate_layered.php"> 
             <input type= "submit" method = "post" value = "Create fully interconnected network">
             <input type="hidden" name="totalNeurons" value=<?php echo $_POST['totalNeurons']; ?>>
+            <input type="hidden" name="noOflayers" value=<?php echo $_POST['noOflayers']; ?>>
+
+            <?php 
+                //passing the values-----------
+                for ($number=1; $number <=$_POST['noOflayers']  ; $number++) { 
+                    # code...
+                    echo "total neurons: ".$_POST['totalNeuronsEachLayer'.$number];
+                    ?>
+                    <input type="hidden" name=<?php echo "totalNeuronsEachLayer".$number; ?> value=<?php echo $_POST['totalNeuronsEachLayer'.$number]; ?> required>
+                    <?php
+                }
+
+             ?>
+            
+            
+
+
             <input type="hidden" name="topologyType" value="fullyConnected">
         </form>
         <br><br>
-        <form action = "topologygenerate.php" method = "post">
-            <input type= "submit" method = "post" value = "Create probabilistic network[30%]">    
-            <input type="hidden" name="topologyType" value="probConnected">
-            <input type="hidden" name="totalNeurons" value=<?php echo $_POST['totalNeurons']; ?>>
-        </form>
-        <br><br>
-        <form action = "topologygenerate.php" method = "post">
+        <form action = "topologygenerate_layered.php" method = "post">
             <input type= "submit" method = "post" value = "Create Random network">    
             <input type="hidden" name="topologyType" value="randomlyConnected">
             <input type="hidden" name="totalNeurons" value=<?php echo $_POST['totalNeurons']; ?>>
+            <input type="hidden" name="noOflayers" value=<?php echo $_POST['noOflayers']; ?>>
+
+            <?php 
+                //passing the values-----------
+            echo "no of layers:".$_POST['noOflayers'];
+                for ($number=1; $number <=$_POST['noOflayers']  ; $number++) { 
+                    # code...
+                    ?>
+                    <input type="hidden" name=<?php echo "totalNeuronsEachLayer".$number; ?> value=<?php echo $_POST['totalNeuronsEachLayer'.$number]; ?> required>
+                    <?php
+                }
+
+             ?>
+
+
         </form>
-
-
-
         <?php
                     //probabilistic connections
 

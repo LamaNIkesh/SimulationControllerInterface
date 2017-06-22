@@ -91,9 +91,11 @@ else {
 	</select>
 	<br><br>
 
-
+	<hr>
 	<?php
 }//end of if statement
+
+
 $totalDiffModelNeurons = $_POST['totalDiffModelNeurons'];
 //This section deals with different models
 ?><p><?php echo $totalDiffModelNeurons; ?> neurons to be processed with different models</p>

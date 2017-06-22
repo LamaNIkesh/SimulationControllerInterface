@@ -19,7 +19,7 @@ if ($_SESSION['flag']==1){
 			
 			<p>Would you like to build a layered network?</p>(Press Yes to create a layered network, Press no to create a network without any layers)</p>
 			<form method="POST" action="#">
-			<input type = "submit" value="Create layered network" name = "submit" formaction = "#"> 
+			<input type = "submit" value="Create layered network" name = "submit" formaction = "build_topology_layered.php"> 
 			<input type="submit" value="Create non layered network" name="submit" formaction = "build_topology_nolayer.php">
 		<br><br>
 	</div></div>

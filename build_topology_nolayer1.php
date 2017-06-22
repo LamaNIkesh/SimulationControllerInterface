@@ -11,8 +11,9 @@ include("head.html")
 
 			$userLogged = $_SESSION['username'];
 	//increases the simNum for the file name for multiple file 
-			$_SESSION['simNum']++;
-			$simNum =$_SESSION['simNum'];
+			//$_SESSION['simNum']++;
+			//$simNum =$_SESSION['simNum'];
+			$simNum = 1;
 //Create new document
 			$dom = new DOMDocument('1.0', 'UTF-8');
 			//$dom->formatOutput = true;
@@ -31,7 +32,7 @@ include("head.html")
 						$timestamp = 0;
 						$timestepsize = $_POST['simunits'];
 						$simtime = $_POST['simtime'];
-						$userID = $userLogged ."_".$simNum;
+						$userID = $userLogged .$simNum;
 						$watchdog = $_POST['watchdog']; 
 						//$watchdog = 2;
 						if ($timestepsize=='us'){

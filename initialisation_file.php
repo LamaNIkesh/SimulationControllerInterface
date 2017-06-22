@@ -4,31 +4,40 @@ include("head.html")
 
 <div class = "container">
 	<div class="col-sm-12">
+		<h6><font color = "#52a25e">System Builder->Simulation Parameters->NeuronModels->NeuronModelParameter->Creating Initialisation File->Create Topology->Topology Viewer->Save Topology-><b>Save Initialisation file</b></h6></font>
 <?php
+//to avoid loding problem, not sure of the cause but this seems to get rid of loading entity issu
+//still looking into it
+libxml_disable_entity_loader(false);
 if ($_SESSION['flag']==1){
+
+	//this section appends all three xml files; simulation, neuron initialisation, topology and stimulation (if present)
+	//into a single simulation file that is ready to send to the IM 
+
 	$topo=false;
-	$muscle=false;
 	$stim=false;
 	$simNum =1;
-	// $doc1=file($userLogged . "/" . $userLogged . $simNum . ".xml");
-	// $doc2=file($userLogged . "/Neuron_Ini_file_" . $userLogged . $simNum . ".xml");
+	$userID = $userLogged . $simNum;
+	echo $userID;
+	//$doc1=file($userLogged . "/" . $userLogged . $simNum . ".xml");
+	//$doc2=file($userLogged . "/Neuron_Ini_file_" . $userLogged . $simNum . ".xml");
+	
 	$xmlDoc1 = new DOMDocument();
-	$xmlDoc1->load("SimulationXML/".$userLogged . "/Sim_Ini_file_" . $userLogged . "_".$simNum . ".xml");
+	$xmlDoc1->load("SimulationXML/".$userLogged . "/Sim_Ini_file_" . $userID. ".xml");
+	
 	unlink("SimulationXML/".$userLogged . "/Sim_Ini_file_" . $userLogged . $simNum . ".xml");
 	$xmlDoc2 = new DOMDocument();
+
 	$xmlDoc2->load("SimulationXML/".$userLogged . "/Neuron_Ini_file_" . $userLogged . $simNum . ".xml");
+	
 	unlink("SimulationXML/".$userLogged . "/Neuron_Ini_file_" . $userLogged . $simNum . ".xml");
+	
 	if (file_exists("SimulationXML/".$userLogged . "/Topo_Ini_file_" . $userLogged . $simNum . ".xml")){
 		$xmlDoc3 = new DOMDocument();
 		$xmlDoc3->load("SimulationXML/".$userLogged . "/Topo_Ini_file_" . $userLogged . $simNum . ".xml");
+		
 		$topo=true;
 		unlink("SimulationXML/".$userLogged . "/Topo_Ini_file_" . $userLogged . $simNum . ".xml");
-	}
-	if (file_exists("SimulationXML/".$userLogged . "/Muscle_Ini_file_" . $userLogged . $simNum . ".xml")){
-		$xmlDoc4 = new DOMDocument();
-		$xmlDoc4->load("SimulationXML/".$userLogged . "/Muscle_Ini_file_" . $userLogged . $simNum . ".xml");
-		$muscle=true;
-		unlink("SimulationXML/".$userLogged . "/Muscle_Ini_file_" . $userLogged . $simNum . ".xml");
 	}
 	
 	if (file_exists("SimulationXML/".$userLogged . "/Stim_Ini_file_" . $userLogged . $simNum . ".xml")){
@@ -67,13 +76,6 @@ if ($_SESSION['flag']==1){
 	}
 	
 			// Append xmlDoc4
-	if ($muscle){
-		$musclemeta = $xmlDoc4->getElementsByTagName("packet");
-		foreach($musclemeta as $packet){
-			$packet = $dom->importNode($packet, true);
-			$data->appendChild($packet);
-		}
-	}
 	
 		// Append xmlDoc3
 	if ($topo){
@@ -99,7 +101,7 @@ if ($_SESSION['flag']==1){
 
 	?>
 	<p> The metadata and neuronal XML files will be merged here. The file should be able to be downloaded.</p>
-	<a id="cont" href=<?php echo $userLogged . "/Initialisation_file_" . $userLogged . $simNum . ".xml" ;?> download="Initialisation_file.xml">Save initialisation file to your computer</a>
+	<a id="cont" href=<?php echo "SimulationXML/".$userLogged . "/Initialisation_file_" . $userID. ".xml" ;?> download= <?php echo "Initialisation_file_" . $userID. ".xml"?>>Save initialisation file to your computer</a>
 	<br><br>
 
 	<p> The next button will send the file to the server to transform it into HEX and start the simulation.</p>
