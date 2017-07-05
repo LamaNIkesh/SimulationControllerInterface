@@ -1,3 +1,0 @@
-neuron1
-neuron2
-neuron3

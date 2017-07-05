@@ -65,8 +65,10 @@ var nodes, edges, network;
             	var n = i.toString();
             	var lab1="neuron";
             	var lab2=lab1.concat(n);
+                //console.log(lab2);
+                //document.write(lab2);
             	var lab = document.getElementById(lab2).value;
-                //document.write(lab);
+                
                 nodes.add([
                 	{id:counter2, label: lab, color:'#99CC33 '}]);
                 counter2=counter2+1;

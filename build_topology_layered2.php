@@ -18,9 +18,9 @@ include("head.html")
 			//echo $_POST['model4'];
 			//writing the neurons into a text file for future use
 			if($_POST['samemodel'] == 'yes'){
-				$neuronlist = fopen("SimulationXML/".$userLogged . "/neuronlist.txt", "w");
+				$neuronlist = fopen("SimulationXML/".$userLogged . "/Layered/neuronlist.txt", "w");
 			//this stores model for each layer
-				$LayerModel = fopen("SimulationXML/".$userLogged."/layerModel.txt","w");
+				$LayerModel = fopen("SimulationXML/".$userLogged."/Layered/layerModel.txt","w");
 			//$noOfneuronsEachLayer = fopen("SimulationXML/".$userLogged."/noOfneuronsEachLayer.txt","w");
 			}
 			else{
@@ -30,17 +30,32 @@ include("head.html")
 			//$noOfneuronsEachLayer = fopen("SimulationXML/".$userLogged."/Layered/noOfneuronsEachLayer.txt","w");
 			}
 			$totalNeuronsEachLayer = 0;
+			$totalneurons = 0;
+			//$totalNeurons
 			//$neuronlist = fopen($neuronlistPath, "w"); 
 			//calculating the total no of neurons
 			//checking no of neurons for each layer and adding them up
 			for ($i=1; $i <= $_POST['noOflayers']; $i++) { 
 				# code...
-				fwrite($neuronlist, $i);
+				//fwrite($neuronlist, $i);
 				for ($j=1; $j <= $_POST['totalNeuronsLayer'.$i] ; $j++) {
-					fwrite($neuronlist," ".$i.".".$j); 
+					if($i == 1){
+
+					fwrite($neuronlist,$j." "); 
 					$totalNeuronsEachLayer++;
+					$totalneurons = $totalNeuronsEachLayer;
+				}
+					else{
+						echo "TotalNeuronsEachLayer: ".$totalneurons;
+						$totalneurons++;
+						fwrite($neuronlist, $totalneurons." ");
+						//$totalNeuronsEachLayer++;
+						
+					}
+					
 					# code...
 				}
+
 				//passing no fo neurons each layer to the next file to be read
 				?>
 				<input type ="hidden" name=<?php echo "totalNeuronsEachLayer".$i ?> value= <?php echo $totalNeuronsEachLayer ?> required>
@@ -56,8 +71,8 @@ include("head.html")
 				fwrite($LayerModel,"\n");
 			}
 
-			$neuronlistPath = "SimulationXML/".$userLogged . "/NeuronList.txt";
-			$neuronlist = fopen($neuronlistPath, "w"); 
+			//$neuronlistPath = "SimulationXML/".$userLogged . "/NeuronList.txt";
+			//$neuronlist = fopen($neuronlistPath, "w"); 
 			//echo "no of neurons: ",$totalNeurons;
 
 			//Create new document

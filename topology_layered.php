@@ -15,17 +15,18 @@ include("head.html")
 
     <?php
     if ($_SESSION['flag']==1){
-        $neuronlistPath = "SimulationXML/".$userLogged . "/NeuronList.txt";
+        $neuronlistPath = "SimulationXML/".$userLogged . "/Layered/neuronlist.txt";
         $list=file($neuronlistPath);
 
                     //echo $list[9];
         $totalNeurons=$_POST['totalNeurons'];
+        echo "totalNeurons: ".$_POST['totalNeurons'];
                     //echo $_POST['totalNeurons'];
         //echo $_POST['totalNeuronsEachLayer1'];
         $num = 1;
                     //echo "neuron 1 is ".$_POST['neuron'.$num];
                     //Fully interconnected
-
+    
         ?>
         <br>
         <form method="post" action ="topologygenerate_layered.php"> 
@@ -37,16 +38,13 @@ include("head.html")
                 //passing the values-----------
                 for ($number=1; $number <=$_POST['noOflayers']  ; $number++) { 
                     # code...
-                    echo "total neurons: ".$_POST['totalNeuronsEachLayer'.$number];
+                    echo "total neurons in layer ".$_POST['totalNeuronsEachLayer'.$number];
                     ?>
                     <input type="hidden" name=<?php echo "totalNeuronsEachLayer".$number; ?> value=<?php echo $_POST['totalNeuronsEachLayer'.$number]; ?> required>
                     <?php
                 }
 
              ?>
-            
-            
-
 
             <input type="hidden" name="topologyType" value="fullyConnected">
         </form>

@@ -45,7 +45,7 @@ if ($_POST['samemodel']=='yes'){
 			fwrite($LayerDetails, " ".$_POST['model']);
 			fwrite($LayerDetails,"\n");
 			?>
-			<input type ="hidden" name=<?php echo "totalNeuronsEachLayer".$i ?> value= $_POST['totalNeuronsEachLayer'.$i] required>
+			<input type ="hidden" name=<?php echo "totalNeuronsEachLayer".$i ?> value= <?php echo $_POST['totalNeuronsEachLayer'.$i]; ?>required>
 			<?php  
 		}
 		
