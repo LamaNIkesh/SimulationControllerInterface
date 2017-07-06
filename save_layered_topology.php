@@ -5,6 +5,7 @@
 	<div class = "container">
 		<div class="col-sm-12">
 			<h6><font color = "#52a25e">System Builder->Simulation Parameters->NeuronModels->NeuronModelParameter->Creating Initialisation File->Create Topology->Topology Viewer-><b>Save Topology</b></h6></font>
+			
 			<?php
 			//saves the topology information into a topology initialisation file
 
@@ -15,8 +16,12 @@
 				$data->formatOutput = true;
 				$dom=$data->createElement("Topology_Initialisation");
 	// $xml = simplexml_load_file($userLogged . "/" . $userID . ".xml");
-
+				if($_POST['topology_type'] == 'FullTopology'){
 				$Topology = fopen("SimulationXML/".$userLogged . "/Layered/FullTopology.txt", "r") or die("Unable to open file!");
+				}
+				else{
+					$Topology = fopen("SimulationXML/".$userLogged . "/Layered/RandomTopology.txt", "r") or die("Unable to open file!");
+				}
 				//reads topology txt file created earlier and use that to generate topology initialisation file
 				while(! feof($Topology))
 	  			{
@@ -26,6 +31,7 @@
 	  				//echo $gettingLine;
 	  				//separates numbers from spaces and put into an array
 	  				$spaceSeparatedConnections = explode(" ",$gettingLine);
+	  				print_r($spaceSeparatedConnections);
 	  				//testing purpose
 	  				/*for($i = 0; $i<sizeof($spaceSeparatedConnections);$i++){
 	  					echo $i;
@@ -44,7 +50,7 @@
 					
 					//this loops from value 1 since value 0 is the desitnation device so we are only
 					//interested on the synpases it receives from
-					for ($connect = 1; $connect < sizeof($spaceSeparatedConnections); $connect++){
+					for ($connect = 1; $connect < sizeof($spaceSeparatedConnections) - 1; $connect++){
 						
 							$itemid=$data->createElement("preneuronid",$spaceSeparatedConnections[$connect]);
 							//echo $spaceSeparatedConnections[$connect];
@@ -60,7 +66,7 @@
 				fclose($Topology);
 
 				$data->appendChild($dom);
-				$filename="SimulationXML/".$userLogged . "/Topo_Ini_file_" . $userID . ".xml";
+				$filename="SimulationXML/".$userLogged . "/Layered/Topo_Ini_file_" . $userID . ".xml";
 				$data->save($filename);
 
 				echo "Topology initialisation data has been saved as ", "Topo_Ini_file_" . $userID . ".xml";
@@ -73,6 +79,7 @@
 					<!-- <input type="hidden" name="neuron" id = "neuron" value=<?php echo $_POST['neuron']; ?>> -->
 				</form><br>
 				<form action="initialisation_file.php" method="post">
+					<input type="hidden" name='topology' id = 'topology' value='layeredTopology'>
 					<br><input type="submit" value="Create initialisation file">
 				</form><br>
 				<form action = ""

@@ -73,6 +73,7 @@
 					<!-- <input type="hidden" name="neuron" id = "neuron" value=<?php echo $_POST['neuron']; ?>> -->
 				</form><br>
 				<form action="initialisation_file.php" method="post">
+					<input type="hidden" name='topology' id = 'topology' value='nonlayered'>
 					<br><input type="submit" value="Create initialisation file">
 				</form><br>
 				<form action = ""

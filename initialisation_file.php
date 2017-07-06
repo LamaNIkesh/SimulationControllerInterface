@@ -21,30 +21,38 @@ if ($_SESSION['flag']==1){
 	echo $userID;
 	//$doc1=file($userLogged . "/" . $userLogged . $simNum . ".xml");
 	//$doc2=file($userLogged . "/Neuron_Ini_file_" . $userLogged . $simNum . ".xml");
-	
+	$topology = '';
+	echo "topology: ".$_POST['topology'];
+	if($_POST['topology'] == 'layeredTopology'){
+		$topology = '/Layered';
+	}
+	else{	
+		$topology = '';
+	}
+
 	$xmlDoc1 = new DOMDocument();
-	$xmlDoc1->load("SimulationXML/".$userLogged . "/Sim_Ini_file_" . $userID. ".xml");
+	$xmlDoc1->load("SimulationXML/".$userLogged .$topology. "/Sim_Ini_file_" . $userID. ".xml");
 	
-	unlink("SimulationXML/".$userLogged . "/Sim_Ini_file_" . $userLogged . $simNum . ".xml");
+	unlink("SimulationXML/".$userLogged .$topology. "/Sim_Ini_file_" . $userLogged . $simNum . ".xml");
 	$xmlDoc2 = new DOMDocument();
 
-	$xmlDoc2->load("SimulationXML/".$userLogged . "/Neuron_Ini_file_" . $userLogged . $simNum . ".xml");
+	$xmlDoc2->load("SimulationXML/".$userLogged . $topology."/Neuron_Ini_file_" . $userLogged . $simNum . ".xml");
 	
-	unlink("SimulationXML/".$userLogged . "/Neuron_Ini_file_" . $userLogged . $simNum . ".xml");
+	unlink("SimulationXML/".$userLogged . $topology. "/Neuron_Ini_file_" . $userLogged . $simNum . ".xml");
 	
-	if (file_exists("SimulationXML/".$userLogged . "/Topo_Ini_file_" . $userLogged . $simNum . ".xml")){
+	if (file_exists("SimulationXML/".$userLogged .$topology. "/Topo_Ini_file_" . $userLogged . $simNum . ".xml")){
 		$xmlDoc3 = new DOMDocument();
-		$xmlDoc3->load("SimulationXML/".$userLogged . "/Topo_Ini_file_" . $userLogged . $simNum . ".xml");
+		$xmlDoc3->load("SimulationXML/".$userLogged . $topology. "/Topo_Ini_file_" . $userLogged . $simNum . ".xml");
 		
 		$topo=true;
-		unlink("SimulationXML/".$userLogged . "/Topo_Ini_file_" . $userLogged . $simNum . ".xml");
+		unlink("SimulationXML/".$userLogged . $topology. "/Topo_Ini_file_" . $userLogged . $simNum . ".xml");
 	}
 	
-	if (file_exists("SimulationXML/".$userLogged . "/Stim_Ini_file_" . $userLogged . $simNum . ".xml")){
+	if (file_exists("SimulationXML/".$userLogged . $topology."/Stim_Ini_file_" . $userLogged . $simNum . ".xml")){
 		$xmlDoc5 = new DOMDocument();
-		$xmlDoc5->load("SimulationXML/".$userLogged . "/Stim_Ini_file_" . $userLogged . $simNum . ".xml");
+		$xmlDoc5->load("SimulationXML/".$userLogged . $topology. "/Stim_Ini_file_" . $userLogged . $simNum . ".xml");
 		$stim=true;
-		unlink("SimulationXML/".$userLogged . "/Stim_Ini_file_" . $userLogged . $simNum . ".xml");
+		unlink("SimulationXML/".$userLogged . $topology. "/Stim_Ini_file_" . $userLogged . $simNum . ".xml");
 	}
 	
 	$dom = new DOMDocument("1.0");
@@ -95,21 +103,21 @@ if ($_SESSION['flag']==1){
 	}
 	
 	$dom->appendChild($data);
-	$filename="SimulationXML/".$userLogged . "/Initialisation_file_" . $userID . ".xml";
+	$filename="SimulationXML/".$userLogged . $topology. "/Initialisation_file_" . $userID . ".xml";
 	$dom->save($filename);
 
 
 	?>
 	<p> The metadata and neuronal XML files will be merged here. The file should be able to be downloaded.</p>
-	<a id="cont" href=<?php echo "SimulationXML/".$userLogged . "/Initialisation_file_" . $userID. ".xml" ;?> download= <?php echo "Initialisation_file_" . $userID. ".xml"?>>Save initialisation file to your computer</a>
+	<a id="cont" href=<?php echo "SimulationXML/".$userLogged . $topology. "/Initialisation_file_" . $userID. ".xml" ;?> download= <?php echo "Initialisation_file_" . $userID. ".xml"?>>Save initialisation file to your computer</a>
 	<br><br>
 
 	<p> The next button will send the file to the server to transform it into HEX and start the simulation.</p>
 		
 	<form action="Convert_to_HEX.php" method="post">
 	<input type="submit" value="Send initialisation data to server">
-	<input type="hidden" name="filenameHEX" id = "filenameHEX" value=<?php echo $userLogged . "/Initialisation_file_" . $userID . ".hex" ?>>
-	<input type="hidden" name="filenameXML" id = "filenameXML" value=<?php echo $userLogged . "/Initialisation_file_" . $userID . ".xml" ?>>
+	<input type="hidden" name="filenameHEX" id = "filenameHEX" value=<?php echo $userLogged . $topology."/Initialisation_file_" . $userID . ".hex" ?>>
+	<input type="hidden" name="filenameXML" id = "filenameXML" value=<?php echo $userLogged . $topology."/Initialisation_file_" . $userID . ".xml" ?>>
 	</form>	
 	<br><br>
 	<?php

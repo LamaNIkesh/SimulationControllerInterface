@@ -31,18 +31,19 @@ $myfile = fopen($neuronlistPath, "w") or die("Unable to open file!");
 <form action="topology.php" method="post">
 	<?php
 	if ($_POST['samemodel']=='yes' and $_POST['totalDiffModelNeurons']==0){
-		for ($number = 1; $number < $_POST['totalNeurons']+1; $number++){
+		for ($number = 1; $number <= $_POST['totalNeurons']; $number++){
 			echo 'passed from previous :'.$_POST['neuron'.$number];
 			
 			fwrite($myfile, "neuron".$number."\n");
 			//fwrite($myfile,'\n');
+
 			?>
 			<input type="hidden" value=<?php echo $_POST['neuron'.$number]; ?> name=<?php echo "neuron".$number; ?>>
 
 			<?php
 			$packet=$data->createElement("packet");
 		//$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
-		$destdev=$data->createElement("destdevice", 1);//temporary
+		$destdev=$data->createElement("destdevice", $number);//$number is the neuron number 
 		$packet->appendChild($destdev);
 		$sourcedev=$data->createElement("sourcedevice",65532);
 		$packet->appendChild($sourcedev);

@@ -16,7 +16,7 @@ if ($_SESSION['flag']==1){
 	Your registered email is: <?php echo $_SESSION['useremail']; ?>.<br>
 	<!--You are currently working on simulation number: <?php echo $simNum; ?>.</p>-->
 
-	<p> In this page the user should be able to access his account and manage his/her data (username, password and email) and initialisation files.<br> 
+	<p> In this page the user should be able to access and manage their data (username, password and email) and initialisation files.<br> 
 	The user should also be able to delete files, download files and reset the counter for the files.</p><br><br>
 
 	<a href=<?php echo $userFilename ?>> Click here to view your simulation and results files</a>

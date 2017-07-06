@@ -33,6 +33,7 @@
 		if ($_POST['samemodel']=='yes'){
 			echo "same model";
 			echo "totalNeurons, ".$_POST['totalNeurons'];
+			$neuronNumber = 0;
 			for ($number = 1; $number <= $_POST['noOflayers']; $number++){
 				//echo 'passed from previous :'.$_POST['neuron'.$number];
 				
@@ -44,9 +45,18 @@
 				<?php
 				for($eachlayer = 1; $eachlayer<=$_POST['totalNeuronsEachLayer'.$number]; $eachlayer++){
 
+					if($number == 1){
+						//increasing neuron number
+					$neuronNumber = $eachlayer;
+					echo "Neuron Number for first layer: ".$neuronNumber;
+					}
+					else{
+						$neuronNumber++; ;
+						echo "Neuron Number after first layer: ".$neuronNumber;
+					}
 					$packet=$data->createElement("packet");
 				//$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
-				$destdev=$data->createElement("destdevice", 1);//temporary
+				$destdev=$data->createElement("destdevice", $neuronNumber);//temporary
 				$packet->appendChild($destdev);
 				$sourcedev=$data->createElement("sourcedevice",65532);
 				$packet->appendChild($sourcedev);

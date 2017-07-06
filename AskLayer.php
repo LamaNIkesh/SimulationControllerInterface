@@ -17,9 +17,9 @@ if ($_SESSION['flag']==1){
 			<p>You can build a multi layered network topology with arbitary numbers of neurons on each layer with arbitary synpases or create a highly recurrent network without any visible layers. </P>
 			<p>The neuron parameters are all changeable along with the synaptic connection topology among the neurons</p>
 			
-			<p>Would you like to build a layered network?</p>(Press Yes to create a layered network, Press no to create a network without any layers)</p>
+			<p>Please select below to proceed</p>
 			<form method="POST" action="#">
-			<input type = "submit" value="Create layered network" name = "submit" formaction = "build_topology_layered.php"> 
+			<input type = "submit" value="Create layered network" name = "submit" formaction = "build_topology_layered.php"> &nbsp&nbsp&nbsp&nbsp
 			<input type="submit" value="Create non layered network" name="submit" formaction = "build_topology_nolayer.php">
 		<br><br>
 	</div></div>
