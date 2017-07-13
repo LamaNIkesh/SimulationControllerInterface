@@ -71,9 +71,21 @@ function echoActiveClassIfRequestMatches($requestUri)
 
 	<link rel="stylesheet" href="css/layout.css">
 	<link rel="stylesheet" href="css/login.css">
+
+
+	<!-- Plotly.js -->
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 	
-	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
-	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+	<script type="text/x-mathjax-config">
+	MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+	</script>
+	<script type="text/javascript" async
+	  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+	</script>
+
+	
+	<!---<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<!--<script src="https://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script> -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
@@ -124,7 +136,7 @@ function echoActiveClassIfRequestMatches($requestUri)
 							<a class="dropdown-toggle" data-toggle="dropdown" href="">System Builder <span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="AskLayer.php">Create your own topology</a></li>
-								<li><a href="#">Plot Results</a></li>
+								<li><a href="select_plot_data.php">Plot Results</a></li>
 							</ul>
 						</li>
 						<li = <?php echoActiveClassIfRequestMatches("manage_account")?>><a href="manage_account.php">Manage Your Account</a></li>
