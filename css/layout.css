@@ -36,13 +36,16 @@ html {
 
 #container{
 
-	height:100px;
+	height:90px;
+   
+
 }
 
 
 footer{
    background-color: #424558;
     position: fixed;
+    margin-top: 10px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -71,3 +74,5 @@ footer p {
     color: #000;
    background: #d65c14;
  }
+
+

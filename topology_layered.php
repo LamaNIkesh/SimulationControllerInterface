@@ -39,6 +39,11 @@ include("head.html")
                 for ($number=1; $number <=$_POST['noOflayers']  ; $number++) { 
                     # code...
                     echo "total neurons in layer ".$_POST['totalNeuronsEachLayer'.$number];
+                    //Stimulus is added only to the first layer so the first layer array is passed
+                    //so that it can be used to add stimulus into the network
+                    
+                    //here all the layer info is passed to the next page. 
+                    //neuron number information from first layer will be passed further until we reach stimulation addition page
                     ?>
                     <input type="hidden" name=<?php echo "totalNeuronsEachLayer".$number; ?> value=<?php echo $_POST['totalNeuronsEachLayer'.$number]; ?> required>
                     <?php

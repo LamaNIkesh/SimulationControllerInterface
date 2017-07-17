@@ -322,6 +322,7 @@
                         				<br><br>
                         				<form action="save_layered_topology.php" method="post">
                                         <input type= "hidden" name = "topology_type" id = "topology_type" value = "FullTopology">
+                                        <input type = "hidden" name = "neurons_layer1" id = "neurons_layer1" value = <?php echo $_POST['totalNeuronsEachLayer1']; ?>>
                         				<input type="submit" value="Next" action = "save_layered_topology.php"></form>
                         				<?php 
                         				break;
@@ -367,7 +368,11 @@
                                                 else
                                                 {
                                                     $previouslayer = $layer -1;
-                                                    fwrite($RandomTopology,${"layer$layer"}[$layernum]);
+                                                    //gives rest of the neuron numbers in ascending order...so that would be in second third etc...
+                                                    //echo "neuron num:".${"layer$layer"}[$layernum];
+                                                    fwrite($RandomTopology,${"layer$layer"}[$layernum]); 
+                                                    //echo "Connection to: ".${"layer$layer"}[$layernum];
+
                                                     //echo "next layer size:".count(${"layer$nextlayer"});
                                                     for ($j=0; $j <count(${"layer$previouslayer"}) ; $j++) 
                                                     { 
@@ -375,7 +380,17 @@
                                                         //how many neurons to connect to
                                                         //previous layer is used since, we are dealing with synapses received.
                                                         //echo "j variable is: ".$j;
-                                                        $randomConnection = mt_rand(0,(count(${"layer$previouslayer"})-1));
+                                                        //---------------------------------------------------------------------------------
+                                                        //if there are 6 neurons, we generate random number from 0-4 and not 5 because,
+                                                        //there is weird problem which messes up the format in randomtopology.txt file.
+                                                        //I think that is because if $j randomly goes to upto 5 for 6 previous neurons[prev layer]
+                                                        //then the for loop thinks that next number is 6 but it stays in the loop sinice next num can be 
+                                                        //any number so it stays in this loop but next neurons is already introduced which messes up the whole
+                                                        //format which is important to create topo_Ini file. 
+
+                                                        //For now, genreating random number 1 less than total number of neurons seems to eradicate the issue
+
+                                                        $randomConnection = mt_rand(0,(count(${"layer$previouslayer"})-2));
                                                         $randomDivider = mt_rand(1,10);
                                                         $j = intval($j + (0.3*$randomConnection*count(${"layer$previouslayer"}))/$randomDivider);
                                                         # Here for each layer element will be connected to the previous layer neurons which are randomly chosen
@@ -390,7 +405,16 @@
                                                         //echo "<br>";
                                                         //echo "randomDivider:".$randomDivider;
                                                         //echo "<br>";
-                                                        fwrite($RandomTopology, " ".${"layer$previouslayer"}[$randomConnection]);
+                                                        //echo "Neuron num:".$
+                                                        //echo "ranodm connectio number: ".$randomConnection."<br>";
+                                                        //echo "connection from : ".${"layer$previouslayer"}[$randomConnection]."<br>";
+                                                        //echo "no of neurons in prev layer".count(${"layer$previouslayer"})."<br>";
+                                                        //echo "j value: ".$j."<br>";
+                                                        //echo "connection from neuron: ".${"layer$previouslayer"}[$randomConnection]."<br>";
+                                                        if(${"layer$previouslayer"}[$randomConnection] != NULL){
+                                                        fwrite($RandomTopology," ".${"layer$previouslayer"}[$randomConnection]);
+                                                        }
+                                                        
                                                         ?> 
                                                         <!-- Passing neuron number to the javascript for visualisation -->
                                                         <input type="hidden" id = '<?php echo "neuron".${"layer$layer"}[$layernum];?>' name = <?php echo "neuron".${"layer$layer"}[$layernum];?> value = <?php echo "neuron".${"layer$layer"}[$layernum]; ?>>
@@ -400,19 +424,21 @@
                                                         <?php $noOfconnections++;
                                                         //This recalculates the $j value to decide how many times the loop should run
                                                     } 
-
-                                                    //fwrite($RandomTopology,"\n");     
+                                                    fwrite($RandomTopology,"\n");     
                                                 }//end of else          
                                             }//end of second for loop statement
                                         }//end of for looop
                                         
                                         //-------------------------------------------------------------------------------------------------------------------------------
-
+                                        echo "checking ".$_POST['totalNeuronsEachLayer'.'1'];
                         				?>
                         				<input type= "submit" method = "post" value = "Visualise Network" onclick = "draw(2)">  
                         				<br><br>
                         				<form action="save_layered_topology.php" method="post">
                                             <input type= "hidden" name = "topology_type" id = "topology_type" value = "RandomTopology">
+                                            <!-- neurons_layer1 is passed to the next page and further to know whcih neurons are in the first input layer
+                                                For layered network, the inputs are only in the first layer -->
+                                            <input type = "hidden" name = "neurons_layer1" id = "neurons_layer1" value = <?php echo $_POST['totalNeuronsEachLayer1']; ?>>
                         				<input type="submit" value="Next" action = "save_layered_topology.php"></form>
                         				
                         				<?php

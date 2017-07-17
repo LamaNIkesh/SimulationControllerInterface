@@ -11,10 +11,10 @@
     <timestamp>65532</timestamp>
     <command>14</command>
     <timestamp>0</timestamp>
-    <timestepsize>1000000</timestepsize>
-    <cyclesNum>1000000</cyclesNum>
+    <timestepsize>1000</timestepsize>
+    <cyclesNum>100000</cyclesNum>
     <simID>1</simID>
-    <watchdogPeriod>1</watchdogPeriod>
+    <watchdogPeriod>2</watchdogPeriod>
     <neuronsnum>10</neuronsnum>
   </packet>
   <packet>
@@ -462,12 +462,11 @@
     <timestamp>0</timestamp>
   </packet>
   <packet>
-    <destdevice>3</destdevice>
+    <destdevice>3
+</destdevice>
     <sourcedevice>65532</sourcedevice>
     <command>11</command>
     <timestamp>0</timestamp>
-    <preneuronid>1</preneuronid>
-    <preneuronid>2</preneuronid>
   </packet>
   <packet>
     <destdevice>4</destdevice>
@@ -476,6 +475,7 @@
     <timestamp>0</timestamp>
     <preneuronid>1</preneuronid>
     <preneuronid>2</preneuronid>
+    <preneuronid>3</preneuronid>
   </packet>
   <packet>
     <destdevice>5</destdevice>
@@ -484,39 +484,42 @@
     <timestamp>0</timestamp>
     <preneuronid>1</preneuronid>
     <preneuronid>2</preneuronid>
+    <preneuronid>3</preneuronid>
   </packet>
   <packet>
     <destdevice>6</destdevice>
     <sourcedevice>65532</sourcedevice>
     <command>11</command>
     <timestamp>0</timestamp>
+    <preneuronid>1</preneuronid>
+    <preneuronid>2</preneuronid>
     <preneuronid>3</preneuronid>
-    <preneuronid>4</preneuronid>
-    <preneuronid>5</preneuronid>
   </packet>
   <packet>
     <destdevice>7</destdevice>
     <sourcedevice>65532</sourcedevice>
     <command>11</command>
     <timestamp>0</timestamp>
+    <preneuronid>1</preneuronid>
+    <preneuronid>2</preneuronid>
     <preneuronid>3</preneuronid>
-    <preneuronid>4</preneuronid>
-    <preneuronid>5</preneuronid>
   </packet>
   <packet>
     <destdevice>8</destdevice>
     <sourcedevice>65532</sourcedevice>
     <command>11</command>
     <timestamp>0</timestamp>
+    <preneuronid>1</preneuronid>
+    <preneuronid>2</preneuronid>
     <preneuronid>3</preneuronid>
-    <preneuronid>4</preneuronid>
-    <preneuronid>5</preneuronid>
   </packet>
   <packet>
     <destdevice>9</destdevice>
     <sourcedevice>65532</sourcedevice>
     <command>11</command>
     <timestamp>0</timestamp>
+    <preneuronid>4</preneuronid>
+    <preneuronid>5</preneuronid>
     <preneuronid>6</preneuronid>
     <preneuronid>7</preneuronid>
     <preneuronid>8</preneuronid>
@@ -526,8 +529,37 @@
     <sourcedevice>65532</sourcedevice>
     <command>11</command>
     <timestamp>0</timestamp>
+    <preneuronid>4</preneuronid>
+    <preneuronid>5</preneuronid>
     <preneuronid>6</preneuronid>
     <preneuronid>7</preneuronid>
     <preneuronid>8</preneuronid>
+  </packet>
+  <packet>
+    <destdevice>1</destdevice>
+    <sourcedevice>65532</sourcedevice>
+    <command>19</command>
+    <timestamp>5</timestamp>
+    <endtimestamp>7</endtimestamp>
+    <itemID>65523</itemID>
+    <itemValue>3</itemValue>
+  </packet>
+  <packet>
+    <destdevice>2</destdevice>
+    <sourcedevice>65532</sourcedevice>
+    <command>19</command>
+    <timestamp>10</timestamp>
+    <endtimestamp>15</endtimestamp>
+    <itemID>65523</itemID>
+    <itemValue>2</itemValue>
+  </packet>
+  <packet>
+    <destdevice>3</destdevice>
+    <sourcedevice>65532</sourcedevice>
+    <command>19</command>
+    <timestamp>3</timestamp>
+    <endtimestamp>5</endtimestamp>
+    <itemID>65523</itemID>
+    <itemValue>1</itemValue>
   </packet>
 </newSimulation>

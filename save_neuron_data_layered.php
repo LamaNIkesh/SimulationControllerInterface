@@ -39,6 +39,9 @@
 				
 				//fwrite($myfile, "neuron".$number."\n");
 				//fwrite($myfile,'\n');
+				if($number == 1){
+				echo "neurons is layer 1: ".$_POST['totalNeuronsEachLayer'.$number];
+			}
 				?>
 				<input type="hidden" name=<?php echo "totalNeuronsEachLayer".$number; ?> value=<?php echo $_POST["totalNeuronsEachLayer".$number]; ?>>
 

@@ -11,6 +11,10 @@
 			if ($_SESSION['flag']==1){
 				$simNum = 1;
 				$userID = $userLogged . $simNum;
+				$numberOfNeurons = 0; //counts the number of neurons from the topology file
+										//this neuron number is used only for the stimulation file.
+										//since this is non layered, stimulation can be applied to any neurons.
+										//so we throw out all the neurons
 				$data = new DOMDocument;
 				$data->formatOutput = true;
 				$dom=$data->createElement("Topology_Initialisation");
@@ -24,8 +28,8 @@
 	  				//to avoid any null values at the end
 	  				if($gettingLine == NULL){break;}
 	  				//echo $gettingLine;
-	  				//separates numbers from spaces and put into an array
-	  				$spaceSeparatedConnections = explode(" ",$gettingLine);
+	  				//separates numbers from spaces and put into an array from the file
+	  				$spaceSeparatedConnections = explode(" ",$gettingLine); 
 	  				//testing purpose
 	  				/*for($i = 0; $i<sizeof($spaceSeparatedConnections);$i++){
 	  					echo $i;
@@ -52,7 +56,7 @@
 					
 					}
 					$dom->appendChild($packet);
-
+					$numberOfNeurons++;
 
 
 				}
@@ -68,9 +72,10 @@
 				<br><br>
 				<p>Other initialisation files could be added before sending the data, such as muscle and stimulation. These features would be eventually added.</p>
 				<p> In the case of adding other initialisation files, these buttons will send the user to the adequate page. This procedure might change. </p>
-				<form action="select_stimulus.php" method="post">
+				<form action="select_stim_neurons.php" method="post">
 					<br><input type="submit" value="Add stimulus initialisation data">
-					<!-- <input type="hidden" name="neuron" id = "neuron" value=<?php echo $_POST['neuron']; ?>> -->
+					<input type="hidden" name="topology" id = "topology" value='nonlayered' ?>>
+					<input type = "hidden" name = "noOfNeurons" id = "noOfNeurons" value = <?php echo $numberOfNeurons; ?> >
 				</form><br>
 				<form action="initialisation_file.php" method="post">
 					<input type="hidden" name='topology' id = 'topology' value='nonlayered'>

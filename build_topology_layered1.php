@@ -138,23 +138,24 @@ if ($_SESSION['flag']==1){
 								<option value="3">Izhikevich</option>
 							</select>
 
-							<br>
+							<hr>
 							<?php
 						}
 
 						?>
 						<br><br>
 						<form action="build_topology_layered2.php" method="POST">
-							<br>
+							
 							<input type ="hidden" name= "watchdog" value=<?php echo $_POST['watchdog']; ?> required>
-
 							<input type ="hidden" name= "simtime" value=<?php echo $_POST['simtime']; ?> required>
 							<input type ="hidden" name= "noOflayers" value=<?php echo $_POST['noOflayers']; ?> required>
 							<input type ="hidden" name= "samemodel" value=<?php echo $_POST['samemodel']; ?> required>
 							<input type = "hidden" name = "simunits" value = <?php echo $_POST['simunits'] ?> required>
+							<input type="submit" value="Next" name="submit">&nbsp; &nbsp; &nbsp; &nbsp;<--Lets assign neuron parameters
 
-							<input type="submit" value="Next" name="submit">
+							
 						</form>
+						<br><br><br><br><br>
 
 					</div></div>
 					<?php

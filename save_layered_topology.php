@@ -10,6 +10,9 @@
 			//saves the topology information into a topology initialisation file
 
 			if ($_SESSION['flag']==1){
+				//echo "no of neurons in layer 1: ", $_POST['neurons_layer1']."<br>";
+				
+				//echo "test";
 				$simNum = 1;
 				$userID = $userLogged . $simNum;
 				$data = new DOMDocument;
@@ -74,9 +77,10 @@
 				<br><br>
 				<p>Other initialisation files could be added before sending the data, such as muscle and stimulation. These features would be eventually added.</p>
 				<p> In the case of adding other initialisation files, these buttons will send the user to the adequate page. This procedure might change. </p>
-				<form action="select_stimulus.php" method="post">
+				<form action="select_stim_neurons.php" method="post">
 					<br><input type="submit" value="Add stimulus initialisation data">
-					<!-- <input type="hidden" name="neuron" id = "neuron" value=<?php echo $_POST['neuron']; ?>> -->
+					<input type="hidden" name='topology' id = 'topology' value='layeredTopology'>
+					<input type = "hidden" name = 'inputlayer' id= 'inputlayer' value = <?php echo $_POST['neurons_layer1'];?>>
 				</form><br>
 				<form action="initialisation_file.php" method="post">
 					<input type="hidden" name='topology' id = 'topology' value='layeredTopology'>
