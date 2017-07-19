@@ -112,7 +112,7 @@ var data = [{
 	  }];
     var layout = {
 	  showlegend: false,
-	  title: "Spike trains",
+	  title: "Raster plot of neurons firing",
       yaxis: { 
       	title: "Neuron Numbers",
       	showline:true,
