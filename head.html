@@ -134,7 +134,7 @@ function echoActiveClassIfRequestMatches($requestUri)
 					<ul class="nav nav-tabs">
 						<li = <?php echoActiveClassIfRequestMatches("home")?>><a href="home.php">Home</a></li>
 
-						<li = <?php echoActiveClassIfRequestMatches("news")?>><a href="news.php">News</a></li>
+						<!--<li = <?php echoActiveClassIfRequestMatches("news")?>><a href="news.php">News</a></li> -->
 						<li = <?php echoActiveClassIfRequestMatches("project")?>><a href="project.php">Project</a></li>
 						<li = <?php echoActiveClassIfRequestMatches("publications")?>><a href="publications.php">Publication</a></li>
 						<li class="dropdown">
@@ -145,6 +145,7 @@ function echoActiveClassIfRequestMatches($requestUri)
 							</ul>
 						</li>
 						<li = <?php echoActiveClassIfRequestMatches("manage_account")?>><a href="manage_account.php">Manage Your Account</a></li>
+						<li = <?php echoActiveClassIfRequestMatches("Howto")?>><a href="#">How To Use</a></li>
 						<li = <?php echoActiveClassIfRequestMatches("contact")?>><a href="contact.php">About Us</a></li>
 						<!-- checking if user is logged in or not
 						if already logged in, signup option and login options are disabled-->

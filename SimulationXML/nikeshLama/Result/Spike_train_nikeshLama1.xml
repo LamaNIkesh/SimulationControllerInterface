@@ -288,306 +288,63 @@
 		<spikeNeuronID>13</spikeNeuronID>
 		<spikeNeuronID>14</spikeNeuronID>
 	</item>
+
 	<item>
 		<timestamp>20</timestamp>
 		<spikeNeuronID>14</spikeNeuronID>
-		<spikeNeuronID>5</spikeNeuronID>
-		<spikeNeuronID>14</spikeNeuronID>
-		<spikeNeuronID>8</spikeNeuronID>
-		<spikeNeuronID>10</spikeNeuronID>
-		<spikeNeuronID>15</spikeNeuronID>
-		<spikeNeuronID>14</spikeNeuronID>
+		<spikeNeuronID>6</spikeNeuronID>
+		<spikeNeuronID>7</spikeNeuronID>
+		<spikeNeuronID>12</spikeNeuronID>
 	</item>
 
 	<item>
 		<timestamp>21</timestamp>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>13</spikeNeuronID>
-		<spikeNeuronID>12</spikeNeuronID>
-		<spikeNeuronID>13</spikeNeuronID>
-		<spikeNeuronID>7</spikeNeuronID>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>8</spikeNeuronID>
 		<spikeNeuronID>9</spikeNeuronID>
+		<spikeNeuronID>4</spikeNeuronID>
+		<spikeNeuronID>13</spikeNeuronID>
+		<spikeNeuronID>16</spikeNeuronID>
+		<spikeNeuronID>6</spikeNeuronID>
+		<spikeNeuronID>13</spikeNeuronID>
+		<spikeNeuronID>8</spikeNeuronID>
+		<spikeNeuronID>15</spikeNeuronID>
+		<spikeNeuronID>15</spikeNeuronID>
+		<spikeNeuronID>12</spikeNeuronID>
+		<spikeNeuronID>10</spikeNeuronID>
+
 	</item>
 
 	<item>
 		<timestamp>22</timestamp>
-		<spikeNeuronID>2</spikeNeuronID>
+		<spikeNeuronID>12</spikeNeuronID>
+		<spikeNeuronID>16</spikeNeuronID>
+		<spikeNeuronID>15</spikeNeuronID>
+		<spikeNeuronID>5</spikeNeuronID>
 		<spikeNeuronID>3</spikeNeuronID>
-		<spikeNeuronID>8</spikeNeuronID>
+		<spikeNeuronID>1</spikeNeuronID>
+		<spikeNeuronID>5</spikeNeuronID>
+		<spikeNeuronID>13</spikeNeuronID>
+		<spikeNeuronID>1</spikeNeuronID>
+		<spikeNeuronID>10</spikeNeuronID>
+		<spikeNeuronID>12</spikeNeuronID>
+		<spikeNeuronID>16</spikeNeuronID>
+		<spikeNeuronID>11</spikeNeuronID>
+		<spikeNeuronID>9</spikeNeuronID>
+		<spikeNeuronID>10</spikeNeuronID>
+
 	</item>
 
 	<item>
 		<timestamp>23</timestamp>
-		<spikeNeuronID>1</spikeNeuronID>
-		<spikeNeuronID>15</spikeNeuronID>
-		<spikeNeuronID>3</spikeNeuronID>
-		<spikeNeuronID>14</spikeNeuronID>
+		<spikeNeuronID>12</spikeNeuronID>
+		<spikeNeuronID>11</spikeNeuronID>
 		<spikeNeuronID>9</spikeNeuronID>
-		<spikeNeuronID>12</spikeNeuronID>
-		<spikeNeuronID>7</spikeNeuronID>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>7</spikeNeuronID>
-		<spikeNeuronID>8</spikeNeuronID>
-		<spikeNeuronID>11</spikeNeuronID>
-		<spikeNeuronID>1</spikeNeuronID>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>7</spikeNeuronID>
 		<spikeNeuronID>2</spikeNeuronID>
-		<spikeNeuronID>8</spikeNeuronID>
-		<spikeNeuronID>10</spikeNeuronID>
-	</item>
-
-	<item>
-		<timestamp>24</timestamp>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>11</spikeNeuronID>
-		<spikeNeuronID>20</spikeNeuronID>
-		<spikeNeuronID>14</spikeNeuronID>
-		<spikeNeuronID>6</spikeNeuronID>
-		<spikeNeuronID>2</spikeNeuronID>
-		<spikeNeuronID>14</spikeNeuronID>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>5</spikeNeuronID>
-		<spikeNeuronID>7</spikeNeuronID>
-		<spikeNeuronID>13</spikeNeuronID>
-		<spikeNeuronID>14</spikeNeuronID>
-	</item>
-
-	<item>
-		<timestamp>25</timestamp>
-		<spikeNeuronID>20</spikeNeuronID>
-		<spikeNeuronID>15</spikeNeuronID>
-		<spikeNeuronID>3</spikeNeuronID>
-		<spikeNeuronID>14</spikeNeuronID>
-		<spikeNeuronID>9</spikeNeuronID>
-		<spikeNeuronID>12</spikeNeuronID>
-		<spikeNeuronID>7</spikeNeuronID>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>7</spikeNeuronID>
-		<spikeNeuronID>8</spikeNeuronID>
-		<spikeNeuronID>11</spikeNeuronID>
-		<spikeNeuronID>1</spikeNeuronID>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>7</spikeNeuronID>
-		<spikeNeuronID>2</spikeNeuronID>
-		<spikeNeuronID>8</spikeNeuronID>
-		<spikeNeuronID>10</spikeNeuronID>
-	</item>
-
-	<item>
-		<timestamp>26</timestamp>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>11</spikeNeuronID>
-		<spikeNeuronID>10</spikeNeuronID>
-		<spikeNeuronID>14</spikeNeuronID>
-		<spikeNeuronID>6</spikeNeuronID>
-		<spikeNeuronID>2</spikeNeuronID>
-		<spikeNeuronID>14</spikeNeuronID>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>5</spikeNeuronID>
-		<spikeNeuronID>7</spikeNeuronID>
-		<spikeNeuronID>13</spikeNeuronID>
-		<spikeNeuronID>14</spikeNeuronID>
-	</item>
-	<item>
-		<timestamp>27</timestamp>
-		<spikeNeuronID>14</spikeNeuronID>
-		<spikeNeuronID>5</spikeNeuronID>
-		<spikeNeuronID>14</spikeNeuronID>
-		<spikeNeuronID>8</spikeNeuronID>
-		<spikeNeuronID>10</spikeNeuronID>
-		<spikeNeuronID>15</spikeNeuronID>
-		<spikeNeuronID>21</spikeNeuronID>
-	</item>
-
-	<item>
-		<timestamp>28</timestamp>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>13</spikeNeuronID>
-		<spikeNeuronID>12</spikeNeuronID>
-		<spikeNeuronID>13</spikeNeuronID>
-		<spikeNeuronID>7</spikeNeuronID>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>8</spikeNeuronID>
-		<spikeNeuronID>9</spikeNeuronID>
-	</item>
-
-	<item>
-		<timestamp>29</timestamp>
-		<spikeNeuronID>2</spikeNeuronID>
-		<spikeNeuronID>3</spikeNeuronID>
-		<spikeNeuronID>8</spikeNeuronID>
-	</item>
-
-	<item>
-		<timestamp>30</timestamp>
-		<spikeNeuronID>1</spikeNeuronID>
-		<spikeNeuronID>15</spikeNeuronID>
-		<spikeNeuronID>3</spikeNeuronID>
-		<spikeNeuronID>20</spikeNeuronID>
-		<spikeNeuronID>9</spikeNeuronID>
-		<spikeNeuronID>12</spikeNeuronID>
-		<spikeNeuronID>7</spikeNeuronID>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>7</spikeNeuronID>
-		<spikeNeuronID>8</spikeNeuronID>
-		<spikeNeuronID>11</spikeNeuronID>
-		<spikeNeuronID>1</spikeNeuronID>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>7</spikeNeuronID>
-		<spikeNeuronID>2</spikeNeuronID>
-		<spikeNeuronID>8</spikeNeuronID>
-		<spikeNeuronID>10</spikeNeuronID>
-	</item>
-
-	<item>
-		<timestamp>31</timestamp>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>11</spikeNeuronID>
-		<spikeNeuronID>10</spikeNeuronID>
-		<spikeNeuronID>14</spikeNeuronID>
-		<spikeNeuronID>6</spikeNeuronID>
-		<spikeNeuronID>2</spikeNeuronID>
-		<spikeNeuronID>14</spikeNeuronID>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>5</spikeNeuronID>
-		<spikeNeuronID>7</spikeNeuronID>
-		<spikeNeuronID>13</spikeNeuronID>
-		<spikeNeuronID>14</spikeNeuronID>
-	</item>
-	
-	<item>
-		<timestamp>32</timestamp>
-		<spikeNeuronID>15</spikeNeuronID>
-		<spikeNeuronID>6</spikeNeuronID>
-		<spikeNeuronID>13</spikeNeuronID>
-		<spikeNeuronID>12</spikeNeuronID>
-		<spikeNeuronID>3</spikeNeuronID>
-		<spikeNeuronID>5</spikeNeuronID>
-		<spikeNeuronID>12</spikeNeuronID>
-		<spikeNeuronID>8</spikeNeuronID>
-		<spikeNeuronID>4</spikeNeuronID>
-		<spikeNeuronID>15</spikeNeuronID>
-		<spikeNeuronID>5</spikeNeuronID>
-		<spikeNeuronID>5</spikeNeuronID>
-		<spikeNeuronID>7</spikeNeuronID>
-		<spikeNeuronID>14</spikeNeuronID>
-		<spikeNeuronID>6</spikeNeuronID>
-		<spikeNeuronID>10</spikeNeuronID>
-		<spikeNeuronID>9</spikeNeuronID>
-	</item>
-
-	<item>
-		<timestamp>33</timestamp>
-		<spikeNeuronID>11</spikeNeuronID>
-		<spikeNeuronID>5</spikeNeuronID>
-		<spikeNeuronID>14</spikeNeuronID>
-		<spikeNeuronID>15</spikeNeuronID>
-		<spikeNeuronID>12</spikeNeuronID>
-		<spikeNeuronID>14</spikeNeuronID>
-		<spikeNeuronID>10</spikeNeuronID>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>15</spikeNeuronID>
-		<spikeNeuronID>2</spikeNeuronID>
-		<spikeNeuronID>9</spikeNeuronID>
-		<spikeNeuronID>11</spikeNeuronID>
-	</item>
-
-	<item>
-		<timestamp>34</timestamp>
-		<spikeNeuronID>14</spikeNeuronID>
-		<spikeNeuronID>6</spikeNeuronID>
-		<spikeNeuronID>7</spikeNeuronID>
-		<spikeNeuronID>12</spikeNeuronID>
-	</item>
-
-	<item>
-		<timestamp>35</timestamp>
-		<spikeNeuronID>9</spikeNeuronID>
-		<spikeNeuronID>4</spikeNeuronID>
-		<spikeNeuronID>13</spikeNeuronID>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>6</spikeNeuronID>
-		<spikeNeuronID>13</spikeNeuronID>
-		<spikeNeuronID>8</spikeNeuronID>
-		<spikeNeuronID>15</spikeNeuronID>
-		<spikeNeuronID>15</spikeNeuronID>
-		<spikeNeuronID>12</spikeNeuronID>
-		<spikeNeuronID>10</spikeNeuronID>
-
-	</item>
-
-	<item>
-		<timestamp>36</timestamp>
-		<spikeNeuronID>12</spikeNeuronID>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>15</spikeNeuronID>
-		<spikeNeuronID>5</spikeNeuronID>
-		<spikeNeuronID>3</spikeNeuronID>
-		<spikeNeuronID>1</spikeNeuronID>
-		<spikeNeuronID>5</spikeNeuronID>
 		<spikeNeuronID>13</spikeNeuronID>
 		<spikeNeuronID>1</spikeNeuronID>
 		<spikeNeuronID>10</spikeNeuronID>
-		<spikeNeuronID>12</spikeNeuronID>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>11</spikeNeuronID>
-		<spikeNeuronID>9</spikeNeuronID>
-		<spikeNeuronID>10</spikeNeuronID>
-
-	</item>
-
-	<item>
-		<timestamp>37</timestamp>
-		<spikeNeuronID>12</spikeNeuronID>
-		<spikeNeuronID>11</spikeNeuronID>
-		<spikeNeuronID>9</spikeNeuronID>
-		<spikeNeuronID>2</spikeNeuronID>
-		<spikeNeuronID>25</spikeNeuronID>
-		<spikeNeuronID>1</spikeNeuronID>
-		<spikeNeuronID>10</spikeNeuronID>
 		<spikeNeuronID>9</spikeNeuronID>
 		<spikeNeuronID>12</spikeNeuronID>
 		<spikeNeuronID>3</spikeNeuronID>
 	</item>
-
-	<item>
-		<timestamp>38</timestamp>
-		<spikeNeuronID>14</spikeNeuronID>
-		<spikeNeuronID>11</spikeNeuronID>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>15</spikeNeuronID>
-		<spikeNeuronID>13</spikeNeuronID>
-		<spikeNeuronID>10</spikeNeuronID>
-		<spikeNeuronID>6</spikeNeuronID>
-		<spikeNeuronID>22</spikeNeuronID>
-		<spikeNeuronID>2</spikeNeuronID>
-		<spikeNeuronID>5</spikeNeuronID>
-		<spikeNeuronID>8</spikeNeuronID>
-		<spikeNeuronID>16</spikeNeuronID>
-	</item>
-
-	<item>
-		<timestamp>39</timestamp>
-		<spikeNeuronID>4</spikeNeuronID>
-		<spikeNeuronID>15</spikeNeuronID>
-		<spikeNeuronID>2</spikeNeuronID>
-		<spikeNeuronID>3</spikeNeuronID>
-		<spikeNeuronID>25</spikeNeuronID>
-		<spikeNeuronID>21</spikeNeuronID>
-		<spikeNeuronID>22</spikeNeuronID>
-	</item>
-
-	<item>
-		<timestamp>40</timestamp>
-		<spikeNeuronID>16</spikeNeuronID>
-		<spikeNeuronID>15</spikeNeuronID>
-		<spikeNeuronID>3</spikeNeuronID>
-		<spikeNeuronID>12</spikeNeuronID>
-		<spikeNeuronID>4</spikeNeuronID>
-	</item>
-
 
 </packet>

@@ -68,6 +68,7 @@ include("head.html")
   </div>
 </div>
 </div>
+<br><br><br><br><br>
 
 <?php
 include("end_page.html")
