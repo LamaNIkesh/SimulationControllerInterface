@@ -1,10 +1,12 @@
 <?php 
+ob_start();
 include("head.html")
 
  ?>
 
 <?php
 //variables for database connection
+
 $server = 'localhost';
 $user = 'root';
 $pass = '';
@@ -39,13 +41,14 @@ try{
 		$_SESSION['flag'] = $flag;
 		$_SESSION['loginfail'] = 0;
 		header('Location: home.php'); 
+		exit();
 	}
 	else{
 		//$error = "Your login name or password is invalid";
 		//echo 'Your login name or password is invalid';
 	
 		$_SESSION['loginfail'] = 1;
-		header('Location:login.php');
+		header('Location: login.php');
 		
 			}
 
@@ -58,4 +61,5 @@ catch(PDOException $e)
 }
 
 mysqli_close($connection);
+ob_end_flush(); 
 ?>

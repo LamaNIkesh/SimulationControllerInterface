@@ -21,7 +21,7 @@ include("head.html")
 
 				if($_POST['topology'] == 'nonlayered'){	//for non layered network.
 														//any neurons can get input stimulus
-				$neuronNum = $_POST['noOfNeurons'];
+					$neuronNum = $_POST['noOfNeurons'];
 				}
 				else{
 					$neuronNum = $_POST['inputlayer']; //This gives out number of neurons in the input layer 

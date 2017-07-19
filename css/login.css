@@ -1,5 +1,9 @@
-@import "bourbon";
-
+@import "bourbon/bourbon";
+html {
+    
+    min-height:100%;
+    
+}
 .wrapper {  
     margin-top: 80px;
   margin-bottom: 80px;

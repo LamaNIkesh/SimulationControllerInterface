@@ -1,0 +1,15 @@
+
+#network {
+    width: 100%;
+    height: 800px;
+    border: 2px solid black;
+    margin-left: 0px;
+    background-color:#FFFFFF;
+    margin-bottom : 50px
+}
+.navbar-default .navbar-nav > .active{
+    color: #000;
+   background: #d65c14;
+ }
+
+

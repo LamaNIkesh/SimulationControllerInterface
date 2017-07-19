@@ -69,7 +69,9 @@ function echoActiveClassIfRequestMatches($requestUri)
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 
-	<link rel="stylesheet" href="css/layout.css">
+	<link rel="stylesheet" href="css/container.css" type = "text/css">
+	<link rel="stylesheet" href="css/footer.css" type = "text/css"> 
+	<link rel="stylesheet" href="css/topology.css" type = "text/css">
 	<link rel="stylesheet" href="css/login.css">
 
 
@@ -80,8 +82,9 @@ function echoActiveClassIfRequestMatches($requestUri)
 	MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 	</script>
 	<script type="text/javascript" async
-	  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+	  src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js">
 	</script>
+ 	 
 
 	
 	<!---<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>-->
@@ -94,6 +97,8 @@ function echoActiveClassIfRequestMatches($requestUri)
 	<!--<script src = "js/slideshow.js" type = "text/javascript"></script> --> 
 
 	<script src = "js/registrationVal.js" type = "text/javascript"></script>
+
+
 </head>
 <body>
 	<!-- defines a container for the main body-->
@@ -144,7 +149,7 @@ function echoActiveClassIfRequestMatches($requestUri)
 						<!-- checking if user is logged in or not
 						if already logged in, signup option and login options are disabled-->
 						<ul class="nav navbar-nav navbar-right">
-							<?php  
+							<?php
 							if($_SESSION['flag'] == 0){?>
 							<li><a href="register.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 

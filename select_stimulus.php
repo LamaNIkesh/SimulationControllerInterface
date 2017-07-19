@@ -16,12 +16,13 @@ include("head.html")
 			//saves the topology information into a topology initialisation file
 
 			if ($_SESSION['flag']==1){
-					echo "topology ".$_GET['topology'];
+					//echo "topology".$_POST['topology'];
 				//echo "no of neurons: ".$_GET['noOfNeurons'];
 
 				$name = $_GET['StimNeurons'];
 				//echo "stim neurons: ".$name;
 				$i =1;
+				
 				?>
 				<form action="save_stimulus.php" method="post">
 

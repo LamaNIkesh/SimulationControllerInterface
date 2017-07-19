@@ -81,7 +81,7 @@
 					<input type="hidden" name='topology' id = 'topology' value='nonlayered'>
 					<br><input type="submit" value="Create initialisation file">
 				</form><br>
-				<form action = ""
+				
 				<?php
 			}
 
