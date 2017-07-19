@@ -143,10 +143,11 @@ else{
 
 <input type="submit" value="Log in">
 </form>
-<br><br><br><br><br><br><br>
+<br><br>
 <?php
 }
 ?>
+<br><br><br><br><br>
 <?php
 include("end_page.html")
 ?>
