@@ -22,6 +22,7 @@ include("head.html")
 				$name = $_GET['StimNeurons'];
 				//echo "stim neurons: ".$name;
 				$i =1;
+				echo "the number of neurons: ",$_GET['totalNeurons'];
 				
 				?>
 				<form action="save_stimulus.php" method="post">
@@ -32,7 +33,6 @@ include("head.html")
 					# code...
 					
 					echo "<b>Stimulation for Neuron ".$StimNeurons."</b><br><br>";
-					
 					
 					?>
 					<!---nameid.$i is passed to the save_stimulus.php where the information is written into an xml file-->
@@ -48,6 +48,7 @@ include("head.html")
 				?>
 				<!-- The number of stimulus receiving neurons are passed to the next page to form stimulation xml file -->
 				<input type = "hidden" name = "stimNeurons" id = "stimNeurons" value = <?php echo $i; ?> >
+				<input type = "hidden" name = "totalNeurons" id ="totalNeurons" value = <?php echo $_GET['totalNeurons'];?>>
 
 				<?php 
 				//$name = $_GET['']

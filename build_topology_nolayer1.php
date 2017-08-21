@@ -54,7 +54,7 @@ include("head.html")
 						$input = $dom->createElement("packet");
 						$a=$dom->createElement("destdevice", $destdevice);
 						$input->appendChild($a);
-						$b=$dom->createElement("timestamp", $sourcedevice);
+						$b=$dom->createElement("sourcedevice", $sourcedevice);
 						$input->appendChild($b);
 						$c=$dom->createElement("command", $command);
 						$input->appendChild($c);
@@ -66,7 +66,7 @@ include("head.html")
 						$input->appendChild($f);
 						$g=$dom->createElement("simID", $simNum);
 						$input->appendChild($g);
-						$h=$dom->createElement("watchdogPeriod", $watchdog);
+						$h=$dom->createElement("timeout", $watchdog);
 						$input->appendChild($h);
 						$i=$dom->createElement("neuronsnum", $_POST['totalNeurons']);
 						$input->appendChild($i);

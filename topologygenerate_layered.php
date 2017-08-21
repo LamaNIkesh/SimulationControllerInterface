@@ -280,7 +280,7 @@
                                                     //is 1
                                                     //   2
                                                     //   3
-                                                fwrite($FullTopology,${"layer$layer"}[$layernum]."\n");
+                                                fwrite($FullTopology,${"layer$layer"}[$layernum]." "."\n"); //puts an empty \n character at the end
                                                 ?>
                                                 <input type="hidden" id = '<?php echo "neuron".${"layer$layer"}[$layernum];?>' name = <?php echo "neuron".${"layer$layer"}[$layernum];?> value = <?php echo "neuron".${"layer$layer"}[$layernum]; ?>>
                                                 <?php 
@@ -322,6 +322,7 @@
                         				<br><br>
                         				<form action="save_layered_topology.php" method="post">
                                         <input type= "hidden" name = "topology_type" id = "topology_type" value = "FullTopology">
+                                        <input type ="hidden" name = "totalNeurons" id ="totalNeurons" value = <?php echo $totalNeurons; ?>>
                                         <input type = "hidden" name = "neurons_layer1" id = "neurons_layer1" value = <?php echo $_POST['totalNeuronsEachLayer1']; ?>>
                         				<input type="submit" value="Next" action = "save_layered_topology.php"></form>
                         				<?php 
@@ -418,13 +419,13 @@
                                                         ?> 
                                                         <!-- Passing neuron number to the javascript for visualisation -->
                                                         <input type="hidden" id = '<?php echo "neuron".${"layer$layer"}[$layernum];?>' name = <?php echo "neuron".${"layer$layer"}[$layernum];?> value = <?php echo "neuron".${"layer$layer"}[$layernum]; ?>>
-
+                                                        <input type ="hidden" name = "totalNeurons" id ="totalNeurons" value = <?php echo $totalNeurons; ?>>
                                                         <input type="hidden" id = '<?php echo $connection[$noOfconnections];?>' name = <?php echo $connection[$noOfconnections];?> value = <?php echo $connection[$noOfconnections];?>>
 
                                                         <?php $noOfconnections++;
                                                         //This recalculates the $j value to decide how many times the loop should run
                                                     } 
-                                                    fwrite($RandomTopology,"\n");     
+                                                    fwrite($RandomTopology," "."\n");     
                                                 }//end of else          
                                             }//end of second for loop statement
                                         }//end of for looop
@@ -438,6 +439,7 @@
                                             <input type= "hidden" name = "topology_type" id = "topology_type" value = "RandomTopology">
                                             <!-- neurons_layer1 is passed to the next page and further to know whcih neurons are in the first input layer
                                                 For layered network, the inputs are only in the first layer -->
+                                            <input type ="hidden" name = "totalNeurons" id ="totalNeurons" value = <?php echo $totalNeurons; ?>>
                                             <input type = "hidden" name = "neurons_layer1" id = "neurons_layer1" value = <?php echo $_POST['totalNeuronsEachLayer1']; ?>>
                         				<input type="submit" value="Next" action = "save_layered_topology.php"></form>
                         				

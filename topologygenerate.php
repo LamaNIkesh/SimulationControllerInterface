@@ -197,7 +197,7 @@ else if(topology == 2 || topology == 3){
     			$list=file($neuronlistPath);
                     //echo $list[9];
     			$totalNeurons=$_POST['totalNeurons'];
-    			?><input type="hidden" name="neuron" id = "neuron" value=<?php echo $_POST['totalNeurons']; ?>>
+    			?><input type="hidden" name="neuron" id = "neuron" value=<?php echo $totalNeurons; ?>>
     			<?php 
 
                     //echo $_POST['totalNeurons'];
@@ -241,7 +241,10 @@ else if(topology == 2 || topology == 3){
 
     						<?php
     					}
-    					fwrite($myTopology,"\n"); 
+
+                         fwrite($myTopology, " ". "\n");
+                        
+
     					//this generates the topology in a text file as 1 3 4 5 ..., meaning receives synapses from 3 4 5 ...
 
     				}
@@ -249,7 +252,9 @@ else if(topology == 2 || topology == 3){
     				?><input type= "submit" method = "post" value = "Visualise network" onclick = "draw(1)">
     				<br><br>
     				<form action="save_topology.php" method="post">
-    				<input type="submit" value="Next" action = "save_topology.php"></form>
+    				<input type="submit" value="Next" action = "save_topology.php">
+                    <input type="hidden" name="neuron" id = "neuron" value=<?php echo $totalNeurons; ?>>
+                    </form>
     				<?php 
     				break;
     				case 'probConnected':
@@ -293,7 +298,9 @@ else if(topology == 2 || topology == 3){
     						//$connect = intval(($connect + 5) + ($randomConnection/$randomDivider));
                             $connect = intval($connect + 0.3*$totalNeurons);
     					}
-    					fwrite($myTopology,"\n");
+    					
+                         fwrite($myTopology, " ". "\n");
+                        
     				}
 
                     //random topology
@@ -304,7 +311,9 @@ else if(topology == 2 || topology == 3){
     				<input type= "submit" method = "post" value = "Visualise Network" onclick = "draw(2)">  
     				<br><br>
     				<form action="save_topology.php" method="post">
-    				<input type="submit" value="Next" action = "save_topology.php"></form>
+    				<input type="submit" value="Next" action = "save_topology.php">
+                    <input type="hidden" name="neuron" id = "neuron" value=<?php echo $totalNeurons; ?>>
+                    </form>
     				
     				<?php
     				break;
@@ -349,7 +358,8 @@ else if(topology == 2 || topology == 3){
                             $connect = intval($connect + 5 + ($randomConnection/$randomDivider));
                             //$connect = intval($connect + 0.3*$totalNeurons);
                         }
-                        fwrite($myTopology,"\n");
+                        fwrite($myTopology, " ". "\n");
+                        
                     }
 
                     //random topology
@@ -360,7 +370,9 @@ else if(topology == 2 || topology == 3){
                     <input type= "submit" method = "post" value = "Visualise Network" onclick = "draw(3)">  
                     <br><br>
                     <form action="save_topology.php" method="post">
-                    <input type="submit" value="Next" action = "save_topology.php"></form>
+                    <input type="submit" value="Next" action = "save_topology.php">
+                    <input type="hidden" name="neuron" id = "neuron" value=<?php echo $totalNeurons; ?>>
+                    </form>
                     
                     <?php
                     break;

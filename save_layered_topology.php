@@ -53,6 +53,9 @@
 					
 					//this loops from value 1 since value 0 is the desitnation device so we are only
 					//interested on the synpases it receives from
+
+					//if there are 10 neurons then last element of $spaceSeparatedConnections will be \n which is the line break.
+					//to avoid inputting line break, loop is run not until the last element
 					for ($connect = 1; $connect < sizeof($spaceSeparatedConnections) - 1; $connect++){
 						
 							$itemid=$data->createElement("preneuronid",$spaceSeparatedConnections[$connect]);
@@ -80,10 +83,12 @@
 				<form action="select_stim_neurons.php" method="post">
 					<br><input type="submit" value="Add stimulus initialisation data">
 					<input type="hidden" name='topology' id = 'topology' value='layeredTopology'>
+					<input type ="hidden" name = "totalNeurons" id ="totalNeurons" value = <?php echo $_POST['totalNeurons']; ?>>
 					<input type = "hidden" name = 'inputlayer' id= 'inputlayer' value = <?php echo $_POST['neurons_layer1'];?>>
 				</form><br>
 				<form action="initialisation_file.php" method="post">
 					<input type="hidden" name='topology' id = 'topology' value='layeredTopology'>
+					<input type ="hidden" name = "totalNeurons" id ="totalNeurons" value = <?php echo $_POST['totalNeurons']; ?>>
 					<br><input type="submit" value="Create initialisation file">
 				</form><br>
 				

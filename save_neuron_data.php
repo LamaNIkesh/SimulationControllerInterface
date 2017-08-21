@@ -43,7 +43,7 @@ $myfile = fopen($neuronlistPath, "w") or die("Unable to open file!");
 			<?php
 			$packet=$data->createElement("packet");
 		//$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
-		$destdev=$data->createElement("destdevice", $number);//$number is the neuron number 
+		$destdev=$data->createElement("destdevice", 1);// 1 is the FPGA device
 		$packet->appendChild($destdev);
 		$sourcedev=$data->createElement("sourcedevice",65532);
 		$packet->appendChild($sourcedev);
@@ -51,9 +51,14 @@ $myfile = fopen($neuronlistPath, "w") or die("Unable to open file!");
 		$packet->appendChild($command);
 		$timestamp=$data->createElement("timestamp",0);
 		$packet->appendChild($timestamp);
+		$neuronid = $data->createElement("neuronid", $number); #neuron number
+		$packet->appendChild($neuronid);
+		//$numberofneurons = $data->createElement("numberofneurons", $_POST['totalNeurons']);
+		//$packet->appendChild($numberofneurons);
 		$modelid=$data->createElement("modelid",$_POST['model']);
 		$packet->appendChild($modelid);
-		
+		$timestepsize = $data->createElement("timestepsize",1000);
+		$packet->appendChild($timestepsize);
 		foreach ($ModelLibrary->neuron as $model){
 			if ($model->neuronid==$_POST['model']){
 				foreach ($model->item as $modelitem){

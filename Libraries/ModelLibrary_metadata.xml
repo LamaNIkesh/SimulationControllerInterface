@@ -4,6 +4,7 @@
     <neuronid>1</neuronid>
     <name>Integrate_and_fire</name>
     <modelid>1</modelid>
+    <timestepsize>1000</timestepsize>
     <item>
       <itemid>1</itemid>
       <name>absolute_refractory_period</name>

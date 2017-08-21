@@ -14,7 +14,7 @@ include("head.html")
 										Create Topology->Topology Viewer->Save Topology-><b>Add Stimulus</b></h6></font>
 			<?php
 			//saves the topology information into a topology initialisation file
-
+			echo "total neurons: ".$_POST['totalNeurons'];
 			if ($_SESSION['flag']==1){
 
 				echo "topology ".$_POST['topology'];
@@ -41,6 +41,7 @@ include("head.html")
 				<form action="select_stimulus.php" method="get">
 				  <input type = "hidden" name = "noOfNeurons" id = "noOfNeurons" value = <?php echo $neuronNum; ?> >
 				  <input type="hidden" name='topology' id = 'topology' value=<?php echo $_POST['topology']; ?>>
+				  <input type = "hidden" name = "totalNeurons" id ="totalNeurons" value = <?php echo $_POST['totalNeurons']; ?>
 				  <div class="multiselect">
 				    <div class="selectBox" onclick="showCheckboxes()">
 				      <select>

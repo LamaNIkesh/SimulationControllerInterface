@@ -114,10 +114,10 @@ if ($_SESSION['flag']==1){
 
 	<p> The next button will send the file to the server to transform it into HEX and start the simulation.</p>
 		
-	<form action="Convert_to_HEX.php" method="post">
+	<form action="PublishToTopic.php" method="post">
 	<input type="submit" value="Send initialisation data to server">
 	<input type="hidden" name="filenameHEX" id = "filenameHEX" value=<?php echo $userLogged . $topology."/Initialisation_file_" . $userID . ".hex" ?>>
-	<input type="hidden" name="filenameXML" id = "filenameXML" value=<?php echo $userLogged . $topology."/Initialisation_file_" . $userID . ".xml" ?>>
+	<input type="hidden" name="filenameXML" id = "filenameXML" value=<?php echo $filename ?>>
 	</form>	
 	<br><br>
 	<?php

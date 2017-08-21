@@ -29,7 +29,7 @@ include("head.html")
 						//echo "index with stim neurons: ".$number ." the neuron num is".$_POST['nameid'.$number];
 						//echo "<br>";
 						$packet=$data->createElement("packet");
-						$destdev=$data->createElement("destdevice",$_POST['nameid'.$number]); // Needs to specify the destination; is the neuron??
+						$destdev=$data->createElement("destdevice",1); // Needs to specify the destination; is the neuron??
 						$packet->appendChild($destdev);
 						$sourcedev=$data->createElement("sourcedevice",65532); // Needs to specify the source; is the NC??
 						$packet->appendChild($sourcedev);
@@ -37,12 +37,24 @@ include("head.html")
 						$packet->appendChild($command);
 						$timestamp=$data->createElement("timestamp",$_POST['start'.$number]);
 						$packet->appendChild($timestamp);
+						$neuronid = $data->createElement("neuronid", $_POST['nameid'.$number]);
+						$packet->appendChild($neuronid);
+						//$numberofneurons = $data->createElement("numberofneurons", $_POST['totalNeurons']);
+						//$packet->appendChild($numberofneurons);
 						$endtimestamp=$data->createElement("endtimestamp",$_POST['end'.$number]);
 						$packet->appendChild($endtimestamp);
 						$itemID=$data->createElement("itemID",65523); // 655523 is electrical stimulation, check SCRP document for differnt IDs
 						$packet->appendChild($itemID);
-						$itemValue=$data->createElement("itemValue",$_POST['value'.$number]);
-						$packet->appendChild($itemValue);
+						//variables of a quadratic equation ax^2 + bx + c
+						//for step current, item value a and b are set to zero so c = value
+						$itemValuea = $data->createElement("itemValuea", 0.0);
+						$packet->appendChild($itemValuea);
+
+						$itemValueb = $data->createElement("itemValueb", 0.0);
+						$packet->appendChild($itemValueb);
+
+						$itemValuec=$data->createElement("itemValuec",$_POST['value'.$number]);
+						$packet->appendChild($itemValuec);
 							
 						$dom->appendChild($packet);
 						}

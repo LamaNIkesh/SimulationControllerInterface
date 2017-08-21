@@ -9,6 +9,7 @@
 			//saves the topology information into a topology initialisation file
 
 			if ($_SESSION['flag']==1){
+				$totalNeurons =  $_POST['neuron'];
 				$simNum = 1;
 				$userID = $userLogged . $simNum;
 				$numberOfNeurons = 0; //counts the number of neurons from the topology file
@@ -36,8 +37,9 @@
 	  					echo $spaceSeparatedConnections[$i];
 	  					echo "\n";
 	  				}*/
+
 	  				$packet=$data->createElement("packet");
-					$destdev=$data->createElement("destdevice",$spaceSeparatedConnections[0]);
+					$destdev=$data->createElement("destdevice",1); #1 here is the fpga device number
 					$packet->appendChild($destdev);
 					$sourcedev=$data->createElement("sourcedevice",65532);
 					$packet->appendChild($sourcedev);
@@ -45,13 +47,15 @@
 					$packet->appendChild($command);
 					$timestamp=$data->createElement("timestamp",0);
 					$packet->appendChild($timestamp);
-					
+					$neuronid = $data->createElement("neuronid", $spaceSeparatedConnections[0]);
+					$packet->appendChild($neuronid);
+					$numberofneurons = $data->createElement("numberofneurons", $totalNeurons); //passed on from topo generate
+					$packet->appendChild($numberofneurons);
 					//this loops from value 1 since value 0 is the desitnation device so we are only
 					//interested on the synpases it receives from
-					for ($connect = 1; $connect < sizeof($spaceSeparatedConnections); $connect++){
+					for ($connect = 1; $connect < sizeof($spaceSeparatedConnections) - 1 ; $connect++){
 						
-							$itemid=$data->createElement("preneuronid",$spaceSeparatedConnections[$connect]);
-							//echo $spaceSeparatedConnections[$connect];
+							$itemid=$data->createElement("preneuronid", $spaceSeparatedConnections[$connect]);
 							$packet->appendChild($itemid);
 					
 					}
@@ -75,6 +79,7 @@
 				<form action="select_stim_neurons.php" method="post">
 					<br><input type="submit" value="Add stimulus initialisation data">
 					<input type="hidden" name="topology" id = "topology" value='nonlayered' ?>>
+					<input type = "hidden" name= "totalNeurons" id = "totalNeurons" value = <?php echo $totalNeurons; ?>>
 					<input type = "hidden" name = "noOfNeurons" id = "noOfNeurons" value = <?php echo $numberOfNeurons; ?> >
 				</form><br>
 				<form action="initialisation_file.php" method="post">

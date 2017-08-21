@@ -59,7 +59,7 @@
 					}
 					$packet=$data->createElement("packet");
 				//$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
-				$destdev=$data->createElement("destdevice", $neuronNumber);//temporary
+				$destdev=$data->createElement("destdevice", 1);//temporary 1 is the destination fpga
 				$packet->appendChild($destdev);
 				$sourcedev=$data->createElement("sourcedevice",65532);
 				$packet->appendChild($sourcedev);
@@ -67,6 +67,8 @@
 				$packet->appendChild($command);
 				$timestamp=$data->createElement("timestamp",0);
 				$packet->appendChild($timestamp);
+				$neuronid = $data->createElement("neuronid", $neuronNumber);
+				$packet->appendChild($neuronid);
 				$modelid=$data->createElement("modelid",$_POST['model']);
 				$packet->appendChild($modelid);
 				
@@ -118,6 +120,9 @@
 		//writing for different models
 		//echo $_POST['name'.$number];
 		//echo $_POST['noOflayers'];
+
+		$neuron_num = 0; //this counts the neuron number and assigns neuron number to it
+
 		for ($number = 1; $number <= $_POST['noOflayers']; $number++){
 			//write($myfile, "neuron".($number+$subtractedSameModel)."\n");
 			//echo "no fo neurons of layer: ".$_POST['totalNeuronsEachLayer'.$number];
@@ -128,6 +133,9 @@
 
 			for($eachlayer = 1; $eachlayer<=$_POST['totalNeuronsEachLayer'.$number]; $eachlayer++){
 				//echo "Iteration: ".$eachlayer."\n";
+				//counts the neuron number
+				$neuron_num = $neuron_num + 1;
+				//echo "neuron number: ".$neuron_num;
 				$packet=$data->createElement("packet");
 				//$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
 				$destdev=$data->createElement("destdevice",1);
@@ -138,6 +146,8 @@
 				$packet->appendChild($command);
 				$timestamp=$data->createElement("timestamp",0);
 				$packet->appendChild($timestamp);
+				$neuronid= $data->createElement("neuronid", $neuron_num);
+				$packet ->appendChild($neuronid);
 				$modelid=$data->createElement("modelid",$_POST['model'.$number] ); // the model number are same model num + . eg if there are 3 same 
 				//models then starting index for diff model is 3+1 = 4 and 5,6....
 				$packet->appendChild($modelid);
