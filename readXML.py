@@ -8,7 +8,7 @@ def xmlParseBeforePublishing(xmlFile):
 		This function takes the path of xml file generated from the web interface and breaks the packets into 
 		different chunks and each packet is stored along row of a multidimensional array
 
-		output: returns array of multidimensional matrix with all the information about the packets
+		output: returns a list with all the packets; each element being a different packet
 	'''
 	#xmlFile = sys.argv[1]
 	#print(xmlFile)
