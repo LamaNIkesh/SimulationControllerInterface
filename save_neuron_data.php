@@ -47,6 +47,8 @@ $myfile = fopen($neuronlistPath, "w") or die("Unable to open file!");
 		$packet->appendChild($destdev);
 		$sourcedev=$data->createElement("sourcedevice",65532);
 		$packet->appendChild($sourcedev);
+		$simID = $data->createElement("simID",1);
+		$packet->appendChild($simID);
 		$command=$data->createElement("command",24);
 		$packet->appendChild($command);
 		$timestamp=$data->createElement("timestamp",0);
@@ -123,6 +125,8 @@ else{
 			$packet->appendChild($destdev);
 			$sourcedev=$data->createElement("sourcedevice",65532);
 			$packet->appendChild($sourcedev);
+			$simID = $data->createElement("simID",1);
+			$packet->appendChild($simID);
 			$command=$data->createElement("command",24);
 			$packet->appendChild($command);
 			$timestamp=$data->createElement("timestamp",0);
@@ -179,6 +183,10 @@ for ($number = 1; $number < $_POST['totalDiffModelNeurons'] + 1; $number++){
 	$packet->appendChild($destdev);
 	$sourcedev=$data->createElement("sourcedevice",65532);
 	$packet->appendChild($sourcedev);
+	
+	$simID = $data->createElement("simID",1);
+	$packet->appendChild($simID);
+
 	$command=$data->createElement("command",24);
 	$packet->appendChild($command);
 	$timestamp=$data->createElement("timestamp",0);

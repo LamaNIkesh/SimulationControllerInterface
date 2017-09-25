@@ -33,6 +33,8 @@ include("head.html")
 						$packet->appendChild($destdev);
 						$sourcedev=$data->createElement("sourcedevice",65532); // Needs to specify the source; is the NC??
 						$packet->appendChild($sourcedev);
+						$simID = $data->createElement("simID", 1);
+						$packet->appendChild($simID);
 						$command=$data->createElement("command",19);
 						$packet->appendChild($command);
 						$timestamp=$data->createElement("timestamp",$_POST['start'.$number]);

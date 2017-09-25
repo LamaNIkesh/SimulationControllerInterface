@@ -52,22 +52,26 @@ include("head.html")
 	//Create input tag and place value gotten from form into it
 						$input1 = $dom->createElement("Sim_Meta");
 						$input = $dom->createElement("packet");
-						$a=$dom->createElement("destdevice", $destdevice);
-						$input->appendChild($a);
-						$b=$dom->createElement("sourcedevice", $sourcedevice);
-						$input->appendChild($b);
-						$c=$dom->createElement("command", $command);
-						$input->appendChild($c);
-						$d=$dom->createElement("timestamp", $timestamp);
-						$input->appendChild($d);
-						$e=$dom->createElement("timestepsize", $cycles);
-						$input->appendChild($e);
-						$f=$dom->createElement("cyclesNum", $cyclesNum);
-						$input->appendChild($f);
-						$g=$dom->createElement("simID", $simNum);
-						$input->appendChild($g);
-						$h=$dom->createElement("timeout", $watchdog);
-						$input->appendChild($h);
+
+						$destDevice=$dom->createElement("destdevice", $destdevice);
+						$input->appendChild($destDevice);
+						$sourceDevice=$dom->createElement("sourcedevice", $sourcedevice);
+						$input->appendChild($sourceDevice);
+
+						$simID=$dom->createElement("simID", $simNum);
+						$input->appendChild($simID);
+						
+						$command=$dom->createElement("command", $command);
+						$input->appendChild($command);
+						$tmsp=$dom->createElement("timestamp", $timestamp);
+						$input->appendChild($tmsp);
+						$tmspSize=$dom->createElement("timestepsize", $cycles);
+						$input->appendChild($tmspSize);
+						$cycle=$dom->createElement("cyclesNum", $cyclesNum);
+						$input->appendChild($cycle);
+						$watchdog=$dom->createElement("timeout", $watchdog);
+						$input->appendChild($watchdog);
+
 						$i=$dom->createElement("neuronsnum", $_POST['totalNeurons']);
 						$input->appendChild($i);
 						//Not using muscle, only for c elegans
