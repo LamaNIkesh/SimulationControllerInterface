@@ -34,7 +34,11 @@ include("head.html")
       <div class="item">
         <center><img src="img/slide2.jpg" alt="FPGA" align= "middle" height="500" width = "900"></center>
       </div>
-    
+        
+      <div class="item">
+        <center><img src="img/neuron.jpg" alt="FPGA" align= "middle" height="500" width = "800"></center>
+      </div>  
+
       <div class="item">
         <center><img src="img/slide3.jpg" alt="iCUB" align= "middle" height="500" width = "900"></center>
       </div>

@@ -39,10 +39,12 @@ function myFunction(xml1, xml2) {
 	xmlDoc2 = xml2.responseXML;
 	var test = [];
 	var test2 = [];
-	var zlen = xmlDoc.getElementsByTagName("item").length;
+	var zlen = xmlDoc.getElementsByTagName("packet").length;
+	//console.log('zlen')
 	//console.log(zlen);
 	for (j = 0; j < zlen; j++) {
-	    x = xmlDoc.getElementsByTagName("item")[j];
+	    x = xmlDoc.getElementsByTagName("packet")[j];
+	    //console.log('Full packet content');
 	    //console.log(x);
 	    xlen = x.childNodes.length;
 	    y = x.firstChild;
@@ -51,24 +53,35 @@ function myFunction(xml1, xml2) {
 	    txt = "";
 
 	    for (i = 0; i < xlen; i++) {
-	        if (y.nodeType == 1) {
+	        if (y.nodeType == 1) { //checks if the node type is 1 i.e. xml tag
 	        	//console.log("node type: ", y.nodeType);
 				if (y.nodeName == "timestamp") {
 					var z = x.getElementsByTagName(y.nodeName)[0].childNodes[0].nodeValue;
+					//console.log('testing');
 					//console.log(z);
 					}
 				else{
-					var z = x.getElementsByTagName(y.nodeName)[(i-1)/2-1].childNodes[0].nodeValue;
+					if(i>1){//since first two tags are simualtion and timestamp 
+					//console.log('spike')
+					//var check = (i-1)/2-2 // 
+					//console.log(check)
+					//console.log('checked')
+					//(i-1)/2-2 gives count for the spiking neurons in the packet
+					var z = x.getElementsByTagName(y.nodeName)[(i-1)/2-2].childNodes[0].nodeValue;
+					//puts neuron id values into the test array
 					test.push(z);
+					//test2 contains the timestamp values 
 					test2.push(x.getElementsByTagName("timestamp")[0].childNodes[0].nodeValue);
+
 					}
+				}
 	            txt += i + " " + y.nodeName + " " + z + "<br>";
 	        }
 	        y = y.nextSibling;
 	    }
 	}
-//console.log(txt);z
-console.log("test",test);
+//console.log(txt)
+//console.log("test",test);
 
 function getMaxOfArray(numArray) {
   return Math.max.apply(null, numArray);
@@ -78,17 +91,17 @@ console.log("max: ", getMaxOfArray(test));
 var test4 = [];
 console.log("test.length", test.length)
 for (var i = 0; i < test.length; i++) {
-	console.log(test2[i]);
+	//console.log(test2[i]);
 	//the neuron name would be the same as the name
 	var name = test[i];
-	console.log("name:",name);
+	//console.log("name:",name);
 
 	test4.push([name, test2[i]]);
 	}
-	console.log("sorted: ",test)
-console.log("Test4:",test4);
+	//console.log("sorted: ",test)
+//console.log("Test4:",test4);
 var test5 = test4.sort();	
-console.log("length: ",test5.length);
+//console.log("length: ",test5.length);
 var y1 = [];
 var x1 = [];
 

@@ -15,7 +15,7 @@
     <timestepsize>1000000</timestepsize>
     <cyclesNum>1000000</cyclesNum>
     <timeout>1</timeout>
-    <neuronsnum>10</neuronsnum>
+    <neuronsnum>8</neuronsnum>
   </packet>
   <packet>
     <destdevice>1</destdevice>
@@ -60,7 +60,7 @@
     <inmsb>127</inmsb>
     <outlsb>0</outlsb>
     <outmsb>31</outmsb>
-    <itemvalue>2.0</itemvalue>
+    <itemvalue>1.0</itemvalue>
   </packet>
   <packet>
     <destdevice>1</destdevice>
@@ -105,7 +105,7 @@
     <inmsb>127</inmsb>
     <outlsb>0</outlsb>
     <outmsb>31</outmsb>
-    <itemvalue>2.0</itemvalue>
+    <itemvalue>1.0</itemvalue>
   </packet>
   <packet>
     <destdevice>1</destdevice>
@@ -150,7 +150,7 @@
     <inmsb>127</inmsb>
     <outlsb>0</outlsb>
     <outmsb>31</outmsb>
-    <itemvalue>2.0</itemvalue>
+    <itemvalue>1.0</itemvalue>
   </packet>
   <packet>
     <destdevice>1</destdevice>
@@ -159,7 +159,7 @@
     <command>24</command>
     <timestamp>0</timestamp>
     <neuronid>4</neuronid>
-    <modelid>1</modelid>
+    <modelid>3</modelid>
     <itemid>1</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -188,14 +188,59 @@
     <outmsb>0</outmsb>
     <itemvalue>2.0</itemvalue>
     <itemid>4</itemid>
-    <itemtype>2</itemtype>
+    <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
     <itemintegerpart>8</itemintegerpart>
     <inlsb>96</inlsb>
     <inmsb>127</inmsb>
     <outlsb>0</outlsb>
-    <outmsb>31</outmsb>
+    <outmsb>0</outmsb>
+    <itemvalue>1.0</itemvalue>
+    <itemid>5</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>128</inlsb>
+    <inmsb>159</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>40.0</itemvalue>
+    <itemid>6</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>160</inlsb>
+    <inmsb>191</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
     <itemvalue>2.0</itemvalue>
+    <itemid>7</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>192</inlsb>
+    <inmsb>223</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>-14.0</itemvalue>
+    <itemid>8</itemid>
+    <itemtype>2</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>224</inlsb>
+    <inmsb>255</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>31</outmsb>
+    <itemvalue>0.0</itemvalue>
+    <itemid>9</itemid>
+    <itemtype>2</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>256</inlsb>
+    <inmsb>287</inmsb>
+    <outlsb>32</outlsb>
+    <outmsb>63</outmsb>
+    <itemvalue>0.0</itemvalue>
   </packet>
   <packet>
     <destdevice>1</destdevice>
@@ -204,7 +249,7 @@
     <command>24</command>
     <timestamp>0</timestamp>
     <neuronid>5</neuronid>
-    <modelid>1</modelid>
+    <modelid>3</modelid>
     <itemid>1</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -233,14 +278,59 @@
     <outmsb>0</outmsb>
     <itemvalue>2.0</itemvalue>
     <itemid>4</itemid>
-    <itemtype>2</itemtype>
+    <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
     <itemintegerpart>8</itemintegerpart>
     <inlsb>96</inlsb>
     <inmsb>127</inmsb>
     <outlsb>0</outlsb>
-    <outmsb>31</outmsb>
+    <outmsb>0</outmsb>
+    <itemvalue>1.0</itemvalue>
+    <itemid>5</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>128</inlsb>
+    <inmsb>159</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>40.0</itemvalue>
+    <itemid>6</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>160</inlsb>
+    <inmsb>191</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
     <itemvalue>2.0</itemvalue>
+    <itemid>7</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>192</inlsb>
+    <inmsb>223</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>-14.0</itemvalue>
+    <itemid>8</itemid>
+    <itemtype>2</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>224</inlsb>
+    <inmsb>255</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>31</outmsb>
+    <itemvalue>0.0</itemvalue>
+    <itemid>9</itemid>
+    <itemtype>2</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>256</inlsb>
+    <inmsb>287</inmsb>
+    <outlsb>32</outlsb>
+    <outmsb>63</outmsb>
+    <itemvalue>0.0</itemvalue>
   </packet>
   <packet>
     <destdevice>1</destdevice>
@@ -249,7 +339,7 @@
     <command>24</command>
     <timestamp>0</timestamp>
     <neuronid>6</neuronid>
-    <modelid>1</modelid>
+    <modelid>3</modelid>
     <itemid>1</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -278,14 +368,59 @@
     <outmsb>0</outmsb>
     <itemvalue>2.0</itemvalue>
     <itemid>4</itemid>
-    <itemtype>2</itemtype>
+    <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
     <itemintegerpart>8</itemintegerpart>
     <inlsb>96</inlsb>
     <inmsb>127</inmsb>
     <outlsb>0</outlsb>
-    <outmsb>31</outmsb>
+    <outmsb>0</outmsb>
+    <itemvalue>1.0</itemvalue>
+    <itemid>5</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>128</inlsb>
+    <inmsb>159</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>40.0</itemvalue>
+    <itemid>6</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>160</inlsb>
+    <inmsb>191</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
     <itemvalue>2.0</itemvalue>
+    <itemid>7</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>192</inlsb>
+    <inmsb>223</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>-14.0</itemvalue>
+    <itemid>8</itemid>
+    <itemtype>2</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>224</inlsb>
+    <inmsb>255</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>31</outmsb>
+    <itemvalue>0.0</itemvalue>
+    <itemid>9</itemid>
+    <itemtype>2</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>256</inlsb>
+    <inmsb>287</inmsb>
+    <outlsb>32</outlsb>
+    <outmsb>63</outmsb>
+    <itemvalue>0.0</itemvalue>
   </packet>
   <packet>
     <destdevice>1</destdevice>
@@ -294,7 +429,7 @@
     <command>24</command>
     <timestamp>0</timestamp>
     <neuronid>7</neuronid>
-    <modelid>1</modelid>
+    <modelid>3</modelid>
     <itemid>1</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -323,14 +458,59 @@
     <outmsb>0</outmsb>
     <itemvalue>2.0</itemvalue>
     <itemid>4</itemid>
-    <itemtype>2</itemtype>
+    <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
     <itemintegerpart>8</itemintegerpart>
     <inlsb>96</inlsb>
     <inmsb>127</inmsb>
     <outlsb>0</outlsb>
-    <outmsb>31</outmsb>
+    <outmsb>0</outmsb>
+    <itemvalue>1.0</itemvalue>
+    <itemid>5</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>128</inlsb>
+    <inmsb>159</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>40.0</itemvalue>
+    <itemid>6</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>160</inlsb>
+    <inmsb>191</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
     <itemvalue>2.0</itemvalue>
+    <itemid>7</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>192</inlsb>
+    <inmsb>223</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>-14.0</itemvalue>
+    <itemid>8</itemid>
+    <itemtype>2</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>224</inlsb>
+    <inmsb>255</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>31</outmsb>
+    <itemvalue>0.0</itemvalue>
+    <itemid>9</itemid>
+    <itemtype>2</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>256</inlsb>
+    <inmsb>287</inmsb>
+    <outlsb>32</outlsb>
+    <outmsb>63</outmsb>
+    <itemvalue>0.0</itemvalue>
   </packet>
   <packet>
     <destdevice>1</destdevice>
@@ -339,7 +519,7 @@
     <command>24</command>
     <timestamp>0</timestamp>
     <neuronid>8</neuronid>
-    <modelid>1</modelid>
+    <modelid>2</modelid>
     <itemid>1</itemid>
     <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
@@ -368,11 +548,29 @@
     <outmsb>0</outmsb>
     <itemvalue>2.0</itemvalue>
     <itemid>4</itemid>
-    <itemtype>2</itemtype>
+    <itemtype>1</itemtype>
     <itemdatatype>16</itemdatatype>
     <itemintegerpart>8</itemintegerpart>
     <inlsb>96</inlsb>
     <inmsb>127</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>1.0</itemvalue>
+    <itemid>5</itemid>
+    <itemtype>1</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>128</inlsb>
+    <inmsb>159</inmsb>
+    <outlsb>0</outlsb>
+    <outmsb>0</outmsb>
+    <itemvalue>40.0</itemvalue>
+    <itemid>6</itemid>
+    <itemtype>2</itemtype>
+    <itemdatatype>16</itemdatatype>
+    <itemintegerpart>8</itemintegerpart>
+    <inlsb>160</inlsb>
+    <inmsb>191</inmsb>
     <outlsb>0</outlsb>
     <outmsb>31</outmsb>
     <itemvalue>2.0</itemvalue>
@@ -381,111 +579,18 @@
     <destdevice>1</destdevice>
     <sourcedevice>65532</sourcedevice>
     <simID>1</simID>
-    <command>24</command>
+    <command>11</command>
     <timestamp>0</timestamp>
-    <neuronid>9</neuronid>
-    <modelid>1</modelid>
-    <itemid>1</itemid>
-    <itemtype>1</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>0</inlsb>
-    <inmsb>31</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>5.0</itemvalue>
-    <itemid>2</itemid>
-    <itemtype>1</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>32</inlsb>
-    <inmsb>63</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>50.0</itemvalue>
-    <itemid>3</itemid>
-    <itemtype>1</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>64</inlsb>
-    <inmsb>95</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>2.0</itemvalue>
-    <itemid>4</itemid>
-    <itemtype>2</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>96</inlsb>
-    <inmsb>127</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>31</outmsb>
-    <itemvalue>2.0</itemvalue>
   </packet>
   <packet>
-    <destdevice>1</destdevice>
-    <sourcedevice>65532</sourcedevice>
-    <simID>1</simID>
-    <command>24</command>
-    <timestamp>0</timestamp>
-    <neuronid>10</neuronid>
-    <modelid>1</modelid>
-    <itemid>1</itemid>
-    <itemtype>1</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>0</inlsb>
-    <inmsb>31</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>5.0</itemvalue>
-    <itemid>2</itemid>
-    <itemtype>1</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>32</inlsb>
-    <inmsb>63</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>50.0</itemvalue>
-    <itemid>3</itemid>
-    <itemtype>1</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>64</inlsb>
-    <inmsb>95</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>0</outmsb>
-    <itemvalue>2.0</itemvalue>
-    <itemid>4</itemid>
-    <itemtype>2</itemtype>
-    <itemdatatype>16</itemdatatype>
-    <itemintegerpart>8</itemintegerpart>
-    <inlsb>96</inlsb>
-    <inmsb>127</inmsb>
-    <outlsb>0</outlsb>
-    <outmsb>31</outmsb>
-    <itemvalue>2.0</itemvalue>
-  </packet>
-  <packet>
-    <destdevice>1
-</destdevice>
+    <destdevice>2</destdevice>
     <sourcedevice>65532</sourcedevice>
     <simID>1</simID>
     <command>11</command>
     <timestamp>0</timestamp>
   </packet>
   <packet>
-    <destdevice>2
-</destdevice>
-    <sourcedevice>65532</sourcedevice>
-    <simID>1</simID>
-    <command>11</command>
-    <timestamp>0</timestamp>
-  </packet>
-  <packet>
-    <destdevice>3
-</destdevice>
+    <destdevice>3</destdevice>
     <sourcedevice>65532</sourcedevice>
     <simID>1</simID>
     <command>11</command>
@@ -498,9 +603,8 @@
     <command>11</command>
     <timestamp>0</timestamp>
     <preneuronid>1</preneuronid>
-    <preneuronid>3</preneuronid>
-    <preneuronid>1</preneuronid>
     <preneuronid>2</preneuronid>
+    <preneuronid>3</preneuronid>
   </packet>
   <packet>
     <destdevice>5</destdevice>
@@ -508,9 +612,9 @@
     <simID>1</simID>
     <command>11</command>
     <timestamp>0</timestamp>
-    <preneuronid>3</preneuronid>
-    <preneuronid>3</preneuronid>
     <preneuronid>1</preneuronid>
+    <preneuronid>2</preneuronid>
+    <preneuronid>3</preneuronid>
   </packet>
   <packet>
     <destdevice>6</destdevice>
@@ -518,10 +622,9 @@
     <simID>1</simID>
     <command>11</command>
     <timestamp>0</timestamp>
-    <preneuronid>3</preneuronid>
+    <preneuronid>1</preneuronid>
     <preneuronid>2</preneuronid>
-    <preneuronid>1</preneuronid>
-    <preneuronid>1</preneuronid>
+    <preneuronid>3</preneuronid>
   </packet>
   <packet>
     <destdevice>7</destdevice>
@@ -532,7 +635,6 @@
     <preneuronid>1</preneuronid>
     <preneuronid>2</preneuronid>
     <preneuronid>3</preneuronid>
-    <preneuronid>2</preneuronid>
   </packet>
   <packet>
     <destdevice>8</destdevice>
@@ -540,71 +642,9 @@
     <simID>1</simID>
     <command>11</command>
     <timestamp>0</timestamp>
-    <preneuronid>3</preneuronid>
-    <preneuronid>1</preneuronid>
-    <preneuronid>3</preneuronid>
-    <preneuronid>1</preneuronid>
-  </packet>
-  <packet>
-    <destdevice>9</destdevice>
-    <sourcedevice>65532</sourcedevice>
-    <simID>1</simID>
-    <command>11</command>
-    <timestamp>0</timestamp>
-    <preneuronid>7</preneuronid>
-    <preneuronid>8</preneuronid>
-    <preneuronid>6</preneuronid>
-    <preneuronid>6</preneuronid>
-  </packet>
-  <packet>
-    <destdevice>10</destdevice>
-    <sourcedevice>65532</sourcedevice>
-    <simID>1</simID>
-    <command>11</command>
-    <timestamp>0</timestamp>
-    <preneuronid>8</preneuronid>
-    <preneuronid>7</preneuronid>
     <preneuronid>4</preneuronid>
     <preneuronid>5</preneuronid>
+    <preneuronid>6</preneuronid>
     <preneuronid>7</preneuronid>
-  </packet>
-  <packet>
-    <destdevice>1</destdevice>
-    <sourcedevice>65532</sourcedevice>
-    <simID>1</simID>
-    <command>19</command>
-    <timestamp>10</timestamp>
-    <neuronid>1</neuronid>
-    <endtimestamp>15</endtimestamp>
-    <itemID>65523</itemID>
-    <itemValuea>0</itemValuea>
-    <itemValueb>0</itemValueb>
-    <itemValuec>5</itemValuec>
-  </packet>
-  <packet>
-    <destdevice>1</destdevice>
-    <sourcedevice>65532</sourcedevice>
-    <simID>1</simID>
-    <command>19</command>
-    <timestamp>10</timestamp>
-    <neuronid>2</neuronid>
-    <endtimestamp>15</endtimestamp>
-    <itemID>65523</itemID>
-    <itemValuea>0</itemValuea>
-    <itemValueb>0</itemValueb>
-    <itemValuec>5</itemValuec>
-  </packet>
-  <packet>
-    <destdevice>1</destdevice>
-    <sourcedevice>65532</sourcedevice>
-    <simID>1</simID>
-    <command>19</command>
-    <timestamp>10</timestamp>
-    <neuronid>3</neuronid>
-    <endtimestamp>15</endtimestamp>
-    <itemID>65523</itemID>
-    <itemValuea>0</itemValuea>
-    <itemValueb>0</itemValueb>
-    <itemValuec>5</itemValuec>
   </packet>
 </newSimulation>

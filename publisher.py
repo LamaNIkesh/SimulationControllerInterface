@@ -7,6 +7,7 @@ import subscriber as sub
 
 global flag
 xmlFile = sys.argv[1]
+
 print(xmlFile)
 #Interface Manager
 MQTT_HOST= "100.100.1.254"
@@ -20,9 +21,11 @@ MQTT_MSG = ""
 try:
 	#returns a multidimensional array with 
 	MessageArray = xmlParseBeforePublishing(xmlFile)
-	print("successfully read")
+	#print("successfully read")
 except:
 	print("cannot read")
+
+#print ("message array",MessageArray)
 #Define on_connect event handler
 def on_connect(mosq, obj, rc):
 	print("Connected to the MQTT broker")
