@@ -64,16 +64,16 @@ for i in range(len(MessageArray)):
 
 	#it will be set to true when acknowledgement as 200 is received
 	#---Uncomment this section for acknowledgement 
-	# sub.flag=True
-	# #Initiate MQTT client
-	# mqttc1 = mqtt.Client("listener")
-	# mqttc1.connect(sub.MQTT_HOST, sub.MQTT_PORT, MQTT_KEEPALIVE_INTERVAL)
-	# #Register event handlers
-	# mqttc1.on_message = sub.on_message
-	# mqttc1.on_connect = sub.on_connect
-	# mqttc1.on_subscribe = sub.on_subscribe
-	# mqttc1.loop_forever()
-	# print("Flag",sub.flag)
+	sub.flag=True
+	#Initiate MQTT client
+	mqttc1 = mqtt.Client("listener")
+	mqttc1.connect(sub.MQTT_HOST, sub.MQTT_PORT, MQTT_KEEPALIVE_INTERVAL)
+	#Register event handlers
+	mqttc1.on_message = sub.on_message
+	mqttc1.on_connect = sub.on_connect
+	mqttc1.on_subscribe = sub.on_subscribe
+	mqttc1.loop_forever()
+	print("Flag",sub.flag)
 	if(MessageArray[i] == 0):
 		print("Finished sending packets successfully")
 		break

@@ -9,17 +9,22 @@ include("head.html")
 			Save Topology->Save Initialisation file-><b>Publishing for simulation</b></h6></font>
 <?php
 if ($_SESSION['flag']==1){
-
 	# code...
+	/*
+	* This part of the code take care of running python script that publishes
+	* the intiilisation xml files as packets and awaits acknowledgement from the 
+	* webapp/get/ack topic.
+	* 
+	*/
+
 
 	#opening the xml initialisation file and extracts packets to publish separately 
+	#reads filename and path for the initialisation file
 	$filePath = $_POST['filenameXML'];
 	//providing absolute path
 	$filePath = '/home/nikesh/Documents/WebServer/SimulationControllerInterface/'.$filePath;
-	echo $filePath;
-	#$pathToFile = "/home/nikesh/Documents/WebServer/SimulationControllerInterface";
-	$python_command = "python /home/nikesh/Documents/WebServer/SimulationControllerInterface/publisher_packet.py 2>&1";
-	#echo $python_command;
+	#echo $filePath;
+	
 	#publishing results to the mqtt topic
 	#lsit of topics
 	#topic=["neurons/broadcast","neurons/bitstreams/","neurons/bitstreams/ack","neurons/post/","neurons/post/ack/",
@@ -27,15 +32,18 @@ if ($_SESSION['flag']==1){
 	#publisher.py publishes to webapp/get topic
 	try {
 		#executing python code that publishes the packets
-		#shell_exec($python_command);		
-		#echo shell_exec($python_command);
-		#$output = shell_exec('python3 /home/nikesh/Documents/WebServer/SimulationControllerInterface/test/mkdir.py 2>&1');
-		#$output = shell_exec('python /home/nikesh/Documents/WebServer/SimulationControllerInterface/publisher_packet.py 2>&1');
+
+		#sudo -u ->allows sudo user privelege
+		#daemon is the group that apache2 falls into. Normally is www-data but since
+		#the web directory is not in default place, the user group is www-data
+		#also no password privelege is added to sudoer file for daemon users
+		
 		$output = shell_exec('sudo -u daemon python /home/nikesh/Documents/WebServer/SimulationControllerInterface/publisher_packet.py 2>&1 '.$filePath);
 		echo "<pre>$output</pre>";
 		#echo shell_exec("python3 -V 2>&1");
 		echo "All the packets successfully published to the Interface Manager.\nYou will receive a notification when the simulation is complete";
-	} catch (Exception $e) {
+	} 
+	catch (Exception $e) {
 		echo "Error: Could not publish to the topic";
 	}
 }
