@@ -32,7 +32,9 @@ if ($_SESSION['flag']==1){
 	#publisher.py publishes to webapp/get topic
 	try {
 		#executing python code that publishes the packets
-
+#--------------------------------------------------------------------------------
+#-------Critical region---------------------- Initial issues with running python script
+#-------from php
 		#sudo -u ->allows sudo user privelege
 		#daemon is the group that apache2 falls into. Normally is www-data but since
 		#the web directory is not in default place, the user group is www-data

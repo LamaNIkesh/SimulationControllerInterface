@@ -58,17 +58,17 @@ if ($_SESSION['flag']==1){
 	$dom = new DOMDocument("1.0");
 	$dom->formatOutput = true;
 	$data=$dom->createElement("newSimulation");
-	// Append first packet
-	$pack=$dom->createElement("packet");
-	$el1=$dom->createElement("destdevice", 0);
-	$pack->appendChild($el1);
-	$el2=$dom->createElement("sourcedevice", 65532);
-	$pack->appendChild($el2);
-	$el3=$dom->createElement("command", 15);
-	$pack->appendChild($el3);
-	$el4=$dom->createElement("timestamp", 0);
-	$pack->appendChild($el4);
-	$data->appendChild($pack);
+	// Append first packet----Reset packet----------not needed anymore
+	//$pack=$dom->createElement("packet");
+	//$el1=$dom->createElement("destdevice", 0);
+	//$pack->appendChild($el1);
+	//$el2=$dom->createElement("sourcedevice", 65532);
+	//$pack->appendChild($el2);
+	//$el3=$dom->createElement("command", 15);
+	//$pack->appendChild($el3);
+	//$el4=$dom->createElement("timestamp", 0);
+	//$pack->appendChild($el4);
+	//$data->appendChild($pack);
 	// Append xmlDoc1
 	$meta = $xmlDoc1->getElementsByTagName("packet");
 	foreach($meta as $packet){

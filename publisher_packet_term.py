@@ -6,8 +6,8 @@ import readXML_1 as rx
 import subscriber as sub
 
 global flag
-xmlFile = sys.argv[1]
-#xmlFile = '/home/nikesh/Documents/WebServer/SimulationControllerInterface/SimulationXML/nikeshLama/Initialisation_file_nikeshLama1.xml'
+#xmlFile = sys.argv[1]
+xmlFile = '/home/nikesh/Documents/WebServer/SimulationControllerInterface/SimulationXML/nikeshLama/Initialisation_file_nikeshLama1.xml'
 #xmlFile = 'Initialisation_file_nikeshLama1.xml'
 print(xmlFile)
 #Interface Manager
