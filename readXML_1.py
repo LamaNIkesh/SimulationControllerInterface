@@ -8,7 +8,8 @@ def xmlParseBeforePublishing(xmlFile):
 		This function takes the path of xml file generated from the web interface and breaks the packets into 
 		different chunks and each packet is stored along row of a multidimensional array
 
-		output: returns array of multidimensional matrix with all the information about the packets
+		output: returns a list with all the information about the packets
+				each append is appending a full packet 
 	'''
 	tree = ET.parse(xmlFile)
 	#gets root which is <newSimulation>

@@ -21,6 +21,8 @@ MQTTP_TOPIC_ACK = "webapp/post/ack"
 MQTT_MSG = ""
 try:
 	#returns a list with all the packets 
+	#rx is an instance of readXML_1 which basically takes in xmlfile and 
+	#return multidimensional array with 
 	MessageArray = rx.xmlParseBeforePublishing(xmlFile)
 	print("successfully read")
 except:
