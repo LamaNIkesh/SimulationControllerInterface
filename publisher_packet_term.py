@@ -61,12 +61,14 @@ for i in range(len(MessageArray)):
 	#publishing the packets as string
 	mqttc.publish(MQTT_TOPIC, MQTT_MSG)
 	#setting flag to false
-
+	time.sleep(0.5)
 	#it will be set to true when acknowledgement as 200 is received
 	#---Uncomment this section for acknowledgement 
+	'''
 	sub.flag=True
 	#Initiate MQTT client
 	mqttc1 = mqtt.Client("listener")
+	#time.sleep(0.5)
 	mqttc1.connect(sub.MQTT_HOST, sub.MQTT_PORT, MQTT_KEEPALIVE_INTERVAL)
 	#Register event handlers
 	mqttc1.on_message = sub.on_message
@@ -74,10 +76,11 @@ for i in range(len(MessageArray)):
 	mqttc1.on_subscribe = sub.on_subscribe
 	mqttc1.loop_forever()
 	print("Flag",sub.flag)
+	'''
 	if(MessageArray[i] == 0):
 		print("Finished sending packets successfully")
 		break
-	time.sleep(0.1)
+	
 
 #disconnect from the mqtt broker
 mqttc.disconnect()
