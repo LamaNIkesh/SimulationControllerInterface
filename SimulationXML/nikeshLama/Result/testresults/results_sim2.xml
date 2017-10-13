@@ -2453,13 +2453,6 @@
 </packet>
 <packet>
   <simulation>2</simulation>
-  <timestamp>388</timestamp>
-  <neuronid>0</neuronid>
-  <neuronid>5</neuronid>
-  <neuronid>8</neuronid>
-</packet>
-<packet>
-  <simulation>2</simulation>
   <timestamp>389</timestamp>
   <neuronid>0</neuronid>
 </packet>
@@ -3726,12 +3719,6 @@
 </packet>
 <packet>
   <simulation>2</simulation>
-  <timestamp>576</timestamp>
-  <neuronid>0</neuronid>
-  <neuronid>8</neuronid>
-</packet>
-<packet>
-  <simulation>2</simulation>
   <timestamp>577</timestamp>
   <neuronid>0</neuronid>
 </packet>
@@ -3804,11 +3791,6 @@
   <neuronid>3</neuronid>
   <neuronid>4</neuronid>
   <neuronid>8</neuronid>
-</packet>
-<packet>
-  <simulation>2</simulation>
-  <timestamp>589</timestamp>
-  <neuronid>0</neuronid>
 </packet>
 <packet>
   <simulation>2</simulation>
@@ -5479,10 +5461,6 @@
   <neuronid>5</neuronid>
   <neuronid>8</neuronid>
   <neuronid>9</neuronid>
-</packet>
-<packet>
-  <simulation>2</simulation>
-  <timestamp>831</timestamp>
 </packet>
 <packet>
   <simulation>2</simulation>

@@ -122,10 +122,6 @@
 </packet>
 <packet>
   <simulation>2</simulation>
-  <timestamp>23</timestamp>
-</packet>
-<packet>
-  <simulation>2</simulation>
   <timestamp>24</timestamp>
   <neuronid>0</neuronid>
   <neuronid>1</neuronid>
@@ -723,16 +719,6 @@
 </packet>
 <packet>
   <simulation>2</simulation>
-  <timestamp>122</timestamp>
-  <neuronid>0</neuronid>
-  <neuronid>1</neuronid>
-  <neuronid>2</neuronid>
-  <neuronid>3</neuronid>
-  <neuronid>5</neuronid>
-  <neuronid>6</neuronid>
-</packet>
-<packet>
-  <simulation>2</simulation>
   <timestamp>123</timestamp>
 </packet>
 <packet>
@@ -1301,16 +1287,6 @@
   <simulation>2</simulation>
   <timestamp>213</timestamp>
   <neuronid>0</neuronid>
-</packet>
-<packet>
-  <simulation>2</simulation>
-  <timestamp>214</timestamp>
-  <neuronid>0</neuronid>
-  <neuronid>1</neuronid>
-  <neuronid>3</neuronid>
-  <neuronid>5</neuronid>
-  <neuronid>6</neuronid>
-  <neuronid>7</neuronid>
 </packet>
 <packet>
   <simulation>2</simulation>
@@ -2081,16 +2057,6 @@
   <simulation>2</simulation>
   <timestamp>333</timestamp>
   <neuronid>0</neuronid>
-</packet>
-<packet>
-  <simulation>2</simulation>
-  <timestamp>334</timestamp>
-  <neuronid>0</neuronid>
-  <neuronid>3</neuronid>
-  <neuronid>4</neuronid>
-  <neuronid>5</neuronid>
-  <neuronid>6</neuronid>
-  <neuronid>8</neuronid>
 </packet>
 <packet>
   <simulation>2</simulation>
@@ -2941,15 +2907,6 @@
 </packet>
 <packet>
   <simulation>2</simulation>
-  <timestamp>460</timestamp>
-  <neuronid>0</neuronid>
-  <neuronid>1</neuronid>
-  <neuronid>4</neuronid>
-  <neuronid>5</neuronid>
-  <neuronid>8</neuronid>
-</packet>
-<packet>
-  <simulation>2</simulation>
   <timestamp>461</timestamp>
   <neuronid>0</neuronid>
 </packet>
@@ -3792,10 +3749,6 @@
   <neuronid>5</neuronid>
   <neuronid>6</neuronid>
   <neuronid>8</neuronid>
-</packet>
-<packet>
-  <simulation>2</simulation>
-  <timestamp>587</timestamp>
 </packet>
 <packet>
   <simulation>2</simulation>
@@ -5266,11 +5219,6 @@
   <neuronid>0</neuronid>
   <neuronid>8</neuronid>
   <neuronid>9</neuronid>
-</packet>
-<packet>
-  <simulation>2</simulation>
-  <timestamp>801</timestamp>
-  <neuronid>0</neuronid>
 </packet>
 <packet>
   <simulation>2</simulation>

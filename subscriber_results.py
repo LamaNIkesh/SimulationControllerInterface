@@ -29,9 +29,9 @@ def on_message(mosq, obj, msg):
 	print msg.payload
 	
 	if(msg.payload == '<packet>\n\
-  <destdevice>65533</destdevice>\n\
+  <destdevice>65532</destdevice>\n\
   <sourcedevice>65535</sourcedevice>\n\
-  <simulation>1</simulation>\n\
+  <simulation>2</simulation>\n\
   <command>25</command>\n\
   <timestamp>0</timestamp>\n\
   <type>3</type>\n\
@@ -43,11 +43,11 @@ def on_message(mosq, obj, msg):
 
 	elif(msg.payload == '\
 <packet>\n\
-  <destdevice>65533</destdevice>\n\
+  <destdevice>65532</destdevice>\n\
   <sourcedevice>65535</sourcedevice>\n\
-  <simulation>1</simulation>\n\
+  <simulation>2</simulation>\n\
   <command>25</command>\n\
-  <timestamp>30000</timestamp>\n\
+  <timestamp>1000</timestamp>\n\
   <type>3</type>\n\
   <status>4</status>\n\
 </packet>\n\
