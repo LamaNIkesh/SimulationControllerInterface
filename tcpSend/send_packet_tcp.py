@@ -5,9 +5,9 @@ import sys
 import numpy as np
 import readXML_1 as rx
 
-#host = socket.gethostname()
-host = IMserver # host name is already configured in /etc/hosts ; IMserver has 100.100.1.252 IP address
-port = 4001
+host = socket.gethostname()
+#host = 100.100.1.252 # host name is already configured in /etc/hosts ; IMserver has 100.100.1.252 IP address
+port = 60000
 packet = ""
 
 ##----sys.argv[1] will be used when calling this python script from php webpage directly.
@@ -18,15 +18,15 @@ xmlFile = '/home/nikesh/Documents/WebServer/SimulationControllerInterface/Simula
 
 #function for tcp connection and packet transmission
 def TCPclient(host, port, packet):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    print("Sending packet to ", host, port)
-    try:
-        #TODO needs revision
-        sock.connect((host, port))
-        sock.sendall(packet.encode('utf-8'))
-    finally:
-        sock.close()
-
+	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)    
+	print("+++++++++++Connection established with ", host, "port: ", port, "+++++++++++")	
+	print("Sending packet to ", host, port)
+	try:
+		#TODO needs revision
+		sock.connect((host, port))
+		sock.sendall(packet.encode('utf-8'))
+	finally:
+		sock.close()
 
 #try converting xml file into array elements as separate packets
 try:
