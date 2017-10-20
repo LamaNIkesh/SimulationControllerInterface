@@ -21,7 +21,7 @@ xmlFile = '/home/nikesh/Documents/WebServer/SimulationControllerInterface/Simula
 #function for tcp connection and packet transmission
 def TCPclient(host, port, packet):
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)    
-	print colored(("+++++++++++Connection established with ", host,"port: ",port, "+++++++++++"),'cyan')	
+	print (colored(("+++++++++++Connection established with ", host,"port: ",port, "+++++++++++"),'cyan'))
 	print ("Sending packet to ", host, port)
 	try:
 		#TODO needs revision
@@ -35,10 +35,11 @@ try:
 	#returns a list with all the packets 
 	MessageArray = rx.xmlParseBeforePublishing(xmlFile)
 		
-	print colored("successfully read",'green')
+	print (colored("successfully read",'green'))
 #error handling
 except:
 	print("cannot read")
+
 
 #traverse through array elements and establish connection and send packet 
 
@@ -46,9 +47,9 @@ except:
 #uncomment this section for sending all the packets 
 '''
 for i in range(len(MessageArray)):
-	'''
-	loops through each packet and send them to the tcp server i.e. im server
-	'''
+	
+	#loops through each packet and send them to the tcp server i.e. im server
+	
 	packet= MessageArray[i]
 	print colored(packet,'green') # just printing on the console
 	TCPclient(host,port,packet)
@@ -56,7 +57,7 @@ for i in range(len(MessageArray)):
 
 #sending only the first packet for testing
 packet = MessageArray[0]
-print colored(packet,'green')
+print (colored(packet,'green'))
 TCPclient(host,port,packet)
 	
 
