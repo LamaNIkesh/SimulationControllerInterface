@@ -1,16 +1,17 @@
-
+#import necessary libraries
 import socket 
 import time
 import sys
 import numpy as np
 import readXML_1 as rx
 
-
 #host = socket.gethostname()
 host = IMserver # host name is already configured in /etc/hosts ; IMserver has 100.100.1.252 IP address
 port = 4001
 packet = ""
 
+##----sys.argv[1] will be used when calling this python script from php webpage directly.
+# argv will the file path which may be different for different users
 #xmlFile = sys.argv[1]
 xmlFile = '/home/nikesh/Documents/WebServer/SimulationControllerInterface/SimulationXML/nikeshLama/Initialisation_file_nikeshLama1.xml'
 #xmlFile = 'Initialisation_file_nikeshLama1.xml'
@@ -36,12 +37,7 @@ try:
 except:
 	print("cannot read")
 
-
-#loops through packets and publish to the topic
-print("message array length: ", len(MessageArray))
-print(MessageArray[1])
-
-
+#traverse through array elements and establish connection and send packet 
 for i in range(len(MessageArray)):
 	'''
 	loops through each packet and send them to the tcp server i.e. im server
