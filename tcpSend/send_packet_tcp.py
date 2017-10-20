@@ -41,15 +41,20 @@ except:
 	print("cannot read")
 
 #traverse through array elements and establish connection and send packet 
+
+
+#uncomment this section for sending all the packets 
 '''
 for i in range(len(MessageArray)):
-	
-	#loops through each packet and send them to the tcp server i.e. im server
-	
+	'''
+	loops through each packet and send them to the tcp server i.e. im server
+	'''
 	packet= MessageArray[i]
 	print colored(packet,'green') # just printing on the console
 	TCPclient(host,port,packet)
 '''
+
+#sending only the first packet for testing
 packet = MessageArray[0]
 print colored(packet,'green')
 TCPclient(host,port,packet)
