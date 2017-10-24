@@ -15,9 +15,34 @@ include("head.html")
 			if ($_SESSION['flag']==1){
 				//$userID = $userLogged . $simNum;
 
-				//echo $_POST['nameid6'];
-				$simNum =1;
-				$userID = $userLogged . $simNum;
+				//-----------------------------------------------------------------------
+				//Reading simulation id from the database
+
+				$server = 'localhost';
+				$user = 'root';
+				$pass = '';
+				$db = 'WebInterface';
+				$flag = 0;
+				try{
+					$connection = mysqli_connect("$server",$user,$pass,$db);
+					//echo $_POST['user'];
+					$result = mysqli_query($connection,"SELECT * FROM UserSimulation ORDER BY id DESC");
+					while($simulation = mysqli_fetch_assoc($result)){
+						if($simulation['UserId'] == $_SESSION['username']){
+							$simNum = $simulation['SimulationId'];
+							break;
+						}
+					}
+				}
+				catch (Exception $e) {
+						echo "error: ".$e->getMessage();
+				}
+				echo "simulation number is : ".$simNum;
+				//------------------------------------------------
+
+
+
+				$userID = $userLogged .'_'.$simNum;
 				$data = new DOMDocument;
 				$data->formatOutput = true;
 				$dom=$data->createElement("Preconfigured_stimulus");
@@ -33,7 +58,7 @@ include("head.html")
 						$packet->appendChild($destdev);
 						$sourcedev=$data->createElement("sourcedevice",65532); // Needs to specify the source; is the NC??
 						$packet->appendChild($sourcedev);
-						$simID = $data->createElement("simID", 1);
+						$simID = $data->createElement("simID", $simNum);
 						$packet->appendChild($simID);
 						$command=$data->createElement("command",19);
 						$packet->appendChild($command);

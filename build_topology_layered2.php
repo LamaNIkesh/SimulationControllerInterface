@@ -10,10 +10,54 @@ include("head.html")
 		if ($_SESSION['flag']==1){
 
 			$userLogged = $_SESSION['username'];
-	//increases the simNum for the file name for multiple file 
-			//$_SESSION['simNum']++;
-			//$simNum =$_SESSION['simNum'];
-			$simNum = 1;
+
+			/*
+			---------------------------------------------------------------------------------------------------------------------------
+			This section to assign simulation number to this particular simulation
+			Reading database for simulation id, assigning unused simid to the user and update the database
+			*/
+			//database connection params
+			$server = 'localhost';
+			$user = 'root';
+			$pass = '';
+			$db = 'WebInterface';
+			try{
+				$connection = mysqli_connect("$server",$user,$pass,$db);
+				$result = mysqli_query($connection, "select * from SImulation");
+				while($simulation = mysqli_fetch_assoc($result)){
+					#Checking if a particular simualtion number is free to use
+					#after being assigned the sim number engage field is set to 1, so that it cannot be reassigned to another simulation
+					#until it is free again
+					if($simulation['Engage'] == 0){
+						$simNum = $simulation['SimulationId'];
+						#$simulation['Engage'] = 1;
+						$engage_flag = 1;
+						$updateEngage = "UPDATE SImulation SET Engage = '$engage_flag' WHERE SimulationId = '$simNum'";
+						#mysqli_query($sql);
+						if(mysqli_query($connection,$updateEngage) === TRUE){
+							echo "Record updated successfully";
+						}	
+						else{
+							echo "Error updating the record: ".$connection->error;
+						}
+						//once the boolean engage field of simulation is updated, new table UserSimulation is updated too to keep track of
+						//which user gets what simulation number
+						$datetime = date("Y-m-d H:i:s");
+						$insert_userSim = "INSERT INTO UserSimulation(UserId, SimulationId,TimeConfigured) VALUES('$userLogged','$simNum','$datetime')";
+						//pass the query
+						mysqli_query($connection,$insert_userSim);
+
+						break;
+					}
+				}
+			}
+			catch (Exception $e) {
+					echo "error: ".$e->getMessage();
+			}
+			//------------------------------------------------------------------------------------------------------	
+			#$simNum = 1;
+			echo "\nsimulation ID assigned:".$simNum;
+
 			$totalNeurons = 0;
 			//echo $_POST['model4'];
 			//writing the neurons into a text file for future use
@@ -93,7 +137,7 @@ include("head.html")
 						$timestamp = 0;
 						$timestepsize = $_POST['simunits'];
 						$simtime = $_POST['simtime'];
-						$userID = $userLogged .$simNum;
+						$userID = $userLogged .'_'.$simNum;
 						$watchdog = $_POST['watchdog']; 
 						//$watchdog = 2;
 						if ($timestepsize=='us'){

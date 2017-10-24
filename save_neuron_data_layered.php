@@ -8,9 +8,33 @@
 			<h6><font color = "#52a25e">System Builder->Simulation Parameters->NeuronModels->NeuronModelParameter-><b>Creating Initialisation File</b></h6></font>
 			<?php
 			if ($_SESSION['flag']==1){
-				//needs to be changed later on
-				$simNum = 1;
-				$userID = $userLogged . $simNum;
+
+				//--------------------------------------------------------
+				//Reading simulation id assigned to this simulation from the database
+				$server = 'localhost';
+				$user = 'root';
+				$pass = '';
+				$db = 'WebInterface';
+				$flag = 0;
+				try{
+					$connection = mysqli_connect("$server",$user,$pass,$db);
+					//echo $_POST['user'];
+					$result = mysqli_query($connection,"SELECT * FROM UserSimulation ORDER BY id DESC");
+					while($simulation = mysqli_fetch_assoc($result)){
+						if($simulation['UserId'] == $_SESSION['username']){
+							$simNum = $simulation['SimulationId'];
+							break;
+						}
+					}
+				}
+				catch (Exception $e) {
+						echo "error: ".$e->getMessage();
+				}
+				echo "simulation number is : ".$simNum;
+
+			//--------------------------------
+
+				$userID = $userLogged .'_'.$simNum;
 				$data = new DOMDocument;
 				$data->formatOutput = true;
 				$dom=$data->createElement("Neuron_Initialisation");
@@ -64,7 +88,7 @@
 				$sourcedev=$data->createElement("sourcedevice",65532);
 				$packet->appendChild($sourcedev);
 				
-				$simid = $data->createElement("simID",1);
+				$simid = $data->createElement("simID",$simNum);
 				$packet->appendChild($simid);	
 
 				$command=$data->createElement("command",24);
@@ -147,7 +171,7 @@
 				$sourcedev=$data->createElement("sourcedevice",65532);
 				$packet->appendChild($sourcedev);
 				
-				$simID = $data->createElement("simID",1);
+				$simID = $data->createElement("simID",$simNum);
 				$packet->appendChild($simID);	
 
 				$command=$data->createElement("command",24);

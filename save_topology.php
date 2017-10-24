@@ -10,8 +10,39 @@
 
 			if ($_SESSION['flag']==1){
 				$totalNeurons =  $_POST['neuron'];
-				$simNum = 1;
-				$userID = $userLogged . $simNum;
+
+			
+				//-----------------------------------------------------------------------
+				//Reading simulation id from the database
+
+				$server = 'localhost';
+				$user = 'root';
+				$pass = '';
+				$db = 'WebInterface';
+				$flag = 0;
+				try{
+					$connection = mysqli_connect("$server",$user,$pass,$db);
+					//echo $_POST['user'];
+					$result = mysqli_query($connection,"SELECT * FROM UserSimulation ORDER BY id DESC");
+					while($simulation = mysqli_fetch_assoc($result)){
+						if($simulation['UserId'] == $_SESSION['username']){
+							$simNum = $simulation['SimulationId'];
+							break;
+						}
+					}
+				}
+				catch (Exception $e) {
+						echo "error: ".$e->getMessage();
+				}
+				echo "simulation number is : ".$simNum;
+
+				//--------------------------------------------------
+				//-------End of reading simulation id----------------
+
+
+
+				//$simNum = 1;
+				$userID = $userLogged . '_'.$simNum;
 				$numberOfNeurons = 0; //counts the number of neurons from the topology file
 										//this neuron number is used only for the stimulation file.
 										//since this is non layered, stimulation can be applied to any neurons.
@@ -44,7 +75,7 @@
 					$sourcedev=$data->createElement("sourcedevice",65532);
 					$packet->appendChild($sourcedev);
 					
-					$simID = $data->createElement("simID",1);
+					$simID = $data->createElement("simID",$simNum);
 					$packet->appendChild($simID);
 
 					$command=$data->createElement("command",11);

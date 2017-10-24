@@ -10,7 +10,7 @@ include("head.html")
 $server = 'localhost';
 $user = 'root';
 $pass = '';
-$db = 'Registration';
+$db = 'WebInterface';
 $flag = 0;
 
 try{
@@ -26,14 +26,14 @@ try{
 
 
 //query the database for user
-	$result = mysqli_query($connection, "select * from Signup where username ='$username' and password = '$password'") 
+	$result = mysqli_query($connection, "select * from UserDetails where UserId ='$username' and Password = '$password'") 
 			or die("No user found!!!!".mysql_error());
 	$row = mysqli_fetch_array($result);
 
 	
 	//if result matched number of rows will be 1
 
-	if($row['username']== $username && $row['password'] == $password){
+	if($row['UserId']== $username && $row['Password'] == $password){
 		$_SESSION['username'] = $username;
 		$_SESSION['password'] = $password;
 		$_SESSION['useremail'] = $row['email'];
@@ -44,8 +44,8 @@ try{
 		exit();
 	}
 	else{
-		//$error = "Your login name or password is invalid";
-		//echo 'Your login name or password is invalid';
+		#$error = "Your login name or password is invalid";
+		#echo 'Your login name or password is invalid';
 	
 		$_SESSION['loginfail'] = 1;
 		header('Location: login.php');

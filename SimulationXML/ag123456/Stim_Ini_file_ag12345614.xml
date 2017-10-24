@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Preconfigured_stimulus>
+  <packet>
+    <destdevice>1</destdevice>
+    <sourcedevice>65532</sourcedevice>
+    <simID>14</simID>
+    <command>19</command>
+    <timestamp>5</timestamp>
+    <neuronid>1</neuronid>
+    <endtimestamp>5</endtimestamp>
+    <itemID>65523</itemID>
+    <itemValuea>0</itemValuea>
+    <itemValueb>0</itemValueb>
+    <itemValuec>5</itemValuec>
+  </packet>
+  <packet>
+    <destdevice>1</destdevice>
+    <sourcedevice>65532</sourcedevice>
+    <simID>14</simID>
+    <command>19</command>
+    <timestamp>5</timestamp>
+    <neuronid>2</neuronid>
+    <endtimestamp>5</endtimestamp>
+    <itemID>65523</itemID>
+    <itemValuea>0</itemValuea>
+    <itemValueb>0</itemValueb>
+    <itemValuec>5</itemValuec>
+  </packet>
+</Preconfigured_stimulus>

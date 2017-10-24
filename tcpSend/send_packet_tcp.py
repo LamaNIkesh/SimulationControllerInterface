@@ -58,7 +58,10 @@ for i in range(len(MessageArray)):
 #sending only the first packet for testing
 packet = MessageArray[0]
 print (colored(packet,'green'))
-TCPclient(host,port,packet)
+try:
+	TCPclient(host,port,packet)
+except:
+	print (colored('Error: Could not establish connection!!', 'red'))
 	
 
 	

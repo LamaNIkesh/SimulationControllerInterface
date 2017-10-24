@@ -12,9 +12,34 @@
 			if ($_SESSION['flag']==1){
 				//echo "no of neurons in layer 1: ", $_POST['neurons_layer1']."<br>";
 				
-				//echo "test";
-				$simNum = 1;
-				$userID = $userLogged . $simNum;
+				//--------------------------------------------------------
+				//Reading simulation id assigned to this simulation from the database
+				$server = 'localhost';
+				$user = 'root';
+				$pass = '';
+				$db = 'WebInterface';
+				$flag = 0;
+				try{
+					$connection = mysqli_connect("$server",$user,$pass,$db);
+					//echo $_POST['user'];
+					$result = mysqli_query($connection,"SELECT * FROM UserSimulation ORDER BY id DESC");
+					while($simulation = mysqli_fetch_assoc($result)){
+						if($simulation['UserId'] == $_SESSION['username']){
+							$simNum = $simulation['SimulationId'];
+							break;
+						}
+					}
+				}
+				catch (Exception $e) {
+						echo "error: ".$e->getMessage();
+				}
+				echo "simulation number is : ".$simNum;
+
+				//--------------------------------
+								
+
+
+				$userID = $userLogged .'_'. $simNum;
 				$data = new DOMDocument;
 				$data->formatOutput = true;
 				$dom=$data->createElement("Topology_Initialisation");
@@ -46,7 +71,7 @@
 					$packet->appendChild($destdev);
 					$sourcedev=$data->createElement("sourcedevice",65532);
 					$packet->appendChild($sourcedev);
-					$simID = $data->createElement("simID", 1);
+					$simID = $data->createElement("simID", $simNum);
 					$packet->appendChild($simID);
 					
 					$command=$data->createElement("command",11);

@@ -14,10 +14,36 @@ if ($_SESSION['flag']==1){
 	//this section appends all three xml files; simulation, neuron initialisation, topology and stimulation (if present)
 	//into a single simulation file that is ready to send to the IM 
 
+	//Reading simulation id from the database
+
+	$server = 'localhost';
+	$user = 'root';
+	$pass = '';
+	$db = 'WebInterface';
+	$flag = 0;
+	try{
+		$connection = mysqli_connect("$server",$user,$pass,$db);
+		//echo $_POST['user'];
+		$result = mysqli_query($connection,"SELECT * FROM UserSimulation ORDER BY id DESC");
+		while($simulation = mysqli_fetch_assoc($result)){
+			if($simulation['UserId'] == $_SESSION['username']){
+				$simNum = $simulation['SimulationId'];
+				break;
+			}
+		}
+	}
+	catch (Exception $e) {
+		echo "error: ".$e->getMessage();
+	}
+	echo "simulation number is : ".$simNum;
+				//------------------------------------------------
+
+
+
 	$topo=false;
 	$stim=false;
-	$simNum =1;
-	$userID = $userLogged . $simNum;
+	
+	$userID = $userLogged .'_'.$simNum;
 	echo $userID;
 	//$doc1=file($userLogged . "/" . $userLogged . $simNum . ".xml");
 	//$doc2=file($userLogged . "/Neuron_Ini_file_" . $userLogged . $simNum . ".xml");
@@ -33,26 +59,26 @@ if ($_SESSION['flag']==1){
 	$xmlDoc1 = new DOMDocument();
 	$xmlDoc1->load("SimulationXML/".$userLogged .$topology. "/Sim_Ini_file_" . $userID. ".xml");
 	
-	unlink("SimulationXML/".$userLogged .$topology. "/Sim_Ini_file_" . $userLogged . $simNum . ".xml");
+	unlink("SimulationXML/".$userLogged .$topology. "/Sim_Ini_file_" . $userID. ".xml");
 	$xmlDoc2 = new DOMDocument();
 
-	$xmlDoc2->load("SimulationXML/".$userLogged . $topology."/Neuron_Ini_file_" . $userLogged . $simNum . ".xml");
+	$xmlDoc2->load("SimulationXML/".$userLogged . $topology."/Neuron_Ini_file_" . $userID. ".xml");
 	
-	unlink("SimulationXML/".$userLogged . $topology. "/Neuron_Ini_file_" . $userLogged . $simNum . ".xml");
+	unlink("SimulationXML/".$userLogged . $topology. "/Neuron_Ini_file_" . $userID . ".xml");
 	
-	if (file_exists("SimulationXML/".$userLogged .$topology. "/Topo_Ini_file_" . $userLogged . $simNum . ".xml")){
+	if (file_exists("SimulationXML/".$userLogged .$topology. "/Topo_Ini_file_" . $userID . ".xml")){
 		$xmlDoc3 = new DOMDocument();
-		$xmlDoc3->load("SimulationXML/".$userLogged . $topology. "/Topo_Ini_file_" . $userLogged . $simNum . ".xml");
+		$xmlDoc3->load("SimulationXML/".$userLogged . $topology. "/Topo_Ini_file_" . $userID . ".xml");
 		
 		$topo=true;
-		unlink("SimulationXML/".$userLogged . $topology. "/Topo_Ini_file_" . $userLogged . $simNum . ".xml");
+		unlink("SimulationXML/".$userLogged . $topology. "/Topo_Ini_file_" . $userID . ".xml");
 	}
 	
-	if (file_exists("SimulationXML/".$userLogged . $topology."/Stim_Ini_file_" . $userLogged . $simNum . ".xml")){
+	if (file_exists("SimulationXML/".$userLogged . $topology."/Stim_Ini_file_" . $userID . ".xml")){
 		$xmlDoc5 = new DOMDocument();
-		$xmlDoc5->load("SimulationXML/".$userLogged . $topology. "/Stim_Ini_file_" . $userLogged . $simNum . ".xml");
+		$xmlDoc5->load("SimulationXML/".$userLogged . $topology. "/Stim_Ini_file_" . $userID . ".xml");
 		$stim=true;
-		unlink("SimulationXML/".$userLogged . $topology. "/Stim_Ini_file_" . $userLogged . $simNum . ".xml");
+		unlink("SimulationXML/".$userLogged . $topology. "/Stim_Ini_file_" . $userID . ".xml");
 	}
 	
 	$dom = new DOMDocument("1.0");

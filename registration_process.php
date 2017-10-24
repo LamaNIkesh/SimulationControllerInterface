@@ -5,7 +5,8 @@
 $server = 'localhost';
 $user = 'root';
 $pass = '';
-$db = 'Registration'; //database name
+#$db = 'Registration'; //database name
+$db = 'WebInterface';
 $flag = 0;
 try{
 	$connection = new mysqli('localhost', $user, $pass,$db) or die("Unable to connect");
@@ -21,7 +22,7 @@ try{
 	$password = $_POST['user_password'];
 	$email = $_POST['email'];
 	$password = md5($password); //md5 has for security
-
+	$datetime = date("Y-m-d H:i:s");
 
 	#echo $fname;
 	#echo $lname;
@@ -32,7 +33,9 @@ try{
 	#---Inserting into the database, the table Signup is for storing user registration details
 	//--Signup table is inside Registration database
 
-	$sql = "INSERT INTO Signup(Firstname,Lastname,username,password,email) VALUES('$fname','$lname','$username','$password','$email')";
+	#$sql = "INSERT INTO Signup(Firstname,Lastname,username,password,email) VALUES('$fname','$lname','$username','$password','$email')";
+
+	$sql = "INSERT INTO UserDetails(FirstName, LastName, UserId, Password, Email,DateCreated) VALUES('$fname','$lname','$username','$password','$email','$datetime')";
 
 	if(mysqli_query($connection,$sql)){
 		#echo "new Record created successfully";
@@ -43,7 +46,7 @@ try{
 		$_SESSION['useremail'] = $email;
 	}
 	else{
-		echo "Error: ".$sql."<br>".mysqli_error($conn);
+		echo "Error: ".$sql."<br>".mysqli_error($connection);
 		$flag = 0;
 	}
 
