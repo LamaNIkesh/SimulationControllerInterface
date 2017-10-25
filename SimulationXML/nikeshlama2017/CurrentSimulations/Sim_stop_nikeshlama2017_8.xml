@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Stop>
+  <packet>
+    <destdevice>1</destdevice>
+    <sourcedevice>65532</sourcedevice>
+    <simID>8</simID>
+    <command>0</command>
+    <timestamp>0</timestamp>
+  </packet>
+</Stop>
