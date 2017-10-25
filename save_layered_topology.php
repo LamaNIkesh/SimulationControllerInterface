@@ -12,27 +12,8 @@
 			if ($_SESSION['flag']==1){
 				//echo "no of neurons in layer 1: ", $_POST['neurons_layer1']."<br>";
 				
-				//--------------------------------------------------------
-				//Reading simulation id assigned to this simulation from the database
-				$server = 'localhost';
-				$user = 'root';
-				$pass = '';
-				$db = 'WebInterface';
-				$flag = 0;
-				try{
-					$connection = mysqli_connect("$server",$user,$pass,$db);
-					//echo $_POST['user'];
-					$result = mysqli_query($connection,"SELECT * FROM UserSimulation ORDER BY id DESC");
-					while($simulation = mysqli_fetch_assoc($result)){
-						if($simulation['UserId'] == $_SESSION['username']){
-							$simNum = $simulation['SimulationId'];
-							break;
-						}
-					}
-				}
-				catch (Exception $e) {
-						echo "error: ".$e->getMessage();
-				}
+				$simNum = $_POST['simNum'];
+
 				echo "simulation number is : ".$simNum;
 
 				//--------------------------------
@@ -113,10 +94,12 @@
 					<input type="hidden" name='topology' id = 'topology' value='layeredTopology'>
 					<input type ="hidden" name = "totalNeurons" id ="totalNeurons" value = <?php echo $_POST['totalNeurons']; ?>>
 					<input type = "hidden" name = 'inputlayer' id= 'inputlayer' value = <?php echo $_POST['neurons_layer1'];?>>
+					<input type="hidden" value=<?php echo $simNum; ?> name="simNum">
 				</form><br>
 				<form action="initialisation_file.php" method="post">
 					<input type="hidden" name='topology' id = 'topology' value='layeredTopology'>
 					<input type ="hidden" name = "totalNeurons" id ="totalNeurons" value = <?php echo $_POST['totalNeurons']; ?>>
+					<input type="hidden" value=<?php echo $simNum; ?> name="simNum">
 					<br><input type="submit" value="Create initialisation file">
 				</form><br>
 				

@@ -15,6 +15,9 @@ include("head.html")
 
     <?php
     if ($_SESSION['flag']==1){
+
+        $simNum = $_POST['simNum'];
+
         $neuronlistPath = "SimulationXML/".$userLogged . "/NeuronList.txt";
         $list=file($neuronlistPath);
 
@@ -30,18 +33,21 @@ include("head.html")
             <input type= "submit" method = "post" value = "Create fully interconnected network">
             <input type="hidden" name="totalNeurons" value=<?php echo $_POST['totalNeurons']; ?>>
             <input type="hidden" name="topologyType" value="fullyConnected">
+            <input type="hidden" value=<?php echo $simNum; ?> name="simNum">
         </form>
         <br><br>
         <form action = "topologygenerate.php" method = "post">
             <input type= "submit" method = "post" value = "Create probabilistic network[30%]">    
             <input type="hidden" name="topologyType" value="probConnected">
             <input type="hidden" name="totalNeurons" value=<?php echo $_POST['totalNeurons']; ?>>
+            <input type="hidden" value=<?php echo $simNum; ?> name="simNum">
         </form>
         <br><br>
         <form action = "topologygenerate.php" method = "post">
             <input type= "submit" method = "post" value = "Create Random network">    
             <input type="hidden" name="topologyType" value="randomlyConnected">
             <input type="hidden" name="totalNeurons" value=<?php echo $_POST['totalNeurons']; ?>>
+            <input type="hidden" value=<?php echo $simNum; ?> name="simNum">
         </form>
 
 

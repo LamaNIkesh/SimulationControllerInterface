@@ -36,7 +36,7 @@ try{
 	if($row['UserId']== $username && $row['Password'] == $password){
 		$_SESSION['username'] = $username;
 		$_SESSION['password'] = $password;
-		$_SESSION['useremail'] = $row['email'];
+		$_SESSION['useremail'] = $row['Email'];
 		$flag = 1;
 		$_SESSION['flag'] = $flag;
 		$_SESSION['loginfail'] = 0;

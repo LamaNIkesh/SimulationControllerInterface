@@ -192,6 +192,9 @@ else if(topology == 2 || topology == 3){
 
     		<?php
     		if ($_SESSION['flag']==1){
+
+                $simNum = $_POST['simNum'];
+
     			$neuronlistPath = "SimulationXML/".$userLogged . "/NeuronList.txt";
     			$myTopology = fopen("SimulationXML/".$userLogged . "/Topology.txt", "w"); 
     			$list=file($neuronlistPath);
@@ -254,6 +257,7 @@ else if(topology == 2 || topology == 3){
     				<form action="save_topology.php" method="post">
     				<input type="submit" value="Next" action = "save_topology.php">
                     <input type="hidden" name="neuron" id = "neuron" value=<?php echo $totalNeurons; ?>>
+                    <input type="hidden" value=<?php echo $simNum; ?> name="simNum">
                     </form>
     				<?php 
     				break;
@@ -313,6 +317,7 @@ else if(topology == 2 || topology == 3){
     				<form action="save_topology.php" method="post">
     				<input type="submit" value="Next" action = "save_topology.php">
                     <input type="hidden" name="neuron" id = "neuron" value=<?php echo $totalNeurons; ?>>
+                    <input type="hidden" value=<?php echo $simNum; ?> name="simNum">
                     </form>
     				
     				<?php

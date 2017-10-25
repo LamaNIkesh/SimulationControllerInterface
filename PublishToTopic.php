@@ -10,6 +10,8 @@ include("head.html")
 <?php
 if ($_SESSION['flag']==1){
 	# code...
+	$simNum = $_POST['simNum'];
+
 	/*
 	* This part of the code take care of running python script that publishes
 	* the intiilisation xml files as packets and awaits acknowledgement from the 
@@ -32,21 +34,50 @@ if ($_SESSION['flag']==1){
 	#publisher.py publishes to webapp/get topic
 	try {
 		#executing python code that publishes the packets
-#--------------------------------------------------------------------------------
-#-------Critical region---------------------- Initial issues with running python script
-#-------from php
+		#--------------------------------------------------------------------------------
+		#-------Critical region---------------------- Initial issues with running python script
+		#-------from php
 		#sudo -u ->allows sudo user privelege
 		#daemon is the group that apache2 falls into. Normally is www-data but since
 		#the web directory is not in default place, the user group is www-data
 		#also no password privelege is added to sudoer file for daemon users
 		
-		$output = shell_exec('sudo -u daemon python /home/nikesh/Documents/WebServer/SimulationControllerInterface/publisher_packet.py 2>&1 '.$filePath);
+		$output = shell_exec('sudo -u daemon python /home/nikesh/Documents/WebServer/SimulationControllerInterface/tcpSend/send_packet_tcp.py 2>&1 '.$filePath);
 		echo "<pre>$output</pre>";
-		#echo shell_exec("python3 -V 2>&1");
 		echo "All the packets successfully published to the Interface Manager.\nYou will receive a notification when the simulation is complete";
+
+		//Once the packet has been sent to the IM server, the database is updated to show configured simulations for each users
+		$server = 'localhost';
+		$user = 'root';
+		$pass = '';
+		$db = 'WebInterface';
+		try{
+			$connection = mysqli_connect("$server",$user,$pass,$db);
+			$engage_flag = 1;
+			$updateEngage = "UPDATE SImulation SET Engage = '$engage_flag' WHERE SimulationId = '$simNum'";
+			#mysqli_query($sql);
+			if(mysqli_query($connection,$updateEngage) === TRUE){
+				echo "Record updated successfully";
+			}	
+			else{
+				echo "Error updating the record: ".$connection->error;
+			}
+			//once the boolean engage field of simulation is updated, new table UserSimulation is updated too to keep track of
+			//which user gets what simulation number
+			$status = 'Configured';
+			$datetime = date("Y-m-d H:i:s");
+			$insert_userSim = "INSERT INTO UserSimulation(UserId, SimulationId,Status,TimeConfigured) VALUES('$userLogged','$simNum','$status','$datetime')";
+			//pass the query
+			mysqli_query($connection,$insert_userSim);	
+			}
+
+			catch (Exception $e) {
+					echo "error: ".$e->getMessage();
+			}
+			//end of try catch for database update
 	} 
 	catch (Exception $e) {
-		echo "Error: Could not publish to the topic";
+		echo "Error: Could not publish to the server";
 	}
 }
 else{

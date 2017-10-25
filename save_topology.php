@@ -11,35 +11,12 @@
 			if ($_SESSION['flag']==1){
 				$totalNeurons =  $_POST['neuron'];
 
-			
-				//-----------------------------------------------------------------------
-				//Reading simulation id from the database
-
-				$server = 'localhost';
-				$user = 'root';
-				$pass = '';
-				$db = 'WebInterface';
-				$flag = 0;
-				try{
-					$connection = mysqli_connect("$server",$user,$pass,$db);
-					//echo $_POST['user'];
-					$result = mysqli_query($connection,"SELECT * FROM UserSimulation ORDER BY id DESC");
-					while($simulation = mysqli_fetch_assoc($result)){
-						if($simulation['UserId'] == $_SESSION['username']){
-							$simNum = $simulation['SimulationId'];
-							break;
-						}
-					}
-				}
-				catch (Exception $e) {
-						echo "error: ".$e->getMessage();
-				}
+				$simNum = $_POST['simNum'];
+				
 				echo "simulation number is : ".$simNum;
 
 				//--------------------------------------------------
 				//-------End of reading simulation id----------------
-
-
 
 				//$simNum = 1;
 				$userID = $userLogged . '_'.$simNum;
@@ -116,10 +93,12 @@
 					<input type="hidden" name="topology" id = "topology" value='nonlayered' ?>>
 					<input type = "hidden" name= "totalNeurons" id = "totalNeurons" value = <?php echo $totalNeurons; ?>>
 					<input type = "hidden" name = "noOfNeurons" id = "noOfNeurons" value = <?php echo $numberOfNeurons; ?> >
+					<input type="hidden" value=<?php echo $simNum; ?> name="simNum">
 				</form><br>
 				<form action="initialisation_file.php" method="post">
 					<input type="hidden" name='topology' id = 'topology' value='nonlayered'>
 					<br><input type="submit" value="Create initialisation file">
+					<input type="hidden" value=<?php echo $simNum; ?> name="simNum">
 				</form><br>
 				
 				<?php

@@ -8,29 +8,7 @@ include("head.html")
 		<h6><font color = "#52a25e">System Builder->Simulation Parameters->NeuronModels->NeuronModelParameter-><b>Creating Initialisation File</b></h6></font>
 		<?php
 		if ($_SESSION['flag']==1){
-			
-			//--------------------------------------------------------
-			//Reading simulation id assigned to this simulation from the database
-			$server = 'localhost';
-			$user = 'root';
-			$pass = '';
-			$db = 'WebInterface';
-			$flag = 0;
-			try{
-				$connection = mysqli_connect("$server",$user,$pass,$db);
-				//echo $_POST['user'];
-				$result = mysqli_query($connection,"SELECT * FROM UserSimulation ORDER BY id DESC");
-				while($simulation = mysqli_fetch_assoc($result)){
-					if($simulation['UserId'] == $_SESSION['username']){
-						$simNum = $simulation['SimulationId'];
-						break;
-					}
-				}
-			}
-			catch (Exception $e) {
-					echo "error: ".$e->getMessage();
-			}
-			echo "simulation number is : ".$simNum;
+			$simNum = $_POST['simNum'];
 
 			//--------------------------------
 
@@ -122,6 +100,7 @@ $myfile = fopen($neuronlistPath, "w") or die("Unable to open file!");
 
 	<br>
 	<input type="hidden" name="totalNeurons" value=<?php echo $_POST['totalNeurons']; ?>>
+	<input type="hidden" value=<?php echo $simNum; ?> name="simNum">
 	<br>
 	<input type="submit" value="Create topology">
 </form><br><br>
@@ -254,6 +233,7 @@ $data->save($filename);
 ?>
 <br>
 <input type="hidden" name="totalNeurons" value=<?php echo $_POST['totalNeurons']; ?>>
+<input type="hidden" value=<?php echo $simNum; ?> name="simNum">
 <br>
 <input type="submit" value="Create topology">
 </form><br><br>

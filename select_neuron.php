@@ -11,10 +11,11 @@ $loopCounter = 0;
 <div class = "container">
 	<div class="col-sm-12">
 		<h6><font color = "#52a25e">System Builder->Simulation Parameters-><b>NeuronModels</b></h6></font>
+
 		<form action="save_neuron.php" method="post">
 
 			<?php
-
+			$simNum = $_POST['simNum'];
 			if ($_SESSION['flag'] == 1){
 				$list=file("Libraries/neuron_id.txt");
 	// echo preg_replace("/[^a-zA-Z0-9]+/", "", "$list[0]");
@@ -28,6 +29,8 @@ $loopCounter = 0;
 						<input type="hidden" name="totalNeurons" value=<?php echo $totalNeurons; ?>>
 						<input type="hidden" value=<?php echo $_POST['samemodel']; ?> name="samemodel">
 						<input type="hidden" value=<?php echo $_POST['totalDiffModelNeurons']; ?> name="totalDiffModelNeurons">
+						<input type="hidden" value=<?php echo $simNum; ?> name="simNum">
+
 			<!--
 			<input type="hidden" value=<?php echo $_POST['muscle']; ?> name="muscle">
 			
@@ -72,6 +75,7 @@ else {
 		<input type="hidden" name="sameModelNeurons" value=<?php echo $subtractedSameModel; ?>>
 		<input type="hidden" name="totalNeurons" value=<?php echo $totalNeurons; ?>>
 		<input type="hidden" value=<?php echo $_POST['samemodel']; ?> name="samemodel">
+		<input type="hidden" value=<?php echo $simNum; ?> name="simNum">
 
 
 		<?php
@@ -101,6 +105,7 @@ $totalDiffModelNeurons = $_POST['totalDiffModelNeurons'];
 ?><p><?php echo $totalDiffModelNeurons; ?> neurons to be processed with different models</p>
 <input type="hidden" name="totalNeurons" value=<?php echo $totalNeurons; ?>>
 <input type="hidden" value=<?php echo $_POST['totalDiffModelNeurons']; ?> name="totalDiffModelNeurons">
+<input type="hidden" value=<?php echo $simNum; ?> name="simNum">
 
 		<!---
 		<input type="hidden" value=<?php echo $_POST['muscle']; ?> name="muscle">

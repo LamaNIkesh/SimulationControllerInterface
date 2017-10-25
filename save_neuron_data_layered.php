@@ -9,27 +9,7 @@
 			<?php
 			if ($_SESSION['flag']==1){
 
-				//--------------------------------------------------------
-				//Reading simulation id assigned to this simulation from the database
-				$server = 'localhost';
-				$user = 'root';
-				$pass = '';
-				$db = 'WebInterface';
-				$flag = 0;
-				try{
-					$connection = mysqli_connect("$server",$user,$pass,$db);
-					//echo $_POST['user'];
-					$result = mysqli_query($connection,"SELECT * FROM UserSimulation ORDER BY id DESC");
-					while($simulation = mysqli_fetch_assoc($result)){
-						if($simulation['UserId'] == $_SESSION['username']){
-							$simNum = $simulation['SimulationId'];
-							break;
-						}
-					}
-				}
-				catch (Exception $e) {
-						echo "error: ".$e->getMessage();
-				}
+				$simNum = $_POST['simNum'];
 				echo "simulation number is : ".$simNum;
 
 			//--------------------------------
@@ -82,60 +62,61 @@
 						echo "Neuron Number after first layer: ".$neuronNumber;
 					}
 					$packet=$data->createElement("packet");
-				//$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
-				$destdev=$data->createElement("destdevice", 1);//temporary 1 is the destination fpga
-				$packet->appendChild($destdev);
-				$sourcedev=$data->createElement("sourcedevice",65532);
-				$packet->appendChild($sourcedev);
-				
-				$simid = $data->createElement("simID",$simNum);
-				$packet->appendChild($simid);	
+					//$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
+					$destdev=$data->createElement("destdevice", 1);//temporary 1 is the destination fpga
+					$packet->appendChild($destdev);
+					$sourcedev=$data->createElement("sourcedevice",65532);
+					$packet->appendChild($sourcedev);
+					
+					$simid = $data->createElement("simID",$simNum);
+					$packet->appendChild($simid);	
 
-				$command=$data->createElement("command",24);
-				$packet->appendChild($command);
-				$timestamp=$data->createElement("timestamp",0);
-				$packet->appendChild($timestamp);
-				$neuronid = $data->createElement("neuronid", $neuronNumber);
-				$packet->appendChild($neuronid);
-				$modelid=$data->createElement("modelid",$_POST['model']);
-				$packet->appendChild($modelid);
-				
-				foreach ($ModelLibrary->neuron as $model){
-					if ($model->neuronid==$_POST['model']){
-						foreach ($model->item as $modelitem){
-						// $item=$data->createElement("item");
-							$itemid=$data->createElement("itemid",$modelitem->itemid);
-							$packet->appendChild($itemid);
-							$itemtype=$data->createElement("itemtype",$modelitem->type);
-							$packet->appendChild($itemtype);
-							$itemdatatype=$data->createElement("itemdatatype",$modelitem->datatype);
-							$packet->appendChild($itemdatatype);
-							$itemintegerpart=$data->createElement("itemintegerpart",$modelitem->integerpart);
-							$packet->appendChild($itemintegerpart);
-							$inlsb=$data->createElement("inlsb",$modelitem->inlsb);
-							$packet->appendChild($inlsb);
-							$inmsb=$data->createElement("inmsb",$modelitem->inmsb);
-							$packet->appendChild($inmsb);
-							$outlsb=$data->createElement("outlsb",$modelitem->outlsb);
-							$packet->appendChild($outlsb);
-							$outmsb=$data->createElement("outmsb",$modelitem->outmsb);
-							$packet->appendChild($outmsb);
-							$itemvalue=$data->createElement("itemvalue",$_POST["item" . $modelitem->itemid]);
-							$packet->appendChild($itemvalue);
-						// $packet->appendChild($item);
+					$command=$data->createElement("command",24);
+					$packet->appendChild($command);
+					$timestamp=$data->createElement("timestamp",0);
+					$packet->appendChild($timestamp);
+					$neuronid = $data->createElement("neuronid", $neuronNumber);
+					$packet->appendChild($neuronid);
+					$modelid=$data->createElement("modelid",$_POST['model']);
+					$packet->appendChild($modelid);
+					
+					foreach ($ModelLibrary->neuron as $model){
+						if ($model->neuronid==$_POST['model']){
+							foreach ($model->item as $modelitem){
+							// $item=$data->createElement("item");
+								$itemid=$data->createElement("itemid",$modelitem->itemid);
+								$packet->appendChild($itemid);
+								$itemtype=$data->createElement("itemtype",$modelitem->type);
+								$packet->appendChild($itemtype);
+								$itemdatatype=$data->createElement("itemdatatype",$modelitem->datatype);
+								$packet->appendChild($itemdatatype);
+								$itemintegerpart=$data->createElement("itemintegerpart",$modelitem->integerpart);
+								$packet->appendChild($itemintegerpart);
+								$inlsb=$data->createElement("inlsb",$modelitem->inlsb);
+								$packet->appendChild($inlsb);
+								$inmsb=$data->createElement("inmsb",$modelitem->inmsb);
+								$packet->appendChild($inmsb);
+								$outlsb=$data->createElement("outlsb",$modelitem->outlsb);
+								$packet->appendChild($outlsb);
+								$outmsb=$data->createElement("outmsb",$modelitem->outmsb);
+								$packet->appendChild($outmsb);
+								$itemvalue=$data->createElement("itemvalue",$_POST["item" . $modelitem->itemid]);
+								$packet->appendChild($itemvalue);
+							// $packet->appendChild($item);
+							}
 						}
 					}
+					$dom->appendChild($packet);
 				}
-				$dom->appendChild($packet);
 			}
-		}
-		$data->appendChild($dom);
-		$filename="SimulationXML/".$userLogged . "/Layered/Neuron_Ini_file_" . $userID . ".xml";
-		$data->save($filename);
-		?>
+			$data->appendChild($dom);
+			$filename="SimulationXML/".$userLogged . "/Layered/Neuron_Ini_file_" . $userID . ".xml";
+			$data->save($filename);
+			?>
 		<br>
 		<input type="hidden" name="totalNeurons" value=<?php echo $_POST['totalNeurons']; ?>>
 		<input type ="hidden" name="noOflayers" value = <?php echo $_POST['noOflayers']; ?>>
+		<input type="hidden" value=<?php echo $simNum; ?> name="simNum">
 		<br>
 		<input type="submit" value="Create topology">
 	</form><br><br>
@@ -222,6 +203,7 @@
 		<br>
 		<input type="hidden" name="totalNeurons" value=<?php echo $_POST['totalNeurons']; ?>>
 		<input type="hidden" name = "noOflayers" value = <?php echo $_POST['noOflayers']; ?>>
+		<input type="hidden" value=<?php echo $simNum; ?> name="simNum">
 		<br>
 		<input type="submit" value="Create topology">
 	</form><br><br>

@@ -21,32 +21,21 @@ include("head.html")
 			$user = 'root';
 			$pass = '';
 			$db = 'WebInterface';
+
 			try{
 				$connection = mysqli_connect("$server",$user,$pass,$db);
 				$result = mysqli_query($connection, "select * from SImulation");
+
 				while($simulation = mysqli_fetch_assoc($result)){
+					#echo $simulation['id'];
+					#echo $simulation['SimulationId'];
+					#echo $simulation['Engage'];
 					#Checking if a particular simualtion number is free to use
 					#after being assigned the sim number engage field is set to 1, so that it cannot be reassigned to another simulation
 					#until it is free again
 					if($simulation['Engage'] == 0){
 						$simNum = $simulation['SimulationId'];
 						#$simulation['Engage'] = 1;
-						$engage_flag = 1;
-						$updateEngage = "UPDATE SImulation SET Engage = '$engage_flag' WHERE SimulationId = '$simNum'";
-						#mysqli_query($sql);
-						if(mysqli_query($connection,$updateEngage) === TRUE){
-							echo "Record updated successfully";
-						}	
-						else{
-							echo "Error updating the record: ".$connection->error;
-						}
-						//once the boolean engage field of simulation is updated, new table UserSimulation is updated too to keep track of
-						//which user gets what simulation number
-						$datetime = date("Y-m-d H:i:s");
-						$insert_userSim = "INSERT INTO UserSimulation(UserId, SimulationId,TimeConfigured) VALUES('$userLogged','$simNum','$datetime')";
-						//pass the query
-						mysqli_query($connection,$insert_userSim);
-
 						break;
 					}
 				}
@@ -55,7 +44,6 @@ include("head.html")
 					echo "error: ".$e->getMessage();
 			}
 			//------------------------------------------------------------------------------------------------------	
-			#$simNum = 1;
 			echo "\nsimulation ID assigned:".$simNum;
 
 			$totalNeurons = 0;
@@ -203,6 +191,7 @@ include("head.html")
 					<br>
 					<input type ="hidden" name= "noOflayers" value=<?php echo $_POST['noOflayers']; ?> required>
 					<input type ="hidden" name= "samemodel" value=<?php echo $_POST['samemodel']; ?> required>
+					<input type="hidden" value=<?php echo $simNum; ?> name="simNum">
 					<?php if($_POST['samemodel'] == 'yes') {?>
 					<input type ="hidden" name= "model" value=<?php echo $_POST['model']; ?> required>
 					<?php } 

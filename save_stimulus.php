@@ -14,29 +14,10 @@ include("head.html")
 
 			if ($_SESSION['flag']==1){
 				//$userID = $userLogged . $simNum;
+				$simNum = $_POST['simNum'];
 
 				//-----------------------------------------------------------------------
 				//Reading simulation id from the database
-
-				$server = 'localhost';
-				$user = 'root';
-				$pass = '';
-				$db = 'WebInterface';
-				$flag = 0;
-				try{
-					$connection = mysqli_connect("$server",$user,$pass,$db);
-					//echo $_POST['user'];
-					$result = mysqli_query($connection,"SELECT * FROM UserSimulation ORDER BY id DESC");
-					while($simulation = mysqli_fetch_assoc($result)){
-						if($simulation['UserId'] == $_SESSION['username']){
-							$simNum = $simulation['SimulationId'];
-							break;
-						}
-					}
-				}
-				catch (Exception $e) {
-						echo "error: ".$e->getMessage();
-				}
 				echo "simulation number is : ".$simNum;
 				//------------------------------------------------
 
@@ -106,6 +87,7 @@ include("head.html")
 				
 				<input type="hidden" name='topology' id = 'topology' value=<?php echo $_POST['topology']; ?>>   
 				<input type="hidden" name = 'stimulation' id = 'stimulation' name ='yes' >
+				<input type="hidden" value=<?php echo $simNum; ?> name="simNum">
 				<input type="submit" value="Create initialisation file">
 				
 				

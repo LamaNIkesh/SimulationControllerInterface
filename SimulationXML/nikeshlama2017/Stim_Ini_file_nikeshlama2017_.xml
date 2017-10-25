@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Preconfigured_stimulus>
+  <packet>
+    <destdevice>1</destdevice>
+    <sourcedevice>65532</sourcedevice>
+    <simID/>
+    <command>19</command>
+    <timestamp>0</timestamp>
+    <neuronid>1</neuronid>
+    <endtimestamp>0</endtimestamp>
+    <itemID>65523</itemID>
+    <itemValuea>0</itemValuea>
+    <itemValueb>0</itemValueb>
+    <itemValuec>0.00</itemValuec>
+  </packet>
+</Preconfigured_stimulus>

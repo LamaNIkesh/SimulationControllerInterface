@@ -36,22 +36,6 @@ include("head.html")
 					if($simulation['Engage'] == 0){
 						$simNum = $simulation['SimulationId'];
 						#$simulation['Engage'] = 1;
-						$engage_flag = 1;
-						$updateEngage = "UPDATE SImulation SET Engage = '$engage_flag' WHERE SimulationId = '$simNum'";
-						#mysqli_query($sql);
-						if(mysqli_query($connection,$updateEngage) === TRUE){
-							echo "Record updated successfully";
-						}	
-						else{
-							echo "Error updating the record: ".$connection->error;
-						}
-						//once the boolean engage field of simulation is updated, new table UserSimulation is updated too to keep track of
-						//which user gets what simulation number
-						$datetime = date("Y-m-d H:i:s");
-						$insert_userSim = "INSERT INTO UserSimulation(UserId, SimulationId,TimeConfigured) VALUES('$userLogged','$simNum','$datetime')";
-						//pass the query
-						mysqli_query($connection,$insert_userSim);
-
 						break;
 					}
 
@@ -151,7 +135,7 @@ include("head.html")
 					<br>
 					<input type="hidden" value=<?php echo $_POST['totalNeurons']; ?> name="totalNeurons">
 					<input type = "hidden" value=<?php echo $_POST['totalDiffModelNeurons'];?> name = "totalDiffModelNeurons">
-					<!---<input type="hidden" value=<?php echo $simNum; ?> name="simNum">-->
+					<input type="hidden" value=<?php echo $simNum; ?> name="simNum">
 					<input type="hidden" value=<?php echo $_POST['samemodel']; ?> name="samemodel">
 					<!--
 					<input type="hidden" value=<?php echo $_POST['totalDiffModelNeurons']; ?> name="totalDiffModelNeurons">-->

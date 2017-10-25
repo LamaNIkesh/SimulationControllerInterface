@@ -36,6 +36,10 @@ if($_SESSION['flag'] == 1){
 	if (!file_exists('SimulationXML/'.$userLogged.'/Layered')) {
     mkdir('SimulationXML/'.$userLogged.'/Layered', 0777, true);
 	}
+	if (!file_exists('SimulationXML/'.$userLogged.'/CurrentSimulations')) {
+    mkdir('SimulationXML/'.$userLogged.'/CurrentSimulations', 0777, true);
+	}
+
 }
 else{
 	$userLogged = "";

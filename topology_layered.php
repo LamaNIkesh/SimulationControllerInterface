@@ -15,6 +15,9 @@ include("head.html")
 
     <?php
     if ($_SESSION['flag']==1){
+
+        $simNum = $_POST['simNum'];
+
         $neuronlistPath = "SimulationXML/".$userLogged . "/Layered/neuronlist.txt";
         $list=file($neuronlistPath);
 
@@ -33,6 +36,7 @@ include("head.html")
             <input type= "submit" method = "post" value = "Create fully interconnected network">
             <input type="hidden" name="totalNeurons" value=<?php echo $_POST['totalNeurons']; ?>>
             <input type="hidden" name="noOflayers" value=<?php echo $_POST['noOflayers']; ?>>
+            <input type="hidden" value=<?php echo $simNum; ?> name="simNum">
 
             <?php 
                 //passing the values-----------
@@ -59,6 +63,7 @@ include("head.html")
             <input type="hidden" name="topologyType" value="randomlyConnected">
             <input type="hidden" name="totalNeurons" value=<?php echo $_POST['totalNeurons']; ?>>
             <input type="hidden" name="noOflayers" value=<?php echo $_POST['noOflayers']; ?>>
+            <input type="hidden" value=<?php echo $simNum; ?> name="simNum">
 
             <?php 
                 //passing the values-----------

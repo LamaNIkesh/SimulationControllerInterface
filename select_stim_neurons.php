@@ -17,6 +17,8 @@ include("head.html")
 			echo "total neurons: ".$_POST['totalNeurons'];
 			if ($_SESSION['flag']==1){
 
+				$simNum = $_POST['simNum'];
+
 				echo "topology ".$_POST['topology'];
 
 				if($_POST['topology'] == 'nonlayered'){	//for non layered network.
@@ -41,7 +43,8 @@ include("head.html")
 				<form action="select_stimulus.php" method="get">
 				  <input type = "hidden" name = "noOfNeurons" id = "noOfNeurons" value = <?php echo $neuronNum; ?> >
 				  <input type="hidden" name='topology' id = 'topology' value=<?php echo $_POST['topology']; ?>>
-				  <input type = "hidden" name = "totalNeurons" id ="totalNeurons" value = <?php echo $_POST['totalNeurons']; ?>
+				  <input type = "hidden" name = "totalNeurons" id ="totalNeurons" value = <?php echo $_POST['totalNeurons']; ?>>
+				  <input type="hidden" value=<?php echo $simNum; ?> name="simNum">
 				  <div class="multiselect">
 				    <div class="selectBox" onclick="showCheckboxes()">
 				      <select>
