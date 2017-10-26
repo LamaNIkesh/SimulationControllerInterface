@@ -14,9 +14,14 @@ port = 3001                   # Reserve a port for your service.
 s = socket.socket()             # Create a socket object
 #host = '127.0.0.1'    # Get local machine name
 host = '100.100.1.173'
+#host = '127.0.0.1'
+#port = 3000
+
 s.bind((host, port))            # Bind to the port
 s.listen(5)                     # Now wait for client connection.
 
+
+########################################################################################
 
 def database_connect(db_table):
 	#Once the packet has been sent to the IM server, the database is updated to show configured simulations for each users	
@@ -36,6 +41,59 @@ def database_connect(db_table):
 	#print("number of rows:", countrow)
 	#data = cur.fetchone()
 	#print(data)
+
+def userDatabaseUpdate(simulationid, status,engage):
+	'''
+	updates the database after the result has been obtained
+	The simulation Table is also updated to free up engage value
+	Args: simulation id
+			status 
+			engage
+	'''
+	#setting up query and arguents for the query
+	query = "UPDATE UserSimulation SET Status = %s, Engage = %s WHERE SimulationId = %s"
+	arguements = (status, engage, simulationid)
+	try:
+		con = mdb.connect(host ="localhost",port =3306, user = "nikesh", passwd = "1234", db = "WebInterface")
+		cur = con.cursor()	
+		cur.execute(query, arguements)
+		#accep changes
+		con.commit()
+	except Error as error:
+			print(error)
+	finally:
+			cur.close()
+			con.close()
+	print("++++++++User Database Updated++++++++++")
+		
+
+def simulationDatabaseUpdate(simulationid,engage):
+	'''
+	updates the database after the result has been obtained
+	The simulation Table is also updated to free up engage value
+	Args: simulation id
+			status 
+			engage
+	'''
+	#setting up query and arguents for the query
+	query = "UPDATE SImulation SET Engage = %s WHERE SimulationId = %s"
+	arguements = (engage, simulationid)
+	try:
+		con = mdb.connect(host ="localhost",port =3306, user = "nikesh", passwd = "1234", db = "WebInterface")
+		cur = con.cursor()	
+		cur.execute(query, arguements)
+		#accep changes
+		con.commit()
+	except Error as error:
+			print(error)
+	finally:
+			cur.close()
+			con.close()
+	print("++++++++Simulation Database Updated++++++++++")
+
+
+
+
 def insertIntoQueue():
 	pass
 
@@ -43,6 +101,8 @@ def insertIntoQueue():
 
 def xmlResultCheckForSimulationIDandCommand():
 	pass
+
+#############################################################################
 
 
 while True:
@@ -130,6 +190,9 @@ while True:
 							resultsFile.close()
 							#now that the file has been successfully stored
 							#Database needs to be updated as well
+							userDatabaseUpdate(simulationid = simId, status = 'Finished',engage = 0)
+							#update simulatino database
+							simulationDatabaseUpdate(simulationid = simId,engage = 0)
 
 						else:
 							print("Error: End packet received before start packet!!!!")
