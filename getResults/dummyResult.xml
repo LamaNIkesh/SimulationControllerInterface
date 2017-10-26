@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results>
+<packet>
+  <destdevice>65532</destdevice>
+  <sourcedevice>65535</sourcedevice>
+  <simulation>6</simulation>
+  <command>25</command>
+  <timestamp>0</timestamp>
+  <type>3</type>
+  <status>1</status>
+</packet>
+<packet>
+  <simulation>6</simulation>
+  <timestamp>1</timestamp>
+  <neuronid>0</neuronid>
+</packet>
+<packet>
+  <simulation>6</simulation>
+  <timestamp>2</timestamp>
+  <neuronid>0</neuronid>
+  <neuronid>1</neuronid>
+</packet>
+<packet>
+  <simulation>6</simulation>
+  <timestamp>3</timestamp>
+</packet>
+<packet>
+  <destdevice>65532</destdevice>
+  <sourcedevice>65535</sourcedevice>
+  <simulation>6</simulation>
+  <command>25</command>
+  <timestamp>1000</timestamp>
+  <type>3</type>
+  <status>4</status>
+</packet>
+</results>
+

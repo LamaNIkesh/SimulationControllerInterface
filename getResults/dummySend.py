@@ -9,10 +9,10 @@ import readXML_1 as rx
 from termcolor import colored,cprint
 
 
-#host = '127.0.0.1'
-host = "100.100.1.252" # IM server IP
-port = 3000  # port for IM server tcp 
-#port = 6000
+host = '127.0.0.1'
+#host = "100.100.1.252" # IM server IP
+#port = 3000  # port for IM server tcp 
+port = 3000
 
 packet = ""
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results>
+<packet>
+  <simulation>6</simulation>
+  <timestamp>1</timestamp>
+  <neuronid>0</neuronid>
+</packet>
+<packet>
+  <simulation>6</simulation>
+  <timestamp>2</timestamp>
+  <neuronid>0</neuronid>
+  <neuronid>1</neuronid>
+</packet>
+<packet>
+  <simulation>6</simulation>
+  <timestamp>3</timestamp>
+</packet>
+</results>
