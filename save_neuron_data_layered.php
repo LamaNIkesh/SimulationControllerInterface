@@ -34,6 +34,53 @@
 
 	<form action="topology_layered.php" method="post">
 		<?php
+
+		##################################################################################################
+		#############################################################################################
+		#		ADDED BIT FOR MULTI FPGA SIMULATION 
+
+		$DevicesWithExactNumOfNeurons= intval($_POST['totalNeurons']/8);
+		if($_POST['totalNeurons']%8 > 0){
+			$extraDevice = 1;
+		}
+		else{
+			$extraDevice = 0;
+		}
+		$totalRequiredDevice = $DevicesWithExactNumOfNeurons + $extraDevice;
+
+		#echo "total device required: ",($totalRequiredDevice);
+
+		#Multiple devices per simulation
+		#calcualting how many devices are required for selected number of neurons
+		#each device can only have 8 neurons
+		echo "total neurons: ", $_POST['totalNeurons'];
+		$arraywithDevNum = array($_POST['totalNeurons']);
+
+		for ($totalNeu=0; $totalNeu <$_POST['totalNeurons'] ; $totalNeu++) { 
+			# code...
+			#echo $totalNeu;
+			#echo "<br>";
+			for ($i=$totalRequiredDevice ; $i>0; $i--) { 
+				# code...
+				#echo "i: ",$i,"<br>";
+				if(intval($totalNeu/8) >= intval($i-1)){
+					echo "destdev: ",$i,"<br>";
+					$destdevice = $i ;
+					#cho 'destdevice: ',$destdevice;
+					$arraywithDevNum[$totalNeu-1] = $destdevice;
+					break;
+				}
+				#echo "destdevice: ",$destdevice;
+			}
+		}
+		echo "array size: ",sizeof($arraywithDevNum);
+		file_put_contents("SimulationXML/".$userLogged . "/DeviceId_" . $userID . ".bin",serialize($arraywithDevNum));
+		
+		###############################################################################################
+		##########################################################################################################
+
+
+
 		if ($_POST['samemodel']=='yes'){
 			echo "same model";
 			echo "totalNeurons, ".$_POST['totalNeurons'];
@@ -63,7 +110,7 @@
 					}
 					$packet=$data->createElement("packet");
 					//$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
-					$destdev=$data->createElement("destdevice", 1);//temporary 1 is the destination fpga
+					$destdev=$data->createElement("destdevice", $arraywithDevNum[$neuronNumber - 2]);//temporary 1 is the destination fpga
 					$packet->appendChild($destdev);
 					$sourcedev=$data->createElement("sourcedevice",65532);
 					$packet->appendChild($sourcedev);
@@ -147,7 +194,7 @@
 				//echo "neuron number: ".$neuron_num;
 				$packet=$data->createElement("packet");
 				//$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
-				$destdev=$data->createElement("destdevice",1);
+				$destdev=$data->createElement("destdevice",$arraywithDevNum[$neuron_num - 2]);
 				$packet->appendChild($destdev);
 				$sourcedev=$data->createElement("sourcedevice",65532);
 				$packet->appendChild($sourcedev);

@@ -425,7 +425,7 @@ try {
                                 <input type="hidden" id = '<?php echo "neuron".${"layer$layer"}[$layernum];?>' name = <?php echo "neuron".${"layer$layer"}[$layernum];?> value = <?php echo "neuron".${"layer$layer"}[$layernum]; ?>>
                                 <input type ="hidden" name = "totalNeurons" id ="totalNeurons" value = <?php echo $totalNeurons; ?>>
                                 <input type="hidden" id = '<?php echo $connection[$noOfconnections];?>' name = <?php echo $connection[$noOfconnections];?> value = <?php echo $connection[$noOfconnections];?>>
-
+                                 <input type="hidden" value=<?php echo $simNum; ?> name="simNum">
                                 <?php $noOfconnections++;
                                 //This recalculates the $j value to decide how many times the loop should run
                             } 

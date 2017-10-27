@@ -32,6 +32,16 @@
 					$Topology = fopen("SimulationXML/".$userLogged . "/Layered/RandomTopology.txt", "r") or die("Unable to open file!");
 				}
 				//reads topology txt file created earlier and use that to generate topology initialisation file
+
+				#########################################################################################
+				#reading the saved array from save_neuron-data file, it contains the device id number for each neuron
+				$deviceidarray = unserialize(file_get_contents("SimulationXML/".$userLogged . "/DeviceId_" . $userID . ".bin"));
+				$totalNeurons = sizeof($deviceidarray);
+				#print_r($deviceidarray);
+				############################################################################################
+				$numberOfNeurons = 0;
+
+
 				while(! feof($Topology))
 	  			{
 	  				$gettingLine= fgets($Topology);
@@ -48,7 +58,7 @@
 	  					echo "\n";
 	  				}*/
 	  				$packet=$data->createElement("packet");
-					$destdev=$data->createElement("destdevice",$spaceSeparatedConnections[0]);
+					$destdev=$data->createElement("destdevice",$deviceidarray[$numberOfNeurons-1]);
 					$packet->appendChild($destdev);
 					$sourcedev=$data->createElement("sourcedevice",65532);
 					$packet->appendChild($sourcedev);
@@ -59,7 +69,11 @@
 					$packet->appendChild($command);
 					$timestamp=$data->createElement("timestamp",0);
 					$packet->appendChild($timestamp);
-					
+					$neuronid = $data->createElement("neuronid", $spaceSeparatedConnections[0]);
+					$packet->appendChild($neuronid);
+					$numberofneurons = $data->createElement("numberofneurons", $totalNeurons); //passed on from topo generate
+					$packet->appendChild($numberofneurons);
+
 					//this loops from value 1 since value 0 is the desitnation device so we are only
 					//interested on the synpases it receives from
 
@@ -74,7 +88,7 @@
 					}
 					$dom->appendChild($packet);
 
-
+					$numberOfNeurons++;
 
 				}
 

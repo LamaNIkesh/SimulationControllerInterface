@@ -1154,23 +1154,10 @@
     <command>19</command>
     <timestamp>1</timestamp>
     <neuronid>1</neuronid>
-    <endtimestamp>10</endtimestamp>
+    <endtimestamp>2</endtimestamp>
     <itemID>65523</itemID>
     <itemValuea>0</itemValuea>
     <itemValueb>0</itemValueb>
-    <itemValuec>10</itemValuec>
-  </packet>
-  <packet>
-    <destdevice>1</destdevice>
-    <sourcedevice>65532</sourcedevice>
-    <simID>9</simID>
-    <command>19</command>
-    <timestamp>11</timestamp>
-    <neuronid>2</neuronid>
-    <endtimestamp>20</endtimestamp>
-    <itemID>65523</itemID>
-    <itemValuea>0</itemValuea>
-    <itemValueb>0</itemValueb>
-    <itemValuec>10</itemValuec>
+    <itemValuec>5</itemValuec>
   </packet>
 </newSimulation>

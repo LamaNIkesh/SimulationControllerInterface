@@ -27,10 +27,16 @@
 				$data = new DOMDocument;
 				$data->formatOutput = true;
 				$dom=$data->createElement("Topology_Initialisation");
-	// $xml = simplexml_load_file($userLogged . "/" . $userID . ".xml");
+				// $xml = simplexml_load_file($userLogged . "/" . $userID . ".xml");
 
 				$Topology = fopen("SimulationXML/".$userLogged . "/Topology.txt", "r") or die("Unable to open file!");
 				//reads topology txt file created earlier and use that to generate topology initialisation file
+				#########################################################################################
+				#reading the saved array from save_neuron-data file, it contains the device id number for each neuron
+				$deviceidarray = unserialize(file_get_contents("SimulationXML/".$userLogged . "/DeviceId_" . $userID . ".bin"));
+
+				#print_r($deviceidarray);
+				############################################################################################
 				while(! feof($Topology))
 	  			{
 	  				$gettingLine= fgets($Topology);
@@ -47,7 +53,7 @@
 	  				}*/
 
 	  				$packet=$data->createElement("packet");
-					$destdev=$data->createElement("destdevice",1); #1 here is the fpga device number
+					$destdev=$data->createElement("destdevice",$deviceidarray[$numberOfNeurons-1]); #1 here is the fpga device number
 					$packet->appendChild($destdev);
 					$sourcedev=$data->createElement("sourcedevice",65532);
 					$packet->appendChild($sourcedev);

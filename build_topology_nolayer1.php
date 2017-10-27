@@ -70,21 +70,21 @@ include("head.html")
 						$userID = $userLogged .'_'.$simNum;
 						$watchdog = $_POST['watchdog']; 
 						//$watchdog = 2;
-						if ($timestepsize=='us'){
+					
+						if ($timestepsize=='ms'){
 							$cycles=1;
 							$cyclesNum=$simtime*$cycles;
 						}
-						if ($timestepsize=='ms'){
-							$cycles=1000;
-							$cyclesNum=$simtime*$cycles;
-						}
 						if ($timestepsize=='s'){
-							$cycles=1000000;
+							$cycles=1000;
 							$cyclesNum=$simtime*$cycles;
 						}
 		//Create the xml tag input where every other tags goes into
 		//$input = $dom->createElement("input");
 	//Create input tag and place value gotten from form into it
+
+						
+
 						$input1 = $dom->createElement("Sim_Meta");
 						$input = $dom->createElement("packet");
 

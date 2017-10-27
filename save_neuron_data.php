@@ -32,69 +32,113 @@ $myfile = fopen($neuronlistPath, "w") or die("Unable to open file!");
 
 <form action="topology.php" method="post">
 	<?php
+##################################################################################################
+	$DevicesWithExactNumOfNeurons= intval($_POST['totalNeurons']/8);
+	if($_POST['totalNeurons']%8 > 0){
+		$extraDevice = 1;
+	}
+	else{
+		$extraDevice = 0;
+	}
+	$totalRequiredDevice = $DevicesWithExactNumOfNeurons + $extraDevice;
+
+	#echo "total device required: ",($totalRequiredDevice);
+
+	#Multiple devices per simulation
+	#calcualting how many devices are required for selected number of neurons
+	#each device can only have 8 neurons
+	echo "total neurons: ", $_POST['totalNeurons'];
+	$arraywithDevNum = array($_POST['totalNeurons']);
+
+	for ($totalNeu=0; $totalNeu <$_POST['totalNeurons'] ; $totalNeu++) { 
+		# code...
+		#echo $totalNeu;
+		#echo "<br>";
+		for ($i=$totalRequiredDevice ; $i>0; $i--) { 
+			# code...
+			#echo "i: ",$i,"<br>";
+			if(intval($totalNeu/8) >= intval($i-1)){
+				echo "destdev: ",$i,"<br>";
+				$destdevice = $i ;
+				#cho 'destdevice: ',$destdevice;
+				$arraywithDevNum[$totalNeu-1] = $destdevice;
+				break;
+			}
+			#echo "destdevice: ",$destdevice;
+		}
+	}
+	echo "array size: ",sizeof($arraywithDevNum);
+	file_put_contents("SimulationXML/".$userLogged . "/DeviceId_" . $userID . ".bin",serialize($arraywithDevNum));
+	
+	###############################################################################################
+
+
 	if ($_POST['samemodel']=='yes' and $_POST['totalDiffModelNeurons']==0){
+
+
 		for ($number = 1; $number <= $_POST['totalNeurons']; $number++){
-			echo 'passed from previous :'.$_POST['neuron'.$number];
-			
+			#echo 'passed from previous :'.$_POST['neuron'.$number];
+			echo "neuron number",$number,"<br>";
 			fwrite($myfile, "neuron".$number."\n");
 			//fwrite($myfile,'\n');
 
+			#if($DevicesWithExactNumOfNeurons)
+
 			?>
 			<input type="hidden" value=<?php echo $_POST['neuron'.$number]; ?> name=<?php echo "neuron".$number; ?>>
-
 			<?php
+
 			$packet=$data->createElement("packet");
-		//$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
-		$destdev=$data->createElement("destdevice", 1);// 1 is the FPGA device
-		$packet->appendChild($destdev);
-		$sourcedev=$data->createElement("sourcedevice",65532);
-		$packet->appendChild($sourcedev);
-		$simID = $data->createElement("simID",$simNum);
-		$packet->appendChild($simID);
-		$command=$data->createElement("command",24);
-		$packet->appendChild($command);
-		$timestamp=$data->createElement("timestamp",0);
-		$packet->appendChild($timestamp);
-		$neuronid = $data->createElement("neuronid", $number); #neuron number
-		$packet->appendChild($neuronid);
-		//$numberofneurons = $data->createElement("numberofneurons", $_POST['totalNeurons']);
-		//$packet->appendChild($numberofneurons);
-		$modelid=$data->createElement("modelid",$_POST['model']);
-		$packet->appendChild($modelid);
-		$timestepsize = $data->createElement("timestepsize",1000);
-		$packet->appendChild($timestepsize);
-		foreach ($ModelLibrary->neuron as $model){
-			if ($model->neuronid==$_POST['model']){
-				foreach ($model->item as $modelitem){
-				// $item=$data->createElement("item");
-					$itemid=$data->createElement("itemid",$modelitem->itemid);
-					$packet->appendChild($itemid);
-					$itemtype=$data->createElement("itemtype",$modelitem->type);
-					$packet->appendChild($itemtype);
-					$itemdatatype=$data->createElement("itemdatatype",$modelitem->datatype);
-					$packet->appendChild($itemdatatype);
-					$itemintegerpart=$data->createElement("itemintegerpart",$modelitem->integerpart);
-					$packet->appendChild($itemintegerpart);
-					$inlsb=$data->createElement("inlsb",$modelitem->inlsb);
-					$packet->appendChild($inlsb);
-					$inmsb=$data->createElement("inmsb",$modelitem->inmsb);
-					$packet->appendChild($inmsb);
-					$outlsb=$data->createElement("outlsb",$modelitem->outlsb);
-					$packet->appendChild($outlsb);
-					$outmsb=$data->createElement("outmsb",$modelitem->outmsb);
-					$packet->appendChild($outmsb);
-					$itemvalue=$data->createElement("itemvalue",$_POST["item" . $modelitem->itemid]);
-					$packet->appendChild($itemvalue);
-				// $packet->appendChild($item);
+			$destdev=$data->createElement("destdevice", $arraywithDevNum[$number-2]);// 1 is the FPGA device
+			$packet->appendChild($destdev);
+			$sourcedev=$data->createElement("sourcedevice",65532);
+			$packet->appendChild($sourcedev);
+			$simID = $data->createElement("simID",$simNum);
+			$packet->appendChild($simID);
+			$command=$data->createElement("command",24);
+			$packet->appendChild($command);
+			$timestamp=$data->createElement("timestamp",0);
+			$packet->appendChild($timestamp);
+			$neuronid = $data->createElement("neuronid", $number); #neuron number
+			$packet->appendChild($neuronid);
+			//$numberofneurons = $data->createElement("numberofneurons", $_POST['totalNeurons']);
+			//$packet->appendChild($numberofneurons);
+			$modelid=$data->createElement("modelid",$_POST['model']);
+			$packet->appendChild($modelid);
+			$timestepsize = $data->createElement("timestepsize",1000);
+			$packet->appendChild($timestepsize);
+			foreach ($ModelLibrary->neuron as $model){
+				if ($model->neuronid==$_POST['model']){
+					foreach ($model->item as $modelitem){
+					// $item=$data->createElement("item");
+						$itemid=$data->createElement("itemid",$modelitem->itemid);
+						$packet->appendChild($itemid);
+						$itemtype=$data->createElement("itemtype",$modelitem->type);
+						$packet->appendChild($itemtype);
+						$itemdatatype=$data->createElement("itemdatatype",$modelitem->datatype);
+						$packet->appendChild($itemdatatype);
+						$itemintegerpart=$data->createElement("itemintegerpart",$modelitem->integerpart);
+						$packet->appendChild($itemintegerpart);
+						$inlsb=$data->createElement("inlsb",$modelitem->inlsb);
+						$packet->appendChild($inlsb);
+						$inmsb=$data->createElement("inmsb",$modelitem->inmsb);
+						$packet->appendChild($inmsb);
+						$outlsb=$data->createElement("outlsb",$modelitem->outlsb);
+						$packet->appendChild($outlsb);
+						$outmsb=$data->createElement("outmsb",$modelitem->outmsb);
+						$packet->appendChild($outmsb);
+						$itemvalue=$data->createElement("itemvalue",$_POST["item" . $modelitem->itemid]);
+						$packet->appendChild($itemvalue);
+					// $packet->appendChild($item);
+					}
 				}
 			}
+			$dom->appendChild($packet);
 		}
-		$dom->appendChild($packet);
-	}
-	$data->appendChild($dom);
-	$filename="SimulationXML/".$userLogged . "/Neuron_Ini_file_" . $userID . ".xml";
-	$data->save($filename);
-	?>
+		$data->appendChild($dom);
+		$filename="SimulationXML/".$userLogged . "/Neuron_Ini_file_" . $userID . ".xml";
+		$data->save($filename);
+		?>
 
 
 
@@ -124,7 +168,7 @@ else{
 			<?php 
 			$packet=$data->createElement("packet");
 			//$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
-			$destdev=$data->createElement("destdevice", 1);//temporary
+			$destdev=$data->createElement("destdevice",  $arraywithDevNum[$number-2]);//temporary
 			$packet->appendChild($destdev);
 			$sourcedev=$data->createElement("sourcedevice",65532);
 			$packet->appendChild($sourcedev);
@@ -134,6 +178,8 @@ else{
 			$packet->appendChild($command);
 			$timestamp=$data->createElement("timestamp",0);
 			$packet->appendChild($timestamp);
+			$neuronid = $data->createElement("neuronid", $number); #neuron number
+			$packet->appendChild($neuronid);
 			$modelid=$data->createElement("modelid",$_POST['model']);
 			$packet->appendChild($modelid);
 
@@ -175,6 +221,8 @@ else{
 //echo $_POST['name'.$number];
 for ($number = 1; $number < $_POST['totalDiffModelNeurons'] + 1; $number++){
 	fwrite($myfile, "neuron".($number+$subtractedSameModel)."\n");
+	$neuronidNum= $number+$subtractedSameModel;
+	echo "neronid," ,$neuronidNum
 	//fwrite($myfile,'\n');
 	?>
 	
@@ -182,7 +230,7 @@ for ($number = 1; $number < $_POST['totalDiffModelNeurons'] + 1; $number++){
 	<?php 
 	$packet=$data->createElement("packet");
 //$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
-	$destdev=$data->createElement("destdevice",1);
+	$destdev=$data->createElement("destdevice", $arraywithDevNum[$neuronidNum-2]);
 	$packet->appendChild($destdev);
 	$sourcedev=$data->createElement("sourcedevice",65532);
 	$packet->appendChild($sourcedev);
@@ -194,6 +242,8 @@ for ($number = 1; $number < $_POST['totalDiffModelNeurons'] + 1; $number++){
 	$packet->appendChild($command);
 	$timestamp=$data->createElement("timestamp",0);
 	$packet->appendChild($timestamp);
+	$neuronid = $data->createElement("neuronid", $neuronidNum); #neuron number
+	$packet->appendChild($neuronid);
 $modelid=$data->createElement("modelid",$_POST['model' . ($number+$subtractedSameModel)]); // the model number are same model num + . eg if there are 3 same 
 //models then starting index for diff model is 3+1 = 4 and 5,6....
 $packet->appendChild($modelid);

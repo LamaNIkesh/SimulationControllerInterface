@@ -19,7 +19,7 @@ if ($_SESSION['flag']==1){
 <br><br>
 
 <script>
-var filename ='<?php echo  "SimulationXML/".$userlogged ."/Result/". $_POST["plotfile"] ; ?>';
+var filename ='<?php echo  "SimulationXML/".$userlogged ."/simResults/". $_POST["plotfile"] ; ?>';
 //var filename = "ACM/Spike_train_ACM1.xml";
 var xhttp = new XMLHttpRequest();
 var xhttp2 = new XMLHttpRequest();

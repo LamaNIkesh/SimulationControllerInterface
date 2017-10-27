@@ -65,7 +65,7 @@ if ($_SESSION['flag']==1){
 			//once the boolean engage field of simulation is updated, new table UserSimulation is updated too to keep track of
 			//which user gets what simulation number
 			$status = 'Configured';
-			$engage = 1
+			$engage = 1;
 			$datetime = date("Y-m-d H:i:s");
 			$insert_userSim = "INSERT INTO UserSimulation(UserId, SimulationId,Status,TimeConfigured,Engage) VALUES('$userLogged','$simNum','$status','$datetime','$engage')";
 			//pass the query

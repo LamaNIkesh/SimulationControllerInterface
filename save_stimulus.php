@@ -29,13 +29,20 @@ include("head.html")
 				$dom=$data->createElement("Preconfigured_stimulus");
 				//fopen("SimulationXML/".$userLogged . "/Layered/FullTopology.txt", "r") or die("Unable to open file!");
 				// $xml = simplexml_load_file($userLogged . "/" . $userID . ".xml");
+
+				#reading the saved array from save_neuron-data file, it contains the device id number for each neuron
+				$deviceidarray = unserialize(file_get_contents("SimulationXML/".$userLogged . "/DeviceId_" . $userID . ".bin"));
+				#print_r($deviceidarray);
+				#echo "device id : ",$deviceidarray[12];
+				print_r($deviceidarray);
+
 				for ($number = 1; $number <= $_POST['stimNeurons']; $number++){
 					
 					if(isset($_POST['nameid'.$number])){
 						//echo "index with stim neurons: ".$number ." the neuron num is".$_POST['nameid'.$number];
 						//echo "<br>";
 						$packet=$data->createElement("packet");
-						$destdev=$data->createElement("destdevice",1); // Needs to specify the destination; is the neuron??
+						$destdev=$data->createElement("destdevice",$deviceidarray[$_POST['nameid'.$number]-2]); // Needs to specify the destination; is the neuron??
 						$packet->appendChild($destdev);
 						$sourcedev=$data->createElement("sourcedevice",65532); // Needs to specify the source; is the NC??
 						$packet->appendChild($sourcedev);

@@ -104,7 +104,6 @@ def xmlResultCheckForSimulationIDandCommand():
 
 #############################################################################
 
-
 while True:
 	print ('Server listening....')
 	conn, addr = s.accept()     # Establish connection with client.
@@ -192,7 +191,7 @@ while True:
 							#Database needs to be updated as well
 							userDatabaseUpdate(simulationid = simId, status = 'Finished',engage = 0)
 							#update simulatino database
-							simulationDatabaseUpdate(simulationid = simId,engage = 0)
+							#simulationDatabaseUpdate(simulationid = simId,engage = 0)
 
 						else:
 							print("Error: End packet received before start packet!!!!")

@@ -17,7 +17,7 @@ if ($_SESSION['flag']==1){
 			<p>Please choose your simulation parameters</p>
 				<form method="POST" action="build_topology_nolayer1.php">
 					<div class= "col-sm-3">
-					Timestamp(in ms): </div><input type="number" name="timestamp" value="0.01" disabled> (Fixed value)<br>
+					Timestamp(in ms): </div><input type="number" name="timestamp" value="1" disabled> (Fixed value)<br>
 					<br>
 					<div class= "col-sm-3">
 					Number of neurons :</div> <input type="number" name="totalNeurons" min="1" max="500" value="1" required>
@@ -46,7 +46,6 @@ if ($_SESSION['flag']==1){
 			Simulation units: </div><select name="simunits" required>
 			<option value="s">Seconds</option>
 			<option value="ms">Miliseconds</option>
-			<option value="us">Microseconds</option>
 		</select>
 		<br><br>
 		<div class= "col-sm-3">

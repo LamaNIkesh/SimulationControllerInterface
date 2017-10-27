@@ -2,55 +2,41 @@
 <results>
 <packet>
   <simulation>9</simulation>
-  <timestamp>1</timestamp>
-  <neuronid>0</neuronid>
-</packet>
-<packet>
-  <simulation>9</simulation>
   <timestamp>2</timestamp>
-  <neuronid>0</neuronid>
   <neuronid>1</neuronid>
 </packet>
 <packet>
   <simulation>9</simulation>
   <timestamp>3</timestamp>
+  <neuronid>1</neuronid>
+  <neuronid>2</neuronid>
 </packet>
 <packet>
   <simulation>9</simulation>
   <timestamp>4</timestamp>
-  <neuronid>0</neuronid>
+  <neuronid>1</neuronid>
 </packet>
 <packet>
   <simulation>9</simulation>
   <timestamp>5</timestamp>
-  <neuronid>0</neuronid>
+  <neuronid>1</neuronid>
+  <neuronid>3</neuronid>
 </packet>
 <packet>
   <simulation>9</simulation>
   <timestamp>6</timestamp>
-  <neuronid>0</neuronid>
   <neuronid>1</neuronid>
   <neuronid>2</neuronid>
 </packet>
 <packet>
   <simulation>9</simulation>
   <timestamp>7</timestamp>
+  <neuronid>1</neuronid>
+  <neuronid>2</neuronid>
+  <neuronid>3</neuronid>
 </packet>
 <packet>
   <simulation>9</simulation>
   <timestamp>8</timestamp>
-  <neuronid>0</neuronid>
+  <neuronid>1</neuronid>
 </packet>
-<packet>
-  <simulation>9</simulation>
-  <timestamp>9</timestamp>
-  <neuronid>0</neuronid>
-</packet>
-<packet>
-  <simulation>9</simulation>
-  <timestamp>10</timestamp>
-  <neuronid>0</neuronid>
-  <neuronid>2</neuronid>
-  <neuronid>3</neuronid>
-</packet>
-</results>

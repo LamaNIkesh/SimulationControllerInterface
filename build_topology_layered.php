@@ -31,13 +31,12 @@
 										<br><br>
 
 					<div class= "col-sm-3">
-						Timestamp(in ms): </div><input type="number" name="timestamp" value="0.01" disabled> (Fixed value)<br>
+						Timestamp(in ms): </div><input type="number" name="timestamp" value="1" disabled> (Fixed value)<br>
 						<br>
 						<div class= "col-sm-3">
 							Simulation units: </div><select name="simunits" required>
 							<option value="s">Seconds</option>
 							<option value="ms">Miliseconds</option>
-							<option value="us">Microseconds</option>
 						</select>
 						<br><br>
 						<div class= "col-sm-3">
