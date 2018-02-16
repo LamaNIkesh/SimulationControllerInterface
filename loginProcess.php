@@ -12,6 +12,7 @@ $user = 'root';
 $pass = '';
 $db = 'WebInterface';
 $flag = 0;
+$userType = 0; //0 for regular user and 1 for admin users
 
 try{
 	
@@ -26,8 +27,16 @@ try{
 
 
 //query the database for user
+	if($_POST['LoginType'] == "UserLogin"){
 	$result = mysqli_query($connection, "select * from UserDetails where UserId ='$username' and Password = '$password'") 
 			or die("No user found!!!!".mysql_error());
+			$userType = 0;
+		}
+	else{
+		$result = mysqli_query($connection, "select * from AdminDetails where UserId ='$username' and Password = '$password'") 
+			or die("No user found!!!!".mysql_error());
+		$userType = 1;
+	}
 	$row = mysqli_fetch_array($result);
 
 	
@@ -38,6 +47,13 @@ try{
 		$_SESSION['password'] = $password;
 		$_SESSION['useremail'] = $row['Email'];
 		$flag = 1;
+		if($userType == 1){
+			$_SESSION['userType'] = 'Admin';
+		}
+		else{
+			$_SESSION['userType'] = 'user';
+		}
+
 		$_SESSION['flag'] = $flag;
 		$_SESSION['loginfail'] = 0;
 		header('Location: home.php'); 
@@ -48,7 +64,13 @@ try{
 		#echo 'Your login name or password is invalid';
 	
 		$_SESSION['loginfail'] = 1;
-		header('Location: login.php');
+		if($_POST['LoginType'] == "UserLogin"){
+			header('Location: login.php');
+		}
+		else{
+			header('Location: admin_login.php');	
+		}
+
 		
 			}
 
