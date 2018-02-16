@@ -69,7 +69,7 @@ catch(PDOException $e)
 			<br>
 			<fieldset> 	
 			<h2> Signup successfull!!!</p>	
-			<a href="home.php">Go to the interface</a>
+			<a href="../home.php">Go to the interface</a>
 		<?php	 
 		}
 		else{
