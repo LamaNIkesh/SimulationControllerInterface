@@ -1,6 +1,10 @@
 	<?php
+	//head included
 	include("head.html")
 	?>
+
+
+
 
 	<div class = "container">
 		<div class="col-sm-12">

@@ -1,7 +1,10 @@
-
-
-
 <?php
+//header file for admin
+//The menus are different than in regular user
+//Menus to add synapses are included for easy model addition or deletion
+
+
+
 //starting sessino for already logged in options
 
 //session_start();
@@ -9,9 +12,6 @@
 
 if (session_status() == PHP_SESSION_NONE) {
 	session_start();
-	
-
-
 }
 
 //checks if empty username i.e. no has logged on
@@ -27,6 +27,8 @@ if(empty($_SESSION['password'])){
 	$_SESSION['password']= "";
 }
 
+//For logged in user 
+//checks if the user is admin or not, if admin appropriate page is shown
 
 //echo "flag".$_SESSION['flag'];
 if($_SESSION['flag'] == 1){
@@ -36,23 +38,30 @@ if($_SESSION['flag'] == 1){
 	else{
 		$userLogged = "Admin - ". $_SESSION['username'];
 	}
+	/* Could probably remove all of these files
+		I will leave them for now-----
+	 */
 
+	//-----------------------------------------------------------------
 	$filename = 'SimulationXml/'.$userLogged.'Layered';
 	//echo $_SESSION['useremail'];
 	if (!file_exists('SimulationXML/'.$userLogged.'/Layered')) {
     mkdir('SimulationXML/'.$userLogged.'/Layered', 0777, true);
 	}
+
 	if (!file_exists('SimulationXML/'.$userLogged.'/CurrentSimulations')) {
     mkdir('SimulationXML/'.$userLogged.'/CurrentSimulations', 0777, true);
 	}
+
 	if (!file_exists('SimulationXML/'.$userLogged.'/simResults')) {
     mkdir('SimulationXML/'.$userLogged.'/simResults', 0777, true);
 	}
-
+	//---------------------------------------------------------------------
 }
-else{
+else
+{
+	//When no one is logged in 
 	$userLogged = "";
-
 }
 
 //echo $_SESSION['username'];
