@@ -32,6 +32,7 @@ try{
 	//--Signup table is inside Registration database
 
 	#$sql = "INSERT INTO Signup(Firstname,Lastname,username,password,email) VALUES('$fname','$lname','$username','$password','$email')";
+	// inserting into AdminDetails table
 
 	$sql = "INSERT INTO AdminDetails(FirstName, LastName, UserId, Password, Email,DateCreated) VALUES('$fname','$lname','$username','$password','$email','$datetime')";
 
