@@ -44,7 +44,8 @@ try{
 		$_SESSION['username'] = $username;
 		$_SESSION['useremail'] = $email;
 	}
-	else{
+	else
+	{
 		echo "Error: ".$sql."<br>".mysqli_error($connection);
 		$flag = 0;
 	}
