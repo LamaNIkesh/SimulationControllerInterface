@@ -296,6 +296,7 @@ else if(topology == 2 || topology == 3){
     						}
                             //echo $randomlyconnected[$connect];
     						?> <input type="hidden" id = '<?php echo $randomlyconnected[$connect];?>' name = <?php echo $randomlyconnected[$connect];?> >
+                                <input type="hidden" value=<?php echo $simNum; ?> name="simNum">
 
 
     						<?php

@@ -17,9 +17,7 @@ if ($_SESSION['flag']==1){
 	//Reading simulation id from the database
 
 	echo "simulation number is : ".$simNum;
-				//------------------------------------------------
-
-
+	//------------------------------------------------
 
 	$topo=false;
 	$stim=false;
@@ -36,6 +34,48 @@ if ($_SESSION['flag']==1){
 	else{	
 		$topology = '';
 	}
+
+
+	##################################################################################################
+	# Update UserSimulation database with number of neurons, this will be used for results xml parsing
+	##################################################################################################
+
+	#Get total number of neurons from Sim_init file already created at the early stage of the network creation
+	if(file_exists("SimulationXML/".$userLogged .$topology. "/Sim_Ini_file_" . $userID. ".xml")){ #Load XML file
+		$SimInitXML = simplexml_load_file ("SimulationXML/".$userLogged .$topology. "/Sim_Ini_file_" . $userID. ".xml");
+		//echo "test";
+	}
+	#Gives the total neurons 
+	echo $SimInitXML->packet->neuronsnum;
+	$totalNeurons = $SimInitXML->packet->neuronsnum;
+
+	#print_r($xmlDoc_totalneurons);
+
+	$server = 'localhost';
+	$user = 'root';
+	$pass = '';
+	$db = 'WebInterface';
+	try{
+		$connection = mysqli_connect("$server",$user,$pass,$db);
+		
+		$updateNeuronNum = "UPDATE UserSimulation SET NoOfNeurons = '$totalNeurons' WHERE SimulationId = '$simNum'";
+		#mysqli_query($sql);
+		if(mysqli_query($connection,$updateNeuronNum) === TRUE){
+			echo "Record updated successfully";
+		}	
+		else{
+			echo "Error updating the record: ".$connection->error;
+			}	
+	}
+	catch (Exception $e) {
+		echo "error: ".$e->getMessage();
+					}
+
+
+
+
+
+	
 
 	$xmlDoc1 = new DOMDocument();
 	$xmlDoc1->load("SimulationXML/".$userLogged .$topology. "/Sim_Ini_file_" . $userID. ".xml");

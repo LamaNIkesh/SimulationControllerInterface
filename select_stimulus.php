@@ -16,16 +16,14 @@ include("head.html")
 			//saves the topology information into a topology initialisation file
 
 			if ($_SESSION['flag']==1){
-
-				$simNum = $_GET['simNum'];
-					//echo "topology".$_POST['topology'];
-				//echo "no of neurons: ".$_GET['noOfNeurons'];
-
-				$name = $_GET['StimNeurons'];
-				//echo "stim neurons: ".$name;
-				$i =1;
-				echo "the number of neurons: ",$_GET['totalNeurons'];
-				
+					
+					if($_GET['StimNeurons']){
+					$simNum = $_GET['simNum'];
+					$name = $_GET['StimNeurons'];
+					//echo "stim neurons: ".$name;
+					$i =1;
+					echo "the number of neurons: ",$_GET['totalNeurons'];
+	
 				?>
 				<form action="save_stimulus.php" method="post">
 
@@ -47,6 +45,11 @@ include("head.html")
 					
 					$i++;
 				}
+			}
+			else{
+				echo "No neurons selected for stimulation!!!";
+			}
+
 				?>
 				<!-- The number of stimulus receiving neurons are passed to the next page to form stimulation xml file -->
 				<input type = "hidden" name = "stimNeurons" id = "stimNeurons" value = <?php echo $i; ?> >
