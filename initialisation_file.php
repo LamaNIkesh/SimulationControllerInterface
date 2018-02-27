@@ -47,7 +47,10 @@ if ($_SESSION['flag']==1){
 	}
 	#Gives the total neurons 
 	echo $SimInitXML->packet->neuronsnum;
+	#reading total neuron numbers
 	$totalNeurons = $SimInitXML->packet->neuronsnum;
+	#reading simulation duration in ms, 
+	$simulationTime = $SimInitXML->packet->cyclesNum;
 
 	#print_r($xmlDoc_totalneurons);
 
@@ -58,7 +61,7 @@ if ($_SESSION['flag']==1){
 	try{
 		$connection = mysqli_connect("$server",$user,$pass,$db);
 		
-		$updateNeuronNum = "UPDATE UserSimulation SET NoOfNeurons = '$totalNeurons' WHERE SimulationId = '$simNum'";
+		$updateNeuronNum = "UPDATE UserSimulation SET NoOfNeurons = '$totalNeurons', SimTime_ms = '$simulationTime' WHERE SimulationId = '$simNum'";
 		#mysqli_query($sql);
 		if(mysqli_query($connection,$updateNeuronNum) === TRUE){
 			echo "Record updated successfully";

@@ -358,7 +358,7 @@ else if(topology == 2 || topology == 3){
                             }
                             //echo $randomlyconnected[$connect];
                             ?> <input type="hidden" id = '<?php echo $randomlyconnected[$connect];?>' name = <?php echo $randomlyconnected[$connect];?> >
-                            <input type="hidden" value=<?php echo $simNum; ?> name="simNum">
+                                <input type="hidden" value=<?php echo $simNum; ?> name="simNum">
 
 
                             <?php
@@ -379,6 +379,7 @@ else if(topology == 2 || topology == 3){
                     <form action="save_topology.php" method="post">
                     <input type="submit" value="Next" action = "save_topology.php">
                     <input type="hidden" name="neuron" id = "neuron" value=<?php echo $totalNeurons; ?>>
+                    <input type="hidden" value=<?php echo $simNum; ?> name="simNum">
                     </form>
                     
                     <?php

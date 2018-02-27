@@ -6,20 +6,26 @@ Each line contains timestamps separated with a space for a particular spike .
 For eg: 12 50 100 120 300 500 ....... ->these are timestamps in ms for one spike trains
 
 '''
-
+import sys
 import numpy as np
 import xml.etree.ElementTree as ET
 import csv
 
-def spikeTrainsFromXML(xmlFile, noOfNeurons):
+global tree,root,child
 
-	tree = ET.parse(xmlFile)
-	root = tree.getroot()
+def spikeTrainsFromXML(xmlFileLoc,filename, noOfNeurons):
+	print("No of Neurons: {}".format(noOfNeurons))
 
 	#creating empty list to store spiketrains before saving into a csv/txt file
 	spiketrains = [[0 for _ in range(1)] for i in range(noOfNeurons) ]
+	
+	xmlFile = xmlFileLoc + filename;
 
-	for elem in tree.iter(child.tag):
+	tree = ET.parse(xmlFile)
+	root = tree.getroot()
+	#print("root: {}".format(root.tag))
+
+	for elem in tree.iter(root[0].tag):
 		'''
 		#Here is the format of the xml results
 		<results> -->root
@@ -39,7 +45,8 @@ def spikeTrainsFromXML(xmlFile, noOfNeurons):
 		#print ("elem tag: {}".format(elem.tag))
 		#print ("Neurons firing at timestamp {}".format(elem[1].text))
 		if len(elem) < 3: # if only headers are present, it means no neurons spiked at this timestamp
-			print("No neurons fired at this timestamp {}".format(elem[1].text))
+			#print("No neurons fired at this timestamp {}".format(elem[1].text))
+			pass
 		else:
 			for j in range(len(elem)):
 				#looking into for
@@ -62,12 +69,28 @@ def spikeTrainsFromXML(xmlFile, noOfNeurons):
 	############################
 	#here we have a list of list of spike trains
 	#export these into a text file for further analysis
-	csvfile = "resultscsv.txt"
+	filename = filename[:-4]
+	csvfile = xmlFileLoc + filename + "resultscsv.txt"
 	with open(csvfile, "w") as outFile:
 			write = csv.writer(outFile, delimiter = " ", lineterminator = "\n")
 			write.writerows(spiketrains)
-
-
+	print("Conversion complete.....")
+	
 if __name__ == '__main__':
 	
-	spikeTrainsFromXML(xmlFile = 'Results_nikeshlama2018_4.xml' , noOfNeurons = 10)
+	#getting xml file as user input which will be read automaically via php scripts
+	#similarly for neuron numbers too.  
+	
+	xmlFileLoc = sys.argv[1]
+	filename = sys.argv[2]	
+	noOfNeurons = sys.argv[3]
+	#xmlFile = 'Results_nikeshlama2018_4.xml'
+	#noOfNeurons = 10	
+	#xmlFileLoc will give locationa and filename gives the actual name of the file
+	#these are separted so that we can save the csv file in the same folder
+	spikeTrainsFromXML(xmlFileLoc = xmlFileLoc,filename = filename , noOfNeurons = int(noOfNeurons))
+
+
+
+
+
