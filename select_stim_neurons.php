@@ -60,7 +60,7 @@ include("head.html")
 				    			<label for=<?php echo $i; ?>>
 				    			<?php 
 				    			
-				        			echo '<input type="checkbox" name = "StimNeurons[]" id="StimNuerons" value = '.$i.' size = 10> Neuron'.$i.'</label>' ;
+				        			echo '<input type="checkbox" name = "StimNeurons[]" id="StimNuerons" value = '.$i.' size = 10 required> Neuron'.$i.'</label>' ;
 				        		}
 				        	}	
 				        catch(Exception $e){

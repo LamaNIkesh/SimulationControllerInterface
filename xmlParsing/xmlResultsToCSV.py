@@ -72,7 +72,7 @@ def spikeTrainsFromXML(xmlFileLoc,filename, noOfNeurons):
 	filename = filename[:-4]
 	csvfile = xmlFileLoc + filename + "resultscsv.txt"
 	with open(csvfile, "w") as outFile:
-			write = csv.writer(outFile, delimiter = " ", lineterminator = "\n")
+			write = csv.writer(outFile, delimiter = ",", lineterminator = "\n")
 			write.writerows(spiketrains)
 	print("Conversion complete.....")
 	
