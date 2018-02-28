@@ -6,13 +6,13 @@ include("head_admin.html")
 
 <?php 
 //sanity check
-echo $_POST['modelName'];
+//echo $_POST['modelName'];
 
 //lets create a counter variable that counts the number of parameters that have been created...
 
 
 //function to update the database
-function databaseUpdate($name,$type,$datatype,$integerpart,$typicalval,$inlsb,$inmsb,$outlsb,$outmsb){
+function databaseUpdate($modelId,$name,$type,$datatype,$integerpart,$typicalval,$inlsb,$inmsb,$outlsb,$outmsb){
   //create connection
   $server = 'localhost';
   $user = 'root';
@@ -23,6 +23,7 @@ function databaseUpdate($name,$type,$datatype,$integerpart,$typicalval,$inlsb,$i
       $connection = mysqli_connect("$server",$user,$pass,$db);
       
       //$itemid = mysqli_real_escape_string($connection,$itemid);
+      $modelId = mysqli_real_escape_string($connection,$modelId);
       $name = mysqli_real_escape_string($connection,$name);
       $type = mysqli_real_escape_string($connection,$type);
       $datatype = mysqli_real_escape_string($connection,$datatype);
@@ -33,15 +34,16 @@ function databaseUpdate($name,$type,$datatype,$integerpart,$typicalval,$inlsb,$i
       $outlsb = mysqli_real_escape_string($connection,$outlsb);
       $outmsb = mysqli_real_escape_string($connection,$outmsb);
 
-      echo $_POST['modelName'];
+      //echo $_POST['modelName'];
       //checkign the table exists or not, if the table with model name already exists, we simply update the parameters
       $sql = "SHOW TABLES LIKE '".$_POST['modelName']."'";
       if(mysqli_num_rows(mysqli_query($connection, $sql)) == 1){
-        echo "Table exists..";
+        //echo "Table exists..";
       }
       else{
         $createTable = "CREATE TABLE ".$_POST['modelName']." (
         ItemID INT(10) AUTO_INCREMENT PRIMARY KEY,
+        ModelID varchar(100) NOT NULL,
         Name VARCHAR(30) NOT NULL,
         Type INT(5) NOT NULL,
         Datatype INT(5) NOT NULL,
@@ -50,7 +52,8 @@ function databaseUpdate($name,$type,$datatype,$integerpart,$typicalval,$inlsb,$i
         InLSB INT(5) NOT NULL,
         InMSB INT(5) NOT NULL,
         OutLSB INT(5) NOT NULL,
-        OutMSB INT(5) NOT NULL
+        OutMSB INT(5) NOT NULL,
+        FOREIGN KEY (ModelID) REFERENCES ModelLibrary(ModelID)
         )";
         if($connection->query($createTable) == TRUE){
           echo "Table created successfully......";
@@ -61,8 +64,8 @@ function databaseUpdate($name,$type,$datatype,$integerpart,$typicalval,$inlsb,$i
        }                                                     //since item id is autoincremented no need to explicitly insert into database
 
 
-      $insertData = "INSERT INTO ".$_POST['modelName']." (Name, Type, Datatype, IntegerPart, TypicalVal, InLSB,InMSB, OutLSB, OutMSB) 
-                    VALUES ('$name', '$type','$datatype', '$integerpart', '$typicalval', '$inlsb', '$inmsb', '$outlsb', '$outmsb')";
+      $insertData = "INSERT INTO ".$_POST['modelName']." (ModelID,Name, Type, Datatype, IntegerPart, TypicalVal, InLSB,InMSB, OutLSB, OutMSB) 
+                    VALUES ('$modelId','$name', '$type','$datatype', '$integerpart', '$typicalval', '$inlsb', '$inmsb', '$outlsb', '$outmsb')";
       if($connection->query($insertData)){
         echo "New record created successfully";
       }
@@ -79,7 +82,7 @@ function databaseUpdate($name,$type,$datatype,$integerpart,$typicalval,$inlsb,$i
 
 
 if(isset($_POST['name'])){
-    databaseUpdate($_POST['name'],$_POST['type'],$_POST['datatype'],$_POST['integerpart'],$_POST['typicalval'],$_POST['inlsb'],$_POST['inmsb'],$_POST['outlsb'],$_POST['outmsb']);
+    databaseUpdate($_POST['modelID'],$_POST['name'],$_POST['type'],$_POST['datatype'],$_POST['integerpart'],$_POST['typicalval'],$_POST['inlsb'],$_POST['inmsb'],$_POST['outlsb'],$_POST['outmsb']);
 }
 
 
@@ -150,6 +153,7 @@ if ($_SESSION['flag']==1){
                  
           <div class= "col-sm-3">
           <input type="hidden" name="modelName" value=<?php echo $_POST['modelName']; ?>>
+          <input type="hidden" name="modelID" value=<?php echo $_POST['modelID']; ?>>
           <input type="hidden" name="noOfPara" value=<?php echo $_POST['noOfPara'] - 1; ?>>
             <input type="submit" value="Next" required>
             <br><br>

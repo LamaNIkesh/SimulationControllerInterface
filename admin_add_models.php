@@ -3,40 +3,6 @@ include("head_admin.html")
 ?>
 
 <?php 
-//function to update the database
-function CreateModelTabel($modelId,$modelName,$noOfPara, $url){
-  //create connection
-  $server = 'localhost';
-  $user = 'root';
-  $pass = '';
-  $db = 'WebInterface';
-
-  try{
-      $connection = mysqli_connect("$server",$user,$pass,$db);
-      
-      //$itemid = mysqli_real_escape_string($connection,$itemid);
-      $name = mysqli_real_escape_string($connection,$name);
-
-      //All the new models are inserted into ModelLibrary table which has three columns:modelId, modelname and URL for .sof location for FPGA
-
-      $insertData = "INSERT INTO ModelLibrary (ModleID, ModelName, LocationURL) 
-                    VALUES ('$modelID', '$modelName','$noOfPara','$url')";
-      if($connection->query($insertData)){
-        echo "New record created successfully";
-      }
-      else{
-        echo "ERROR: ".$insertData."<br>".$connection->error;
-      }
-    }
-    catch (Exception $e){
-      echo "ERROR!!!!!!!";
-    }
-}
-//end of function
-
-
-
-
 
 if ($_SESSION['flag']==1){
     ?>
@@ -70,7 +36,7 @@ if ($_SESSION['flag']==1){
         <b><p>Please specify neuron model name<p></b>
 
 
-        <form method="POST" action="admin_add_models_parameters.php">
+        <form method="POST" action="admin_add_models_dbUpdate.php">
 
           <div class= "col-sm-3">
             Model Name: </div><input type="text" name="modelName" placeholder = "eg.LIF" required><br>
@@ -82,13 +48,13 @@ if ($_SESSION['flag']==1){
             No of Parameters: </div><input type="number" name="noOfPara" min="1" placeholder = "1" required>
             <br><br>
           <div class= "col-sm-3">
-            .sof url: </div><input type="text" placeholder="://url" min="1" max="1000" required>
+            .sof url: </div><input type="text" name = "url" placeholder="://url" min="1" max="1000" required>
             <br><br>
-                
-
                   
           <div class= "col-sm-3">
             <input type="submit" value="Next" name="submit" required>
+
+
             <br><br>
           </div>
          </form> 
