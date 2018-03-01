@@ -147,11 +147,6 @@ $totalDiffModelNeurons = $_POST['totalDiffModelNeurons'];
 <input type="hidden" name="totalNeurons" value=<?php echo $totalNeurons; ?>>
 <input type="hidden" value=<?php echo $_POST['totalDiffModelNeurons']; ?> name="totalDiffModelNeurons">
 <input type="hidden" value=<?php echo $simNum; ?> name="simNum">
-
-		<!---
-		<input type="hidden" value=<?php echo $_POST['muscle']; ?> name="muscle">
-		<
-		<input type="hidden" value=<?php echo $_POST['musclesamemodel']; ?> name="musclesamemodel">-->
 		
 		<?php
 		for ($neuronNum = 1; $neuronNum < $totalDiffModelNeurons+1; $neuronNum++){
@@ -164,13 +159,6 @@ $totalDiffModelNeurons = $_POST['totalDiffModelNeurons'];
 			<input type ="hidden" name=<?php echo 'model'.$number; ?> value=<?php echo 'name'.$number ; ?>
 			<!---
 			Neuron name: <select name=<?php echo 'name'.$number; ?> required>
-			<?php
-			for ($index = 0; $index < 302; ++$index){ ?>
-			<!--<option value=<?php echo $index;?>> <?php echo preg_replace("/[^a-zA-Z0-9]+/", "", "$list[$index]"); ?> </option>-->
-
-			<?php
-		}
-		?>
 
 		<?php echo 'model'.$number; ?>
 		Neuron model: <select name=<?php echo 'model'.$number?> required>
