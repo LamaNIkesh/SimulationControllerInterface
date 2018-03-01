@@ -9,7 +9,11 @@
     <timestepsize>1000</timestepsize>
     <cyclesNum>1000</cyclesNum>
     <timeout>1</timeout>
+<<<<<<< HEAD
     <neuronsnum>6</neuronsnum>
+=======
+    <neuronsnum>3</neuronsnum>
+>>>>>>> 4f584a4387f4d767b5ebe509720011a536f72e04
   </packet>
   <packet>
     <destdevice>1</destdevice>
@@ -153,6 +157,7 @@
     <destdevice>1</destdevice>
     <sourcedevice>65532</sourcedevice>
     <simID>4</simID>
+<<<<<<< HEAD
     <command>24</command>
     <timestamp>0</timestamp>
     <neuronid>4</neuronid>
@@ -361,6 +366,15 @@
     <preneuronid>4</preneuronid>
     <preneuronid>5</preneuronid>
     <preneuronid>6</preneuronid>
+=======
+    <command>11</command>
+    <timestamp>0</timestamp>
+    <neuronid>1</neuronid>
+    <numberofneurons>3</numberofneurons>
+    <preneuronid>3</preneuronid>
+    <preneuronid>2</preneuronid>
+    <preneuronid>1</preneuronid>
+>>>>>>> 4f584a4387f4d767b5ebe509720011a536f72e04
   </packet>
   <packet>
     <destdevice>1</destdevice>
@@ -368,6 +382,7 @@
     <simID>4</simID>
     <command>11</command>
     <timestamp>0</timestamp>
+<<<<<<< HEAD
     <neuronid>6</neuronid>
     <numberofneurons>6</numberofneurons>
     <preneuronid>1</preneuronid>
@@ -376,5 +391,50 @@
     <preneuronid>4</preneuronid>
     <preneuronid>5</preneuronid>
     <preneuronid>6</preneuronid>
+=======
+    <neuronid>2</neuronid>
+    <numberofneurons>3</numberofneurons>
+    <preneuronid>1</preneuronid>
+    <preneuronid>1</preneuronid>
+    <preneuronid>2</preneuronid>
+  </packet>
+  <packet>
+    <destdevice>1</destdevice>
+    <sourcedevice>65532</sourcedevice>
+    <simID>4</simID>
+    <command>11</command>
+    <timestamp>0</timestamp>
+    <neuronid>3</neuronid>
+    <numberofneurons>3</numberofneurons>
+    <preneuronid>1</preneuronid>
+    <preneuronid>1</preneuronid>
+    <preneuronid>2</preneuronid>
+  </packet>
+  <packet>
+    <destdevice>1</destdevice>
+    <sourcedevice>65532</sourcedevice>
+    <simID>4</simID>
+    <command>19</command>
+    <timestamp>2</timestamp>
+    <neuronid>1</neuronid>
+    <endtimestamp>2</endtimestamp>
+    <itemID>65523</itemID>
+    <itemValuea>0</itemValuea>
+    <itemValueb>0</itemValueb>
+    <itemValuec>1</itemValuec>
+  </packet>
+  <packet>
+    <destdevice>1</destdevice>
+    <sourcedevice>65532</sourcedevice>
+    <simID>4</simID>
+    <command>19</command>
+    <timestamp>2</timestamp>
+    <neuronid>2</neuronid>
+    <endtimestamp>3</endtimestamp>
+    <itemID>65523</itemID>
+    <itemValuea>0</itemValuea>
+    <itemValueb>0</itemValueb>
+    <itemValuec>1</itemValuec>
+>>>>>>> 4f584a4387f4d767b5ebe509720011a536f72e04
   </packet>
 </newSimulation>

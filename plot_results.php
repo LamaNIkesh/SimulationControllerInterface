@@ -8,6 +8,10 @@ include("head.html")
 $flag=0;
 if ($_SESSION['flag']==1){
 	$userlogged = $_SESSION['username'];
+	$resultFileLocation = "SimulationXML/".$userlogged ."/simResults/";
+	$filename = $_POST["plotfile"];
+	$resultFile = $resultFileLocation.$filename;
+	echo $resultFile;
 	?>
 <h1> Spike Train Results</h1>
 <p> 
@@ -185,6 +189,17 @@ var layout = {
     Plotly.plot(document.getElementById('spikes'), data, layout, {displaylogo: false});
 }
 </script>
+<!-- ################################################################################################################################### --> 
+
+<!-- lets do if isset to stay on the same page after submitting for download -->
+
+<p>Generate a text version of results for easy export to matlab or other processing.. </p>
+<form action="saveToCSV.php" method="POST">
+<input type="submit" value="Generate" name="submit">
+<input type="hidden" name="resultsFile" id = "resultsFile" value= "<?php echo $resultFile; ?>"/>
+<input type="hidden" name="resultsFileLocation" id = "resultsFileLocation" value= "<?php echo $resultFileLocation; ?>"/>
+<input type="hidden" name="filename" id = "filename" value= "<?php echo $filename; ?>"/>
+</form>
 
 <?php
 }

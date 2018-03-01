@@ -6,11 +6,16 @@ Each line contains timestamps separated with a space for a particular spike .
 For eg: 12 50 100 120 300 500 ....... ->these are timestamps in ms for one spike trains
 
 '''
+<<<<<<< HEAD
 
+=======
+import sys
+>>>>>>> 4f584a4387f4d767b5ebe509720011a536f72e04
 import numpy as np
 import xml.etree.ElementTree as ET
 import csv
 
+<<<<<<< HEAD
 def spikeTrainsFromXML(xmlFile, noOfNeurons):
 
 	tree = ET.parse(xmlFile)
@@ -20,6 +25,23 @@ def spikeTrainsFromXML(xmlFile, noOfNeurons):
 	spiketrains = [[0 for _ in range(1)] for i in range(noOfNeurons) ]
 
 	for elem in tree.iter(child.tag):
+=======
+global tree,root,child
+
+def spikeTrainsFromXML(xmlFileLoc,filename, noOfNeurons):
+	print("No of Neurons: {}".format(noOfNeurons))
+
+	#creating empty list to store spiketrains before saving into a csv/txt file
+	spiketrains = [[0 for _ in range(1)] for i in range(noOfNeurons) ]
+	
+	xmlFile = xmlFileLoc + filename;
+
+	tree = ET.parse(xmlFile)
+	root = tree.getroot()
+	#print("root: {}".format(root.tag))
+
+	for elem in tree.iter(root[0].tag):
+>>>>>>> 4f584a4387f4d767b5ebe509720011a536f72e04
 		'''
 		#Here is the format of the xml results
 		<results> -->root
@@ -39,7 +61,12 @@ def spikeTrainsFromXML(xmlFile, noOfNeurons):
 		#print ("elem tag: {}".format(elem.tag))
 		#print ("Neurons firing at timestamp {}".format(elem[1].text))
 		if len(elem) < 3: # if only headers are present, it means no neurons spiked at this timestamp
+<<<<<<< HEAD
 			print("No neurons fired at this timestamp {}".format(elem[1].text))
+=======
+			#print("No neurons fired at this timestamp {}".format(elem[1].text))
+			pass
+>>>>>>> 4f584a4387f4d767b5ebe509720011a536f72e04
 		else:
 			for j in range(len(elem)):
 				#looking into for
@@ -62,6 +89,7 @@ def spikeTrainsFromXML(xmlFile, noOfNeurons):
 	############################
 	#here we have a list of list of spike trains
 	#export these into a text file for further analysis
+<<<<<<< HEAD
 	csvfile = "resultscsv.txt"
 	with open(csvfile, "w") as outFile:
 			write = csv.writer(outFile, delimiter = " ", lineterminator = "\n")
@@ -71,3 +99,30 @@ def spikeTrainsFromXML(xmlFile, noOfNeurons):
 if __name__ == '__main__':
 	
 	spikeTrainsFromXML(xmlFile = 'Results_nikeshlama2018_4.xml' , noOfNeurons = 10)
+=======
+	filename = filename[:-4]
+	csvfile = xmlFileLoc + filename + "resultscsv.txt"
+	with open(csvfile, "w") as outFile:
+			write = csv.writer(outFile, delimiter = ",", lineterminator = "\n")
+			write.writerows(spiketrains)
+	print("Conversion complete.....")
+	
+if __name__ == '__main__':
+	
+	#getting xml file as user input which will be read automaically via php scripts
+	#similarly for neuron numbers too.  
+	
+	xmlFileLoc = sys.argv[1]
+	filename = sys.argv[2]	
+	noOfNeurons = sys.argv[3]
+	#xmlFile = 'Results_nikeshlama2018_4.xml'
+	#noOfNeurons = 10	
+	#xmlFileLoc will give locationa and filename gives the actual name of the file
+	#these are separted so that we can save the csv file in the same folder
+	spikeTrainsFromXML(xmlFileLoc = xmlFileLoc,filename = filename , noOfNeurons = int(noOfNeurons))
+
+
+
+
+
+>>>>>>> 4f584a4387f4d767b5ebe509720011a536f72e04

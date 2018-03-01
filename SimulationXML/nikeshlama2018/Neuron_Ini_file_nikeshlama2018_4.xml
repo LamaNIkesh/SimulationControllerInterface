@@ -230,6 +230,7 @@
     <outmsb>31</outmsb>
     <itemvalue>2.0</itemvalue>
   </packet>
+<<<<<<< HEAD
   <packet>
     <destdevice>1</destdevice>
     <sourcedevice>65532</sourcedevice>
@@ -276,4 +277,6 @@
     <outmsb>31</outmsb>
     <itemvalue>2.0</itemvalue>
   </packet>
+=======
+>>>>>>> 4f584a4387f4d767b5ebe509720011a536f72e04
 </Neuron_Initialisation>
