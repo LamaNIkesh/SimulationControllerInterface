@@ -1,7 +1,8 @@
 <?php
 include('head.html')
-
 ?>
+
+
 <?php echo $_SESSION['loginfail'] ?>
 <div class = "container">
   <div class="wrapper">

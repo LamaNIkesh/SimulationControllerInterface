@@ -6,8 +6,40 @@ include("head.html")
 //just a counter variable 
 $loopCounter = 0; 
 
-?>
+//function to read database and return the list of neuron models present
+function queryDatabase($arrayForModelName){
+	$server = 'localhost';
+  	$user = 'root';
+  	$pass = '';
+  	$db = 'WebInterface';
 
+  	try{
+  		//create connection
+  	$connection = mysqli_connect("$server",$user,$pass,$db);
+  	$result = mysqli_query($connection, "select * from ModelLibrary") 
+			or die("No model found!!!!".mysql_error());
+
+	if(mysqli_num_rows($result)>0){
+		while($row = mysqli_fetch_assoc($result)){
+
+			echo "Model ID: ".$row['ModelID']."---Model Name: ".$row['ModelName']." "."<br>";
+			$arrayForModelName[] = $row['ModelName'];
+			echo count($arrayForModelName);
+		}
+	}
+	return $arrayForModelName;
+	mysqli_close($connection);
+  	}
+
+  	catch(Exception $e){
+  		echo "Cannot establish connection !!";
+  	}
+
+}
+$arrayForModelName = array();
+$arrayForModelName = queryDatabase($arrayForModelName);
+#echo $arrayForModelName[0];
+?>
 <div class = "container">
 	<div class="col-sm-12">
 		<h6><font color = "#52a25e">System Builder->Simulation Parameters-><b>NeuronModels</b></h6></font>
@@ -17,8 +49,7 @@ $loopCounter = 0;
 			<?php
 			$simNum = $_POST['simNum'];
 			if ($_SESSION['flag'] == 1){
-				$list=file("Libraries/neuron_id.txt");
-	// echo preg_replace("/[^a-zA-Z0-9]+/", "", "$list[0]");
+
 				$totalNeurons=$_POST['totalNeurons'];
 
 			//for only same model options without any different models
@@ -45,9 +76,14 @@ $loopCounter = 0;
 			?>
 
 			Neuron model: <select name="model" required>
-			<option value="1">Integrate and fire</option>
-			<option value="2">Leaky integrate and fire</option>
-			<option value="3">Izhikevich</option>
+			<?php 
+				for ($i=0; $i < count($arrayForModelName); $i++) { 
+					# code...//list all the models
+					?>
+					<option value=<?php echo $arrayForModelName[$i]; ?>><?php echo $arrayForModelName[$i]; ?></option>
+				<?php 
+				}
+			 ?>
 		</select>
 		<br><br>
 		<input type="submit" value="Next">
@@ -89,9 +125,14 @@ else {
 
 
 		Neuron model: <select name="model" required>
-		<option value="1">Integrate and fire</option>
-		<option value="2">Leaky integrate and fire</option>
-		<option value="3">Izhikevich</option>
+		<?php 
+				for ($i=0; $i < count($arrayForModelName); $i++) { 
+					# code...//list all the models
+					?>
+					<option value=<?php echo $arrayForModelName[$i]; ?>><?php echo $arrayForModelName[$i]; ?></option>
+				<?php 
+				}
+			 ?>
 	</select>
 	<br><br>
 
@@ -134,9 +175,14 @@ $totalDiffModelNeurons = $_POST['totalDiffModelNeurons'];
 		<?php echo 'model'.$number; ?>
 		Neuron model: <select name=<?php echo 'model'.$number?> required>
 
-		<option value="1">Integrate and fire</option>name
-		<option value="2">Leaky integrate and fire</option>
-		<option value="3">Izhikevich</option>
+		<?php 
+				for ($i=0; $i < count($arrayForModelName); $i++) { 
+					# code...//list all the models
+					?>
+					<option value=<?php echo $arrayForModelName[$i]; ?>><?php echo $arrayForModelName[$i]; ?></option>
+				<?php 
+				}
+			 ?>
 	</select>
 	
 	<br><br>

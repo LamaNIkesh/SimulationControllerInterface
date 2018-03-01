@@ -54,13 +54,20 @@ include("head.html")
 				    </div>
 				    <div id="checkboxes">
 				    	<?php 
+				    	try{
 				    		for($i = 1; $i<=$neuronNum; $i++){
 				    			?>
 				    			<label for=<?php echo $i; ?>>
 				    			<?php 
-				        		echo '<input type="checkbox" name = "StimNeurons[]" id="StimNuerons" value = '.$i.' size = 10> Neuron'.$i.'</label>' ;
+				    			
+				        			echo '<input type="checkbox" name = "StimNeurons[]" id="StimNuerons" value = '.$i.' size = 10 required> Neuron'.$i.'</label>' ;
+				        		}
+				        	}	
+				        catch(Exception $e){
+				        	echo 'No Stimulation selected!!!!';
 				        	}
-				        	?>
+				        
+				       	?>
 				  </div>
 				  </div>		
 				<br>		

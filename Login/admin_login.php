@@ -1,13 +1,13 @@
 <?php
-include('head.html')
+include("head.html")
 
 ?>
 <?php echo $_SESSION['loginfail'] ?>
 <div class = "container">
   <div class="wrapper">
-    <form class="form-signin" action = "loginProcess.php" method = "post">
-    <input type="hidden" value="UserLogin" name="LoginType">       
-      <h2 class="form-signin-heading">Please login</h2>
+    <form class="form-signin" action = "loginProcess.php" method = "post">   
+    <input type="hidden" value="AdminLogin" name="LoginType">          
+      <h2 class="form-signin-heading" align = "center">Admin Login <img src="img/admin.png" width = "25" height = "25" margin-top = "100px"></h2> 
       <?php 
       if($_SESSION['loginfail'] == 1)
         {?>
@@ -20,9 +20,6 @@ include('head.html')
         <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
       </label>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-      <br>
-      <a href="admin_login.php">Login as admin  </a> <img src="img/admin.png" width = "25" height = "25" margin-top = "100px">
-      
     </form>
 
   </div>

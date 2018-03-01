@@ -1,7 +1,10 @@
-
-
-
 <?php
+//header file for admin
+//The menus are different than in regular user
+//Menus to add synapses are included for easy model addition or deletion
+
+
+
 //starting sessino for already logged in options
 
 //session_start();
@@ -9,9 +12,6 @@
 
 if (session_status() == PHP_SESSION_NONE) {
 	session_start();
-	
-
-
 }
 
 //checks if empty username i.e. no has logged on
@@ -27,6 +27,8 @@ if(empty($_SESSION['password'])){
 	$_SESSION['password']= "";
 }
 
+//For logged in user 
+//checks if the user is admin or not, if admin appropriate page is shown
 
 //echo "flag".$_SESSION['flag'];
 if($_SESSION['flag'] == 1){
@@ -36,23 +38,30 @@ if($_SESSION['flag'] == 1){
 	else{
 		$userLogged = "Admin - ". $_SESSION['username'];
 	}
+	/* Could probably remove all of these files
+		I will leave them for now-----
+	 */
 
+	//-----------------------------------------------------------------
 	$filename = 'SimulationXml/'.$userLogged.'Layered';
 	//echo $_SESSION['useremail'];
 	if (!file_exists('SimulationXML/'.$userLogged.'/Layered')) {
     mkdir('SimulationXML/'.$userLogged.'/Layered', 0777, true);
 	}
+
 	if (!file_exists('SimulationXML/'.$userLogged.'/CurrentSimulations')) {
     mkdir('SimulationXML/'.$userLogged.'/CurrentSimulations', 0777, true);
 	}
+
 	if (!file_exists('SimulationXML/'.$userLogged.'/simResults')) {
     mkdir('SimulationXML/'.$userLogged.'/simResults', 0777, true);
 	}
-
+	//---------------------------------------------------------------------
 }
-else{
+else
+{
+	//When no one is logged in 
 	$userLogged = "";
-
 }
 
 //echo $_SESSION['username'];
@@ -119,7 +128,7 @@ function echoActiveClassIfRequestMatches($requestUri)
 		<!--coumn size, total is 12 -->
 		<div class="col-sm-9">
 			<div class="content-wrapper" style="margin-top:10px; margin-bottom:5px">
-				<a href="home.php"><img src = "Pictures/mainlogo.png" alt = "logo" width = "450" height = "100" margin-top = "100px"></a>
+				<a href="home_admin.php"><img src = "Pictures/mainlogo.png" alt = "logo" width = "450" height = "100" margin-top = "100px"></a>
 			</div>
 		</div>
 		<!---div class = "col-sm-5"></div>-->
@@ -145,11 +154,14 @@ function echoActiveClassIfRequestMatches($requestUri)
 
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav nav-tabs">
-						<li = <?php echoActiveClassIfRequestMatches("home")?>><a href="home.php">Home</a></li>
+						<li = <?php echoActiveClassIfRequestMatches("home")?>><a href="home_admin.php">Home</a></li>
 
 						<!--<li = <?php echoActiveClassIfRequestMatches("news")?>><a href="news.php">News</a></li> -->
-						<li = <?php echoActiveClassIfRequestMatches("project")?>><a href="project.php">Project</a></li>
-						<li = <?php echoActiveClassIfRequestMatches("publications")?>><a href="publications.php">Publication</a></li>
+						
+						<li = <?php echoActiveClassIfRequestMatches("Add Models")?>><a href="admin_add_models.php">Add Models</a></li>
+
+						<li = <?php echoActiveClassIfRequestMatches("Edit Models")?>><a href="#">Edit Models</a></li>
+						<!--
 						<li class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="">System Builder <span class="caret"></span></a>
 							<ul class="dropdown-menu">
@@ -158,8 +170,8 @@ function echoActiveClassIfRequestMatches($requestUri)
 							</ul>
 						</li>
 						<li = <?php echoActiveClassIfRequestMatches("manage_account")?>><a href="manage_account.php">Manage Your Account</a></li>
-						<li = <?php echoActiveClassIfRequestMatches("Howto")?>><a href="howtouse.php">How To Use</a></li>
-						<li = <?php echoActiveClassIfRequestMatches("contact")?>><a href="contact.php">About Us</a></li>
+						-->
+
 						<!-- checking if user is logged in or not
 						if already logged in, signup option and login options are disabled-->
 						<ul class="nav navbar-nav navbar-right">

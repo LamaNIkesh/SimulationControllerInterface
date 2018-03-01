@@ -47,20 +47,16 @@ try{
 		$_SESSION['password'] = $password;
 		$_SESSION['useremail'] = $row['Email'];
 		$flag = 1;
-		$_SESSION['flag'] = $flag;
-		$_SESSION['loginfail'] = 0;
-
 		if($userType == 1){
 			$_SESSION['userType'] = 'Admin';
-			header('Location: home_admin.php');
 		}
 		else{
 			$_SESSION['userType'] = 'user';
-			header('Location: home.php');
 		}
 
-		
-		 
+		$_SESSION['flag'] = $flag;
+		$_SESSION['loginfail'] = 0;
+		header('Location: home.php'); 
 		exit();
 	}
 	else{
@@ -76,7 +72,7 @@ try{
 		}
 
 		
-		}
+			}
 
 
 	}
