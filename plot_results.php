@@ -1,13 +1,12 @@
 <?php
 include("head.html")
 ?>
-
+<!-- start of div class -->
 <div class = "container">
 <div class="col-md-12">
 <?php
 $flag=0;
 if ($_SESSION['flag']==1){
-	
 	$userlogged = $_SESSION['username'];
 	?>
 <h1> Spike Train Results</h1>
@@ -17,7 +16,6 @@ if ($_SESSION['flag']==1){
 <p id="demo1"></p>
 <div id="spikes"></div>
 <br><br>
-
 <script>
 var filename ='<?php echo  "SimulationXML/".$userlogged ."/simResults/". $_POST["plotfile"] ; ?>';
 //var filename = "ACM/Spike_train_ACM1.xml";
@@ -101,7 +99,7 @@ for (var i = 0; i < test.length; i++) {
 	//console.log("sorted: ",test)
 //console.log("Test4:",test4);
 var test5 = test4.sort();	
-//console.log("length: ",test5.length);
+console.log("length: ",test5[0].length);
 var y1 = [];
 var x1 = [];
 
@@ -109,8 +107,8 @@ for (var i = 0; i < test5.length; i++) {
 	y1.push(test5[i][0]);
 	x1.push(test5[i][1]);
 	}
-	console.log(y1)
-console.log(x1)
+console.log("y axis:",y1)
+console.log("x axis:", x1)
 var data = [{
 	  name: "Spikes",
       y: y1,
@@ -118,31 +116,72 @@ var data = [{
       mode: 'markers',
 	  marker: { 
 		symbol: 142,
-		color: 'rgba(0,0,100,1)',
+		color: 'black',
 		//size: 500
 		},
-	  uid: "40abaa"
-	  }];
-    var layout = {
-	  showlegend: false,
+	  //uid: "40abaa"
+	}];
+
+var layout = {
+	  showlegend: true,
 	  title: "Raster plot of neurons firing",
       yaxis: { 
       	title: "Neuron Numbers",
       	showline:true,
-		showgrid: true
+		showgrid: true,
+		dtick: 1, //steps of 1 
 	   },      // set the y axis title
       xaxis: {
-		title: "Timestamp",
-        showgrid: false,                  // remove the x-axis grid lines
-		zeroline: false
-       },
+      	title: "Timestamp",
+	    showgrid: false,                  // remove the x-axis grid lines
+		zeroline: false,
+	   },
 	  hovermode: 'closest',
 	  margin: {                           // update the left, bottom, right, top margin
-        l: 40, b: 40, r: 10, t: 60
-      },
+	    l: 40, b: 40, r: 10, t: 60
+	  },
 	  paper_bgcolor: "rgba(255,0,255,0.01)",
-	  plot_bgcolor: "rgba(0,0,255,0.01)"
-    };
+	  plot_bgcolor: "rgba(0,0,255,0.01)"	  
+};
+
+	/*var layout = {
+  		xaxis: {
+	    title: 'Time(ms)',
+	    titlefont: {
+	      family: 'Arial, sans-serif',
+	      size: 18,
+	      color: 'lightgrey'
+	    },
+	    showticklabels: true,
+	    tickfont: {
+	      family: 'Old Standard TT, serif',
+	      size: 14,
+	      color: 'black'
+	    },
+	    exponentformat: 'e',
+	    showexponent: 'All'
+	  },
+  	yaxis: {
+    title: 'AXIS TITLE',
+    dtick = 1,
+    titlefont: {
+      family: 'Arial, sans-serif',
+      size: 18,
+      color: 'lightgrey'
+    },
+    showticklabels: true,
+    
+    tickfont: {
+      family: 'Old Standard TT, serif',
+      size: 14,
+      color: 'black'
+    },
+    exponentformat: 'e',
+    showexponent: 'All'
+  }    //dtick = 1
+  };*/
+
+
     Plotly.plot(document.getElementById('spikes'), data, layout, {displaylogo: false});
 }
 </script>

@@ -36,6 +36,7 @@ include("head.html")
 					if($simulation['Engage'] == 0){
 						$simNum = $simulation['SimulationId'];
 						#$simulation['Engage'] = 1;
+						#$sql = "INSERT INTO SImulation (NoOfNeurons) VALUES ('10')";
 						break;
 					}
 				}
@@ -167,7 +168,7 @@ include("head.html")
 						$input1->appendChild($input);
 						$dom->appendChild($input1);
 
-			//Save generated xml file as build_input.xml
+						//Save generated xml file as build_input.xml
 						$filename="SimulationXML/".$userLogged . "/Layered/Sim_Ini_file_" . $userID . ".xml";
 						//echo $filename;
 						$dom->save($filename);	
@@ -225,7 +226,7 @@ include("head.html")
 				{
 					?>
 					<p>At least one field is empty</p>
-					<form action="build.php" method="POST">
+					<form action="build_topology_layered.php" method="POST">
 						<br>
 						<input type="submit" value="Try again" name="submit">
 					</form>

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 #import necessary libraries
-import socket 
+import socket
 import time
 import sys
 import numpy as np
@@ -24,7 +24,7 @@ xmlFile = sys.argv[1]
 #print_red_on_cyan = lambda x:cprint(x,'red','on_cyan')
 #function for tcp connection and packet transmission
 def TCPclient(host, port, packet):
-	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)    
+	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	print (colored(("+++++++++++Connection established with ", host,"port: ",port, "+++++++++++"),'cyan'))
 	print ("Sending packet to ", host, port)
 	try:
@@ -39,7 +39,6 @@ def TCPclient(host, port, packet):
 try:
 	#returns a list with all the packets 
 	MessageArray = rx.xmlParseBeforePublishing(xmlFile)
-		
 	print (colored("successfully read",'green'))
 #error handling
 except:
@@ -52,17 +51,13 @@ except:
 #uncomment this section for sending all the packets 
 
 for i in range(len(MessageArray)):
-	
 	#loops through each packet and send them to the tcp server i.e. im server
-	
 	packet= MessageArray[i]
 	print (colored(packet,'green')) # just printing on the console
 	try:
 		TCPclient(host,port,packet)
 	except:
 		print (colored('Error: Could not establish connection!!', 'red'))
-	
-
 
 #sending only the first packet for testing
 '''
@@ -72,9 +67,5 @@ try:
 	TCPclient(host,port,packet)
 except:
 	print (colored('Error: Could not establish connection!!', 'red'))
-	
 '''
-	
-	
-
 
