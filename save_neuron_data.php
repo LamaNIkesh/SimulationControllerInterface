@@ -3,6 +3,49 @@ include("head.html")
 ?>
 
 
+<?php 
+	//query database to get all the parameters.
+	function queryDatabase($arrayForModelPara,$model){
+		$server = 'localhost';
+	  	$user = 'root';
+	  	$pass = '';
+	  	$db = 'WebInterface';
+
+	  	try{
+	  		//create connection
+		  	$connection = mysqli_connect("$server",$user,$pass,$db);
+		  	//$_POST['model'] is the selected model from the previous page
+		  	//since the table is named with the same model we can select table with the model name
+		  	$result = mysqli_query($connection, "select * from $model") 
+					or die("No model found!!!!".mysql_error());
+			$loopCounter = 0;
+			$noOfFields = 0;
+			if(mysqli_num_rows($result)>0){
+				while($row = mysqli_fetch_assoc($result)){
+
+					//echo "Model ID: ".$row['ModelID']."---Model Name: ".$row['Name']." "."<br>";
+					$arrayForModelPara[$loopCounter][0] = $row['Name']; //first element of 2d array is para name and second column is the typical value
+					//eg: [[Absolute_refractory_period 6.0]]
+					$arrayForModelPara[$loopCounter][1] = $row['TypicalVal'];
+					//echo count($arrayForModelName);
+					$arrayForModelPara[$loopCounter][2] = $row['ModelID'];
+					$loopCounter++;
+				}
+			}
+			return $arrayForModelPara;
+			mysqli_close($connection);
+		  	}
+
+	  	catch(Exception $e){
+	  		echo "Cannot establish connection !!";
+	  	}
+
+	}
+
+
+
+ ?>
+
 <div class = "container">
 	<div class="col-sm-12">
 		<h6><font color = "#52a25e">System Builder->Simulation Parameters->NeuronModels->NeuronModelParameter-><b>Creating Initialisation File</b></h6></font>

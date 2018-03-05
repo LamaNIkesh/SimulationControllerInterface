@@ -5,43 +5,44 @@ include("head.html")
 
 <?php 
 	
-	//function to read database and return the list of neuron models present
-	function queryDatabase($arrayForModelPara){
-	$server = 'localhost';
-  	$user = 'root';
-  	$pass = '';
-  	$db = 'WebInterface';
+	//function to read database and return the list of neuron model parameters present
+	 
+	function queryDatabase($arrayForModelPara,$model){
+		$server = 'localhost';
+	  	$user = 'root';
+	  	$pass = '';
+	  	$db = 'WebInterface';
 
-  	try{
-  		//create connection
-	  	$connection = mysqli_connect("$server",$user,$pass,$db);
-	  	//$_POST['model'] is the selected model from the previous page
-	  	//since the table is named with the same model we can select table with the model name
-	  	$result = mysqli_query($connection, "select * from ".$_POST['model']."") 
-				or die("No model found!!!!".mysql_error());
-		$loopCounter = 0;
-		$noOfFields = 0;
-		if(mysqli_num_rows($result)>0){
-			while($row = mysqli_fetch_assoc($result)){
+	  	try{
+	  		//create connection
+		  	$connection = mysqli_connect("$server",$user,$pass,$db);
+		  	//$_POST['model'] is the selected model from the previous page
+		  	//since the table is named with the same model we can select table with the model name
+		  	$result = mysqli_query($connection, "select * from $model") 
+					or die("No model found!!!!".mysql_error());
+			$loopCounter = 0;
+			$noOfFields = 0;
+			if(mysqli_num_rows($result)>0){
+				while($row = mysqli_fetch_assoc($result)){
 
-				echo "Model ID: ".$row['ModelID']."---Model Name: ".$row['Name']." "."<br>";
-				$arrayForModelPara[$loopCounter][0] = $row['Name']; //first element of 2d array is para name and second column is the typical value
-				//eg: [[Absolute_refractory_period 6.0]]
-				$arrayForModelPara[$loopCounter][1] = $row['TypicalVal'];
-				//echo count($arrayForModelName);
-				$arrayForModelPara[$loopCounter][2] = $row['ModelID'];
-				$loopCounter++;
+					//echo "Model ID: ".$row['ModelID']."---Model Name: ".$row['Name']." "."<br>";
+					$arrayForModelPara[$loopCounter][0] = $row['Name']; //first element of 2d array is para name and second column is the typical value
+					//eg: [[Absolute_refractory_period 6.0]]
+					$arrayForModelPara[$loopCounter][1] = $row['TypicalVal'];
+					//echo count($arrayForModelName);
+					$arrayForModelPara[$loopCounter][2] = $row['ModelID'];
+					$loopCounter++;
+				}
 			}
-		}
-		return $arrayForModelPara;
-		mysqli_close($connection);
+			return $arrayForModelPara;
+			mysqli_close($connection);
+		  	}
+
+	  	catch(Exception $e){
+	  		echo "Cannot establish connection !!";
 	  	}
 
-  	catch(Exception $e){
-  		echo "Cannot establish connection !!";
-  	}
-
-}
+	}
 
 #echo $arrayForModelPara[1][1];
 #echo count($arrayForModelPara);
@@ -57,11 +58,15 @@ include("head.html")
 if ($_SESSION['flag']==1){
 	$simNum = $_POST['simNum'];
 
+	//#############################################################################################################
+    // 										SAME NEURON MODELS
+	//############################################################################################################
+
 	if ($_POST['samemodel']=='yes' and $_POST['totalDiffModelNeurons'] == 0){
 
 		//Lets get the model parameters
 		$arrayForModelPara = array(array());
-		$arrayForModelPara = queryDatabase($arrayForModelPara); //return 2D array with parameter name and value for user input
+		$arrayForModelPara = queryDatabase($arrayForModelPara,$_POST['model']); //return 2D array with parameter name and value for user input
 		#echo $arrayForModelPara[1][1];
 		#echo count($arrayForModelPara);
 
@@ -125,10 +130,7 @@ if ($_SESSION['flag']==1){
 							</div>
 							<br><br>
 						<?php
-				
-
-
-			}
+			} //end of $arrayForModelpara for loop
 
 	?>
 	<input type="submit" value="Next">
@@ -136,6 +138,9 @@ if ($_SESSION['flag']==1){
 	<?php
 	} //end of if samemodel==true
 
+	//##############################################################################################################
+	//					WITH DIFFERENT MODELS
+	//##############################################################################################################
 	else{
 		//deals with different models with combination of same models too
 
@@ -144,7 +149,7 @@ if ($_SESSION['flag']==1){
 
 			//Lets get the model parameters
 			$arrayForModelPara = array(array());
-			$arrayForModelPara = queryDatabase($arrayForModelPara); //return 2D array with parameter name and value for user input
+			$arrayForModelPara = queryDatabase($arrayForModelPara,$_POST['model']); //return 2D array with parameter name and value for user input
 			#echo $arrayForModelPara[1][1];
 			#echo count($arrayForModelPara);
 
@@ -154,7 +159,11 @@ if ($_SESSION['flag']==1){
 			/*if ($_POST['model']==1){$modelname="Integrate and fire";}
 			if ($_POST['model']==2){$modelname="Leaky integrate and fire";}
 			if ($_POST['model']==3){$modelname="Izhikevich";}*/
-			?><p>There are <?php echo $subtractedSameModel; ?> neurons to be processed with the same model.
+			//####################################################################################################
+			//				SAME MODEL
+			//####################################################################################################
+			?>
+			<p>There are <?php echo $subtractedSameModel; ?> neurons to be processed with the same model.
 			<br><br> <legend>The typical values for the <?php echo $_POST['model']; ?> model are: </legend></p>
 			<form action="save_neuron_data.php" method="post">
 
@@ -177,7 +186,7 @@ if ($_SESSION['flag']==1){
 				<input type="hidden" value=<?php echo $simNum; ?> name="simNum">
 
 				<?php
-				$index = 1;
+				/*$index = 1;
 				foreach ($ModelLibrary->neuron as $model)
 				{
 					if ($model->neuronid==$_POST['model']){
@@ -195,20 +204,43 @@ if ($_SESSION['flag']==1){
 					$index++;
 						}
 					}
-				} //endo of first for each ----- these braces are driving me crazy
-			?>
+				}*/ //endo of first for each ----- these braces are driving me crazy
+
+				for ($i=0; $i <count($arrayForModelPara) ; $i++) { 
+				#this array contains how many parameters for selected model
+				/*
+					the way it is stored is:
+								[0]				  [1]		  [2]	
+					------------------------------------------------
+					|absolute_refractory_period | 6.0		| 1    |
+					----------------------------|-------------------
+				*/
+				?>
+						<div class="col-sm-4">
+							<!-- grabbing parameters and default values for each parameter from the database -->
+							<?php echo ($i+1) ,")"; ?> <?php echo $arrayForModelPara[$i][0]; ?>:</div>
+							<div class="col-sm-8">
+								<input type="number" name=<?php echo "item" . $arrayForModelPara[$i][2]; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
+							</div>
+							<br><br>
+						<?php
+				} //end of $arrayForModelpara for loop
+				?>
 
 		<?php
 		} //end of if $_POST['totalNeurons']>$_POST['totalDiffModelNeurons']
 
 
 	//$list=file("Libraries/neuron_id.txt");
+	//################################################################################################################
+	//										DIFFERENT MODELS WITHIN GROUP OF MODELS
+	//################################################################################################################	
 	?><p>There are <?php echo $_POST['totalDiffModelNeurons']; ?> neuron(s) to be processed with different models.</p>
 
 	<?php 
 		//Lets get the model parameters
-		$arrayForModelPara = array(array());
-		$arrayForModelPara = queryDatabase($arrayForModelPara); //return 2D array with parameter name and value for user input
+		//$arrayForModelPara = array(array());
+		//$arrayForModelPara = queryDatabase($arrayForModelPara,$_POST['model'.$modelNumber]); //return 2D array with parameter name and value for user input
 		#echo $arrayForModelPara[1][1];
 		#echo count($arrayForModelPara)
 
@@ -221,34 +253,48 @@ if ($_SESSION['flag']==1){
 		<?php
 		for ($loopCounter = 1; $loopCounter < $_POST['totalDiffModelNeurons']+1; $loopCounter++){
 			//echo $loopCounter;
+
+			/*modelNumber gives an individual number to all the different models. for eg
+				if 5 neurons are same model and 4 differnt then
+				nueron number 1-5 will have same model and neuron 6-9 will get different models
+			*/
 			$modelNumber = $loopCounter + $subtractedSameModel;
 			//echo 'passed model : '.$_POST['model'.$modelNumber];
-			if ($_POST['model'.$modelNumber]==1){$modelname="Integrate and fire";}
+			/*if ($_POST['model'.$modelNumber]==1){$modelname="Integrate and fire";}
 			if ($_POST['model'.$modelNumber]==2){$modelname="Leaky integrate and fire";}
 			if ($_POST['model'.$modelNumber]==3){$modelname="Izhikevich";}
+*/
 
-			foreach ($ModelLibrary->neuron as $model){
-				if ($model->neuronid==$_POST['model'.$modelNumber]){
+			//Lets get the model parameters
+			$arrayForModelPara = array(array());
+			$arrayForModelPara = queryDatabase($arrayForModelPara,$_POST['model'.$modelNumber]); //return 2D array with parameter name and value for user input
+			#echo $arrayForModelPara[1][1];
+			#echo count($arrayForModelPara);
+			 
+ 			$id=$_POST['name'.($loopCounter + $subtractedSameModel)];
+			echo 'id '.$id;
+			?><br><fieldset>
+			<legend>The typical values for the <?php echo $_POST['model'.$modelNumber];?> model are: </legend>
+			<input type="hidden" name=<?php echo 'model'.$modelNumber; ?> value=<?php echo $_POST['model'.$modelNumber]; ?>>
+			<input type="hidden" name=<?php echo 'name'.$modelNumber; ?> value=<?php echo $id; ?>>
+			<?php
+			for ($i=0; $i <count($arrayForModelPara) ; $i++) { 
 
-					$id=$_POST['name'.($loopCounter + $subtractedSameModel)];
-					echo 'id '.$id;
-					?><br><fieldset>
-					<legend>The typical values for the <?php echo $modelname; ?> model are: </legend>
-					<input type="hidden" name=<?php echo 'model'.$modelNumber; ?> value=<?php echo $_POST['model'.$modelNumber]; ?>>
-					<input type="hidden" name=<?php echo 'name'.$modelNumber; ?> value=<?php echo $id; ?>><?php
-					foreach ($model->item as $item){
-						$DataItem= str_replace("_", " ", $item->name);
-						?>
-						<div class="col-sm-4">
-							<?php echo $DataItem; ?>:</div>
-							<div class = "col-sm-8"> 
-								<input type="number" name=<?php echo "neuron" . $modelNumber . "item" . $item->itemid; ?> value=<?php echo $item->typicalvalue; ?> required>
-							</div><br><br>
-							<?php
-						}
-					}?></fieldset><?php
-				} //end of foreach
-			}?>
+				?>
+				<div class="col-sm-4">
+					<!-- grabbing parameters and default values for each parameter from the database -->
+					<?php echo ($i+1) ,")"; ?> <?php echo $arrayForModelPara[$i][0]; ?>:</div>
+					<div class="col-sm-8">
+						<input type="number" name=<?php echo "item" . $arrayForModelPara[$i][2]; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
+				</div>
+				<br><br>
+				<?php
+		}
+				
+
+		}
+
+		?>
 			
 			<br><input type="submit" value="Next">
 		</form><br><br>
