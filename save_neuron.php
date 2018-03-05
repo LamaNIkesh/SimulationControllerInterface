@@ -77,8 +77,8 @@ if ($_SESSION['flag']==1){
 		if ($_POST['model']==3){$modelname="Izhikevich";}*/
 		?><p>There are <?php echo $_POST['totalNeurons']; ?> neurons to be processed with the same model.
 		<br><br> The typical values for the <?php echo $_POST['model']; ?> model are: </p>
-		<form action="save_neuron_data.php" method="post">
-			
+
+		<form action="save_neuron_data.php" method="post">	
 			<?php
 			for ($number = 1; $number < $_POST['totalNeurons']+1; ++$number){
 				?>
@@ -289,10 +289,10 @@ if ($_SESSION['flag']==1){
 				</div>
 				<br><br>
 				<?php
-		}
+			}
 				
 
-		}
+			}
 
 		?>
 			
