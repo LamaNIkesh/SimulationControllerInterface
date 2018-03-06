@@ -189,33 +189,37 @@ include("head.html")
 					<input type ="hidden" name= "noOflayers" value=<?php echo $_POST['noOflayers']; ?> required>
 					<input type ="hidden" name= "samemodel" value=<?php echo $_POST['samemodel']; ?> required>
 					<input type="hidden" value=<?php echo $simNum; ?> name="simNum">
-					<?php if($_POST['samemodel'] == 'yes') {?>
-					<input type ="hidden" name= "model" value=<?php echo $_POST['model']; ?> required>
-					<?php } 
+					<?php 
+					if($_POST['samemodel'] == 'yes') {
+					?>
+						<input type ="hidden" name= "model" value=<?php echo $_POST['model']; ?> required>
+						<?php } 
 					else{
 						?>
 						<input type ="hidden" name= "model" value='0' required>
-						<?php } ?>
-
-						<input type = "hidden" name = "totalNeurons" value = <?php  echo $totalNeurons; ?> require>
-
 						<?php 
+					} 
+					?>
 
-						for ($i=1; $i <= $_POST['noOflayers']; $i++) { 
+					<input type = "hidden" name = "totalNeurons" value = <?php  echo $totalNeurons; ?> require>
 
-								//passing no fo neurons each layer to the next file to be read
-							?>
-							<input type ="hidden" name=<?php echo "totalNeuronsEachLayer".$i ?> value= <?php echo $_POST['totalNeuronsLayer'.$i]; ?> required>
-							<?php 
-						}
+					<?php 
 
+					for ($i=1; $i <= $_POST['noOflayers']; $i++) { 
 
-
+							//passing no fo neurons each layer to the next file to be read
 						?>
+						<input type ="hidden" name=<?php echo "totalNeuronsEachLayer".$i ?> value= <?php echo $_POST['totalNeuronsLayer'.$i]; ?> required>
+						<?php 
+					}
 
 
 
-						<input type="submit" value="Next" name="submit">
+					?>
+
+
+
+					<input type="submit" value="Next" name="submit">
 					</form>
 
 

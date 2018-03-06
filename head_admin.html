@@ -160,7 +160,7 @@ function echoActiveClassIfRequestMatches($requestUri)
 						
 						<li = <?php echoActiveClassIfRequestMatches("Add Models")?>><a href="admin_add_models.php">Add Models</a></li>
 
-						<li = <?php echoActiveClassIfRequestMatches("Edit Models")?>><a href="#">Edit Models</a></li>
+						<li = <?php echoActiveClassIfRequestMatches("Edit Models")?>><a href="admin_edit_models.php">Edit Models</a></li>
 						<!--
 						<li class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="">System Builder <span class="caret"></span></a>
@@ -188,7 +188,7 @@ function echoActiveClassIfRequestMatches($requestUri)
 						else{
 							?>
 							<!-- This part will have link to user profile later on-->
-						<li><a href="manage_account.php"><span class="glyphicon glyphicon-user"></span> <?php  echo $userLogged," logged in.";?> </a></li>
+						<li><a href="#"><span class="glyphicon glyphicon-user"></span> <?php  echo $userLogged," logged in.";?> </a></li>
 						<li><a href="logout.php"><span class="glyphicon glyphicon-log-out" ></span>Logout</a></li>
 						<?php 
 					}

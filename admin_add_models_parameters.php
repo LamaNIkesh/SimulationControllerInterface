@@ -53,7 +53,7 @@ function databaseUpdate($modelId,$name,$type,$datatype,$integerpart,$typicalval,
         InMSB INT(5) NOT NULL,
         OutLSB INT(5) NOT NULL,
         OutMSB INT(5) NOT NULL,
-        FOREIGN KEY (ModelID) REFERENCES ModelLibrary(ModelID)
+        FOREIGN KEY (ModelID) REFERENCES ModelLibrary(ModelID) ON DELETE CASCADE
         )";
         if($connection->query($createTable) == TRUE){
           echo "Table created successfully......";
@@ -115,7 +115,7 @@ if ($_SESSION['flag']==1){
             <br>
           -->
           <div class= "col-sm-3">
-            Name: </div><input type="text" name="name" placeholder = "eg.LIF" required> 
+            Name: </div><input type="text" name="name" placeholder = "eg.threshold" required> 
             <br>
             <br> 
           <div class= "col-sm-3">

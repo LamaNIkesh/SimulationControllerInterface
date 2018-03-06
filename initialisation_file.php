@@ -105,7 +105,7 @@ if ($_SESSION['flag']==1){
 		unlink("SimulationXML/".$userLogged . $topology. "/Stim_Ini_file_" . $userID . ".xml");
 	}
 	
-	$dom = new DOMDocument("1.0");
+	$dom = new DOMDocument("1.0", "ISO-8859-15");
 	$dom->formatOutput = true;
 	$data=$dom->createElement("newSimulation");
 	// Append first packet----Reset packet----------not needed anymore
