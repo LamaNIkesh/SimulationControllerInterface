@@ -42,7 +42,7 @@ include("head.html")
 						//echo "index with stim neurons: ".$number ." the neuron num is".$_POST['nameid'.$number];
 						//echo "<br>";
 						$packet=$data->createElement("packet");
-						$destdev=$data->createElement("destdevice",$deviceidarray[$_POST['nameid'.$number]-2]); // Needs to specify the destination; is the neuron??
+						$destdev=$data->createElement("destdevice",$deviceidarray[$_POST['nameid'.$number]-1]); // Needs to specify the destination; is the neuron??
 						$packet->appendChild($destdev);
 						$sourcedev=$data->createElement("sourcedevice",65532); // Needs to specify the source; is the NC??
 						$packet->appendChild($sourcedev);

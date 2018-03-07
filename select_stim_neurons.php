@@ -5,7 +5,28 @@ include("head.html")
 <link rel="stylesheet" href="css/stimDrop.css">
 
 <?php 
-?>
+//echo '<script type="text/javascript">alert("<b>Select at least any one of the checkbox</b>");</script>';
+   //error handling to make sure at least one neuron is selected for stimulus	
+function checkingCheckingBox(){
+  if (isset($_GET['submit']))
+  {
+  	echo '<script type="text/javascript">alert("<b>Select at least any one of the checkbox</b>");</script>';
+      if (!empty($_GET['StimNeurons'])) 
+	  {
+          foreach ($_GET['StimNeurons'] as $selected)
+		  {
+              //echo "<p>".$selected ."</p>";
+          }
+      }
+      else 
+	  {
+          //echo "<b>Select at least any one of the checkbox</b>";
+          echo '<script type="text/javascript">alert("<b>Select at least any one of the checkbox</b>");</script>';
+      }
+  }
+
+}
+ ?>
 
 <div class = "container">
 		<div class="col-sm-12">
@@ -40,7 +61,8 @@ include("head.html")
 				// $xmlDoc1 = new DOMDocument();
 				// $xmlDoc1->load($filename);
 				?>
-				<form action="select_stimulus.php" method="get">
+				<form action="select_stimulus.php"  method="get">
+				
 				  <input type = "hidden" name = "noOfNeurons" id = "noOfNeurons" value = <?php echo $neuronNum; ?> >
 				  <input type="hidden" name='topology' id = 'topology' value=<?php echo $_POST['topology']; ?>>
 				  <input type = "hidden" name = "totalNeurons" id ="totalNeurons" value = <?php echo $_POST['totalNeurons']; ?>>
@@ -60,7 +82,7 @@ include("head.html")
 				    			<label for=<?php echo $i; ?>>
 				    			<?php 
 				    			
-				        			echo '<input type="checkbox" name = "StimNeurons[]" id="StimNuerons" value = '.$i.' size = 10 required> Neuron'.$i.'</label>' ;
+				        			echo '<input type="checkbox" name = "StimNeurons[]" id="StimNuerons" value = '.$i.' size = 10> Neuron'.$i.'</label>' ;
 				        		}
 				        	}	
 				        catch(Exception $e){

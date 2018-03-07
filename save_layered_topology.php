@@ -58,7 +58,7 @@
 	  					echo "\n";
 	  				}*/
 	  				$packet=$data->createElement("packet");
-					$destdev=$data->createElement("destdevice",$deviceidarray[$numberOfNeurons-1]);
+					$destdev=$data->createElement("destdevice",$deviceidarray[$numberOfNeurons]); // since the indexing starts from zero
 					$packet->appendChild($destdev);
 					$sourcedev=$data->createElement("sourcedevice",65532);
 					$packet->appendChild($sourcedev);

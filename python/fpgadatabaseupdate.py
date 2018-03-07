@@ -13,6 +13,7 @@ if __name__ == '__main__':
 			if i > 0:
 				x.execute("""INSERT INTO FPGAPool (FPGANumber, Maintenance, OnlineStatus,Simulationid) VALUES (%s,%s,%s,%s)""", (i,0,0,0))
 				connect.commit()
+				print "#"
 	except:
 		connect.rollback()
 
