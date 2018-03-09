@@ -25,7 +25,7 @@ if ($_SESSION['flag']==1){
 	$filePath = $_POST['filenameXML'];
 	//providing absolute path
 	$filePath = '/home/nikesh/Documents/WebServer/SimulationControllerInterface/'.$filePath;
-	#echo $filePath;
+	echo $filePath;
 	
 	#publishing results to the mqtt topic
 	#lsit of topics
