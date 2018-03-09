@@ -8,7 +8,7 @@ function CreateModelTabel($modelId,$modelName,$noOfPara, $url,$filename){
   //create connection
   $server = 'localhost';
   $user = 'root';
-  $pass = '';
+  $pass = 'cncr2018';
   $db = 'WebInterface';
 
   try{

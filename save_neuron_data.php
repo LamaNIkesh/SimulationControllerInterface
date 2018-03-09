@@ -8,7 +8,7 @@ include("head.html")
 	function queryDatabaseForParameters($arrayForModelPara,$model){
 		$server = 'localhost';
 	  	$user = 'root';
-	  	$pass = '';
+	  	$pass = 'cncr2018';
 	  	$db = 'WebInterface';
 
 	  	try{
@@ -66,7 +66,7 @@ include("head.html")
 		*/
 		$server = 'localhost';
 	  	$user = 'root';
-	  	$pass = '';
+	  	$pass = 'cncr2018';
 	  	$db = 'WebInterface';
 	  	$availableFPGANum = 0;
 	  	try{

@@ -7,7 +7,7 @@ include("head.html")
 function queryDatabase($arrayForModelName){
 	$server = 'localhost';
   	$user = 'root';
-  	$pass = '';
+  	$pass = 'cncr2018';
   	$db = 'WebInterface';
 
   	try{

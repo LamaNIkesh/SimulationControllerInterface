@@ -49,7 +49,7 @@ if ($_SESSION['flag']==1){
 		//Once the packet has been sent to the IM server, the database is updated to show configured simulations for each users
 		$server = 'localhost';
 		$user = 'root';
-		$pass = '';
+		$pass = 'cncr2018';
 		$db = 'WebInterface';
 		try{
 			$connection = mysqli_connect("$server",$user,$pass,$db);

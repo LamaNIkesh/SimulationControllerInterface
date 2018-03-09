@@ -7,7 +7,7 @@ include("head_admin.html")
 function readModelLibrary(){
   $server = 'localhost';
   $user = 'root';
-  $pass = '';
+  $pass = 'cncr2018';
   $db = 'WebInterface';
   $flag = 0;
 
@@ -56,7 +56,7 @@ function removeModel($model){
   //function for deletion of model
   $server = 'localhost';
   $user = 'root';
-  $pass = '';
+  $pass = 'cncr2018';
   $db = 'WebInterface';
   $flag = 0;
 

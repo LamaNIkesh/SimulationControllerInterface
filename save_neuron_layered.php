@@ -9,7 +9,7 @@ include("head.html")
 	function queryDatabase($arrayForModelPara,$model){
 		$server = 'localhost';
 	  	$user = 'root';
-	  	$pass = '';
+	  	$pass = 'cncr2018';
 	  	$db = 'WebInterface';
 
 	  	try{
@@ -47,7 +47,7 @@ include("head.html")
 	function getModelNameFromModelID($modelID){
 		$server = 'localhost';
 	  	$user = 'root';
-	  	$pass = '';
+	  	$pass = 'cncr2018';
 	  	$db = 'WebInterface';
 
 	  	try{

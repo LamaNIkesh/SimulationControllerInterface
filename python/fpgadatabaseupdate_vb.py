@@ -3,7 +3,7 @@ import MySQLdb
 
 if __name__ == '__main__':
 	
-	connect = MySQLdb.connect(host='localhost',user="root", passwd="cncr2018", db='WebInterface')
+	connect = MySQLdb.connect(host='100.100.1.168',user="root", passwd="cncr2018", db='WebInterface')
 
 	x = connect.cursor()
 	try:
@@ -17,12 +17,3 @@ if __name__ == '__main__':
 
 	connect.close()
     
-
-'''
-import pymysql 
-import pymysql.cursors
-
-conn= pymysql.connect(host='localhost',user='root',password='cncr2018',db='WebInterface',charset='utf8mb4',cursorclass=pymysql.cursors.DictCursor)
-a=conn.cursor()
-'''
-

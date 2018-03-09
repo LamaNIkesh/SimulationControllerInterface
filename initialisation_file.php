@@ -78,9 +78,9 @@ function generateFPGAConfigurationXML($fileLocationOfNeuronInit){
 
 	}
 	//print_r ($arrayForFPGAdeviceModelid);
-	echo "<br> Length of the array is :".count($arrayForFPGAdeviceModelid)."<br>";
-	echo "<br>Elements: ".$arrayForFPGAdeviceModelid[0][0]. $arrayForFPGAdeviceModelid[0][1]."<br>";
-	echo "<br>Elements: ".$arrayForFPGAdeviceModelid[1][0]. $arrayForFPGAdeviceModelid[1][1]."<br>";
+	//echo "<br> Length of the array is :".count($arrayForFPGAdeviceModelid)."<br>";
+	//echo "<br>Elements: ".$arrayForFPGAdeviceModelid[0][0]. $arrayForFPGAdeviceModelid[0][1]."<br>";
+	//echo "<br>Elements: ".$arrayForFPGAdeviceModelid[1][0]. $arrayForFPGAdeviceModelid[1][1]."<br>";
 	//echo "<br>Elements: ".$arrayForFPGAdeviceModelid[0][0]. $arrayForFPGAdeviceModelid[0][1]."<br>";
 	//echo "<br>Elements: ".$arrayForFPGAdeviceModelid[0][0]. $arrayForFPGAdeviceModelid[0][1]."<br>";
 	return $arrayForFPGAdeviceModelid;
@@ -130,7 +130,7 @@ function getModelURLandFilenameForFPGA($modelId){
 	//returns correct neuron model from the databse for the FPGA based on which neuron was assigned for which FPGA
 	$server = 'localhost';
 	$user = 'root';
-	$pass = '';
+	$pass = 'cncr2018';
 	$db = 'WebInterface';
 	$location_filename_array= array(2);//just storing url and filename
 	try{
@@ -216,7 +216,7 @@ if ($_SESSION['flag']==1){
 
 	$server = 'localhost';
 	$user = 'root';
-	$pass = '';
+	$pass = 'cncr2018';
 	$db = 'WebInterface';
 	try{
 		$connection = mysqli_connect("$server",$user,$pass,$db);

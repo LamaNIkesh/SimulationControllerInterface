@@ -16,7 +16,7 @@ function databaseUpdate($modelId,$name,$type,$datatype,$integerpart,$typicalval,
   //create connection
   $server = 'localhost';
   $user = 'root';
-  $pass = '';
+  $pass = 'cncr2018';
   $db = 'WebInterface';
 
   try{
