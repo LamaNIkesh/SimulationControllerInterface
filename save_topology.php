@@ -53,7 +53,7 @@
 	  				}*/
 
 	  				$packet=$data->createElement("packet");
-					$destdev=$data->createElement("destdevice",$deviceidarray[$numberOfNeurons-1]); #1 here is the fpga device number
+					$destdev=$data->createElement("destdevice",$deviceidarray[$numberOfNeurons]); #1 here is the fpga device number
 					$packet->appendChild($destdev);
 					$sourcedev=$data->createElement("sourcedevice",65532);
 					$packet->appendChild($sourcedev);

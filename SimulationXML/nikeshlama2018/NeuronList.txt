@@ -3,7 +3,6 @@ neuron2
 neuron3
 neuron4
 neuron5
-<<<<<<< HEAD
 neuron6
-=======
->>>>>>> 4f584a4387f4d767b5ebe509720011a536f72e04
+neuron7
+neuron8

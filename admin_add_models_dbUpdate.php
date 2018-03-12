@@ -8,7 +8,7 @@ function CreateModelTabel($modelId,$modelName,$noOfPara, $url,$filename){
   //create connection
   $server = 'localhost';
   $user = 'root';
-  $pass = '';
+  $pass = 'cncr2018';
   $db = 'WebInterface';
 
   try{
@@ -23,7 +23,11 @@ function CreateModelTabel($modelId,$modelName,$noOfPara, $url,$filename){
       //All the new models are inserted into ModelLibrary table which has three columns:modelId, modelname and URL for .sof location for FPGA
 
       $insertData = "INSERT INTO ModelLibrary (ModelID, ModelName, NoOfPara, LocationURL,Filename) 
+<<<<<<< HEAD
                     VALUES ('$modelId', '$modelName','$noOfPara','$url','$filename')";
+=======
+                    VALUES ('$modelId', '$modelName','$noOfPara','$url','$filename'')";
+>>>>>>> cd5a783c8776bead8a65b8cfecdb2a5b81788a70
       if($connection->query($insertData)){
         echo "New record created successfully";
       }
@@ -85,6 +89,7 @@ if ($_SESSION['flag']==1){
           <input type = "Hidden" name = "noOfPara" value = <?php echo $_POST['noOfPara']; ?> >  
 
           <input type = "Hidden" name = "url" value = <?php echo $_POST['url']; ?> >
+          <input type = "Hidden" name = "filename" value = <?php echo $_POST['filename']; ?> >
 
           <div class= "col-sm-3">
             <input type="submit" value="Next" name="submit" required>

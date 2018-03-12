@@ -50,7 +50,11 @@ if ($_SESSION['flag']==1){
           <div class= "col-sm-3">
             .sof url: </div><input type="text" name = "url" placeholder="://url" min="1" max="1000" required>
             <br><br>
+<<<<<<< HEAD
             <div class= "col-sm-3">
+=======
+          <div class= "col-sm-3">
+>>>>>>> cd5a783c8776bead8a65b8cfecdb2a5b81788a70
             Filename: </div><input type="text" name = "filename" placeholder="eg:phototaxis" min="1" max="1000" required>
             <br><br>
                   

@@ -40,6 +40,17 @@ try:
 	#returns a list with all the packets 
 	MessageArray = rx.xmlParseBeforePublishing(xmlFile)
 	print (colored("successfully read",'green'))
+	#uncomment this section for sending all the packets 
+
+	for i in range(len(MessageArray)):
+		#loops through each packet and send them to the tcp server i.e. im server
+		packet= MessageArray[i]
+		print (colored(packet,'green')) # just printing on the console
+		try:
+			TCPclient(host,port,packet)
+		except:
+			print (colored('Error: Could not establish connection!!', 'red'))
+
 #error handling
 except:
 	print("cannot read")
@@ -48,16 +59,6 @@ except:
 #traverse through array elements and establish connection and send packet 
 #print(MessageArray[0])
 
-#uncomment this section for sending all the packets 
-
-for i in range(len(MessageArray)):
-	#loops through each packet and send them to the tcp server i.e. im server
-	packet= MessageArray[i]
-	print (colored(packet,'green')) # just printing on the console
-	try:
-		TCPclient(host,port,packet)
-	except:
-		print (colored('Error: Could not establish connection!!', 'red'))
 
 #sending only the first packet for testing
 '''

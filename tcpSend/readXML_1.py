@@ -11,10 +11,13 @@ def xmlParseBeforePublishing(xmlFile):
 		output: returns a list with all the information about the packets
 				each append is appending a full packet 
 	'''
-	tree = ET.parse(xmlFile)
+	try:
+		tree = ET.parse(xmlFile)
+	except:
+		print("cannot open xml...")
 	#gets root which is <newSimulation>
 	root = tree.getroot()
-	#print (root)
+	print (root)
 	packetContent = []
 	for child in root:
 		packetContent.append( ET.tostring(child))

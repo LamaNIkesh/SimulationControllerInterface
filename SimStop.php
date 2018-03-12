@@ -58,7 +58,7 @@ include("head.html")
 				if ($fileSentFlag == 1) {
 					$server = 'localhost';
 					$user = 'root';
-					$pass = '';
+					$pass = 'cncr2018';
 					$db = 'WebInterface';
 
 					try{

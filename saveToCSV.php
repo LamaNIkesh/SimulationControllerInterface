@@ -35,7 +35,7 @@ include("head.html")
 		 		//these information are then used to create a txt version of the results
 		 		$server = 'localhost';
 				$user = 'root';
-				$pass = '';
+				$pass = 'cncr2018';
 				$db = 'WebInterface';
 
 
