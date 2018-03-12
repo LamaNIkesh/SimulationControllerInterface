@@ -10,7 +10,7 @@ include("head.html")
 	function queryDatabaseForParameters($arrayForModelPara,$model){
 		$server = 'localhost';
 	  	$user = 'root';
-	  	$pass = '';
+	  	$pass = 'cncr2018';
 	  	$db = 'WebInterface';
 
 	  	try{
@@ -63,7 +63,7 @@ include("head.html")
 	function getModelNameFromModelID($modelID){
 		$server = 'localhost';
 	  	$user = 'root';
-	  	$pass = '';
+	  	$pass = 'cncr2018';
 	  	$db = 'WebInterface';
 
 	  	try{
@@ -92,6 +92,58 @@ include("head.html")
 	  		echo "Cannot establish connection !!";
 	  	}
 	}
+
+	//Function to get teh available FPGA device from the database
+	function getFPGADevice($simNum){
+		/*
+		Queries FPGAPool database to get available FPGA for device assignment. 
+		The first available FPGA are utilized. Sometimes, FPGA may be down for maintenance or some other simulation might be
+		running so to avoid that this approach is useful
+		*/
+		$server = 'localhost';
+	  	$user = 'root';
+	  	$pass = 'cncr2018';
+	  	$db = 'WebInterface';
+	  	$availableFPGANum = 0;
+	  	try{
+	  		//create connection
+		  	$connection = mysqli_connect("$server",$user,$pass,$db);
+		  	//$_POST['model'] is the selected model from the previous page
+		  	//since the table is named with the same model we can select table with the model name
+		  	$FPGAQuery = mysqli_query($connection, "select FPGANumber from FPGAPool where Maintenance = '0' and OnlineStatus = '0'") 
+					or die("No model found!!!!".mysql_error());
+			$loopCounter = 0;
+			if(mysqli_num_rows($FPGAQuery)>0){
+				while($availableFPGA = mysqli_fetch_assoc($FPGAQuery)){
+					//getting the very first available FPGA 
+					$availableFPGANum = $availableFPGA['FPGANumber'];
+
+					//Now that we have the available FPGA, lets mark it as on for OnlineStatus so that it wont be assigned to another simulation
+					//during the process
+
+					$updateStatus = "UPDATE FPGAPool SET OnlineStatus = '1', Simulationid = '$simNum', ConfigureDate = 'now()'  WHERE FPGANumber = '$availableFPGANum'";
+					#mysqli_query($sql);
+					if(mysqli_query($connection,$updateStatus) === TRUE){
+						//echo "Record updated successfully";
+					}	
+					else{
+						//echo "Error updating the record: ".$connection->error;
+					}	
+					//end of updating online status
+
+					break;
+				}
+			}
+			
+			mysqli_close($connection);
+		  	}
+
+	  	catch(Exception $e){
+	  		echo "Cannot establish connection !!";
+	  	}
+	  	return $availableFPGANum;
+	} //end of function getFPGADevice
+
 
 
 ?>
@@ -152,23 +204,46 @@ else {
 	echo "total neurons: ", $_POST['totalNeurons'];
 	$arraywithDevNum = array($_POST['totalNeurons']);
 
-	for ($totalNeu=0; $totalNeu <$_POST['totalNeurons'] ; $totalNeu++) { 
+	$totalNeuronsPerFPGGA = 8;
+	$destinationFPGA = 0;
+
+	for ($neuronNum=0; $neuronNum < $_POST['totalNeurons'] ; $neuronNum++) { 
 		# code...
-		#echo $totalNeu;
-		#echo "<br>";
-		for ($i=$totalRequiredDevice ; $i>0; $i--) { 
-			# code...
-			#echo "i: ",$i,"<br>";
-			if(intval($totalNeu/8) >= intval($i-1)){
-				echo "destdev: ",$i,"<br>";
-				$destdevice = $i ;
-				#cho 'destdevice: ',$destdevice;
-				$arraywithDevNum[$totalNeu-1] = $destdevice;
-				break;
-			}
-			#echo "destdevice: ",$destdevice;
+		
+		# iterate through each Neuron and check for available FPGA only at multiples of $totalNueronsPerFPGA
+		#i.e. for eg if there are 8 neurons per FPGA then, 0 - 7 neurons get one FPGA and similary 8-15 gets next FPGA
+		#since the FPGA are to be checked in the database for availability, we can only check at these multiples. so that each check will
+		#result in 1 FPGA wcich will be engou for next 7 neurons resultign in 8 neurons per FPGA or anyother number depending 
+		//echo "Intval: ",$neuronNum/($totalNeuronsPerFPGGA+1);
+		//echo "<br>";
+		if (($neuronNum == 0) || is_int($neuronNum/($totalNeuronsPerFPGGA))){
+			//calling functions that gets the FPGA, simid is argument to update the table
+			//New FPGA is queried only at the begining and when the FPGA capacity gets full
+			echo "<br> Condition Met at Neuron !!",$neuronNum;
+			echo "<br>";
+			$destinationFPGA = getFPGADevice($simNum);
+			echo "destinationFPGA: ",$destinationFPGA;
 		}
+		//echo "<br>first for loop : ",$neuronNum;
+		//echo "<br>";
+		//stores destination device ID for corresponding neuron indicated with index. device at index 0 if for neuron 1
+		$arraywithDevNum[$neuronNum] = $destinationFPGA;
+
+		
+	/*for ($i=$totalRequiredDevice ; $i>0; $i--) { 
+		# code...
+		echo "iteration i: ",$i,"<br>";
+		if(intval($totalNeu/8) >= intval($i-1)){
+			echo "destdev: ",$i,"<br>";
+			$destdevice = $i ;
+			#echo 'destdevice: ',$destdevice;
+			$arraywithDevNum[$totalNeu-1] = $destdevice;
+			break;
+		}
+		#echo "destdevice: ",$destdevice;
+	}*/
 	}
+	print_r($arraywithDevNum);
 	echo "array size: ",sizeof($arraywithDevNum);
 	file_put_contents("SimulationXML/".$userLogged . "/DeviceId_" . $userID . ".bin",serialize($arraywithDevNum));
 	
@@ -211,7 +286,7 @@ else {
 				}
 				$packet=$data->createElement("packet");
 				//$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
-				$destdev=$data->createElement("destdevice", $arraywithDevNum[$neuronNumber - 2]);//temporary 1 is the destination fpga
+				$destdev=$data->createElement("destdevice", $arraywithDevNum[$neuronNumber - 1]);//neurons are numbered as 1,2 but index are 0,1,2 so to get index
 				$packet->appendChild($destdev);
 				$sourcedev=$data->createElement("sourcedevice",65532);
 				$packet->appendChild($sourcedev);
@@ -326,7 +401,7 @@ else{
 			//echo "neuron number: ".$neuron_num;
 			$packet=$data->createElement("packet");
 			//$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
-			$destdev=$data->createElement("destdevice",$arraywithDevNum[$neuron_num - 2]);
+			$destdev=$data->createElement("destdevice",$arraywithDevNum[$neuron_num - 1]);//neurons are numbered as 1,2 but index are 0,1,2 so to get index
 			$packet->appendChild($destdev);
 			$sourcedev=$data->createElement("sourcedevice",65532);
 			$packet->appendChild($sourcedev);

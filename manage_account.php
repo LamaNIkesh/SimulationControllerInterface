@@ -55,7 +55,7 @@ if ($_SESSION['flag']==1){
 	//the user simulation contains information about the simulation when it was configured and what is the status of the simulation
 		$server = 'localhost';
 		$user = 'root';
-		$pass = '';
+		$pass = 'cncr2018';
 		$db = 'WebInterface';
 		$flag = 0;
 		try{

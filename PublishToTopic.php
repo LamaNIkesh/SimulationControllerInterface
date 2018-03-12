@@ -24,14 +24,19 @@ if ($_SESSION['flag']==1){
 	#reads filename and path for the initialisation file
 	$filePath = $_POST['filenameXML'];
 	//providing absolute path
-	$filePath = '/home/nikesh/Documents/WebServer/SimulationControllerInterface/'.$filePath;
-	#echo $filePath;
+	$filePath = getcwd().'/'.$filePath;
+	echo "File Path:".$filePath;
+
+	echo "Current working directory: ".getcwd();
+
+	$sendPacketPyFilePath = getcwd().'/tcpSend/send_packet_tcp.py';
 	
 	#publishing results to the mqtt topic
 	#lsit of topics
 	#topic=["neurons/broadcast","neurons/bitstreams/","neurons/bitstreams/ack","neurons/post/","neurons/post/ack/",
 	#"neurons/get", "neurons/errors","webapp/post","webapp/post/ack","webapp/get","webapp/get/ack","im/errors","im/msgs","im/warnings"]
 	#publisher.py publishes to webapp/get topic
+	
 	try {
 		#executing python code that publishes the packets
 		#--------------------------------------------------------------------------------
@@ -43,13 +48,14 @@ if ($_SESSION['flag']==1){
 		#also no password privelege is added to sudoer file for daemon users
 		
 		$output = shell_exec('sudo -u daemon python /home/nikesh/Documents/WebServer/SimulationControllerInterface/tcpSend/send_packet_tcp.py 2>&1 '.$filePath);
+		#$output = shell_exec('sudo -u daemon python '.$sendPacketPyFilePath. ' 2>&1 '.$filePath);
 		echo "<pre>$output</pre>";
 		echo "All the packets successfully published to the Interface Manager.\nYou will receive a notification when the simulation is complete";
 
 		//Once the packet has been sent to the IM server, the database is updated to show configured simulations for each users
 		$server = 'localhost';
 		$user = 'root';
-		$pass = '';
+		$pass = 'cncr2018';
 		$db = 'WebInterface';
 		try{
 			$connection = mysqli_connect("$server",$user,$pass,$db);

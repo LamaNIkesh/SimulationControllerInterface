@@ -10,7 +10,7 @@ $loopCounter = 0;
 function queryDatabase($arrayForModelName){
 	$server = 'localhost';
   	$user = 'root';
-  	$pass = '';
+  	$pass = 'cncr2018';
   	$db = 'WebInterface';
 
   	try{

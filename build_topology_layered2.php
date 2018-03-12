@@ -19,7 +19,7 @@ include("head.html")
 			//database connection params
 			$server = 'localhost';
 			$user = 'root';
-			$pass = '';
+			$pass = 'cncr2018';
 			$db = 'WebInterface';
 
 			try{

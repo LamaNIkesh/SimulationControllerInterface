@@ -10,7 +10,7 @@ include("head.html")
 	function queryDatabase($arrayForModelPara,$model){
 		$server = 'localhost';
 	  	$user = 'root';
-	  	$pass = '';
+	  	$pass = 'cncr2018';
 	  	$db = 'WebInterface';
 
 	  	try{

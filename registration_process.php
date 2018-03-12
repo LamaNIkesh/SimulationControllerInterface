@@ -4,7 +4,7 @@
 //var declaration
 $server = 'localhost';
 $user = 'root';
-$pass = '';
+$pass = 'cncr2018';
 #$db = 'Registration'; //database name
 $db = 'WebInterface';
 $flag = 0;

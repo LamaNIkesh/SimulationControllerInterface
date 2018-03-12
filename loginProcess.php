@@ -9,7 +9,7 @@ include("head.html")
 
 $server = 'localhost';
 $user = 'root';
-$pass = '';
+$pass = 'cncr2018';
 $db = 'WebInterface';
 $flag = 0;
 $userType = 0; //0 for regular user and 1 for admin users
