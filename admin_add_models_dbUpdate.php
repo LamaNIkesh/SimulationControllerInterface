@@ -4,7 +4,7 @@ include("head_admin.html")
 
 <?php 
 //function to update the database
-function CreateModelTabel($modelId,$modelName,$noOfPara, $url){
+function CreateModelTabel($modelId,$modelName,$noOfPara, $url,$filename){
   //create connection
   $server = 'localhost';
   $user = 'root';
@@ -22,8 +22,8 @@ function CreateModelTabel($modelId,$modelName,$noOfPara, $url){
 
       //All the new models are inserted into ModelLibrary table which has three columns:modelId, modelname and URL for .sof location for FPGA
 
-      $insertData = "INSERT INTO ModelLibrary (ModelID, ModelName, NoOfPara, LocationURL) 
-                    VALUES ('$modelId', '$modelName','$noOfPara','$url')";
+      $insertData = "INSERT INTO ModelLibrary (ModelID, ModelName, NoOfPara, LocationURL,Filename) 
+                    VALUES ('$modelId', '$modelName','$noOfPara','$url','$filename')";
       if($connection->query($insertData)){
         echo "New record created successfully";
       }
@@ -42,7 +42,7 @@ function CreateModelTabel($modelId,$modelName,$noOfPara, $url){
 if(isset($_POST['modelName'])){
   echo "pressed....";
   //pass the user variable into the function
-  CreateModelTabel($_POST['modelID'],$_POST['modelName'],$_POST['noOfPara'],$_POST['url']);
+  CreateModelTabel($_POST['modelID'],$_POST['modelName'],$_POST['noOfPara'],$_POST['url'],$_POST['filename']);
 }
 
 if ($_SESSION['flag']==1){
