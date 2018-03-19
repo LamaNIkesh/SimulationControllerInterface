@@ -44,6 +44,35 @@ include("head.html")
 
 	}
 
+
+	function sortNeuronModel($hashmaparray){
+		#This function sorts the hashmap array so that all the similar models are together
+		#FOr eg: [1] => leaky_integrate_and_fire [2] => leaky_integrate_and_fire [3] => leaky_integrate_and_fire
+		#        [4] => Izhikevich [5] => leaky_integrate_and_fire [6] => leaky_integrate_and_fire 
+		#		 [7] => leaky_integrate_and_fire [8] => Izhikevich [9] => leaky_integrate_and_fire 
+		#	     [10] => Izhikevich
+		# This array will be sorted as so that all leaky_integrate_and_fire are together. 
+		#        [1] => leaky_integrate_and_fire [2] => leaky_integrate_and_fire [3] => leaky_integrate_and_fire
+		#        [5] => leaky_integrate_and_fire [6] => leaky_integrate_and_fire 
+		#		 [7] => leaky_integrate_and_fire [9] => leaky_integrate_and_fire 
+		#	     [4] => Izhikevich  [8] => Izhikevich  [10] => Izhikevich
+		#This will make easier for model assignment on FPGA.
+		# Simple counting from 1-8 models which are same can be assigned to one FPGA
+		# For eg: here Neurons 1,2,3,5,6,7,9 will be mapped into one FPGA and neurons 4,8,10 onto another since they are different models. 
+		# The neuron number is stil the same so that its easy to track. 
+
+		asort($hashmaparray);
+		echo "<br>Sorted hasmap: ";
+		print_r($hashmaparray);
+		echo "<br>";
+		echo "\nAfter sorting..........\n";
+		echo "<br>";
+		foreach($hashmaparray as $key=>$val){
+			echo "$key = $val\n";
+		}
+		return $hashmaparray;
+	}
+
 #echo $arrayForModelPara[1][1];
 #echo count($arrayForModelPara);
 
@@ -57,19 +86,21 @@ include("head.html")
 //echo $_POST['samemodel'];
 if ($_SESSION['flag']==1){
 	$simNum = $_POST['simNum'];
-
+	//echo getFPGADevice($simNum);
+	$userID = $userLogged . '_'.$simNum;
 	//#############################################################################################################
     // 										SAME NEURON MODELS
 	//############################################################################################################
-
+	$HashMapArrayForNeuronToModel = array();
 	if ($_POST['samemodel']=='yes' and $_POST['totalDiffModelNeurons'] == 0){
 
 		//Lets get the model parameters
 		$arrayForModelPara = array(array());
+		echo "<br>Same model: ".$_POST['model'];
 		$arrayForModelPara = queryDatabase($arrayForModelPara,$_POST['model']); //return 2D array with parameter name and value for user input
-		#echo $arrayForModelPara[1][1];
+		#print_r($arrayForModelPara);
 		#echo count($arrayForModelPara);
-
+		
 
 
 		/*if ($_POST['model']==1){$modelname="Integrate and fire";}
@@ -79,23 +110,21 @@ if ($_SESSION['flag']==1){
 		<br><br> The typical values for the <?php echo $_POST['model']; ?> model are: </p>
 
 		<form action="save_neuron_data.php" method="post">	
-			<?php
-			for ($number = 1; $number < $_POST['totalNeurons']+1; ++$number){
-				?>
-				<input type="hidden" name=<?php echo "neuron".$number?> value=<?php echo $_POST['neuron'.$number]; ?>>
-				<?php
-
-			}
-			?>
-
 			<input type="hidden" name="model" value=<?php echo $_POST['model']; ?>>
 			<!--keeping the to neuron for the next file save_neuron_data-->
 			<input type="hidden" name="totalNeurons" value=<?php echo $_POST['totalNeurons']; ?>>
 			<input type="hidden" name="totalDiffModelNeurons" value=<?php echo $_POST['totalDiffModelNeurons']; ?>>
 			<input type="hidden" value=<?php echo $_POST['samemodel']; ?> name="samemodel">
 			<input type="hidden" value=<?php echo $simNum; ?> name="simNum">
-
 			<?php
+
+			for ($number = 1; $number < $_POST['totalNeurons']+1; ++$number){
+				?>
+				<input type="hidden" name=<?php echo "neuron".$number?> value=<?php echo $_POST['neuron'.$number]; ?>>
+				<?php
+				$HashMapArrayForNeuronToModel[$number] = $_POST['model']; 
+
+			}
 			/*
 			foreach ($ModelLibrary->neuron as $model)
 			{
@@ -126,11 +155,13 @@ if ($_SESSION['flag']==1){
 							<!-- grabbing parameters and default values for each parameter from the database -->
 							<?php echo ($i+1) ,")"; ?> <?php echo $arrayForModelPara[$i][0]; ?>:</div>
 							<div class="col-sm-8">
-								<input type="number" name=<?php echo "item" . $arrayForModelPara[$i][2]; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
+								<!-- Passing itemvalues for each parameter to  next page -->
+								<input type="number" name=<?php echo "SameNeuron_itemval_".$i ; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
 							</div>
 							<br><br>
 						<?php
 			} //end of $arrayForModelpara for loop
+		
 
 	?>
 	<input type="submit" value="Next">
@@ -152,6 +183,7 @@ if ($_SESSION['flag']==1){
 			$arrayForModelPara = queryDatabase($arrayForModelPara,$_POST['model']); //return 2D array with parameter name and value for user input
 			#echo $arrayForModelPara[1][1];
 			#echo count($arrayForModelPara);
+			print_r($arrayForModelPara);
 
 
 			//echo "nxt stage";
@@ -162,6 +194,7 @@ if ($_SESSION['flag']==1){
 			//####################################################################################################
 			//				SAME MODEL
 			//####################################################################################################
+			echo "<br>Same model: ".$_POST['model'];
 			?>
 			<p>There are <?php echo $subtractedSameModel; ?> neurons to be processed with the same model.
 			<br><br> <legend>The typical values for the <?php echo $_POST['model']; ?> model are: </legend></p>
@@ -172,6 +205,7 @@ if ($_SESSION['flag']==1){
 					?>
 					<input type="hidden" name=<?php echo "neuron".$loopCounter?> value=<?php echo $_POST['neuron'.$loopCounter]; ?>>
 					<?php
+					$HashMapArrayForNeuronToModel[$loopCounter] = $_POST['model'];
 					//echo "name ", $_POST['name'.$number];
 
 				}
@@ -205,8 +239,9 @@ if ($_SESSION['flag']==1){
 						}
 					}
 				}*/ //endo of first for each ----- these braces are driving me crazy
-
+				echo "array para count: ".count($arrayForModelPara);
 				for ($i=0; $i <count($arrayForModelPara) ; $i++) { 
+					//echo "$i: ".$i;
 				#this array contains how many parameters for selected model
 				/*
 					the way it is stored is:
@@ -220,7 +255,7 @@ if ($_SESSION['flag']==1){
 							<!-- grabbing parameters and default values for each parameter from the database -->
 							<?php echo ($i+1) ,")"; ?> <?php echo $arrayForModelPara[$i][0]; ?>:</div>
 							<div class="col-sm-8">
-								<input type="number" name=<?php echo "item" . $arrayForModelPara[$i][2]; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
+								<input type="number" name=<?php echo "SameNeuron_itemval_".$i; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
 							</div>
 							<br><br>
 						<?php
@@ -270,8 +305,15 @@ if ($_SESSION['flag']==1){
 			$arrayForModelPara = queryDatabase($arrayForModelPara,$_POST['model'.$modelNumber]); //return 2D array with parameter name and value for user input
 			#echo $arrayForModelPara[1][1];
 			#echo count($arrayForModelPara);
-			 
+			
  			$id=$_POST['name'.($loopCounter + $subtractedSameModel)];
+ 			####################################################################################################
+ 			//entering neuron number to its corresponding model
+ 			//The array needs to be sorted later so that approoriate assignment of FPGA can be done later.
+ 			//$loopCounter + $subtractedSameModel ==> gives a neuron number. 
+ 			//Since each FPGA can only take certain number of neurons and only of one type, Sorting similar neurons to a similar number might help 
+ 			####################################################################################################
+ 			$HashMapArrayForNeuronToModel[$loopCounter + $subtractedSameModel] = $_POST['model'.$modelNumber];
 			echo 'id '.$id;
 			?><br><fieldset>
 			<legend>The typical values for the <?php echo $_POST['model'.$modelNumber];?> model are: </legend>
@@ -285,7 +327,7 @@ if ($_SESSION['flag']==1){
 					<!-- grabbing parameters and default values for each parameter from the database -->
 					<?php echo ($i+1) ,")"; ?> <?php echo $arrayForModelPara[$i][0]; ?>:</div>
 					<div class="col-sm-8">
-						<input type="number" name=<?php echo "item" . $arrayForModelPara[$i][2]; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
+						<input type="number" name=<?php echo "DifferentNeuron_itemval_".$loopCounter."_".$i; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
 				</div>
 				<br><br>
 				<?php
@@ -293,6 +335,9 @@ if ($_SESSION['flag']==1){
 				
 
 			}
+
+		
+
 
 		?>
 			
@@ -302,6 +347,13 @@ if ($_SESSION['flag']==1){
 	} //end of else
 	?>
 	<?php
+	print_r($HashMapArrayForNeuronToModel);	
+		//This array needs to be sorted so that all the similar models are
+	$sortedHashMapArrayForNeuronToModel = sortNeuronModel($HashMapArrayForNeuronToModel);
+	//lets store it into a file for later use
+	print_r($sortedHashMapArrayForNeuronToModel);
+	file_put_contents("SimulationXML/".$userLogged . "/SortedNeuronModelHashMap_" . $userID . ".bin",serialize($sortedHashMapArrayForNeuronToModel));
+
 } //end of main if
 
 else{
