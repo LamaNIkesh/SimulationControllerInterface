@@ -10,6 +10,24 @@ include("head.html")
 //still looking into it
 libxml_disable_entity_loader(false);
 
+//functino to return a unique multidimensional array
+function super_unique($array)
+{
+  $result = array_map("unserialize", array_unique(array_map("serialize", $array)));
+
+  foreach ($result as $key => $value)
+  {
+    if ( is_array($value) )
+    {
+      $result[$key] = super_unique($value);
+    }
+  }
+
+  return $result;
+}
+
+
+
 function generateFPGAConfigurationXML($fileLocationOfNeuronInit){
 	/*This function looks into neuron initialisation file and extracts which FPGA devices are 
 	  used for what neuron models. Based on these information, a packet for each FPGA to configure
@@ -47,15 +65,15 @@ function generateFPGAConfigurationXML($fileLocationOfNeuronInit){
 		if ($counter == 0){
 			echo "counter zero <br>";
 			//Assignment for the first iteration
-			$previousFPGAdevice = $packet->destdevice;
-			$previousmodelid = $packet->modelid;
+			$previousFPGAdevice = intval($packet->destdevice);
+			$previousmodelid = intval($packet->modelid);
 			$arrayForFPGAdeviceModelid[$arrayIndexing][0] = $previousFPGAdevice;
 			$arrayForFPGAdeviceModelid[$arrayIndexing][1] = $previousmodelid;
 			$arrayIndexing++;
 		}
 		else{
-			$FPGAdevice = $packet->destdevice;
-			$modelid = $packet->modelid;
+			$FPGAdevice = intval($packet->destdevice);
+			$modelid = intval($packet->modelid);
 			echo "FPGAdevice: ".$FPGAdevice."<br>";
 			echo "prevFPGAdevice: ".$previousFPGAdevice."<br>";
 			echo "modelid: ".$modelid."<br>";
@@ -83,15 +101,40 @@ function generateFPGAConfigurationXML($fileLocationOfNeuronInit){
 	//echo "<br>Elements: ".$arrayForFPGAdeviceModelid[1][0]. $arrayForFPGAdeviceModelid[1][1]."<br>";
 	//echo "<br>Elements: ".$arrayForFPGAdeviceModelid[0][0]. $arrayForFPGAdeviceModelid[0][1]."<br>";
 	//echo "<br>Elements: ".$arrayForFPGAdeviceModelid[0][0]. $arrayForFPGAdeviceModelid[0][1]."<br>";
-	return $arrayForFPGAdeviceModelid;
+	echo "<br> Target FPGA array<br>";
+	print_r($arrayForFPGAdeviceModelid);
+	echo "<br>Unique<br>";
+	//There is a repetition of same FPGA device, we need to get rid of that and return only the unique ones
+	//for eg. if there are 5 entries of 3 unique FPGA devices, then we return only the 3. 
+	$uniquearray = super_unique($arrayForFPGAdeviceModelid);
+	$uniquearray = array_values($uniquearray); // This resets the index. eg. 
+												//[3] => Hello
+												//	[7] => Moo
+												//	[45] => America
+												// To 
+												//	[0] => Hello
+												//	[1] => Moo
+												//	[2] => America
+	print_r($uniquearray);
+	//print_r(array_unique($arrayForFPGAdeviceModelid));
+	echo "<br>";
+	return $uniquearray;
+
 }
 
 
 function createFPGAConfigurationXML($arrayForFPGAdeviceModelid,$storingLocation,$simNum){
+
+
+	//Lets get FPGA device info from saved array with FPGA assignment into each neuron
+
+	//$FinalSortedNeuronsFPGAArray = unserialize(file_get_contents("SimulationXML/".$userLogged . "/FinalSortedNeuronsFPGAArray_" . $userID . ".bin"));
+
 	//Once, we have the array with FPGA number and model id, we can generate packet to program the FPGA
 	$data  = new DOMDocument;
 	$data ->formatOutput = true;
 	$dom=$data->createElement("sUploadSof");
+
 
 
 	for ($i=0; $i < count($arrayForFPGAdeviceModelid) ; $i++) { 

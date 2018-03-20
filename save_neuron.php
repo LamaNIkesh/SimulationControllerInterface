@@ -156,7 +156,7 @@ if ($_SESSION['flag']==1){
 							<?php echo ($i+1) ,")"; ?> <?php echo $arrayForModelPara[$i][0]; ?>:</div>
 							<div class="col-sm-8">
 								<!-- Passing itemvalues for each parameter to  next page -->
-								<input type="number" name=<?php echo "SameNeuron_itemval_".$i ; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
+								<input type="number" name=<?php echo "AllSameNeuron_itemval_".$i ; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
 							</div>
 							<br><br>
 						<?php
@@ -167,6 +167,10 @@ if ($_SESSION['flag']==1){
 	<input type="submit" value="Next">
 	</form><br><br>
 	<?php
+	print_r($HashMapArrayForNeuronToModel);	
+	file_put_contents("SimulationXML/".$userLogged . "/SortedNeuronModelHashMap_" . $userID . ".bin",serialize($HashMapArrayForNeuronToModel));
+
+
 	} //end of if samemodel==true
 
 	//##############################################################################################################
@@ -255,7 +259,7 @@ if ($_SESSION['flag']==1){
 							<!-- grabbing parameters and default values for each parameter from the database -->
 							<?php echo ($i+1) ,")"; ?> <?php echo $arrayForModelPara[$i][0]; ?>:</div>
 							<div class="col-sm-8">
-								<input type="number" name=<?php echo "SameNeuron_itemval_".$i; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
+								<input type="number" name=<?php echo "SameFromDiff_Neuron_itemval_".$i; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
 							</div>
 							<br><br>
 						<?php
@@ -293,6 +297,7 @@ if ($_SESSION['flag']==1){
 				if 5 neurons are same model and 4 differnt then
 				nueron number 1-5 will have same model and neuron 6-9 will get different models
 			*/
+			$neuronId = $loopCounter + $subtractedSameModel;
 			$modelNumber = $loopCounter + $subtractedSameModel;
 			//echo 'passed model : '.$_POST['model'.$modelNumber];
 			/*if ($_POST['model'.$modelNumber]==1){$modelname="Integrate and fire";}
@@ -327,7 +332,9 @@ if ($_SESSION['flag']==1){
 					<!-- grabbing parameters and default values for each parameter from the database -->
 					<?php echo ($i+1) ,")"; ?> <?php echo $arrayForModelPara[$i][0]; ?>:</div>
 					<div class="col-sm-8">
-						<input type="number" name=<?php echo "DifferentNeuron_itemval_".$loopCounter."_".$i; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
+						<?php echo "DifferentNeuron_itemval_".$neuronId."_".$i;?>
+						<!-- Here neuron id with each parameter is posted to the next page which are picked in the next page -->
+						<input type="number" name=<?php echo "DifferentNeuron_itemval_".$neuronId."_".$i; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
 				</div>
 				<br><br>
 				<?php
@@ -344,15 +351,16 @@ if ($_SESSION['flag']==1){
 			<br><input type="submit" value="Next">
 		</form><br><br>
 		<?php
+		//saving sorted hasmap array for use in next page
+			print_r($HashMapArrayForNeuronToModel);	
+				//This array needs to be sorted so that all the similar models are
+			$sortedHashMapArrayForNeuronToModel = sortNeuronModel($HashMapArrayForNeuronToModel);
+			//lets store it into a file for later use
+			print_r($sortedHashMapArrayForNeuronToModel);
+			file_put_contents("SimulationXML/".$userLogged . "/SortedNeuronModelHashMap_" . $userID . ".bin",serialize($sortedHashMapArrayForNeuronToModel));
+
 	} //end of else
-	?>
-	<?php
-	print_r($HashMapArrayForNeuronToModel);	
-		//This array needs to be sorted so that all the similar models are
-	$sortedHashMapArrayForNeuronToModel = sortNeuronModel($HashMapArrayForNeuronToModel);
-	//lets store it into a file for later use
-	print_r($sortedHashMapArrayForNeuronToModel);
-	file_put_contents("SimulationXML/".$userLogged . "/SortedNeuronModelHashMap_" . $userID . ".bin",serialize($sortedHashMapArrayForNeuronToModel));
+	
 
 } //end of main if
 
