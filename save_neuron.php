@@ -91,7 +91,8 @@ if ($_SESSION['flag']==1){
 	//#############################################################################################################
     // 										SAME NEURON MODELS
 	//############################################################################################################
-	$HashMapArrayForNeuronToModel = array();
+	$HashMapArrayForNeuronToModel = array(); //array holding neuron with model
+
 	if ($_POST['samemodel']=='yes' and $_POST['totalDiffModelNeurons'] == 0){
 
 		//Lets get the model parameters
@@ -168,6 +169,9 @@ if ($_SESSION['flag']==1){
 	</form><br><br>
 	<?php
 	print_r($HashMapArrayForNeuronToModel);	
+	//No need to sort for all same models since they are already sorted . Only need to sort for different models.
+	//For different models, the models are not in sorted order for eg neuron 1 could get LIF and neuron 2 could get IZ. Sorting puts all LIF and IZ in sorted order.
+	//This makes easy to assign FPGA for each 8 models. 
 	file_put_contents("SimulationXML/".$userLogged . "/SortedNeuronModelHashMap_" . $userID . ".bin",serialize($HashMapArrayForNeuronToModel));
 
 

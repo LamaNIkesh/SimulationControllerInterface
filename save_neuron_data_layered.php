@@ -25,13 +25,13 @@ include("head.html")
 			if(mysqli_num_rows($result)>0){
 				while($row = mysqli_fetch_assoc($result)){
 
-					/*
-					reading the whole database which will be used to generate xml file with all the parameters.
-					The parameter table is
-					  [0]     [1]   [2]  [3]    [4]       [5]        [6]       [7]   [8]   [9]   [10]
-					ItemID|ModelID|Name|Type|Datatype|IntegerPart|TypicalVal|InLSB|InMSB|OutLSB|OutMSB
+					
+					#reading the whole database which will be used to generate xml file with all the parameters.
+					#The parameter table is
+					#  [0]     [1]   [2]  [3]    [4]       [5]        [6]       [7]   [8]   [9]   [10]
+					#ItemID|ModelID|Name|Type|Datatype|IntegerPart|TypicalVal|InLSB|InMSB|OutLSB|OutMSB
 
-					*/
+					
 
 					//echo "Model ID: ".$row['ModelID']."---Model Name: ".$row['Name']." "."<br>";
 					$arrayForModelPara[$loopCounter][0] = $row['ItemID']; //first element of 2d array is para name and second column is the typical value
@@ -58,7 +58,7 @@ include("head.html")
 	  	}
 
 	}
-
+###########################################################################################################################
 	//returns model name for the model ID
 	function getModelNameFromModelID($modelID){
 		$server = 'localhost';
@@ -92,7 +92,7 @@ include("head.html")
 	  		echo "Cannot establish connection !!";
 	  	}
 	}
-
+################################################################################################################################
 	//Function to get teh available FPGA device from the database
 	function getFPGADevice($simNum){
 		/*
@@ -143,8 +143,152 @@ include("head.html")
 	  	}
 	  	return $availableFPGANum;
 	} //end of function getFPGADevice
+#########################################################################################################
+
+	function getFPGADeviceIntoArray($sortedHashMapArray){
+		#This function calculates how many FPGA devices are required
+		#No two different models can be in a same FPGA.
+		#So mainly takign already sorted hashmaparray and break it into chunks of 8 neurons of same model. If there are 10 neurons of LIF and 2 of Izhikevich then
+		# two FPGA are used LIf and another one for Izhikevich
+
+		$simNum = $_POST['simNum'];
+
+		$totalNeuronCount = count($sortedHashMapArray);
+		echo "<br>Total neurons: ".$totalNeuronCount."<br>";
+		print_r($sortedHashMapArray);
+		$lastModel = '';
+		#keeping track of the loop
+		$counter = 0;
+		#this value is incremeneted everytime a new FPGA is required
+		
+
+		$ResetToNewCounter = 0; //This will be used to deduct counter from previous different neurons.
+		#For eg: if neuron 1,2 are izhikevich and 3-15 are LIF, then after counter 1 and 2 New counter must start to check for next 8 neurons.
+		#In this case, $ResetToNewCounter is set to 2 and while checking it is done as if($counter - $ResetToNewCounter)%8 == 0 then do something.
+		#Probably not the best way....
+		$arrayWithNeuronIdModelFPGANum = array(array()); //been thinking may be if we store all the necessary info into one array then this will reduce the codebase
+														 //quite significantly. Also, things will be much more concise and easy to understand
+														 // Eventhough this array is useful, reducing codebase seems like a wishful thinking.
+														 //with demo deadline coming near, I dont want to fiddle with major chunks of the codebase. I need to plan more 
+														 //For each neuron one row will contain, NeuronNum, Modelname, FPGANum 
+		$totalFPGANeeded = 0;
+
+		/*
+		Expecting somthing like this where 
+							   Neuron#     Model        FPGA 
+		[0] => Array ( [0] => 20 [1] => Izhikevich [2] => 1 ) 
+		[1] => Array ( [0] => 12 [1] => Izhikevich [2] => 1 ) 
+		[2] => Array ( [0] => 19 [1] => Izhikevich [2] => 1 ) 
+		[3] => Array ( [0] => 18 [1] => Izhikevich [2] => 1 ) 
+		[4] => Array ( [0] => 17 [1] => Izhikevich [2] => 1 ) 
+		[5] => Array ( [0] => 16 [1] => Izhikevich [2] => 1 ) 
+		[6] => Array ( [0] => 15 [1] => Izhikevich [2] => 1 ) 
+		[7] => Array ( [0] => 14 [1] => Izhikevich [2] => 1 ) 
+		[8] => Array ( [0] => 13 [1] => Izhikevich [2] => 2 ) 
+		[9] => Array ( [0] => 11 [1] => Izhikevich [2] => 2 ) 
+		[10] => Array ( [0] => 2 [1] => leaky_integrate_and_fire [2] => 3 ) 
+		[11] => Array ( [0] => 10 [1] => leaky_integrate_and_fire [2] => 3 ) 
+		[12] => Array ( [0] => 9 [1] => leaky_integrate_and_fire [2] => 3 ) 
+		[13] => Array ( [0] => 8 [1] => leaky_integrate_and_fire [2] => 3 ) 
+		[14] => Array ( [0] => 7 [1] => leaky_integrate_and_fire [2] => 3 ) 
+		[15] => Array ( [0] => 6 [1] => leaky_integrate_and_fire [2] => 3 ) 
+		[16] => Array ( [0] => 5 [1] => leaky_integrate_and_fire [2] => 3 ) 
+		[17] => Array ( [0] => 4 [1] => leaky_integrate_and_fire [2] => 3 ) 
+		[18] => Array ( [0] => 3 [1] => leaky_integrate_and_fire [2] => 4 ) 
+		[19] => Array ( [0] => 1 [1] => leaky_integrate_and_fire [2] => 4 ) 
+		*/
 
 
+		foreach ($sortedHashMapArray as $key=>$value){
+			echo "<br>";
+			
+			if($counter == 0){
+				//for the first element, we assign to a new FPGA
+				$FPGARequired = getFPGADevice($simNum); //Look for new FPGA device in the database
+				echo "FPGA_first : ".$FPGARequired."<br>";
+				echo "Model: ".$value."<br>";
+				echo "Counter: ".$counter."<br>";
+				echo "key: ".$key;
+				$totalFPGANeeded++;
+				//writing into a 2D array
+				$arrayWithNeuronIdModelFPGANum[$key][0] = $key; //Neuron number at index 0, actually the first index num is same as the neuron num, this makes 
+																//easy to find where which neuron is. 
+				$arrayWithNeuronIdModelFPGANum[$key][1] = $value; //Model Name for neuron with $key value which is at index [][1] 
+				$arrayWithNeuronIdModelFPGANum[$key][2] = $FPGARequired; //FPGA num at index 2 
+
+
+				//This model will be used to compare with the next one
+				$lastModel = $value;
+			}
+			else{
+				//After deaing with the first neuron, We need to check if the next neuron has the same model or different.
+				//Alongside, keeping track of how neuron count, since [AT THIS STAGE] each FPGA can have max of 8 neurons, we place 9th Neuron to a different FPGA
+				if($value == $lastModel){
+					//for same model 
+					echo "<br>Same model as before<br>";
+					if (($counter-$ResetToNewCounter)%8 == 0){
+						#means multiple of 8 is found
+						#it means the FPGA is full and needs another FPGA
+						echo "<br>Neuron full<br>";
+						$FPGARequired = getFPGADevice($simNum); //Look for new FPGA device in the database
+						$totalFPGANeeded++;
+						echo "FPGA_sameMOdel : ".$FPGARequired."<br>";
+						echo "Model: ".$value."<br>";
+						echo "Counter: ".$counter."<br>";
+						//writing into an array
+						$arrayWithNeuronIdModelFPGANum[$key][0] = $key; //Neuron number at index 0 
+						$arrayWithNeuronIdModelFPGANum[$key][1] = $value; //Model Name at index 1
+						$arrayWithNeuronIdModelFPGANum[$key][2] = $FPGARequired; //FPGA num at index 2
+
+					}
+					else{
+						echo "Model: ".$value."<br>";
+						echo "Counter: ".$counter."<br>";
+						//writing into an array
+						$arrayWithNeuronIdModelFPGANum[$key][0] = $key; //Neuron number at index 0 
+						$arrayWithNeuronIdModelFPGANum[$key][1] = $value; //Model Name at index 1
+						$arrayWithNeuronIdModelFPGANum[$key][2] = $FPGARequired; //FPGA num at index 2
+
+					}
+
+				}
+				else{
+					#for different model
+					$lastModel = $value;
+					$FPGARequired = getFPGADevice($simNum); //new device needed
+					$totalFPGANeeded++;
+					echo "FPGA_diff : ".$FPGARequired."<br>";
+					echo "Model: ".$value."<br>";
+					echo "Counter: ".$counter."<br>";
+					//writing into an array
+					$arrayWithNeuronIdModelFPGANum[$key][0] = $key; //Neuron number at index 0 
+					$arrayWithNeuronIdModelFPGANum[$key][1] = $value; //Model Name at index 1
+					$arrayWithNeuronIdModelFPGANum[$key][2] = $FPGARequired; //FPGA num at index 2
+
+					$ResetToNewCounter = $counter;
+				}
+
+			}
+			$counter++;
+		}
+		echo "<br>TOTAL FPGA REQUIRED: ".$totalFPGANeeded."<br>";
+
+		#print_r($arrayWithNeuronIdModelFPGANum); //So this 
+		#asort($arrayWithNeuronIdModelFPGANum); //sorting it according to the neuron number, the rest of the information will remain intact. So it is easier to go through 
+		//loops to assign values
+		echo "<br><br>";
+		print_r($arrayWithNeuronIdModelFPGANum);
+		//returns sorted along neuron number
+		return $arrayWithNeuronIdModelFPGANum;
+	}
+
+
+
+
+
+
+
+########################################################################################################
 
 ?>
 
@@ -168,12 +312,6 @@ include("head.html")
 			$dom=$data->createElement("Neuron_Initialisation");
 // $xml = simplexml_load_file($userLogged . "/" . $userID . ".xml");
 
-if(file_exists('Libraries/ModelLibrary_metadata.xml')){ #Load XML file
-	$ModelLibrary = simplexml_load_file ("Libraries/ModelLibrary_metadata.xml");
-}
-else {
-	exit ('Could not load the file...');
-}
 ?>
 <?php
 //$neuronlistPath = "SimulationXML/".$userLogged . "/Layered/neuronlist.txt";
@@ -183,7 +321,45 @@ else {
 <form action="topology_layered.php" method="post">
 	<?php
 
-	##################################################################################################
+	#################################################################################################
+	#	BETTER ASSIGNMENT OF NEURONS TO FPGA USIGN SORTED HASHMAP ARRAY FOR NEURONS TO MODEL
+	#	A function call from another file is carried out to return a 2D array of neuron->model->FPGAdevice
+	#################################################################################################
+
+	try{
+		$sortedHashMapArrayOfNeuronModels = array();
+		#$deviceidarray = unserialize(file_get_contents("SimulationXML/".$userLogged . "/DeviceId_" . $userID . ".bin"));
+		$sortedHashMapArrayOfNeuronModels = unserialize(file_get_contents("SimulationXML/".$userLogged . "/Layered/SortedNeuronModelHashMap_" . $userID . ".bin"));
+		//function call
+		echo "<br>Sorted Hash Map Array<br>";
+		print_r($sortedHashMapArrayOfNeuronModels);
+
+		//getFPGADeviceIntoArray is read from another php file 
+		
+		//return a 2D array with neuron num, model name and FPGA
+		//The array is also sorted with neuron numbers. 
+		//So to generate xml we can simply loop through each neuron and assign FPGA device num, model parameters present in this 2d array
+		$FinalSortedNeuronsFPGAArray = getFPGADeviceIntoArray($sortedHashMapArrayOfNeuronModels); 
+		//tHIS returns a 2D array
+		/*
+		$arrayWithNeuronIdModelFPGANum[$counter][0] = $key; //Neuron number at index 0 
+		$arrayWithNeuronIdModelFPGANum[$counter][1] = $value; //Model Name at index 1
+		$arrayWithNeuronIdModelFPGANum[$counter][2] = $FPGARequired; //FPGA num at index 2*/
+		echo "<br>Final Sorted Array<br>";
+		print_r($FinalSortedNeuronsFPGAArray);
+		echo "<br>";
+
+		//lets save this array for further use down the road in save_topology.php
+		file_put_contents("SimulationXML/".$userLogged . "/Layered/FinalSortedNeuronsFPGAArray_" . $userID . ".bin",serialize($FinalSortedNeuronsFPGAArray));
+
+	}
+	catch(Exception $e){
+		echo "Cannot open file...";
+	}
+
+
+
+	/*##################################################################################################
 	#############################################################################################
 	#		ADDED BIT FOR MULTI FPGA SIMULATION 
 
@@ -242,10 +418,10 @@ else {
 		}
 		#echo "destdevice: ",$destdevice;
 	}*/
-	}
+	/*}
 	print_r($arraywithDevNum);
 	echo "array size: ",sizeof($arraywithDevNum);
-	file_put_contents("SimulationXML/".$userLogged . "/DeviceId_" . $userID . ".bin",serialize($arraywithDevNum));
+	file_put_contents("SimulationXML/".$userLogged . "/Layered/DeviceId_" . $userID . ".bin",serialize($arraywithDevNum));*/
 	
 	###############################################################################################
 	#							SAME MODEL LAYERS
@@ -286,7 +462,7 @@ else {
 				}
 				$packet=$data->createElement("packet");
 				//$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
-				$destdev=$data->createElement("destdevice", $arraywithDevNum[$neuronNumber - 1]);//neurons are numbered as 1,2 but index are 0,1,2 so to get index
+				$destdev=$data->createElement("destdevice", $FinalSortedNeuronsFPGAArray[$neuronNumber][2]);//neurons are numbered as 1,2 but index are 0,1,2 so to get index
 				$packet->appendChild($destdev);
 				$sourcedev=$data->createElement("sourcedevice",65532);
 				$packet->appendChild($sourcedev);
@@ -351,7 +527,7 @@ else {
 					$packet->appendChild($outlsb);
 					$outmsb=$data->createElement("outmsb",$arrayForModelPara[$i][10]);
 					$packet->appendChild($outmsb);
-					$itemvalue=$data->createElement("itemvalue",$arrayForModelPara[$i][6]);
+					$itemvalue=$data->createElement("itemvalue",$_POST['AllSameNeuron_itemval_'.$i]);
 					$packet->appendChild($itemvalue);
 				// $packet->appendChild($item);
 				}
@@ -391,7 +567,7 @@ else{
 		$arrayForModelPara = queryDatabaseForParameters($arrayForModelPara,$modelName);
 
 		?>
-		<input type="hidden" name=<?php echo "totalNeuronsEachLayer".$number; ?> value=<?php echo $_POST["totalNeuronsEachLayer".$number]; ?>>
+		<input type="hidden" name=<?php echo "totalNeuronsEachLayer".$number; ?> value=<?php echo $_POST['totalNeuronsEachLayer'.$number]; ?>>
 		<?php 
 
 		for($eachlayer = 1; $eachlayer<=$_POST['totalNeuronsEachLayer'.$number]; $eachlayer++){
@@ -401,7 +577,7 @@ else{
 			//echo "neuron number: ".$neuron_num;
 			$packet=$data->createElement("packet");
 			//$destdev=$data->createElement("destdevice",$_POST['name'.$number]+1);
-			$destdev=$data->createElement("destdevice",$arraywithDevNum[$neuron_num - 1]);//neurons are numbered as 1,2 but index are 0,1,2 so to get index
+			$destdev=$data->createElement("destdevice",$FinalSortedNeuronsFPGAArray[$neuron_num][2]);//neurons are numbered as 1,2 but index are 0,1,2 so to get index
 			$packet->appendChild($destdev);
 			$sourcedev=$data->createElement("sourcedevice",65532);
 			$packet->appendChild($sourcedev);
@@ -467,8 +643,9 @@ else{
 				$packet->appendChild($outlsb);
 				$outmsb=$data->createElement("outmsb",$arrayForModelPara[$i][10]);
 				$packet->appendChild($outmsb);
-				$itemvalue=$data->createElement("itemvalue",$arrayForModelPara[$i][6]);
-				$packet->appendChild($itemvalue);
+				$itemvalue=$data->createElement("itemvalue",$_POST['DiffNeurons_layer_itemval_'.($number-1).'_'.$i]); //$number is the layer num, since previously layer started
+																												  //from zero index
+ 				$packet->appendChild($itemvalue);
 			// $packet->appendChild($item);
 			}
 		

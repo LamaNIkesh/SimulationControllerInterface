@@ -162,7 +162,9 @@ include("head.html")
 		#In this case, $ResetToNewCounter is set to 2 and while checking it is done as if($counter - $ResetToNewCounter)%8 == 0 then do something.
 		#Probably not the best way....
 		$arrayWithNeuronIdModelFPGANum = array(array()); //been thinking may be if we store all the necessary info into one array then this will reduce the codebase
-														 //quite significantly. Also, things will be much more concise and easy to unde
+														 //quite significantly. Also, things will be much more concise and easy to understand
+														 // Eventhough this array is useful, reducing codebase seems like a wishful thinking.
+														 //with demo deadline coming near, I dont want to fiddle with major chunks of the codebase. I need to plan more 
 														 //For each neuron one row will contain, NeuronNum, Modelname, FPGANum 
 		$totalFPGANeeded = 0;
 
@@ -203,16 +205,19 @@ include("head.html")
 				echo "Counter: ".$counter."<br>";
 				echo "key: ".$key;
 				$totalFPGANeeded++;
-				//writing into an array
-				$arrayWithNeuronIdModelFPGANum[$key][0] = $key; //Neuron number at index 0 
-				$arrayWithNeuronIdModelFPGANum[$key][1] = $value; //Model Name at index 1
-				$arrayWithNeuronIdModelFPGANum[$key][2] = $FPGARequired; //FPGA num at index 2
+				//writing into a 2D array
+				$arrayWithNeuronIdModelFPGANum[$key][0] = $key; //Neuron number at index 0, actually the first index num is same as the neuron num, this makes 
+																//easy to find where which neuron is. 
+				$arrayWithNeuronIdModelFPGANum[$key][1] = $value; //Model Name for neuron with $key value which is at index [][1] 
+				$arrayWithNeuronIdModelFPGANum[$key][2] = $FPGARequired; //FPGA num at index 2 
 
 
 				//This model will be used to compare with the next one
 				$lastModel = $value;
 			}
 			else{
+				//After deaing with the first neuron, We need to check if the next neuron has the same model or different.
+				//Alongside, keeping track of how neuron count, since [AT THIS STAGE] each FPGA can have max of 8 neurons, we place 9th Neuron to a different FPGA
 				if($value == $lastModel){
 					//for same model 
 					echo "<br>Same model as before<br>";

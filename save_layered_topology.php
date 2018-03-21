@@ -37,6 +37,9 @@
 				#reading the saved array from save_neuron-data file, it contains the device id number for each neuron
 				$deviceidarray = unserialize(file_get_contents("SimulationXML/".$userLogged . "/DeviceId_" . $userID . ".bin"));
 				$totalNeurons = sizeof($deviceidarray);
+
+				$FinalSortedNeuronsFPGAArray = unserialize(file_get_contents("SimulationXML/".$userLogged . "/Layered/FinalSortedNeuronsFPGAArray_" . $userID . ".bin"));
+
 				#print_r($deviceidarray);
 				############################################################################################
 				$numberOfNeurons = 0;
@@ -58,7 +61,7 @@
 	  					echo "\n";
 	  				}*/
 	  				$packet=$data->createElement("packet");
-					$destdev=$data->createElement("destdevice",$deviceidarray[$numberOfNeurons]); // since the indexing starts from zero
+					$destdev=$data->createElement("destdevice",$FinalSortedNeuronsFPGAArray[$numberOfNeurons+1][2]); // since the indexing starts from zero
 					$packet->appendChild($destdev);
 					$sourcedev=$data->createElement("sourcedevice",65532);
 					$packet->appendChild($sourcedev);
