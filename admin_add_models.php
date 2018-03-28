@@ -52,7 +52,7 @@ if ($_SESSION['flag']==1){
             <br><br>
 
           <div class= "col-sm-3">
-            Filename: </div><input type="text" name = "filename" placeholder="eg:phototaxis" min="1" max="1000" required>
+            Filename: </div><input type="text" name = "filename" placeholder="eg:LIF.sof" min="1" max="1000" required>
             <br><br>
                   
           <div class= "col-sm-3">

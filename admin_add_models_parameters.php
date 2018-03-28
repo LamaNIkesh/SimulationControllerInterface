@@ -12,7 +12,7 @@ include("head_admin.html")
 
 
 //function to update the database
-function databaseUpdate($modelId,$name,$type,$datatype,$integerpart,$typicalval,$inlsb,$inmsb,$outlsb,$outmsb){
+function databaseUpdate($modelId,$name,$typicalval){
   //create connection
   $server = 'localhost';
   $user = 'root';
@@ -25,14 +25,7 @@ function databaseUpdate($modelId,$name,$type,$datatype,$integerpart,$typicalval,
       //$itemid = mysqli_real_escape_string($connection,$itemid);
       $modelId = mysqli_real_escape_string($connection,$modelId);
       $name = mysqli_real_escape_string($connection,$name);
-      $type = mysqli_real_escape_string($connection,$type);
-      $datatype = mysqli_real_escape_string($connection,$datatype);
-      $integerpart = mysqli_real_escape_string($connection,$integerpart);
       $typicalval = mysqli_real_escape_string($connection,$typicalval);
-      $inlsb = mysqli_real_escape_string($connection,$inlsb);
-      $inmsb = mysqli_real_escape_string($connection,$inmsb);
-      $outlsb = mysqli_real_escape_string($connection,$outlsb);
-      $outmsb = mysqli_real_escape_string($connection,$outmsb);
 
       //echo $_POST['modelName'];
       //checkign the table exists or not, if the table with model name already exists, we simply update the parameters
@@ -45,14 +38,7 @@ function databaseUpdate($modelId,$name,$type,$datatype,$integerpart,$typicalval,
         ItemID INT(10) AUTO_INCREMENT PRIMARY KEY,
         ModelID varchar(100) NOT NULL,
         Name VARCHAR(30) NOT NULL,
-        Type INT(5) NOT NULL,
-        Datatype INT(5) NOT NULL,
-        IntegerPart INT(5) NOT NULL,
         TypicalVal FLOAT(10) NOT NULL,
-        InLSB INT(5) NOT NULL,
-        InMSB INT(5) NOT NULL,
-        OutLSB INT(5) NOT NULL,
-        OutMSB INT(5) NOT NULL,
         FOREIGN KEY (ModelID) REFERENCES ModelLibrary(ModelID) ON DELETE CASCADE
         )";
         if($connection->query($createTable) == TRUE){
@@ -64,8 +50,8 @@ function databaseUpdate($modelId,$name,$type,$datatype,$integerpart,$typicalval,
        }                                                     //since item id is autoincremented no need to explicitly insert into database
 
 
-      $insertData = "INSERT INTO ".$_POST['modelName']." (ModelID,Name, Type, Datatype, IntegerPart, TypicalVal, InLSB,InMSB, OutLSB, OutMSB) 
-                    VALUES ('$modelId','$name', '$type','$datatype', '$integerpart', '$typicalval', '$inlsb', '$inmsb', '$outlsb', '$outmsb')";
+      $insertData = "INSERT INTO ".$_POST['modelName']." (ModelID,Name, TypicalVal) 
+                    VALUES ('$modelId','$name','$typicalval')";
       if($connection->query($insertData)){
         echo "New record created successfully";
       }
@@ -82,7 +68,7 @@ function databaseUpdate($modelId,$name,$type,$datatype,$integerpart,$typicalval,
 
 
 if(isset($_POST['name'])){
-    databaseUpdate($_POST['modelID'],$_POST['name'],$_POST['type'],$_POST['datatype'],$_POST['integerpart'],$_POST['typicalval'],$_POST['inlsb'],$_POST['inmsb'],$_POST['outlsb'],$_POST['outmsb']);
+    databaseUpdate($_POST['modelID'],$_POST['name'], $_POST['typicalval']);
 }
 
 
@@ -118,6 +104,7 @@ if ($_SESSION['flag']==1){
             Name: </div><input type="text" name="name" placeholder = "eg.threshold" required> 
             <br>
             <br> 
+            <!--
           <div class= "col-sm-3">
             Type: </div><input type="text" name="type" placeholder = "eg.1" required>
             <br>
@@ -130,10 +117,13 @@ if ($_SESSION['flag']==1){
             Integer Part: </div><input type="text" name="integerpart" placeholder = "eg.8" required> 
             <br>
             <br> 
+          -->
+
           <div class= "col-sm-3">
             Typical Value: </div><input type="text" name="typicalval" placeholder = "eg.6.0" required>
             <br>
             <br>
+          <!--
           <div class= "col-sm-3">
             In LSB: </div><input type="text" name="inlsb" placeholder = "eg.0" required>
             <br>
@@ -150,7 +140,7 @@ if ($_SESSION['flag']==1){
             Out MSB: </div><input type="text" name="outmsb" placeholder = "eg.0" required>
             <br>
             <br>
-                 
+          -->       
           <div class= "col-sm-3">
           <input type="hidden" name="modelName" value=<?php echo $_POST['modelName']; ?>>
           <input type="hidden" name="modelID" value=<?php echo $_POST['modelID']; ?>>

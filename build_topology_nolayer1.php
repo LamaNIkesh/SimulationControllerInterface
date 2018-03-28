@@ -134,7 +134,8 @@ include("head.html")
 				<form action="select_neuron.php" method="POST">
 					<br>
 					<input type="hidden" value=<?php echo $_POST['totalNeurons']; ?> name="totalNeurons">
-					<input type = "hidden" value=<?php echo $_POST['totalDiffModelNeurons'];?> name = "totalDiffModelNeurons">
+					<!-- For same models, no different model info is transferred so just doing an error handling -->
+					<input type = "hidden" value=<?php if(isset($_POST['totalDiffModelNeurons'])){echo $_POST['totalDiffModelNeurons'];} else{echo 0;}?> name = "totalDiffModelNeurons">
 					<input type="hidden" value=<?php echo $simNum; ?> name="simNum">
 					<input type="hidden" value=<?php echo $_POST['samemodel']; ?> name="samemodel">
 					<!--

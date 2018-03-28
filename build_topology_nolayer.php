@@ -25,14 +25,14 @@ if ($_SESSION['flag']==1){
 					<!---Number of muscles in the subcircuit: <input type="number" name="muscle" min="0" max="135" value="0" required>
 					<br><br>-->
 					<div class= "col-sm-3">
-					Are all neurons using the same model: </div><select name="samemodel" required>
+					Are all neurons using the same model: </div><select name="samemodel" onchange = 'CheckDiffModel(this.value);' required>
 					<option value="yes">Yes</option>
 					<option value="no" >No</option>
 					</select>
 					<br><br>
 					<div class = "col-sm-3">
 					
-					How many with different models?:</div><input type="number" name="totalDiffModelNeurons" min="0" max="500" value="0" required>(Leave it to zero if all the neurons have same model)
+					How many with different models?:</div><input type="number" name="totalDiffModelNeurons" id = "totalDiffModelNeuronsTxtField" min="0" max="500" value="0" disabled >(Leave it to zero if all the neurons have same model)
 				
 				
 				<br><br>

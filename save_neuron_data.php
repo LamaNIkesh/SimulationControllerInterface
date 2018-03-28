@@ -28,6 +28,13 @@ include("head.html")
 					The parameter table is
 					  [0]     [1]   [2]  [3]    [4]       [5]        [6]       [7]   [8]   [9]   [10]
 					ItemID|ModelID|Name|Type|Datatype|IntegerPart|TypicalVal|InLSB|InMSB|OutLSB|OutMSB
+					
+					OK, Now things have changed and Pedro doesnt really need most of these information.
+					All that are needed are itemid, modelid, name and typical value
+
+					so new layout is 
+					 [0]     [1]    [2]  	[3]          
+					ItemID|ModelID|Name|TypicalVal|
 
 					*/
 
@@ -35,14 +42,14 @@ include("head.html")
 					$arrayForModelPara[$loopCounter][0] = $row['ItemID']; //first element of 2d array is para name and second column is the typical value
 					$arrayForModelPara[$loopCounter][1] = $row['ModelID'];
 					$arrayForModelPara[$loopCounter][2] = $row['Name'];
-					$arrayForModelPara[$loopCounter][3] = $row['Type']; //first element of 2d array is para name and second column is the typical value
+					/*$arrayForModelPara[$loopCounter][3] = $row['Type']; //first element of 2d array is para name and second column is the typical value
 					$arrayForModelPara[$loopCounter][4] = $row['Datatype'];
-					$arrayForModelPara[$loopCounter][5] = $row['IntegerPart'];
-					$arrayForModelPara[$loopCounter][6] = $row['TypicalVal']; //first element of 2d array is para name and second column is the typical value
-					$arrayForModelPara[$loopCounter][7] = $row['InLSB'];
+					$arrayForModelPara[$loopCounter][5] = $row['IntegerPart'];*/
+					$arrayForModelPara[$loopCounter][3] = $row['TypicalVal']; //first element of 2d array is para name and second column is the typical value
+					/*$arrayForModelPara[$loopCounter][7] = $row['InLSB'];
 					$arrayForModelPara[$loopCounter][8] = $row['InMSB'];
 					$arrayForModelPara[$loopCounter][9] = $row['OutLSB']; //first element of 2d array is para name and second column is the typical value
-					$arrayForModelPara[$loopCounter][10] = $row['OutMSB'];
+					$arrayForModelPara[$loopCounter][10] = $row['OutMSB'];*/
 
 					$loopCounter++;
 				}
@@ -490,7 +497,11 @@ include("head.html")
 							$item=$data->createElement("item");
 							$itemid=$data->createElement("itemid",$arrayForModelPara[$i][0]);
 							$packet->appendChild($itemid);
-							$itemtype=$data->createElement("itemtype",$arrayForModelPara[$i][3]); //to understand these numbers, have a look at line 29 which shows
+							//Well now, Pedro doesn't want all these information such as item type, inlsb and such.......
+							// So the database has been trimmed to just keep ItemID, ModelID, Name and TypicalVal
+
+
+							/*$itemtype=$data->createElement("itemtype",$arrayForModelPara[$i][3]); //to understand these numbers, have a look at line 29 which shows
 																								  // the table structure in the database
 							$packet->appendChild($itemtype);
 							$itemdatatype=$data->createElement("itemdatatype",$arrayForModelPara[$i][4]);
@@ -504,7 +515,7 @@ include("head.html")
 							$outlsb=$data->createElement("outlsb",$arrayForModelPara[$i][9]);
 							$packet->appendChild($outlsb);
 							$outmsb=$data->createElement("outmsb",$arrayForModelPara[$i][10]);
-							$packet->appendChild($outmsb);
+							$packet->appendChild($outmsb);*/
 							$itemvalue=$data->createElement("itemvalue",$_POST['AllSameNeuron_itemval_'.$i]);
 							$packet->appendChild($itemvalue);
 						// $packet->appendChild($item);
@@ -627,7 +638,7 @@ include("head.html")
 							#--iterating through all the parameters and values for each one 
 							$item=$data->createElement("item");
 							$itemid=$data->createElement("itemid",$arrayForModelPara[$i][0]);
-							$packet->appendChild($itemid);
+							/*$packet->appendChild($itemid);
 							$itemtype=$data->createElement("itemtype",$arrayForModelPara[$i][3]); //to understand these numbers, have a look at line 29 which shows
 																								  // the table structure in the database
 							$packet->appendChild($itemtype);
@@ -642,7 +653,7 @@ include("head.html")
 							$outlsb=$data->createElement("outlsb",$arrayForModelPara[$i][9]);
 							$packet->appendChild($outlsb);
 							$outmsb=$data->createElement("outmsb",$arrayForModelPara[$i][10]);
-							$packet->appendChild($outmsb);
+							$packet->appendChild($outmsb);*/
 							$itemvalue=$data->createElement("itemvalue",$_POST['SameFromDiff_Neuron_itemval_'.$i]);
 							$packet->appendChild($itemvalue);
 						// $packet->appendChild($item);
@@ -738,7 +749,7 @@ include("head.html")
 						#--iterating through all the parameters and values for each one 
 						$item=$data->createElement("item");
 						$itemid=$data->createElement("itemid",$arrayForModelPara[$i][0]);
-						$packet->appendChild($itemid);
+						/*$packet->appendChild($itemid);
 						$itemtype=$data->createElement("itemtype",$arrayForModelPara[$i][3]); //to understand these numbers, have a look at line 29 which shows
 																							  // the table structure in the database
 						$packet->appendChild($itemtype);
@@ -753,7 +764,7 @@ include("head.html")
 						$outlsb=$data->createElement("outlsb",$arrayForModelPara[$i][9]);
 						$packet->appendChild($outlsb);
 						$outmsb=$data->createElement("outmsb",$arrayForModelPara[$i][10]);
-						$packet->appendChild($outmsb);
+						$packet->appendChild($outmsb);*/
 						$itemvalue=$data->createElement("itemvalue",$_POST['DifferentNeuron_itemval_'.$neuronidNum.'_'.$i]); //$number is the neuron num and $i is the item 
 						$packet->appendChild($itemvalue);
 					// $packet->appendChild($item);

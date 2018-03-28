@@ -157,7 +157,7 @@ if ($_SESSION['flag']==1){
 							<?php echo ($i+1) ,")"; ?> <?php echo $arrayForModelPara[$i][0]; ?>:</div>
 							<div class="col-sm-8">
 								<!-- Passing itemvalues for each parameter to  next page -->
-								<input type="number" name=<?php echo "AllSameNeuron_itemval_".$i ; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
+								<input type="number" step = "any" name=<?php echo "AllSameNeuron_itemval_".$i ; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
 							</div>
 							<br><br>
 						<?php
@@ -263,7 +263,7 @@ if ($_SESSION['flag']==1){
 							<!-- grabbing parameters and default values for each parameter from the database -->
 							<?php echo ($i+1) ,")"; ?> <?php echo $arrayForModelPara[$i][0]; ?>:</div>
 							<div class="col-sm-8">
-								<input type="number" name=<?php echo "SameFromDiff_Neuron_itemval_".$i; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
+								<input type="number" step = "any" name=<?php echo "SameFromDiff_Neuron_itemval_".$i; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
 							</div>
 							<br><br>
 						<?php
@@ -338,7 +338,7 @@ if ($_SESSION['flag']==1){
 					<div class="col-sm-8">
 						<?php echo "DifferentNeuron_itemval_".$neuronId."_".$i;?>
 						<!-- Here neuron id with each parameter is posted to the next page which are picked in the next page -->
-						<input type="number" name=<?php echo "DifferentNeuron_itemval_".$neuronId."_".$i; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
+						<input type="number" step = "any" name=<?php echo "DifferentNeuron_itemval_".$neuronId."_".$i; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
 				</div>
 				<br><br>
 				<?php
