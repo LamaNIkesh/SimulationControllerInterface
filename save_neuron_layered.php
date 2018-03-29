@@ -78,6 +78,36 @@ include("head.html")
 	}
 
 
+	function sortNeuronModel($hashmaparray){
+		#This function sorts the hashmap array so that all the similar models are together
+		#FOr eg: [1] => leaky_integrate_and_fire [2] => leaky_integrate_and_fire [3] => leaky_integrate_and_fire
+		#        [4] => Izhikevich [5] => leaky_integrate_and_fire [6] => leaky_integrate_and_fire 
+		#		 [7] => leaky_integrate_and_fire [8] => Izhikevich [9] => leaky_integrate_and_fire 
+		#	     [10] => Izhikevich
+		# This array will be sorted as so that all leaky_integrate_and_fire are together. 
+		#        [1] => leaky_integrate_and_fire [2] => leaky_integrate_and_fire [3] => leaky_integrate_and_fire
+		#        [5] => leaky_integrate_and_fire [6] => leaky_integrate_and_fire 
+		#		 [7] => leaky_integrate_and_fire [9] => leaky_integrate_and_fire 
+		#	     [4] => Izhikevich  [8] => Izhikevich  [10] => Izhikevich
+		#This will make easier for model assignment on FPGA.
+		# Simple counting from 1-8 models which are same can be assigned to one FPGA
+		# For eg: here Neurons 1,2,3,5,6,7,9 will be mapped into one FPGA and neurons 4,8,10 onto another since they are different models. 
+		# The neuron number is stil the same so that its easy to track. 
+
+		asort($hashmaparray);
+		echo "<br>Sorted hasmap: ";
+		print_r($hashmaparray);
+		echo "<br>";
+		echo "\nAfter sorting..........\n";
+		echo "<br>";
+		foreach($hashmaparray as $key=>$val){
+			echo "$key = $val\n";
+		}
+		return $hashmaparray;
+	}
+
+
+
 ?>
 
 
@@ -90,11 +120,17 @@ include("head.html")
 		if ($_SESSION['flag']==1){
 
 			$simNum = $_POST['simNum'];
+			echo "<br>Simulation Num: ".$simNum."<br>";
+			$userID = $userLogged.'_'.$simNum;
 
+			$HashMapArrayForNeuronToModel = array(); //array holding neuron with model
+			###########################################################################
+			#				SAME MODEL FOR ALL LAYERS
+			############################################################################
 			//echo $_POST['samemodel'];
 			if ($_POST['samemodel']=='yes'){
 
-				$LayerDetails = fopen("SimulationXML/".$userLogged."/LayerDetails.txt","w");
+				$LayerDetails = fopen("SimulationXML/".$userLogged."/Layered/LayerDetails.txt","w");
 				//reading database for model parameters for the models
 				//returns a 2D array with all the parameters with values for each parameters
 				echo "model is: ".$_POST['model'];
@@ -117,13 +153,27 @@ include("head.html")
 					<input type ="hidden" name= "model" value=<?php echo $_POST['model']; ?> >
 					<input type = "hidden" name = "totalNeurons" value = <?php  echo $_POST['totalNeurons']; ?> >
 					<input type="hidden" value=<?php echo $simNum; ?> name="simNum">
-					<?php  
+					<?php
+
+					$neuronId = 1;
+
 					for ($i=1; $i <= $_POST['noOflayers']; $i++) { 
 						//passing no fo neurons each layer to the next file to be read
 						fwrite($LayerDetails,$i);
 						fwrite($LayerDetails," ".$_POST['totalNeuronsEachLayer'.$i]);
 						fwrite($LayerDetails, " ".$_POST['model']);
 						fwrite($LayerDetails,"\n");
+						//We can also write these information into an array as well. 
+						//basically, going through each layer and numbering each neuron with its corresponding model id
+						
+						for ($number = 1; $number < $_POST['totalNeuronsEachLayer'.$i] + 1; ++$number){
+							echo "<br>Neuron id: ".$neuronId.", Model=> ".$_POST['model']."<br>";
+							$HashMapArrayForNeuronToModel[$neuronId] = $_POST['model'];
+							$neuronId++; //increasing neuron id number for next loop. since this is all same model this is pretty straightforward 
+
+						}
+
+
 						?>
 						<input type ="hidden" name=<?php echo "totalNeuronsEachLayer".$i ?> value= <?php echo $_POST['totalNeuronsEachLayer'.$i]; ?>>
 						<?php  
@@ -144,7 +194,7 @@ include("head.html")
 							}
 						}
 					}*/
-
+					echo "<br>ArrayForModelPara: ".count($arrayForModelPara)."<br>";
 					for ($i=0; $i <count($arrayForModelPara) ; $i++) { 
 					#this array contains how many parameters for selected model
 					/*
@@ -159,7 +209,7 @@ include("head.html")
 								<!-- grabbing parameters and default values for each parameter from the database -->
 								<?php echo ($i+1) ,")"; ?> <?php echo $arrayForModelPara[$i][0]; ?>:</div>
 								<div class="col-sm-8">
-									<input type="number" name=<?php echo "item" . $arrayForModelPara[$i][2]; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
+									<input type="number" name=<?php echo "AllSameNeuron_itemval_".$i ; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
 								</div>
 								<br><br>
 							<?php
@@ -170,6 +220,12 @@ include("head.html")
 			<input type="submit" value="Next">
 			</form><br><br>
 			<?php
+			//print_r($HashMapArrayForNeuronToModel);	
+			//No need to sort for all same models since they are already sorted . Only need to sort for different models.
+			//For different models, the models are not in sorted order for eg neuron 1 could get LIF and neuron 2 could get IZ. Sorting puts all LIF and IZ in sorted order.
+			//This makes easy to assign FPGA for each 8 models. 
+			file_put_contents("SimulationXML/".$userLogged . "/Layered/SortedNeuronModelHashMap_" . $userID . ".bin",serialize($HashMapArrayForNeuronToModel));
+
 
 			} //end of same model if statment
 
@@ -203,7 +259,7 @@ include("head.html")
 				echo "[0]:".$modelarray[0];
 				echo "[1]:".$modelarray[1];
 				echo "[2]:".$modelarray[2];*/
-				
+				$neuronId = 1; //starting neuron id
 				
 				for ($layernum=0; $layernum <$numberOfLayers ; $layernum++) { 
 					# code...
@@ -227,6 +283,16 @@ include("head.html")
 					fwrite($LayerDetails," ".$_POST['totalNeuronsEachLayer'.($layernum+1)]);
 					fwrite($LayerDetails, " ".$modelarray[$layernum]);
 					//fwrite($LayerDetails, "\n");
+
+					for ($number = 1; $number < $_POST['totalNeuronsEachLayer'.($layernum+1)] + 1; ++$number){
+
+						echo "<br>Neuron id: ".$neuronId.", Model=> ".$modelarray[$layernum]."<br>";
+						$HashMapArrayForNeuronToModel[$neuronId] = $modelarray[$layernum];
+						$neuronId++; //increasing neuron id number for next loop. since this is all same model this is pretty straightforward 
+
+					}
+
+
 					?>
 					<form action="save_neuron_data_layered.php" method="post">
 
@@ -282,7 +348,7 @@ include("head.html")
 								<!-- grabbing parameters and default values for each parameter from the database -->
 								<?php echo ($i+1) ,")"; ?> <?php echo $arrayForModelPara[$i][0]; ?>:</div>
 								<div class="col-sm-8">
-									<input type="number" name=<?php echo "item" . $arrayForModelPara[$i][2]; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
+									<input type="number" name=<?php echo "DiffNeurons_layer_itemval_".$layernum."_".$i; ?> value=<?php echo $arrayForModelPara[$i][1]; ?> required>
 							</div>
 							<br><br>
 							<?php
@@ -297,7 +363,15 @@ include("head.html")
 					<input type="submit" value="Next">
 				</form><br><br><br>
 				<?php
+
 				fclose($LayerDetails);
+				//print_r($HashMapArrayForNeuronToModel);	
+
+				//This array needs to be sorted so that all the similar models are are sorted, this helps to assign FPGA appropriately
+				$sortedHashMapArrayForNeuronToModel = sortNeuronModel($HashMapArrayForNeuronToModel);
+				//lets store it into a file for later use
+				//print_r($sortedHashMapArrayForNeuronToModel);
+				file_put_contents("SimulationXML/".$userLogged . "/Layered/SortedNeuronModelHashMap_" . $userID . ".bin",serialize($sortedHashMapArrayForNeuronToModel));
 			}
 
 		}

@@ -33,7 +33,15 @@
 				//reads topology txt file created earlier and use that to generate topology initialisation file
 				#########################################################################################
 				#reading the saved array from save_neuron-data file, it contains the device id number for each neuron
-				$deviceidarray = unserialize(file_get_contents("SimulationXML/".$userLogged . "/DeviceId_" . $userID . ".bin"));
+				//$deviceidarray = unserialize(file_get_contents("SimulationXML/".$userLogged . "/DeviceId_" . $userID . ".bin"));
+				
+				//This array gives info about which neuron is to be assigned to which FPGA
+				//tHIS returns a 2D array
+				/*
+				$arrayWithNeuronIdModelFPGANum[$counter][0] = $key; //Neuron number at index 0 
+				$arrayWithNeuronIdModelFPGANum[$counter][1] = $value; //Model Name at index 1
+				$arrayWithNeuronIdModelFPGANum[$counter][2] = $FPGARequired; //FPGA num at index 2*/
+				$FinalSortedNeuronsFPGAArray = unserialize(file_get_contents("SimulationXML/".$userLogged . "/FinalSortedNeuronsFPGAArray_" . $userID . ".bin"));
 
 				#print_r($deviceidarray);
 				############################################################################################
@@ -53,7 +61,7 @@
 	  				}*/
 
 	  				$packet=$data->createElement("packet");
-					$destdev=$data->createElement("destdevice",$deviceidarray[$numberOfNeurons]); #1 here is the fpga device number
+					$destdev=$data->createElement("destdevice",$FinalSortedNeuronsFPGAArray[$numberOfNeurons+1][2]); #1 here is the fpga device number
 					$packet->appendChild($destdev);
 					$sourcedev=$data->createElement("sourcedevice",65532);
 					$packet->appendChild($sourcedev);

@@ -10,6 +10,24 @@ include("head.html")
 //still looking into it
 libxml_disable_entity_loader(false);
 
+//functino to return a unique multidimensional array
+function super_unique($array)
+{
+  $result = array_map("unserialize", array_unique(array_map("serialize", $array)));
+
+  foreach ($result as $key => $value)
+  {
+    if ( is_array($value) )
+    {
+      $result[$key] = super_unique($value);
+    }
+  }
+
+  return $result;
+}
+
+
+
 function generateFPGAConfigurationXML($fileLocationOfNeuronInit){
 	/*This function looks into neuron initialisation file and extracts which FPGA devices are 
 	  used for what neuron models. Based on these information, a packet for each FPGA to configure
@@ -47,15 +65,15 @@ function generateFPGAConfigurationXML($fileLocationOfNeuronInit){
 		if ($counter == 0){
 			echo "counter zero <br>";
 			//Assignment for the first iteration
-			$previousFPGAdevice = $packet->destdevice;
-			$previousmodelid = $packet->modelid;
+			$previousFPGAdevice = intval($packet->destdevice);
+			$previousmodelid = intval($packet->modelid);
 			$arrayForFPGAdeviceModelid[$arrayIndexing][0] = $previousFPGAdevice;
 			$arrayForFPGAdeviceModelid[$arrayIndexing][1] = $previousmodelid;
 			$arrayIndexing++;
 		}
 		else{
-			$FPGAdevice = $packet->destdevice;
-			$modelid = $packet->modelid;
+			$FPGAdevice = intval($packet->destdevice);
+			$modelid = intval($packet->modelid);
 			echo "FPGAdevice: ".$FPGAdevice."<br>";
 			echo "prevFPGAdevice: ".$previousFPGAdevice."<br>";
 			echo "modelid: ".$modelid."<br>";
@@ -83,15 +101,40 @@ function generateFPGAConfigurationXML($fileLocationOfNeuronInit){
 	//echo "<br>Elements: ".$arrayForFPGAdeviceModelid[1][0]. $arrayForFPGAdeviceModelid[1][1]."<br>";
 	//echo "<br>Elements: ".$arrayForFPGAdeviceModelid[0][0]. $arrayForFPGAdeviceModelid[0][1]."<br>";
 	//echo "<br>Elements: ".$arrayForFPGAdeviceModelid[0][0]. $arrayForFPGAdeviceModelid[0][1]."<br>";
-	return $arrayForFPGAdeviceModelid;
+	echo "<br> Target FPGA array<br>";
+	print_r($arrayForFPGAdeviceModelid);
+	echo "<br>Unique<br>";
+	//There is a repetition of same FPGA device, we need to get rid of that and return only the unique ones
+	//for eg. if there are 5 entries of 3 unique FPGA devices, then we return only the 3. 
+	$uniquearray = super_unique($arrayForFPGAdeviceModelid);
+	$uniquearray = array_values($uniquearray); // This resets the index. eg. 
+												//[3] => Hello
+												//	[7] => Moo
+												//	[45] => America
+												// To 
+												//	[0] => Hello
+												//	[1] => Moo
+												//	[2] => America
+	print_r($uniquearray);
+	//print_r(array_unique($arrayForFPGAdeviceModelid));
+	echo "<br>";
+	return $uniquearray;
+
 }
 
 
 function createFPGAConfigurationXML($arrayForFPGAdeviceModelid,$storingLocation,$simNum){
+
+
+	//Lets get FPGA device info from saved array with FPGA assignment into each neuron
+
+	//$FinalSortedNeuronsFPGAArray = unserialize(file_get_contents("SimulationXML/".$userLogged . "/FinalSortedNeuronsFPGAArray_" . $userID . ".bin"));
+
 	//Once, we have the array with FPGA number and model id, we can generate packet to program the FPGA
 	$data  = new DOMDocument;
 	$data ->formatOutput = true;
 	$dom=$data->createElement("sUploadSof");
+
 
 
 	for ($i=0; $i < count($arrayForFPGAdeviceModelid) ; $i++) { 
@@ -154,6 +197,148 @@ function getModelURLandFilenameForFPGA($modelId){
 
 
 }
+
+
+function ParseSynapseXMLtoArray($TopologyXMLFile,$userLogged,$topology, $userID){
+	# From topology file, a new packet is generated which consists of all synapse information for each neuron
+	# Weights are randomly generated to start the simulation
+	
+	#$synapsePacket = new DOMDocument();
+	#$synapsePacket->load("SimulationXML/".$userLogged . $topology. "/Topo_Ini_file_" . $userID . ".xml");
+
+	/*<packet>
+		<destdevice>140</destdevice>					[0]
+		<sourcedevice>65532</sourcedevice>				[1]
+		<simID>3</simID>								[2]	
+		<command>11</command>							[3]
+		<timestamp>0</timestamp>						[4]
+		<neuronid>2</neuronid>							[5]
+		<numberofneurons>4</numberofneurons>			[6]
+		<preneuronid>4</preneuronid>					[7]
+		<preneuronid>1</preneuronid>					[8]
+	</packet>*/
+
+
+	$synapsePacket = simplexml_load_file($TopologyXMLFile) or die("Error: Cannot create object");
+	#var_dump($synapsePacket);
+	#print_r("<br>------------SynapsePacket: ".$synapsePacket."<br>");
+
+	$synapseInfoArray = array(array());
+	$neuronIndex = 0;
+	$fieldsIndex = 0;
+	//$itemID = 0; //for numbering synpases
+	foreach ($synapsePacket->packet as $packet) {
+		# code...
+		echo "####Number of children: ".$packet->count();
+		$numberOfSynapses = $packet->count() - 7; # since the actual header before synpases are 7. Subtracting it from total count gives how many incoming
+												  #synapses are there.	
+		foreach ($packet as $key => $value) {
+			# code...
+			#echo "<br>.........$key->".$value."<br>";
+			
+			if($fieldsIndex == 3){
+				$synapseInfoArray[$neuronIndex][$fieldsIndex] = 28; #command for synapses
+			}
+			elseif($fieldsIndex == 6){ //at index 6 <numberofneurons> tag will be replaced with <numberofsynapses>
+				$synapseInfoArray[$neuronIndex][$fieldsIndex] = $numberOfSynapses;	
+			}
+			elseif($fieldsIndex > 6){ //so basically going through each <preneuronid> and assigning weight to the synapses
+				$synapseInfoArray[$neuronIndex][$fieldsIndex] = intval($value);
+				//Next tag will be actual weight of the synpase, since it is a next tag lets increase the $fieldsIndex 
+				$fieldsIndex++;
+				$synapseInfoArray[$neuronIndex][$fieldsIndex] = 1; //arbitrary value of 1 for now
+			}
+			else{
+				$synapseInfoArray[$neuronIndex][$fieldsIndex] = intval($value);	
+			}
+
+			$fieldsIndex++;
+		}
+		$fieldsIndex = 0;
+		$neuronIndex++;
+	}
+	echo "<br>--------------Synapse Array---------------<br>";
+	print_r($synapseInfoArray);
+	echo "Neurons count: ".count($synapseInfoArray);
+	echo "Each neuron fields:".count($synapseInfoArray[0]);
+
+	$userLogged = $userLogged;
+	$topology = $topology;
+	$userID = $userID;
+
+	generateXMLFromParsedArray($synapseInfoArray,$userLogged,$topology, $userID);
+
+	//Now that we have prased xml into a 2D array, lets generate an xml file.
+}
+
+function generateXMLFromParsedArray($xmlParsedArray,$userLogged,$topology, $userID){
+	#generating xml from 2D array parsed from an xml from ParseSynapseXMLtoArray() function
+	$synData = new DomDocument();
+	$synData->formatOutput = true;
+	$domDoc=$synData->createElement("synapsepacket");
+	
+	$neuronIndex = 0;
+	$fieldsIndex = 0;
+
+
+
+	for ($i=0; $i < count($xmlParsedArray); $i++) { 
+		# code...
+		//getting fields from each neuron
+		$packet=$synData->createElement("packet");
+		for ($j=0; $j < count($xmlParsedArray[$i]); $j++) { 
+			# Now we are in a row, where we go through each column to basically get the value and put it in the xml format
+			
+			if($j == 0){
+				$destDevice=$synData->createElement("destdevice", $xmlParsedArray[$i][$j]);
+				$packet->appendChild($destDevice);
+
+			}
+			elseif ($j == 1){
+				$sourceDevice=$synData->createElement("sourcedevice", $xmlParsedArray[$i][$j]);
+				$packet->appendChild($sourceDevice);
+			}
+			elseif ($j == 2){
+				$simID=$synData->createElement("simID", $xmlParsedArray[$i][$j]);
+				$packet->appendChild($simID);
+			}
+			elseif($j == 3){
+				$command=$synData->createElement("command", $xmlParsedArray[$i][$j]);
+				$packet->appendChild($command);
+			}
+			elseif ($j == 4){
+				$timestamp=$synData->createElement("timestamp", $xmlParsedArray[$i][$j]);
+				$packet->appendChild($timestamp);
+			}
+			elseif ($j == 5){
+				$neuronid=$synData->createElement("neuronid", $xmlParsedArray[$i][$j]);
+				$packet->appendChild($neuronid);
+			}
+			elseif ($j == 6){
+				$numberofsynapses=$synData->createElement("numberofsynapses", $xmlParsedArray[$i][$j]);
+				$packet->appendChild($numberofsynapses);
+			}
+
+			else{
+				//Now we add itemid and synaptic weights
+				$itemid=$synData->createElement("itemid", $xmlParsedArray[$i][$j]);
+				$packet->appendChild($itemid);
+				$j++;
+				$itemvalue=$synData->createElement("itemvalue", $xmlParsedArray[$i][$j]);
+				$packet->appendChild($itemvalue);
+			}
+
+
+		}
+		$domDoc->appendChild($packet);
+	}
+	$synData->appendChild($domDoc);
+	$filename="SimulationXML/".$userLogged . $topology. "/Initialisation_file_Synapse_" . $userID . ".xml";
+	echo "<br>Filename is :".$filename."<br>";
+	$synData->save($filename);
+
+}
+
 
 
 if ($_SESSION['flag']==1){
@@ -255,7 +440,10 @@ if ($_SESSION['flag']==1){
 	if (file_exists("SimulationXML/".$userLogged .$topology. "/Topo_Ini_file_" . $userID . ".xml")){
 		$xmlDoc3 = new DOMDocument();
 		$xmlDoc3->load("SimulationXML/".$userLogged . $topology. "/Topo_Ini_file_" . $userID . ".xml");
-		
+		$TopoXMLLocation = "SimulationXML/".$userLogged . $topology. "/Topo_Ini_file_" . $userID . ".xml";
+		#lets generate synapse xml
+		ParseSynapseXMLtoArray($TopoXMLLocation,$userLogged,$topology, $userID);
+
 		$topo=true;
 		unlink("SimulationXML/".$userLogged . $topology. "/Topo_Ini_file_" . $userID . ".xml");
 	}

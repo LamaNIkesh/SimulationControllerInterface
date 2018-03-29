@@ -31,18 +31,27 @@ include("head.html")
 				// $xml = simplexml_load_file($userLogged . "/" . $userID . ".xml");
 
 				#reading the saved array from save_neuron-data file, it contains the device id number for each neuron
-				$deviceidarray = unserialize(file_get_contents("SimulationXML/".$userLogged . "/DeviceId_" . $userID . ".bin"));
-				#print_r($deviceidarray);
-				#echo "device id : ",$deviceidarray[12];
-				print_r($deviceidarray);
+				if($_POST['topology'] == 'layeredTopology'){
+					//For layered topology its a different file
+					$FinalSortedNeuronsFPGAArray = unserialize(file_get_contents("SimulationXML/".$userLogged . "/Layered/FinalSortedNeuronsFPGAArray_" . $userID . ".bin"));
+				}
+				else{
+
+					#For non layered topology
+
+					$FinalSortedNeuronsFPGAArray = unserialize(file_get_contents("SimulationXML/".$userLogged . "/FinalSortedNeuronsFPGAArray_" . $userID . ".bin"));
+				}
+				
 
 				for ($number = 1; $number <= $_POST['stimNeurons']; $number++){
 					
 					if(isset($_POST['nameid'.$number])){
-						//echo "index with stim neurons: ".$number ." the neuron num is".$_POST['nameid'.$number];
+
+						//echo "<br>index with stim neurons: ".$number ." the neuron num is".$_POST['nameid'.$number];
 						//echo "<br>";
+						echo "<br>Destination Device: ".$FinalSortedNeuronsFPGAArray[$_POST['nameid'.$number]][2]."<br>";
 						$packet=$data->createElement("packet");
-						$destdev=$data->createElement("destdevice",$deviceidarray[$_POST['nameid'.$number]-1]); // Needs to specify the destination; is the neuron??
+						$destdev=$data->createElement("destdevice",$FinalSortedNeuronsFPGAArray[$_POST['nameid'.$number]][2]); // From array created at save_neuron_data stage
 						$packet->appendChild($destdev);
 						$sourcedev=$data->createElement("sourcedevice",65532); // Needs to specify the source; is the NC??
 						$packet->appendChild($sourcedev);
