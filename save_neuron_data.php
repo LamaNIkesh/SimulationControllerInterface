@@ -638,8 +638,8 @@ include("head.html")
 							#--iterating through all the parameters and values for each one 
 							$item=$data->createElement("item");
 							$itemid=$data->createElement("itemid",$arrayForModelPara[$i][0]);
-							/*$packet->appendChild($itemid);
-							$itemtype=$data->createElement("itemtype",$arrayForModelPara[$i][3]); //to understand these numbers, have a look at line 29 which shows
+							$packet->appendChild($itemid);
+							/*$itemtype=$data->createElement("itemtype",$arrayForModelPara[$i][3]); //to understand these numbers, have a look at line 29 which shows
 																								  // the table structure in the database
 							$packet->appendChild($itemtype);
 							$itemdatatype=$data->createElement("itemdatatype",$arrayForModelPara[$i][4]);
@@ -749,8 +749,8 @@ include("head.html")
 						#--iterating through all the parameters and values for each one 
 						$item=$data->createElement("item");
 						$itemid=$data->createElement("itemid",$arrayForModelPara[$i][0]);
-						/*$packet->appendChild($itemid);
-						$itemtype=$data->createElement("itemtype",$arrayForModelPara[$i][3]); //to understand these numbers, have a look at line 29 which shows
+						$packet->appendChild($itemid);
+						/*$itemtype=$data->createElement("itemtype",$arrayForModelPara[$i][3]); //to understand these numbers, have a look at line 29 which shows
 																							  // the table structure in the database
 						$packet->appendChild($itemtype);
 						$itemdatatype=$data->createElement("itemdatatype",$arrayForModelPara[$i][4]);

@@ -198,8 +198,83 @@ function getModelURLandFilenameForFPGA($modelId){
 
 }
 
+function ParseNeuronInitXMLtoArrayForModelId($neuronInitXMLFile, $userLogged,$topology, $userID){
+	/*
+		So heres the story. The item id in synapse packet needs to (neuron number + last item id from that neuron).
+		Not clear!!--> for example if Izh have 6 parameters then synpase item id for incoming synpase from neuron 5 is (5+6)=11. 
+		So that everything falls into a sequential order for hardware implementation. I do as I am told. 
 
-function ParseSynapseXMLtoArray($TopologyXMLFile,$userLogged,$topology, $userID){
+		So here we only try to extract neuron id, model id for that neuron and number of parameters for that mode.
+
+		When we create synpase packet we will add that value after comparing with the neuron id. 
+
+		Here we cut open old neuron initialisation packet and extract those data to be stored in an array. 
+	*/
+	$neuronInitPacket = simplexml_load_file($neuronInitXMLFile) or die("Error: Cannot create object");
+
+	$ModelIdParaNeuron = array(array());
+	$neuronIndex = 0;
+	$fieldsIndex = 0;
+
+	foreach($neuronInitPacket->packet as $packet){
+		#lets dig into values
+		$numberOfItemsForEachModel = ($packet->count() - 8)/2; // First 8 items upto timesstepsize are not part of actual neuron item.
+														  		//subtracting those and diving remaining by 2 gives how many itesmare there.	
+		foreach ($packet as $key => $value){
+			/*Sample packet.
+			<packet>
+			    <destdevice>175</destdevice>						[0]
+			    <sourcedevice>65532</sourcedevice>					[1]
+			    <simID>3</simID>									[2]
+			    <command>24</command>								[3]
+			    <timestamp>0</timestamp>							[4]	
+			    <neuronid>19</neuronid>								[5]
+			    <modelid>1</modelid>								[6]
+			    <timestepsize>1000</timestepsize>					[7]
+			    <itemid>1</itemid>									[8]
+			    <itemvalue>5</itemvalue>							[9]
+			    <itemid>2</itemid>									[10]
+			    <itemvalue>50</itemvalue>							[11]
+			    <itemid>3</itemid>									[12]
+			    <itemvalue>2</itemvalue>							[13]
+			    <itemid>4</itemid>									[14]
+			    <itemvalue>2</itemvalue>							[15]
+		    </packet>
+		    */
+			
+			if($fieldsIndex == 5){
+				$ModelIdParaNeuron[$neuronIndex][0] = intval($value); # index 5 is for neuron id
+			}
+			elseif($fieldsIndex == 6){ //at index 6 is for model id. Based on this model id we know how many parameters are there for each neuron
+				$ModelIdParaNeuron[$neuronIndex][1] = intval($value);	
+				$fieldsIndex++;
+				$ModelIdParaNeuron[$neuronIndex][2] = $numberOfItemsForEachModel;
+				break;
+			}
+			else{
+
+			}
+
+			$fieldsIndex++;
+		}
+		$fieldsIndex = 0;
+		$neuronIndex++;		
+	}
+
+	echo "<br>--------------Neuron Data Array---------------<br>";
+	print_r($ModelIdParaNeuron);
+	echo "Neurons count: ".count($ModelIdParaNeuron);
+	echo "Each neuron fields:".count($ModelIdParaNeuron[0]);
+
+	return $ModelIdParaNeuron;
+}
+
+
+
+
+
+
+function ParseSynapseXMLtoArray($TopologyXMLFile,$userLogged,$topology, $userID,$ModelIdParaNeuron){
 	# From topology file, a new packet is generated which consists of all synapse information for each neuron
 	# Weights are randomly generated to start the simulation
 	
@@ -266,13 +341,16 @@ function ParseSynapseXMLtoArray($TopologyXMLFile,$userLogged,$topology, $userID)
 	$topology = $topology;
 	$userID = $userID;
 
-	generateXMLFromParsedArray($synapseInfoArray,$userLogged,$topology, $userID);
+	generateXMLFromParsedArray($synapseInfoArray,$userLogged,$topology, $userID, $ModelIdParaNeuron);
 
 	//Now that we have prased xml into a 2D array, lets generate an xml file.
 }
 
-function generateXMLFromParsedArray($xmlParsedArray,$userLogged,$topology, $userID){
+function generateXMLFromParsedArray($xmlParsedArray,$userLogged,$topology, $userID,$ModelIdParaNeuron){
 	#generating xml from 2D array parsed from an xml from ParseSynapseXMLtoArray() function
+		/*
+	$ModelIdParaNeuron array contains info about neuron number with its corresponding model id and number of items 
+	*/
 	$synData = new DomDocument();
 	$synData->formatOutput = true;
 	$domDoc=$synData->createElement("synapsepacket");
@@ -280,7 +358,7 @@ function generateXMLFromParsedArray($xmlParsedArray,$userLogged,$topology, $user
 	$neuronIndex = 0;
 	$fieldsIndex = 0;
 
-
+	$neuronId = 0;
 
 	for ($i=0; $i < count($xmlParsedArray); $i++) { 
 		# code...
@@ -313,6 +391,7 @@ function generateXMLFromParsedArray($xmlParsedArray,$userLogged,$topology, $user
 			elseif ($j == 5){
 				$neuronid=$synData->createElement("neuronid", $xmlParsedArray[$i][$j]);
 				$packet->appendChild($neuronid);
+				$neuronId = $xmlParsedArray[$i][$j];
 			}
 			elseif ($j == 6){
 				$numberofsynapses=$synData->createElement("numberofsynapses", $xmlParsedArray[$i][$j]);
@@ -321,7 +400,9 @@ function generateXMLFromParsedArray($xmlParsedArray,$userLogged,$topology, $user
 
 			else{
 				//Now we add itemid and synaptic weights
-				$itemid=$synData->createElement("itemid", $xmlParsedArray[$i][$j]);
+				//item id is last item number plus incoming synpase from neuron
+				//for eg for Izh model, last item number is 9, so if neuron is receiving input from neuron 10 then item id is (10+9) = 19
+				$itemid=$synData->createElement("itemid", $xmlParsedArray[$i][$j] + $ModelIdParaNeuron[$neuronId - 1][2]); // this array has model para num at index 3
 				$packet->appendChild($itemid);
 				$j++;
 				$itemvalue=$synData->createElement("itemvalue", $xmlParsedArray[$i][$j]);
@@ -390,7 +471,7 @@ if ($_SESSION['flag']==1){
 		$SimInitXML = simplexml_load_file ("SimulationXML/".$userLogged .$topology. "/Sim_Ini_file_" . $userID. ".xml");
 		//echo "test";
 	}
-	#Gives the total neurons 
+	#Gives the total neurons  
 	echo $SimInitXML->packet->neuronsnum;
 	#reading total neuron numbers
 	$totalNeurons = $SimInitXML->packet->neuronsnum;
@@ -435,6 +516,14 @@ if ($_SESSION['flag']==1){
 
 	$xmlDoc2->load("SimulationXML/".$userLogged . $topology."/Neuron_Ini_file_" . $userID. ".xml");
 	
+	//extractiong model number and number of parameters for each model to be used for synpase packet
+	$neuronInitXMLLocation = ("SimulationXML/".$userLogged . $topology."/Neuron_Ini_file_" . $userID. ".xml");
+	$ModelIdParaNeuron = array(array());
+	//ParseNeuronInitXMLtoArrayForModelId function returns a 2D array with each row for neuron with columns being neuron id, model id and parameter count
+	$ModelIdParaNeuron = ParseNeuronInitXMLtoArrayForModelId($neuronInitXMLLocation, $userLogged,$topology, $userID);
+	print_r($ModelIdParaNeuron);
+
+
 	unlink("SimulationXML/".$userLogged . $topology. "/Neuron_Ini_file_" . $userID . ".xml");
 	
 	if (file_exists("SimulationXML/".$userLogged .$topology. "/Topo_Ini_file_" . $userID . ".xml")){
@@ -442,7 +531,7 @@ if ($_SESSION['flag']==1){
 		$xmlDoc3->load("SimulationXML/".$userLogged . $topology. "/Topo_Ini_file_" . $userID . ".xml");
 		$TopoXMLLocation = "SimulationXML/".$userLogged . $topology. "/Topo_Ini_file_" . $userID . ".xml";
 		#lets generate synapse xml
-		ParseSynapseXMLtoArray($TopoXMLLocation,$userLogged,$topology, $userID);
+		ParseSynapseXMLtoArray($TopoXMLLocation,$userLogged,$topology, $userID,$ModelIdParaNeuron);
 
 		$topo=true;
 		unlink("SimulationXML/".$userLogged . $topology. "/Topo_Ini_file_" . $userID . ".xml");
