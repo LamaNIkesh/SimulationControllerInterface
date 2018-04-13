@@ -37,14 +37,14 @@ include("head.html")
 					$arrayForModelPara[$loopCounter][0] = $row['ItemID']; //first element of 2d array is para name and second column is the typical value
 					$arrayForModelPara[$loopCounter][1] = $row['ModelID'];
 					$arrayForModelPara[$loopCounter][2] = $row['Name'];
-					$arrayForModelPara[$loopCounter][3] = $row['Type']; //first element of 2d array is para name and second column is the typical value
-					$arrayForModelPara[$loopCounter][4] = $row['Datatype'];
-					$arrayForModelPara[$loopCounter][5] = $row['IntegerPart'];
+					//$arrayForModelPara[$loopCounter][3] = $row['Type']; //first element of 2d array is para name and second column is the typical value
+					//$arrayForModelPara[$loopCounter][4] = $row['Datatype'];
+					//$arrayForModelPara[$loopCounter][5] = $row['IntegerPart'];
 					$arrayForModelPara[$loopCounter][6] = $row['TypicalVal']; //first element of 2d array is para name and second column is the typical value
-					$arrayForModelPara[$loopCounter][7] = $row['InLSB'];
-					$arrayForModelPara[$loopCounter][8] = $row['InMSB'];
-					$arrayForModelPara[$loopCounter][9] = $row['OutLSB']; //first element of 2d array is para name and second column is the typical value
-					$arrayForModelPara[$loopCounter][10] = $row['OutMSB'];
+					//$arrayForModelPara[$loopCounter][7] = $row['InLSB'];
+					//$arrayForModelPara[$loopCounter][8] = $row['InMSB'];
+					//$arrayForModelPara[$loopCounter][9] = $row['OutLSB']; //first element of 2d array is para name and second column is the typical value
+					//$arrayForModelPara[$loopCounter][10] = $row['OutMSB'];
 
 					$loopCounter++;
 				}
@@ -479,6 +479,8 @@ include("head.html")
 				$modelid=$data->createElement("modelid",$_POST['model']);
 				//$modelid=$data->createElement("modelid",$modelName);
 				$packet->appendChild($modelid);
+				$timestepsize = $data->createElement("timestepsize",1000);
+				$packet->appendChild($timestepsize);
 				
 				/*foreach ($ModelLibrary->neuron as $model){
 					if ($model->neuronid==$_POST['model']){
@@ -512,7 +514,7 @@ include("head.html")
 					$item=$data->createElement("item");
 					$itemid=$data->createElement("itemid",$arrayForModelPara[$i][0]);
 					$packet->appendChild($itemid);
-					$itemtype=$data->createElement("itemtype",$arrayForModelPara[$i][3]); //to understand these numbers, have a look at line 29 which shows
+					/*$itemtype=$data->createElement("itemtype",$arrayForModelPara[$i][3]); //to understand these numbers, have a look at line 29 which shows
 																						  // the table structure in the database
 					$packet->appendChild($itemtype);
 					$itemdatatype=$data->createElement("itemdatatype",$arrayForModelPara[$i][4]);
@@ -526,7 +528,7 @@ include("head.html")
 					$outlsb=$data->createElement("outlsb",$arrayForModelPara[$i][9]);
 					$packet->appendChild($outlsb);
 					$outmsb=$data->createElement("outmsb",$arrayForModelPara[$i][10]);
-					$packet->appendChild($outmsb);
+					$packet->appendChild($outmsb);*/
 					$itemvalue=$data->createElement("itemvalue",$_POST['AllSameNeuron_itemval_'.$i]);
 					$packet->appendChild($itemvalue);
 				// $packet->appendChild($item);
@@ -594,6 +596,10 @@ else{
 			$modelid=$data->createElement("modelid",$_POST['model'.$number] ); // the model number are same model num + . eg if there are 3 same 
 			//models then starting index for diff model is 3+1 = 4 and 5,6....
 			$packet->appendChild($modelid);
+
+			$timestepsize = $data->createElement("timestepsize",1000);
+			$packet->appendChild($timestepsize);
+
 			//adding values as per the model 
 			//different model has different fields
 			/*foreach ($ModelLibrary->neuron as $model){
@@ -628,7 +634,7 @@ else{
 				$item=$data->createElement("item");
 				$itemid=$data->createElement("itemid",$arrayForModelPara[$i][0]);
 				$packet->appendChild($itemid);
-				$itemtype=$data->createElement("itemtype",$arrayForModelPara[$i][3]); //to understand these numbers, have a look at line 29 which shows
+				/*$itemtype=$data->createElement("itemtype",$arrayForModelPara[$i][3]); //to understand these numbers, have a look at line 29 which shows
 																					  // the table structure in the database
 				$packet->appendChild($itemtype);
 				$itemdatatype=$data->createElement("itemdatatype",$arrayForModelPara[$i][4]);
@@ -642,7 +648,7 @@ else{
 				$outlsb=$data->createElement("outlsb",$arrayForModelPara[$i][9]);
 				$packet->appendChild($outlsb);
 				$outmsb=$data->createElement("outmsb",$arrayForModelPara[$i][10]);
-				$packet->appendChild($outmsb);
+				$packet->appendChild($outmsb);*/
 				$itemvalue=$data->createElement("itemvalue",$_POST['DiffNeurons_layer_itemval_'.($number-1).'_'.$i]); //$number is the layer num, since previously layer started
 																												  //from zero index
  				$packet->appendChild($itemvalue);

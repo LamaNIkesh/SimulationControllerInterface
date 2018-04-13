@@ -392,6 +392,8 @@ function generateXMLFromParsedArray($xmlParsedArray,$userLogged,$topology, $user
 				$neuronid=$synData->createElement("neuronid", $xmlParsedArray[$i][$j]);
 				$packet->appendChild($neuronid);
 				$neuronId = $xmlParsedArray[$i][$j];
+				echo "<br>--------Neuron ID-------->".$neuronId."<br>";
+				//$addedItemNum = $neuronId; //THis is a long story, just tryna make it work .... why am i so stupid?!!!!
 			}
 			elseif ($j == 6){
 				$numberofsynapses=$synData->createElement("numberofsynapses", $xmlParsedArray[$i][$j]);
@@ -402,8 +404,12 @@ function generateXMLFromParsedArray($xmlParsedArray,$userLogged,$topology, $user
 				//Now we add itemid and synaptic weights
 				//item id is last item number plus incoming synpase from neuron
 				//for eg for Izh model, last item number is 9, so if neuron is receiving input from neuron 10 then item id is (10+9) = 19
-				$itemid=$synData->createElement("itemid", $xmlParsedArray[$i][$j] + $ModelIdParaNeuron[$neuronId - 1][2]); // this array has model para num at index 3
+				$neuronId = $xmlParsedArray[$i][$j];
+				echo "<br>------Input synpase neuron------->".$neuronId."<br>";
+				echo "---------Model Para count-------->".$ModelIdParaNeuron[$neuronId - 1][2]."<br>";
+				$itemid=$synData->createElement("itemid", $neuronId + $ModelIdParaNeuron[$neuronId - 1][2]); // this array has model para num at index 3
 				$packet->appendChild($itemid);
+				//$neuronId++;
 				$j++;
 				$itemvalue=$synData->createElement("itemvalue", $xmlParsedArray[$i][$j]);
 				$packet->appendChild($itemvalue);
