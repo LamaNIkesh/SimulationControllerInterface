@@ -67,7 +67,7 @@ include("head.html")
 						//$packet->appendChild($numberofneurons);
 						$endtimestamp=$data->createElement("endtimestamp",$_POST['end'.$number]);
 						$packet->appendChild($endtimestamp);
-						$itemID=$data->createElement("itemID",65523); // 655523 is electrical stimulation, check SCRP document for differnt IDs
+						$itemID=$data->createElement("itemID",65535); // 655523 is electrical stimulation, check SCRP document for differnt IDs
 						$packet->appendChild($itemID);
 						//variables of a quadratic equation ax^2 + bx + c
 						//for step current, item value a and b are set to zero so c = value
