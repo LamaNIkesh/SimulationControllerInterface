@@ -26,9 +26,9 @@ function super_unique($array)
   return $result;
 }
 
-#----------------------------------------------------------------------------------------------------------------------------------------------------
+#####################################################################################################################################################
 #--------------------------------------------LIST OF FUNCTIONS---------------------------------------------------------------------------------------
-#----------------------------------------------------------------------------------------------------------------------------------------------------
+#####################################################################################################################################################
 
 function generateFPGAConfigurationXML($fileLocationOfNeuronInit){
 	/*This function looks into neuron initialisation file and extracts which FPGA devices are 
@@ -58,7 +58,7 @@ function generateFPGAConfigurationXML($fileLocationOfNeuronInit){
 	$counter = 0;
 	//counter for array indexing, only increased when array is updated
 	$arrayIndexing = 0;
-	//array to store FPGA device and correspondign model for it
+	//array to store FPGA device and corresponding model for it
 	$arrayForFPGAdeviceModelid = array(array());
 
 	foreach($xmlNeuronInit->packet as $packet){
@@ -272,10 +272,6 @@ function ParseNeuronInitXMLtoArrayForModelId($neuronInitXMLFile, $userLogged,$to
 }
 
 
-
-
-
-
 function ParseSynapseXMLtoArray($TopologyXMLFile,$userLogged,$topology, $userID,$ModelIdParaNeuron){
 	# From topology file, a new packet is generated which consists of all synapse information for each neuron
 	# Weights are randomly generated to start the simulation
@@ -342,7 +338,7 @@ function ParseSynapseXMLtoArray($TopologyXMLFile,$userLogged,$topology, $userID,
 	$userLogged = $userLogged;
 	$topology = $topology;
 	$userID = $userID;
-	
+
 	#FEEDING INTO FUNCTION WHICH ACTUALLY CREATES THE XML FILE FOR SYNAPSES....
 	generateXMLFromParsedArray($synapseInfoArray,$userLogged,$topology, $userID, $ModelIdParaNeuron);
 
@@ -430,9 +426,10 @@ function generateXMLFromParsedArray($xmlParsedArray,$userLogged,$topology, $user
 
 }
 
-#--------------------------------------------------------------------------------------------------------------------------------------------------------
-#------------------------------------------------------------END OF FUNCTIONS----------------------------------------------------------------------------
-#--------------------------------------------------------------------------------------------------------------------------------------------------------
+#####################################################################################################################################################
+#--------------------------------------------END OF FUNCTIONS---------------------------------------------------------------------------------------
+#####################################################################################################################################################
+
 
 if ($_SESSION['flag']==1){
 
