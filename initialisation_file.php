@@ -404,7 +404,8 @@ function generateXMLFromParsedArray($xmlParsedArray,$userLogged,$topology, $user
 				//Now we add itemid and synaptic weights
 				//item id is last item number plus incoming synpase from neuron
 				//for eg for Izh model, last item number is 9, so if neuron is receiving input from neuron 10 then item id is (10+9) = 19
-				$neuronId = $xmlParsedArray[$i][$j];
+
+				$neuronId = $xmlParsedArray[$i][$j]; //This neuron Id is neuron id of the incoming synapse neuron.
 				echo "<br>------Input synpase neuron------->".$neuronId."<br>";
 				echo "---------Model Para count-------->".$ModelIdParaNeuron[$neuronId - 1][2]."<br>";
 				$itemid=$synData->createElement("itemid", $neuronId + $ModelIdParaNeuron[$neuronId - 1][2]); // this array has model para num at index 3
