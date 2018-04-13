@@ -349,6 +349,17 @@ function generateXMLFromParsedArray($xmlParsedArray,$userLogged,$topology, $user
 	#generating xml from 2D array parsed from an xml from ParseSynapseXMLtoArray() function
 		/*
 	$ModelIdParaNeuron array contains info about neuron number with its corresponding model id and number of items 
+	
+	STRUCTUREOF $xmlParsedArray is, 
+    
+    																					  (neuronid+itemCount)           (synapseweigthVal)
+																									^                           ^
+    index           destDev   | sourceDev  | simID  | cmd     |  tmsp  | neuronid | noOfSynps | itemID | itemVal | itemID  | itemVal | itemID  | itemVal | itemID  | itemVal 
+
+	[4] => Array ( [0] => 236 [1] => 65532 [2] => 3 [3] => 28 [4] => 0 [5] => 5   [6] => 4    [7] => 1 [8] => 1  [9] => 2  [10] => 1 [11] => 3 [12] => 1 [13] => 4 [14] => 1 ) 	
+
+
+
 	*/
 	$synData = new DomDocument();
 	$synData->formatOutput = true;
@@ -404,9 +415,10 @@ function generateXMLFromParsedArray($xmlParsedArray,$userLogged,$topology, $user
 				//item id is last item number plus incoming synpase from neuron
 				//for eg for Izh model, last item number is 9, so if neuron is receiving input from neuron 10 then item id is (10+9) = 19
 
-				$neuronId = $xmlParsedArray[$i][$j]; //This neuron Id is neuron id of the incoming synapse neuron.
+				$neuronId = $xmlParsedArray[$i][$j]; //This neuron Id is neuron id of the incoming synapse neuron. 
 				echo "<br>------Input synpase neuron------->".$neuronId."<br>";
 				echo "---------Model Para count-------->".$ModelIdParaNeuron[$neuronId - 1][2]."<br>";
+				//ITEM ID IS ITEM NUMBER FROM A NEURON MODEL + INCOMING SYNPASE NEURON
 				$itemid=$synData->createElement("itemid", $neuronId + $ModelIdParaNeuron[$neuronId - 1][2]); // this array has model para num at index 3
 				$packet->appendChild($itemid);
 				//$neuronId++;
@@ -414,8 +426,6 @@ function generateXMLFromParsedArray($xmlParsedArray,$userLogged,$topology, $user
 				$itemvalue=$synData->createElement("itemvalue", $xmlParsedArray[$i][$j]);
 				$packet->appendChild($itemvalue);
 			}
-
-
 		}
 		$domDoc->appendChild($packet);
 	}
