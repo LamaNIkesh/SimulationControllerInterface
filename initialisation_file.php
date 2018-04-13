@@ -26,7 +26,9 @@ function super_unique($array)
   return $result;
 }
 
-
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+#--------------------------------------------LIST OF FUNCTIONS---------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------------------------------------------------
 
 function generateFPGAConfigurationXML($fileLocationOfNeuronInit){
 	/*This function looks into neuron initialisation file and extracts which FPGA devices are 
@@ -340,7 +342,8 @@ function ParseSynapseXMLtoArray($TopologyXMLFile,$userLogged,$topology, $userID,
 	$userLogged = $userLogged;
 	$topology = $topology;
 	$userID = $userID;
-
+	
+	#FEEDING INTO FUNCTION WHICH ACTUALLY CREATES THE XML FILE FOR SYNAPSES....
 	generateXMLFromParsedArray($synapseInfoArray,$userLogged,$topology, $userID, $ModelIdParaNeuron);
 
 	//Now that we have prased xml into a 2D array, lets generate an xml file.
@@ -427,7 +430,9 @@ function generateXMLFromParsedArray($xmlParsedArray,$userLogged,$topology, $user
 
 }
 
-
+#--------------------------------------------------------------------------------------------------------------------------------------------------------
+#------------------------------------------------------------END OF FUNCTIONS----------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------------------------------
 
 if ($_SESSION['flag']==1){
 
