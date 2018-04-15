@@ -1,3 +1,8 @@
+<!-- 
+			GRAND FINALE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! THIS IS WHERE EVERYTHING COMES TOGETHER........OR DOES IT? 
+			So all the different packets such as siminit, neuroninit, simulationpara etc etc are merged together to form a single initialisation file in xml
+-->
+
 <?php
 include("head.html")
 ?>
@@ -417,12 +422,12 @@ function generateXMLFromParsedArray($xmlParsedArray,$userLogged,$topology, $user
 
 				$neuronId = $xmlParsedArray[$i][$j]; //This neuron Id is neuron id of the incoming synapse neuron. 
 				echo "<br>------Input synpase neuron------->".$neuronId."<br>";
-				echo "---------Model Para count-------->".$ModelIdParaNeuron[$neuronId - 1][2]."<br>";
+				echo "---------Model Para count-------->".$ModelIdParaNeuron[$neuronId-1][2]."<br>";
 				//ITEM ID IS ITEM NUMBER FROM A NEURON MODEL + INCOMING SYNPASE NEURON
-				$itemid=$synData->createElement("itemid", $neuronId + $ModelIdParaNeuron[$neuronId - 1][2]); // this array has model para num at index 3
+				$itemid=$synData->createElement("itemid", $neuronId + $ModelIdParaNeuron[$neuronId-1][2]); // this array has model para num at index 3
 				$packet->appendChild($itemid);
 				//$neuronId++;
-				$j++;
+				$j++; //Next column is itemvalue, hence the increment. 
 				$itemvalue=$synData->createElement("itemvalue", $xmlParsedArray[$i][$j]);
 				$packet->appendChild($itemvalue);
 			}
@@ -520,7 +525,10 @@ if ($_SESSION['flag']==1){
 					}
 
 
-
+	#######################################################################################################################################
+	#	Lets get to some operation now. Get gloves and scissors.
+	# 	SimInit, NeuronInit, TopoInit files are opened and merged together with synpase file as well. XMl version of HumanCentipede!!!!????				
+	#				
 
 
 	$xmlDoc = new DomDocument();

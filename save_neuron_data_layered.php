@@ -281,15 +281,7 @@ include("head.html")
 		//returns sorted along neuron number
 		return $arrayWithNeuronIdModelFPGANum;
 	}
-
-
-
-
-
-
-
 ########################################################################################################
-
 ?>
 
 
