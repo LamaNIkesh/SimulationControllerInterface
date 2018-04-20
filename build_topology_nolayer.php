@@ -20,7 +20,7 @@ if ($_SESSION['flag']==1){
 					Timestamp(in ms): </div><input type="number" name="timestamp" value="1" disabled> (Fixed value)<br>
 					<br>
 					<div class= "col-sm-3">
-					Number of neurons :</div> <input type="number" name="totalNeurons" min="1" max="500" value="1" required>
+					Number of neurons :</div> <input type="number" name="totalNeurons" min="1" max="5000" value="1" required>
 					<br><br>
 					<!---Number of muscles in the subcircuit: <input type="number" name="muscle" min="0" max="135" value="0" required>
 					<br><br>-->
