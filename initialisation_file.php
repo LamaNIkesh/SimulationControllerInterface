@@ -344,10 +344,13 @@ function ParseSynapseXMLtoArray($TopologyXMLFile,$userLogged,$topology, $userID,
 	$topology = $topology;
 	$userID = $userID;
 
-	#FEEDING INTO FUNCTION WHICH ACTUALLY CREATES THE XML FILE FOR SYNAPSES....
-	generateXMLFromParsedArray($synapseInfoArray,$userLogged,$topology, $userID, $ModelIdParaNeuron);
+	#FEEDING INTO FUNCTION WHICH ACTUALLY CREATES THE XML FILE FOR SYNAPSES....At the end it also returns the file location the synapse xml.
+	#This filelocation is used to send the xml file to the IM.
+	$synapseFileLocation = generateXMLFromParsedArray($synapseInfoArray,$userLogged,$topology, $userID, $ModelIdParaNeuron);
 
-	//Now that we have prased xml into a 2D array, lets generate an xml file.
+	
+	//returning synapse xml file location
+	return $synapseFileLocation;
 }
 
 function generateXMLFromParsedArray($xmlParsedArray,$userLogged,$topology, $userID,$ModelIdParaNeuron){
@@ -438,6 +441,9 @@ function generateXMLFromParsedArray($xmlParsedArray,$userLogged,$topology, $user
 	$filename="SimulationXML/".$userLogged . $topology. "/Initialisation_file_Synapse_" . $userID . ".xml";
 	echo "<br>Filename is :".$filename."<br>";
 	$synData->save($filename);
+
+	$synapseFileLocation = $filename;
+	return $synapseFileLocation;
 
 }
 
@@ -558,8 +564,8 @@ if ($_SESSION['flag']==1){
 		$xmlDoc3->load("SimulationXML/".$userLogged . $topology. "/Topo_Ini_file_" . $userID . ".xml");
 		$TopoXMLLocation = "SimulationXML/".$userLogged . $topology. "/Topo_Ini_file_" . $userID . ".xml";
 		#lets generate synapse xml
-		ParseSynapseXMLtoArray($TopoXMLLocation,$userLogged,$topology, $userID,$ModelIdParaNeuron);
-
+		$synapseFileLocation = ParseSynapseXMLtoArray($TopoXMLLocation,$userLogged,$topology, $userID,$ModelIdParaNeuron);
+		echo "<br>The synapse File location is".$synapseFileLocation."<br>";
 		$topo=true;
 		unlink("SimulationXML/".$userLogged . $topology. "/Topo_Ini_file_" . $userID . ".xml");
 	}
