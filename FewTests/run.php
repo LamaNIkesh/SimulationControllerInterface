@@ -5,8 +5,8 @@
  *  @return array   exit_status  :  exit status of the executed command
  *                  output       :  console output of the executed command
  */
-    $filePath = '/home/nikesh/Documents/WebServer/NewbranchV4/SimulationControllerInterface/SimulationXML/nikeshlama2018/Initialisation_file_nikeshlama2018_12.xml';
-    $synfilePath = '/home/nikesh/Documents/WebServer/NewbranchV4/SimulationControllerInterface/SimulationXML/nikeshlama2018/Initialisation_file_Synapse_nikeshlama2018_12.xml';			
+    $filePath = '/home/nikesh/Documents/WebServer/NewbranchV4/SimulationControllerInterface/SimulationXML/nikeshlama2018/Initialisation_file_nikeshlama2018_6.xml';
+    $synfilePath = '/home/nikesh/Documents/WebServer/NewbranchV4/SimulationControllerInterface/SimulationXML/nikeshlama2018/Initialisation_file_Synapse_nikeshlama2018_6.xml';			
     while (@ ob_end_flush()); // end all output buffers if any
 
 

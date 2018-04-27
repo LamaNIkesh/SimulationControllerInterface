@@ -3,51 +3,51 @@
   <packet>
     <destdevice>65535</destdevice>
     <sourcedevice>65532</sourcedevice>
-    <simID>8</simID>
+    <simID>6</simID>
     <command>30</command>
     <timestamp>0</timestamp>
-    <targetfpga>4</targetfpga>
+    <targetfpga>2</targetfpga>
     <filename>IAF8_1000_0-1.sof</filename>
     <url>~/Models/</url>
   </packet>
   <packet>
     <destdevice>65535</destdevice>
     <sourcedevice>65532</sourcedevice>
-    <simID>8</simID>
-    <command>30</command>
-    <timestamp>0</timestamp>
-    <targetfpga>6</targetfpga>
-    <filename>IAF8_1000_0-1.sof</filename>
-    <url>~/Models/</url>
-  </packet>
-  <packet>
-    <destdevice>65535</destdevice>
-    <sourcedevice>65532</sourcedevice>
-    <simID>8</simID>
+    <simID>6</simID>
     <command>30</command>
     <timestamp>0</timestamp>
     <targetfpga>5</targetfpga>
-    <filename>IAF8_1000_0-1.sof</filename>
+    <filename>LIF8_1000_0-1.sof</filename>
     <url>~/Models/</url>
   </packet>
   <packet>
     <destdevice>65535</destdevice>
     <sourcedevice>65532</sourcedevice>
-    <simID>8</simID>
+    <simID>6</simID>
     <command>30</command>
     <timestamp>0</timestamp>
-    <targetfpga/>
-    <filename/>
-    <url/>
+    <targetfpga>4</targetfpga>
+    <filename>LIF8_1000_0-1.sof</filename>
+    <url>~/Models/</url>
   </packet>
   <packet>
     <destdevice>65535</destdevice>
     <sourcedevice>65532</sourcedevice>
-    <simID>8</simID>
+    <simID>6</simID>
     <command>30</command>
     <timestamp>0</timestamp>
-    <targetfpga>8</targetfpga>
+    <targetfpga>3</targetfpga>
     <filename>LIF8_1000_0-1.sof</filename>
+    <url>~/Models/</url>
+  </packet>
+  <packet>
+    <destdevice>65535</destdevice>
+    <sourcedevice>65532</sourcedevice>
+    <simID>6</simID>
+    <command>30</command>
+    <timestamp>0</timestamp>
+    <targetfpga>6</targetfpga>
+    <filename>IZK8_1000_0-1.sof</filename>
     <url>~/Models/</url>
   </packet>
 </sUploadSof>

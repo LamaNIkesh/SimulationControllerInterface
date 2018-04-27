@@ -117,7 +117,7 @@ function generateFPGAConfigurationXML($fileLocationOfNeuronInit){
 	//There is a repetition of same FPGA device, we need to get rid of that and return only the unique ones
 	//for eg. if there are 5 entries of 3 unique FPGA devices, then we return only the 3. 
 	$uniquearray = super_unique($arrayForFPGAdeviceModelid);
-	#$uniquearray = array_values($uniquearray); // This resets the index. eg. 
+	$uniquearray = array_values($uniquearray); // This resets the index. eg. 
 												//[3] => Hello
 												//	[7] => Moo
 												//	[45] => America
