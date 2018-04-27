@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Sim_Meta><packet><destdevice>0</destdevice><sourcedevice>65532</sourcedevice><simID>2</simID><command>14</command><timestamp>0</timestamp><timestepsize>1000</timestepsize><cyclesNum>3000</cyclesNum><timeout>1</timeout><neuronsnum>80</neuronsnum></packet></Sim_Meta>

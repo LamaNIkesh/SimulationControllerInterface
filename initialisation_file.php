@@ -74,6 +74,8 @@ function generateFPGAConfigurationXML($fileLocationOfNeuronInit){
 			//Assignment for the first iteration
 			$previousFPGAdevice = intval($packet->destdevice);
 			$previousmodelid = intval($packet->modelid);
+			echo "<br>------>INputting FPGA num: ".$previousFPGAdevice."<br>";
+			echo "<br>------>INputting model: ".$previousmodelid."<br>";
 			$arrayForFPGAdeviceModelid[$arrayIndexing][0] = $previousFPGAdevice;
 			$arrayForFPGAdeviceModelid[$arrayIndexing][1] = $previousmodelid;
 			$arrayIndexing++;
@@ -104,7 +106,8 @@ function generateFPGAConfigurationXML($fileLocationOfNeuronInit){
 	}
 	//print_r ($arrayForFPGAdeviceModelid);
 	//echo "<br> Length of the array is :".count($arrayForFPGAdeviceModelid)."<br>";
-	//echo "<br>Elements: ".$arrayForFPGAdeviceModelid[0][0]. $arrayForFPGAdeviceModelid[0][1]."<br>";
+	echo "<br>Elements: ".$arrayForFPGAdeviceModelid[0][0]."<----->". $arrayForFPGAdeviceModelid[0][1]."<br>";
+	echo "<br>Elements: ".$arrayForFPGAdeviceModelid[1][0]."<----->". $arrayForFPGAdeviceModelid[1][1]."<br>";
 	//echo "<br>Elements: ".$arrayForFPGAdeviceModelid[1][0]. $arrayForFPGAdeviceModelid[1][1]."<br>";
 	//echo "<br>Elements: ".$arrayForFPGAdeviceModelid[0][0]. $arrayForFPGAdeviceModelid[0][1]."<br>";
 	//echo "<br>Elements: ".$arrayForFPGAdeviceModelid[0][0]. $arrayForFPGAdeviceModelid[0][1]."<br>";
@@ -114,14 +117,14 @@ function generateFPGAConfigurationXML($fileLocationOfNeuronInit){
 	//There is a repetition of same FPGA device, we need to get rid of that and return only the unique ones
 	//for eg. if there are 5 entries of 3 unique FPGA devices, then we return only the 3. 
 	$uniquearray = super_unique($arrayForFPGAdeviceModelid);
-	$uniquearray = array_values($uniquearray); // This resets the index. eg. 
+	#$uniquearray = array_values($uniquearray); // This resets the index. eg. 
 												//[3] => Hello
 												//	[7] => Moo
 												//	[45] => America
 												// To 
 												//	[0] => Hello
 												//	[1] => Moo
-												//	[2] => America
+	echo "<br>----------------<br> Unique Array-----------<br>";										//	[2] => America
 	print_r($uniquearray);
 	//print_r(array_unique($arrayForFPGAdeviceModelid));
 	echo "<br>";
@@ -161,6 +164,11 @@ function createFPGAConfigurationXML($arrayForFPGAdeviceModelid,$storingLocation,
 		$packet->appendChild($targetfpga);
 
 		//lets get url and filename for the model
+
+		echo "<br>----------------MODEL ID----------->".$arrayForFPGAdeviceModelid[$i][1]."<br>";
+		echo "<br>----------------Filename------------>".getModelURLandFilenameForFPGA($arrayForFPGAdeviceModelid[$i][1])."<br>";
+		echo "<br>----------------Location------------>".getModelURLandFilenameForFPGA($arrayForFPGAdeviceModelid[$i][0])."<br>";
+
 		$arrayStoringUrlFilename = getModelURLandFilenameForFPGA($arrayForFPGAdeviceModelid[$i][1]); // since, model id is stored at second index i.e.1
 		//the function returns an array of two elements, [0] = location url, [1] = filename
 
@@ -484,6 +492,7 @@ if ($_SESSION['flag']==1){
 	//correct neuron model
 	//This function returns an array with FPGA to model map where element[0] is FPGA num and element [1] is the model id
 	$arrayForFPGAdeviceModelid = generateFPGAConfigurationXML($fileLocation);
+	print_r($arrayForFPGAdeviceModelid);
 	//well this array along with where to store temporarily, which will be read again, broken down and added at the begining of the Initialisation file
 	//little detour but keeping it this way as debuggin is easier.
 	$storingLocation = "SimulationXML/".$userLogged . $topology."/cUploadSof_" . $userID. ".xml";
@@ -539,7 +548,7 @@ if ($_SESSION['flag']==1){
 
 	$xmlDoc = new DomDocument();
 	$xmlDoc ->load($storingLocation); //where the .sof configuration packet is stored
-	unlink($storingLocation);
+	#unlink($storingLocation);
 
 	$xmlDoc1 = new DOMDocument();
 	$xmlDoc1->load("SimulationXML/".$userLogged .$topology. "/Sim_Ini_file_" . $userID. ".xml");
@@ -648,6 +657,7 @@ if ($_SESSION['flag']==1){
 	<input type="submit" value="Send initialisation data to server">
 	<input type="hidden" name="filenameHEX" id = "filenameHEX" value=<?php echo $userLogged . $topology."/Initialisation_file_" . $userID . ".hex" ?>>
 	<input type="hidden" name="filenameXML" id = "filenameXML" value=<?php echo $filename ?>>
+	<input type="hidden" name="SynFilenameXML" id="SynFilenameXML" value = <? echo $synapseFileLocation ?>>
 	<input type="hidden" value=<?php echo $simNum; ?> name="simNum">
 	</form>	
 	<br><br>

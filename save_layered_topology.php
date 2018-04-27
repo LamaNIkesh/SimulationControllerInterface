@@ -35,8 +35,10 @@
 
 				#########################################################################################
 				#reading the saved array from save_neuron-data file, it contains the device id number for each neuron
-				$deviceidarray = unserialize(file_get_contents("SimulationXML/".$userLogged . "/DeviceId_" . $userID . ".bin"));
-				$totalNeurons = sizeof($deviceidarray);
+				#$deviceidarray = unserialize(file_get_contents("SimulationXML/".$userLogged . "/Layered/DeviceId_" . $userID . ".bin"));
+				#$totalNeurons = sizeof($deviceidarray);
+
+				$totalNeurons = $_POST['totalNeurons'];
 
 				$FinalSortedNeuronsFPGAArray = unserialize(file_get_contents("SimulationXML/".$userLogged . "/Layered/FinalSortedNeuronsFPGAArray_" . $userID . ".bin"));
 

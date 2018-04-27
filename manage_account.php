@@ -41,7 +41,7 @@ if ($_SESSION['flag']==1){
 	</style>
 
 
-	<table width  = "800" border = "1" cellpadding = "1" cellspacing = "1">
+	<table width  = "800" border = "1" cellpadding = "1" cellspacing = "1" STYLE="margin-bottom: 50px;">
 	<tr>
 	<th>Simulation Number</th>
 	<th>Simulation Configured</th>
@@ -115,7 +115,6 @@ if ($_SESSION['flag']==1){
 
 				
 			}
-			
 		}
 		catch (Exception $e) {
 			echo "error: ".$e->getMessage();
@@ -123,7 +122,8 @@ if ($_SESSION['flag']==1){
 
 	?>
 	<a href=<?php echo $userFilename ?>> Click here to view your simulation and results files</a>
-	<?php
+
+	<?php 
 }
 else{
 	?>
@@ -135,8 +135,8 @@ else{
 <?php
 }
 ?>
-
-</div></div>
+</div>
+</div>
 
 <?php
 include("end_page.html")

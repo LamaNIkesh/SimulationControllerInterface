@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<sUploadSof>
+  <packet>
+    <destdevice>65535</destdevice>
+    <sourcedevice>65532</sourcedevice>
+    <simID>16</simID>
+    <command>30</command>
+    <timestamp>0</timestamp>
+    <targetfpga>9</targetfpga>
+    <filename>IAF8_1000_0-1.sof</filename>
+    <url>~/Models/</url>
+  </packet>
+  <packet>
+    <destdevice>65535</destdevice>
+    <sourcedevice>65532</sourcedevice>
+    <simID>16</simID>
+    <command>30</command>
+    <timestamp>0</timestamp>
+    <targetfpga>10</targetfpga>
+    <filename>IAF8_1000_0-1.sof</filename>
+    <url>~/Models/</url>
+  </packet>
+  <packet>
+    <destdevice>65535</destdevice>
+    <sourcedevice>65532</sourcedevice>
+    <simID>16</simID>
+    <command>30</command>
+    <timestamp>0</timestamp>
+    <targetfpga>11</targetfpga>
+    <filename>IAF8_1000_0-1.sof</filename>
+    <url>~/Models/</url>
+  </packet>
+</sUploadSof>

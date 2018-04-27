@@ -23,8 +23,10 @@ if ($_SESSION['flag']==1){
 	#opening the xml initialisation file and extracts packets to publish separately 
 	#reads filename and path for the initialisation file
 	$filePath = $_POST['filenameXML'];
+	$synFilePath = $_POST['SynFilenameXML'];
 	//providing absolute path
 	$filePath = getcwd().'/'.$filePath;
+	$synFilePath = getcwd().'/'.$synFilePath;
 	echo "File Path:".$filePath;
 
 	echo "Current working directory: ".getcwd();
@@ -46,10 +48,34 @@ if ($_SESSION['flag']==1){
 		#daemon is the group that apache2 falls into. Normally is www-data but since
 		#the web directory is not in default place, the user group is www-data
 		#also no password privelege is added to sudoer file for daemon users
-		
-		$output = shell_exec('sudo -u daemon python /home/nikesh/Documents/WebServer/SimulationControllerInterface/tcpSend/send_packet_tcp.py 2>&1 '.$filePath);
+
+		/*ob_start();
+		#$output = shell_exec('sudo -u daemon python /home/nikesh/Documents/WebServer/SimulationControllerInterface/tcpSend/send_packet_tcp.py 2>&1 '.$filePath);
+		passthru('sudo -u daemon python /home/nikesh/Documents/WebServer/SimulationControllerInterface/tcpSend/send_packet_tcp.py 2>&1 '.$filePath);
+		$output = ob_get_clean();*/
+
+
+		while (@ ob_end_flush()); // end all output buffers if any
+
+	    $proc = popen("sudo -u daemon python /home/nikesh/Documents/WebServer/NewbranchV4/SimulationControllerInterface/tcpSend/send_packet_tcp.py 2>&1 $filePath $synFilePath; echo Exit status : $?", 'r');
+
+	    $live_output     = "";
+	    $complete_output = "";
+
+	    while (!feof($proc))
+	    {
+	        $live_output     = fread($proc, 10000);
+	        $complete_output = $complete_output . $live_output;
+	        echo "$live_output";
+	        @ flush();
+	    }
+	    pclose($proc);
+
+	    // get exit status
+	    preg_match('/[0-9]+$/', $complete_output, $matches);
+
 		#$output = shell_exec('sudo -u daemon python '.$sendPacketPyFilePath. ' 2>&1 '.$filePath);
-		echo "<pre>$output</pre>";
+		#echo "<pre>$output</pre>";
 		echo "All the packets successfully published to the Interface Manager.\nYou will receive a notification when the simulation is complete";
 
 		//Once the packet has been sent to the IM server, the database is updated to show configured simulations for each users
