@@ -38,8 +38,10 @@ include("head.html")
 					<!---nameid.$i is passed to the save_stimulus.php where the information is written into an xml file-->
 					<input type = "hidden" name = <?php echo "nameid".$i; ?> id = <?php echo "nameid".$i; ?> value = <?php echo $StimNeurons; ?> >
 					Value of the stimulus(mA): <input type="number" name=<?php echo 'value'.$i; ?> value=0.00>
-					&nbsp; &nbsp;Beginning of the stimulus(ms): <input type="number" name=<?php echo 'start'.$i; ?> value=0>
-					&nbsp; &nbsp;End of the stimulus(ms): <input type="number" name=<?php echo 'end'.$i; ?> value=0><br><hr>
+					&nbsp; &nbsp;Beginning(ms): <input type="number" name=<?php echo 'start'.$i; ?> value=0>
+					&nbsp; &nbsp;End(ms): <input type="number" name=<?php echo 'end'.$i; ?> value=0>
+					&nbsp; &nbsp;Frequency(Hz): <input type="number" name=<?php echo 'end'.$i; ?> value=0>
+					<br><hr>
 
 					<?php 
 					
